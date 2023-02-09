@@ -18,7 +18,7 @@ const App = () => {
           <Stack.Screen name={'Splash'} component={SplashScreen} />
           <Stack.Screen name={'Home'} component={HomeScreen} />
           <Stack.Screen name={'Login'} component={Login} />
-          <Stack.Screen name={'SignUp'} component={SignUp} />
+          <Stack.Screen name={'Sign Up'} component={SignUp} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaView>

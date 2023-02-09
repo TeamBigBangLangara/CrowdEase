@@ -6,7 +6,13 @@ const SplashScreen = ({navigation}: {navigation: any}) => {
     <View>
       <Text>Splash Screen</Text>
       <Pressable onPress={() => navigation.navigate('Home')}>
-        <Text>Click Here</Text>
+        <Text>Home</Text>
+      </Pressable>
+      <Pressable onPress={() => navigation.navigate('Login')}>
+        <Text>Login</Text>
+      </Pressable>
+      <Pressable onPress={() => navigation.navigate('SignUp')}>
+        <Text>Sign up</Text>
       </Pressable>
     </View>
   );

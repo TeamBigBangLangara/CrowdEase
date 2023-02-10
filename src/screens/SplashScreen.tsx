@@ -1,5 +1,6 @@
 import React from 'react';
 import {Pressable, Text, View} from 'react-native';
+import {signOut} from '../auth/user';
 
 const SplashScreen = ({navigation}: {navigation: any}) => {
   return (
@@ -11,8 +12,11 @@ const SplashScreen = ({navigation}: {navigation: any}) => {
       <Pressable onPress={() => navigation.navigate('Login')}>
         <Text>Login</Text>
       </Pressable>
-      <Pressable onPress={() => navigation.navigate('SignUp')}>
+      <Pressable onPress={() => navigation.navigate('Sign Up')}>
         <Text>Sign up</Text>
+      </Pressable>
+      <Pressable onPress={() => signOut()}>
+        <Text>Sign out</Text>
       </Pressable>
     </View>
   );

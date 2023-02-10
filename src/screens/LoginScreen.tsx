@@ -8,14 +8,18 @@ import {
   Pressable,
   Alert,
 } from 'react-native';
+
 import {isEmailValid} from '../utils/email';
+import {onGoogleButtonPress} from '../auth/googleSignIn';
+import {signIn} from '../auth/user';
 
 const LoginScreen = ({navigation}: {navigation: any}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const onLoginPress = () => {
+  const onLoginPress = async () => {
     if (loginValidation()) {
+      await signIn(email, password);
       navigation.navigate('Home');
     }
   };
@@ -25,7 +29,10 @@ const LoginScreen = ({navigation}: {navigation: any}) => {
   };
 
   const onGoogleLoginPress = () => {
-    navigation.navigate('Home');
+    onGoogleButtonPress().then(() => {
+      navigation.navigate('Home');
+      console.log('User logged in');
+    });
   };
 
   const loginValidation = (): boolean => {

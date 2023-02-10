@@ -10,14 +10,17 @@ import {
 } from 'react-native';
 import {isEmailValid} from '../utils/email';
 import {isPasswordValid} from '../utils/password';
+import {signIn, signUp} from '../auth/user';
 
 const SignUpScreen = ({navigation}: {navigation: any}) => {
   const [email, setEmail] = useState('');
   const [businessName, setBusinessName] = useState('');
   const [password, setPassword] = useState('');
 
-  const onSignUpPress = () => {
+  const onSignUpPress = async () => {
     if (signUpValidation()) {
+      await signUp(email, password);
+      await signIn(email, password);
       navigation.navigate('Home');
     }
   };

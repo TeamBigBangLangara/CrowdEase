@@ -1,11 +1,8 @@
 import auth from '@react-native-firebase/auth';
 
-export const signUp = (email, password) => {
-  auth()
-    .createUserWithEmailAndPassword(
-      'jane.doe@example.com',
-      'SuperSecretPassword!',
-    )
+export const signUp = async (email, password) => {
+  await auth()
+    .createUserWithEmailAndPassword(email, password)
     .then(() => {
       console.log('User account created & signed in!');
     })
@@ -20,9 +17,9 @@ export const signUp = (email, password) => {
     });
 };
 
-export const signIn = (email, password) => {
-  auth()
-    .signInWithEmailAndPassword('jane.doe@example.com', 'SuperSecretPassword!')
+export const signIn = async (email, password) => {
+  await auth()
+    .signInWithEmailAndPassword(email, password)
     .then(() => {
       console.log('User logged in!');
     })
@@ -34,8 +31,8 @@ export const signIn = (email, password) => {
     });
 };
 
-export const signOut = () => {
-  auth()
+export const signOut = async () => {
+  await auth()
     .signOut()
     .then(() => console.log('User signed out!'));
 };

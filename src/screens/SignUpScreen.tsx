@@ -23,11 +23,11 @@ const SignUpScreen = ({navigation}: {navigation: any}) => {
   };
 
   const onAppleSignUpPress = () => {
-    navigation.navigate('Home');
+    navigation.navigate('Location Access');
   };
 
   const onGoogleSignUpPress = () => {
-    navigation.navigate('Home');
+    navigation.navigate('Location Access');
   };
 
   const signUpValidation = (): boolean => {

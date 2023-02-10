@@ -11,7 +11,7 @@ const SplashScreen = ({navigation}: {navigation: any}) => {
       <Pressable onPress={() => navigation.navigate('Login')}>
         <Text>Login</Text>
       </Pressable>
-      <Pressable onPress={() => navigation.navigate('SignUp')}>
+      <Pressable onPress={() => navigation.navigate('Sign Up')}>
         <Text>Sign up</Text>
       </Pressable>
     </View>

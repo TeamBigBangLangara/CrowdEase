@@ -38,15 +38,23 @@ const LocationPermissionScreen = ({navigation}: {navigation: any}) => {
       const auth = await Geolocation.requestAuthorization('whenInUse');
       if (auth === 'granted') {
         // do something if granted...
+        console.log('IOS');
+        getGeolocationCoordinates();
+      } else {
+        console.log('Permission denied');
       }
     }
 
     if (Platform.OS === 'android') {
-      getGeolocationCoordinates();
+      if (await requestLocationPermissionAndroid()) {
+        getGeolocationCoordinates();
+      } else {
+        console.log('Permission denied');
+      }
     }
   }
 
-  const requestLocationPermission = async () => {
+  const requestLocationPermissionAndroid = async (): Promise<boolean> => {
     try {
       const granted = await PermissionsAndroid.request(
         PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
@@ -72,23 +80,18 @@ const LocationPermissionScreen = ({navigation}: {navigation: any}) => {
   };
 
   const getGeolocationCoordinates = () => {
-    const result = requestLocationPermission();
-    result.then(res => {
-      console.log('res is:', res);
-      if (res) {
-        Geolocation.getCurrentPosition(
-          position => {
-            console.log(position);
-          },
-          error => {
-            // See error code charts below.
-            console.log(error.code, error.message);
-          },
-          {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
-        );
-      }
-    });
-    console.log(location);
+    Geolocation.getCurrentPosition(
+      position => {
+        console.log(position);
+      },
+      error => {
+        // See error code charts below.
+        console.log(error.code, error.message);
+      },
+      {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
+    );
+
+    console.log('Here I am : ');
   };
 
   return (

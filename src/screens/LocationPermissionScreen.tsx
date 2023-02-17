@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -12,9 +12,20 @@ import {
 } from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
 
+interface GeoPositionState {
+  latitude: number | null;
+  longitude: number | null;
+  error: string | null;
+}
+
 const LocationPermissionScreen = ({navigation}: {navigation: any}) => {
   const [isEnabled, setIsEnabled] = useState(false);
-  let location: any;
+  const [location, setLocation] = useState<GeoPositionState>({
+    latitude: null,
+    longitude: null,
+    error: null,
+  });
+
   const getLocation = () => {
     if (signUpValidation()) {
       navigation.navigate('Home');
@@ -25,21 +36,32 @@ const LocationPermissionScreen = ({navigation}: {navigation: any}) => {
     return true;
   };
 
-  const toggleSwitch = async () => {
+  const toggleSwitchPress = async () => {
     setIsEnabled(previousState => !previousState);
     console.log(isEnabled);
-    if (isEnabled) {
-      await requestPermissions();
-    }
+    await requestPermissions();
   };
+
+  // useEffect(() => {
+  //   if (isEnabled) {
+  //     // Do something when isEnabled is true
+  //     console.log('isEnabled is true');
+  //     requestPermissions();
+  //   }
+  // }, [isEnabled]);
 
   async function requestPermissions() {
     if (Platform.OS === 'ios') {
       const auth = await Geolocation.requestAuthorization('whenInUse');
       if (auth === 'granted') {
-        // do something if granted...
         console.log('IOS');
-        getGeolocationCoordinates();
+        await getGeolocationCoordinates();
+        console.log(
+          'Here I am :\n lat :' +
+            location?.latitude +
+            '\n long: ' +
+            location?.longitude,
+        );
       } else {
         console.log('Permission denied');
       }
@@ -47,7 +69,13 @@ const LocationPermissionScreen = ({navigation}: {navigation: any}) => {
 
     if (Platform.OS === 'android') {
       if (await requestLocationPermissionAndroid()) {
-        getGeolocationCoordinates();
+        await getGeolocationCoordinates();
+        console.log(
+          'Here I am :\n lat :' +
+            location?.latitude +
+            '\n long: ' +
+            location?.longitude,
+        );
       } else {
         console.log('Permission denied');
       }
@@ -79,10 +107,15 @@ const LocationPermissionScreen = ({navigation}: {navigation: any}) => {
     }
   };
 
-  const getGeolocationCoordinates = () => {
-    Geolocation.getCurrentPosition(
+  const getGeolocationCoordinates = async () => {
+    await Geolocation.getCurrentPosition(
       position => {
         console.log(position);
+        setLocation({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          error: null,
+        });
       },
       error => {
         // See error code charts below.
@@ -90,8 +123,6 @@ const LocationPermissionScreen = ({navigation}: {navigation: any}) => {
       },
       {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
     );
-
-    console.log('Here I am : ');
   };
 
   return (
@@ -102,7 +133,7 @@ const LocationPermissionScreen = ({navigation}: {navigation: any}) => {
           trackColor={{false: '#767577', true: '#81b0ff'}}
           thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
           ios_backgroundColor="#3e3e3e"
-          onValueChange={toggleSwitch}
+          onValueChange={toggleSwitchPress}
           value={isEnabled}
         />
       </View>

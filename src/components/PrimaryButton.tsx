@@ -1,15 +1,15 @@
 import { Pressable, Text, GestureResponderEvent, StyleSheet } from 'react-native';
 
-const PrimaryButton = (props: { onPress: ((event: GestureResponderEvent) => void) ; title: string; }) => {
+const PrimaryButton = (props: { onClick: ((event: GestureResponderEvent) => void) ; label: string; }) => {
   return (
   <Pressable
-  onPress={props.onPress}
+  onPress={props.onClick}
   style={({ pressed }) => [        
     pressed ? styles.pressedShadow : styles.shadowProp,
     styles.button 
        ]}
     >
-      <Text style= {styles.text}>{props.title}</Text>
+      <Text style= {styles.text}>{props.label}</Text>
 </Pressable>
   )
 }

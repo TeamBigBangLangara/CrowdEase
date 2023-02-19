@@ -1,9 +1,9 @@
 import { Text, Pressable, GestureResponderEvent, StyleSheet, View } from 'react-native';
 
-const LinkButton = (props: { onPress: ((event: GestureResponderEvent) => void); title: string }) => {
+const LinkButton = (props: { onClick: ((event: GestureResponderEvent) => void); label: string }) => {
   return (
-    <Pressable onPress={props.onPress}>
-        <Text style={styles.text}>{props.title}</Text>
+    <Pressable onPress={props.onClick}>
+        <Text style={styles.text}>{props.label}</Text>
     </Pressable>
   );
 };

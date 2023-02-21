@@ -4,8 +4,9 @@ import { StyleSheet, Text, View, TextInput, Button, Pressable, Alert } from 'rea
 import { isEmailValid } from '../utils/email'
 import { onGoogleButtonPress } from '../auth/googleSignIn'
 import { signIn } from '../auth/user'
+import { AuthStackNavigationProps } from '../types/types'
 
-const LoginScreen = ({ navigation }: { navigation: any }) => {
+const LoginScreen = ({ navigation }: AuthStackNavigationProps<'LoginScreen'>) => {
   const [email, setEmail] = useState('jane.doe@example.com')
   const [password, setPassword] = useState('SuperSecretPassword!')
 
@@ -16,12 +17,12 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
   }
 
   const onAppleLoginPress = () => {
-    navigation.navigate('Home')
+    // navigation.navigate('Home')
   }
 
   const onGoogleLoginPress = () => {
     onGoogleButtonPress().then(() => {
-      navigation.navigate('Home')
+      // navigation.navigate('Home')
       console.log('User logged in')
     })
   }
@@ -50,7 +51,7 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
         value={password}
         placeholder={'Enter Password'}
       />
-      <Pressable onPress={() => navigation.navigate('Home')}>
+      <Pressable onPress={() => navigation.navigate('BottomTabs')}>
         <Text>Forgot Password</Text>
       </Pressable>
       <View style={styles.buttonStyle}>

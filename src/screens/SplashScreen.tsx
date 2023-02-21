@@ -1,14 +1,15 @@
 import React from 'react'
 import { Pressable, Text, View } from 'react-native'
+import { AuthStackNavigationProps } from '../types/types'
 
-const SplashScreen = ({ navigation }: { navigation: any }) => {
+const SplashScreen = ({ navigation }: AuthStackNavigationProps<'SplashScreen'>) => {
   return (
     <View>
       <Text>Splash Screen</Text>
-      <Pressable onPress={() => navigation.navigate('Login')}>
+      <Pressable onPress={() => navigation.navigate('LoginScreen')}>
         <Text>Login</Text>
       </Pressable>
-      <Pressable onPress={() => navigation.navigate('Sign Up')}>
+      <Pressable onPress={() => navigation.navigate('SignUpScreen')}>
         <Text>Sign up</Text>
       </Pressable>
     </View>

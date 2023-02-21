@@ -10,6 +10,15 @@ import SplashScreen from './screens/SplashScreen'
 import Login from './screens/LoginScreen'
 
 import NavigationBottomTab from './components/navigation/NavigationBottomTab'
+import LocationScreen from './screens/LocationScreen'
+
+export type AuthStackParams = {
+  SplashScreen: undefined
+  LoginScreen: undefined
+  SignUpScreen: undefined
+  LocationScreen: undefined
+  BottomTabs: undefined
+}
 
 export type MainStackParams = {
   HomeScreen: undefined
@@ -22,7 +31,7 @@ export type TabParams = {
   EventsStack: undefined
 }
 
-const Stack = createNativeStackNavigator()
+const Stack = createNativeStackNavigator<AuthStackParams>()
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -45,10 +54,11 @@ const App = () => {
     <SafeAreaView style={{ flex: 1 }}>
       <NavigationContainer>
         {!isLoggedIn && (
-          <Stack.Navigator initialRouteName={'Splash'}>
-            <Stack.Screen name={'Splash'} component={SplashScreen} />
-            <Stack.Screen name={'Login'} component={Login} />
-            <Stack.Screen name={'Sign Up'} component={SignUp} />
+          <Stack.Navigator initialRouteName={'SplashScreen'}>
+            <Stack.Screen name={'SplashScreen'} component={SplashScreen} />
+            <Stack.Screen name={'LoginScreen'} component={Login} />
+            <Stack.Screen name={'SignUpScreen'} component={SignUp} />
+            <Stack.Screen name={'LocationScreen'} component={LocationScreen} />
           </Stack.Navigator>
         )}
         {isLoggedIn && (

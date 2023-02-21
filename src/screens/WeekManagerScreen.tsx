@@ -1,18 +1,19 @@
-import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React from 'react'
+import { StyleSheet, Text, View } from 'react-native'
 
-const WeekManager = () => {
+const WeekManagerScreen = () => {
   return (
     <View style={styles.wrapper}>
       <Text>Week Manager Screen</Text>
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   wrapper: {
-    backgroundColor: 'red',
-  },
-});
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+})
 
-export default WeekManager;
+export default WeekManagerScreen

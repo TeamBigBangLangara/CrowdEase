@@ -1,18 +1,19 @@
-import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React from 'react'
+import { StyleSheet, Text, View } from 'react-native'
 
 const LocationScreen = () => {
   return (
     <View style={styles.wrapper}>
       <Text>Location Screen</Text>
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   wrapper: {
-    backgroundColor: 'red',
-  },
-});
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+})
 
-export default LocationScreen;
+export default LocationScreen

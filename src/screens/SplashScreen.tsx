@@ -1,25 +1,18 @@
-import React from 'react';
-import {Pressable, Text, View} from 'react-native';
-import {signOut} from '../auth/user';
+import React from 'react'
+import { Pressable, Text, View } from 'react-native'
 
-const SplashScreen = ({navigation}: {navigation: any}) => {
+const SplashScreen = ({ navigation }: { navigation: any }) => {
   return (
     <View>
       <Text>Splash Screen</Text>
-      <Pressable onPress={() => navigation.navigate('Home')}>
-        <Text>Home</Text>
-      </Pressable>
       <Pressable onPress={() => navigation.navigate('Login')}>
         <Text>Login</Text>
       </Pressable>
       <Pressable onPress={() => navigation.navigate('Sign Up')}>
         <Text>Sign up</Text>
       </Pressable>
-      <Pressable onPress={() => signOut()}>
-        <Text>Sign out</Text>
-      </Pressable>
     </View>
-  );
-};
+  )
+}
 
-export default SplashScreen;
+export default SplashScreen

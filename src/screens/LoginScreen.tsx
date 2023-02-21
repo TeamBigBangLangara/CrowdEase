@@ -1,41 +1,39 @@
-import React, {useState} from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  Button,
-  Pressable,
-  Alert,
-} from 'react-native';
-import {isEmailValid} from '../utils/email';
+import React, { useState } from 'react'
+import { StyleSheet, Text, View, TextInput, Button, Pressable, Alert } from 'react-native'
 
-const LoginScreen = ({navigation}: {navigation: any}) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+import { isEmailValid } from '../utils/email'
+import { onGoogleButtonPress } from '../auth/googleSignIn'
+import { signIn } from '../auth/user'
+
+const LoginScreen = ({ navigation }: { navigation: any }) => {
+  const [email, setEmail] = useState('jane.doe@example.com')
+  const [password, setPassword] = useState('SuperSecretPassword!')
 
   const onLoginPress = () => {
     if (loginValidation()) {
-      navigation.navigate('Home');
+      signIn(email, password)
     }
-  };
+  }
 
   const onAppleLoginPress = () => {
-    navigation.navigate('Home');
-  };
+    navigation.navigate('Home')
+  }
 
   const onGoogleLoginPress = () => {
-    navigation.navigate('Home');
-  };
+    onGoogleButtonPress().then(() => {
+      navigation.navigate('Home')
+      console.log('User logged in')
+    })
+  }
 
   const loginValidation = (): boolean => {
     if (isEmailValid(email)) {
-      return true;
+      return true
     } else {
-      Alert.alert('Error', 'Invalid Email');
-      return false;
+      Alert.alert('Error', 'Invalid Email')
+      return false
     }
-  };
+  }
 
   return (
     <View style={styles.wrapper}>
@@ -56,46 +54,37 @@ const LoginScreen = ({navigation}: {navigation: any}) => {
         <Text>Forgot Password</Text>
       </Pressable>
       <View style={styles.buttonStyle}>
-        <Button
-          onPress={onLoginPress}
-          title="Login"
-          accessibilityLabel="Login"
-        />
+        <Button onPress={onLoginPress} title="Login" accessibilityLabel="Login" />
       </View>
       <View style={styles.iconStyle}>
-        <Button
-          onPress={onAppleLoginPress}
-          title="Apple"
-          accessibilityLabel="Login"
-        />
-        <Button
-          onPress={onGoogleLoginPress}
-          title="Google"
-          accessibilityLabel="Login"
-        />
+        <Button onPress={onAppleLoginPress} title="Apple" accessibilityLabel="Login" />
+        <Button onPress={onGoogleLoginPress} title="Google" accessibilityLabel="Login" />
       </View>
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   wrapper: {
-    backgroundColor: 'lightblue',
+    borderWidth: 1,
+    borderRadius: 5,
     alignItems: 'center',
     margin: 20,
+    padding: 16
   },
   buttonStyle: {
     height: 40,
     width: 333,
     margin: 20,
     borderWidth: 1,
-    padding: 1,
+    borderRadius: 6,
+    padding: 1
   },
   iconStyle: {
     gap: 5,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   textInputStyle: {
     height: 40,
@@ -103,8 +92,8 @@ const styles = StyleSheet.create({
     margin: 12,
     borderWidth: 1,
     padding: 10,
-    backgroundColor: 'lightgrey',
-  },
-});
+    backgroundColor: 'lightgrey'
+  }
+})
 
-export default LoginScreen;
+export default LoginScreen

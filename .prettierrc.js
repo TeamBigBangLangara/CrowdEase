@@ -1,7 +1,12 @@
 module.exports = {
+  tabWidth: 2,
+  useTabs: false,
+  semi: false,
+  singleQuote: true,
+  trailingComma: 'none',
+  printWidth: 100,
   arrowParens: 'avoid',
   bracketSameLine: true,
-  bracketSpacing: false,
-  singleQuote: true,
-  trailingComma: 'all',
-};
+  importOrderSeparation: true,
+  importOrderSortSpecifiers: true
+}

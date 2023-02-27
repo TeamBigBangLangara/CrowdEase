@@ -5,8 +5,5 @@
     "skipLibCheck": true, // Skip type checking all .d.ts files.
     "baseUrl": "./src",
     "moduleResolution": "node",
-    "paths": {
-      "~/*": ["*"] // resolve any `~/foo/bar` to `<baseUrl>/foo/bar`
-    }
   }
 }

@@ -11,15 +11,10 @@ import {
   TextInput
 } from 'react-native'
 import Geolocation from 'react-native-geolocation-service'
+import { GeoPositionState } from 'types/geoPositionState'
 import { getPostalCodeCoordinates } from '../services/postalCodeApi'
 import { AuthStackNavigationProps } from '../types/types'
 import { isPostalCodeValid } from '../utils/postalCode'
-
-interface GeoPositionState {
-  latitude: number | null
-  longitude: number | null
-  error: string | null
-}
 
 const LocationScreen = ({ navigation }: AuthStackNavigationProps<'LocationScreen'>) => {
   const [isEnabled, setIsEnabled] = useState(false)
@@ -33,7 +28,7 @@ const LocationScreen = ({ navigation }: AuthStackNavigationProps<'LocationScreen
   const getLocation = async () => {
     if (signUpValidation()) {
       if (isEnabled) {
-        //navigation.navigate('BottomTabs')
+        navigation.navigate('BottomTabs')
       } else if (isPostalCodeValid(postalCode)) {
         try {
           let results = await getPostalCodeCoordinates(postalCode)
@@ -45,7 +40,7 @@ const LocationScreen = ({ navigation }: AuthStackNavigationProps<'LocationScreen
         } catch (error) {
           Alert.alert('Error', `${error}`)
         }
-        //navigation.navigate('BottomTabs')
+        navigation.navigate('BottomTabs')
       } else {
         Alert.alert('Error', 'Enter a valid Postal Code to proceed')
       }

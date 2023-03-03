@@ -2,7 +2,7 @@ import React from 'react'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 
 import { signOut } from '../auth/user'
-import { MainStackNavigationProps } from '~/types/types'
+import { MainStackNavigationProps } from '~/types/navigationTypes'
 
 const HomeScreen = ({ navigation }: MainStackNavigationProps<'HomeScreen'>) => {
   return (

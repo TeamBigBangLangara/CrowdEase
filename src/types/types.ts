@@ -1,15 +1,61 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { TabParams } from '../App'
-import { MainStackParams } from '~/App'
-import { MaterialBottomTabNavigationProp } from '@react-navigation/material-bottom-tabs'
+export interface Event {
+  id: string
+  name: string
+  images: Image
+  dates: Dates
+  classifications: Classification
+  location: Location
+  venue: Venue
+  address: string
+}
 
-// TODO: use official typing when fixed, see https://github.com/react-navigation/react-navigation/issues/10802#issuecomment-1326687295
-export type MainStackNavigationProps<T extends keyof MainStackParams> = NativeStackScreenProps<
-  MainStackParams,
-  T
->
+export interface Image {
+  url: string
+}
 
-export type TabNavigationProps<T extends keyof TabParams> = MaterialBottomTabNavigationProp<
-  TabParams,
-  T
->
+export interface Dates {
+  start: {
+    localDate: string
+    localTime: string
+  }
+}
+
+export interface Classification {
+  segment: {
+    id: string
+    name: string
+  }
+}
+
+export interface Venue {
+  name: string
+  id: string
+  type: string
+  address: {
+    line1: string
+  }
+  location: Location
+}
+
+export interface Location {
+  longitude: string
+  latitude: string
+}
+
+export interface User {
+  userName: string
+  email: string
+  UID: string
+}
+
+export interface Rating {
+  user_id: string
+  category?: string
+  rate: number
+  event_id: string
+}
+
+export interface Bookmark {
+  user_id: string
+  event_id: string
+}

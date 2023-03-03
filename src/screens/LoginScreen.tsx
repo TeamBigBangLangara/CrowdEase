@@ -22,7 +22,6 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
   const onGoogleLoginPress = () => {
     onGoogleButtonPress().then(() => {
       navigation.navigate('Home')
-      console.log('User logged in')
     })
   }
 

@@ -1,33 +1,33 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { TextInput, StyleSheet, Image, View } from 'react-native'
 
 import IconButton from './IconButton'
 
-const SearchForm = (props: { searchEvent: () => {}; placeHolder: string }) => {
-  const [searchValue, setSearchValue] = useState('')
-
+const SearchForm = (props: {
+  placeHolder: string
+  onChangeText: () => void
+  searchText: string
+}) => {
   return (
-    <View style={styles.componentWrapper}>
-      <View style={styles.searchWrapper}>
+    <View style={styles.container}>
+      <View style={styles.searchContainer}>
         <Image source={require('../assets/search.png')} />
         <TextInput
-          onChangeText={setSearchValue}
-          value={searchValue}
-          onSubmitEditing={props.searchEvent}
+          onChangeText={props.onChangeText}
+          value={props.searchText}
           placeholder={props.placeHolder}
           style={styles.input}
           placeholderTextColor="#FFFFFF"
         />
         <Image source={require('../assets/mic.png')} />
       </View>
-      <IconButton iconPath={require('../assets/categories_icon.png')} style={styles.iconButton} />
+      <IconButton iconPath={require('../assets/filter.png')} style={styles.iconButton} />
     </View>
   )
 }
 
-//Style
 const styles = StyleSheet.create({
-  componentWrapper: {
+  container: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     borderRadius: 22,
     gap: 20
   },
-  searchWrapper: {
+  searchContainer: {
     display: 'flex',
     flexDirection: 'row',
     flex: 1,

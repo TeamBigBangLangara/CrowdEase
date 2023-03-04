@@ -1,10 +1,6 @@
 import { View, StyleSheet, Text } from 'react-native'
 
-const WeeklyBreakdownCard = (props: {
-  date: string
-  eventNumber: number
-  participantsQty: number
-}) => {
+const ReportCard = (props: { date: string; eventNumber: number; participantsQty: number }) => {
   return (
     <View style={styles.container}>
       <View>
@@ -47,4 +43,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default WeeklyBreakdownCard
+export default ReportCard

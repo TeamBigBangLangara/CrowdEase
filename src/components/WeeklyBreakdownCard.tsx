@@ -1,17 +1,21 @@
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native'
 
-const WeeklyBreakdownCard = (props: { date: string; eventNumber: number; participantsQty: number; }) => {
+const WeeklyBreakdownCard = (props: {
+  date: string
+  eventNumber: number
+  participantsQty: number
+}) => {
   return (
-    <View style={styles.box}>
-      <View style={styles.infoWrapper} >
+    <View style={styles.container}>
+      <View>
         <Text style={styles.header}>Date</Text>
         <Text style={styles.info}>{props.date}</Text>
       </View>
-      <View style={styles.infoWrapper}>
+      <View>
         <Text style={styles.header}>Event Number</Text>
         <Text style={styles.info}>{props.eventNumber}</Text>
       </View>
-      <View style={styles.infoWrapper}>
+      <View>
         <Text style={styles.header}>Event Participants</Text>
         <Text style={styles.info}>{props.participantsQty}</Text>
       </View>
@@ -20,29 +24,26 @@ const WeeklyBreakdownCard = (props: { date: string; eventNumber: number; partici
 }
 
 const styles = StyleSheet.create({
-  box: {
-    width: '90%',
+  container: {
     backgroundColor: '#121214',
     borderRadius: 12,
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    padding: 10
-  },
-  infoWrapper: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
+    justifyContent: 'space-around',
+    paddingVertical: 10,
+    paddingHorizontal: 6,
+    marginHorizontal: 12
   },
   header: {
-    fontWeight: "500",
+    fontWeight: '500',
     fontSize: 12,
     color: '#E6E1E5',
+    textAlign: 'center'
   },
-  info: { 
-    fontWeight: "500",
+  info: {
+    fontWeight: '500',
     fontSize: 16,
-    color: '#E6E1E5',
+    color: '#E6E1E5'
   }
 })
 

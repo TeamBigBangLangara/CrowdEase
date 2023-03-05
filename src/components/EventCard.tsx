@@ -1,8 +1,9 @@
-import React from 'react';
-import { View, Image, Text, StyleSheet, Pressable } from 'react-native';
+import React, { useState } from "react";
+import { View, Image, Text, StyleSheet, Pressable, Alert } from "react-native";
 
 import BookmarkButton from './BookmarkButton';
 import IconText from './IconText';
+import RateCard from "./RateCard";
 
 const EventCard = (props: {
   eventImage?: any
@@ -12,9 +13,10 @@ const EventCard = (props: {
   eventParticipantsQty: number
   eventDate?: string
   onBookmarkPress?: () => void
-  onGiveRatingPress?: () => void
   eventType: string
 }) => {
+  const [showRating, setShowRating] = useState(false);
+
   const renderDate = () => {
     if (props.eventType === 'past') {
       return (
@@ -41,12 +43,21 @@ const EventCard = (props: {
   const renderRatingButton = () => {
     if (props.eventType === 'past') {
       return (
-        <Pressable onPress={props.onGiveRatingPress} style={styles.giveRatingContainer}>
+        <Pressable onPress={() => setShowRating(true)} style={styles.giveRatingContainer}>
           <Text style={styles.text}>Give a Rating</Text>
           <Image source={require('../assets/downIcon.png')} />
         </Pressable>
       );
     }
+  };
+
+  const renderRatingCard = () => {
+    return (
+      <RateCard
+        onSubmitPress={() => { console.log("to do");}}
+        onSkipPress={() => setShowRating(false)}
+        onStarPress={() => { console.log("to do");}}/>
+    );
   };
 
   return (
@@ -65,7 +76,8 @@ const EventCard = (props: {
           </View>
         </View>
       </View>
-      <View>{renderRatingButton()}</View>
+      <View>{!showRating ? renderRatingButton() : ""}</View>
+      {showRating ? renderRatingCard() : ""}
     </View>
   );
 };

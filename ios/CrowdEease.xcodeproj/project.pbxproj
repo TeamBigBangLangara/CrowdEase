@@ -15,6 +15,18 @@
 		3C3F348B41058465805777EC /* Pods_CrowdEease.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D56242F11A5436E881B69CF /* Pods_CrowdEease.framework */; };
 		54CAFE0C298AEE5F00933648 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 54CAFE0B298AEE5F00933648 /* GoogleService-Info.plist */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		5796C531EF6B4ACAA3C32FB8 /* CircularStd-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = D1F22B8D293745CDA76A0C92 /* CircularStd-Black.otf */; };
+		3651F0E6E32242E0B201D79E /* CircularStd-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 21E3857FABBF483DB4F1F084 /* CircularStd-BlackItalic.otf */; };
+		C05EAE2BB566467F80C952BD /* CircularStd-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6CC0D693642E416283C7C063 /* CircularStd-Bold.otf */; };
+		CA565B4CDF414EFBBFB1B517 /* CircularStd-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = CA98FEEB5FD54E75989D442B /* CircularStd-BoldItalic.otf */; };
+		2B8364D6A23F46E1B5EC417D /* CircularStd-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7ED664D5E2124E4B816B9E90 /* CircularStd-Book.otf */; };
+		BF3004F1F5EA425D8ECB6785 /* CircularStd-BookItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = B990F938C15E4C87B8527884 /* CircularStd-BookItalic.otf */; };
+		C9FE0750BEF64DC8AC9484D5 /* CircularStd-Light Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = D5707A88F8B24BE98267F701 /* CircularStd-Light Italic.otf */; };
+		48FEB2DF2DB943C8BE3575DE /* CircularStd-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3B81D8336CA1499FBAECC6FE /* CircularStd-Light.otf */; };
+		62E22E3D916C44D99202978D /* CircularStd-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 37F725BC988946E0B47F02A9 /* CircularStd-Medium.otf */; };
+		796538AB773747E5B79B64E4 /* CircularStd-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 39B5F08E27744658AABA8EA5 /* CircularStd-MediumItalic.otf */; };
+		9B5F807E21E74317A023E284 /* Read Me.txt in Resources */ = {isa = PBXBuildFile; fileRef = 326BF06E14D04F1A9B32D0FE /* Read Me.txt */; };
+		1F86DC92476343E4BE9C4A9B /* www.dfonts.org.url in Resources */ = {isa = PBXBuildFile; fileRef = E7997606DEB646048601A88C /* www.dfonts.org.url */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +58,18 @@
 		89C6BE57DB24E9ADA2F236DE /* Pods-CrowdEease-CrowdEeaseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CrowdEease-CrowdEeaseTests.release.xcconfig"; path = "Target Support Files/Pods-CrowdEease-CrowdEeaseTests/Pods-CrowdEease-CrowdEeaseTests.release.xcconfig"; sourceTree = "<group>"; };
 		9D56242F11A5436E881B69CF /* Pods_CrowdEease.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CrowdEease.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		D1F22B8D293745CDA76A0C92 /* CircularStd-Black.otf */ = {isa = PBXFileReference; name = "CircularStd-Black.otf"; path = "../assets/fonts/CircularStd-Black.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		21E3857FABBF483DB4F1F084 /* CircularStd-BlackItalic.otf */ = {isa = PBXFileReference; name = "CircularStd-BlackItalic.otf"; path = "../assets/fonts/CircularStd-BlackItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6CC0D693642E416283C7C063 /* CircularStd-Bold.otf */ = {isa = PBXFileReference; name = "CircularStd-Bold.otf"; path = "../assets/fonts/CircularStd-Bold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		CA98FEEB5FD54E75989D442B /* CircularStd-BoldItalic.otf */ = {isa = PBXFileReference; name = "CircularStd-BoldItalic.otf"; path = "../assets/fonts/CircularStd-BoldItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		7ED664D5E2124E4B816B9E90 /* CircularStd-Book.otf */ = {isa = PBXFileReference; name = "CircularStd-Book.otf"; path = "../assets/fonts/CircularStd-Book.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B990F938C15E4C87B8527884 /* CircularStd-BookItalic.otf */ = {isa = PBXFileReference; name = "CircularStd-BookItalic.otf"; path = "../assets/fonts/CircularStd-BookItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D5707A88F8B24BE98267F701 /* CircularStd-Light Italic.otf */ = {isa = PBXFileReference; name = "CircularStd-Light Italic.otf"; path = "../assets/fonts/CircularStd-Light Italic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3B81D8336CA1499FBAECC6FE /* CircularStd-Light.otf */ = {isa = PBXFileReference; name = "CircularStd-Light.otf"; path = "../assets/fonts/CircularStd-Light.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		37F725BC988946E0B47F02A9 /* CircularStd-Medium.otf */ = {isa = PBXFileReference; name = "CircularStd-Medium.otf"; path = "../assets/fonts/CircularStd-Medium.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		39B5F08E27744658AABA8EA5 /* CircularStd-MediumItalic.otf */ = {isa = PBXFileReference; name = "CircularStd-MediumItalic.otf"; path = "../assets/fonts/CircularStd-MediumItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		326BF06E14D04F1A9B32D0FE /* Read Me.txt */ = {isa = PBXFileReference; name = "Read Me.txt"; path = "../assets/fonts/Read Me.txt"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E7997606DEB646048601A88C /* www.dfonts.org.url */ = {isa = PBXFileReference; name = "www.dfonts.org.url"; path = "../assets/fonts/www.dfonts.org.url"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +149,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				974ACA6DD7E947CD8D734A0E /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -150,6 +175,26 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
+		};
+		974ACA6DD7E947CD8D734A0E /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				D1F22B8D293745CDA76A0C92 /* CircularStd-Black.otf */,
+				21E3857FABBF483DB4F1F084 /* CircularStd-BlackItalic.otf */,
+				6CC0D693642E416283C7C063 /* CircularStd-Bold.otf */,
+				CA98FEEB5FD54E75989D442B /* CircularStd-BoldItalic.otf */,
+				7ED664D5E2124E4B816B9E90 /* CircularStd-Book.otf */,
+				B990F938C15E4C87B8527884 /* CircularStd-BookItalic.otf */,
+				D5707A88F8B24BE98267F701 /* CircularStd-Light Italic.otf */,
+				3B81D8336CA1499FBAECC6FE /* CircularStd-Light.otf */,
+				37F725BC988946E0B47F02A9 /* CircularStd-Medium.otf */,
+				39B5F08E27744658AABA8EA5 /* CircularStd-MediumItalic.otf */,
+				326BF06E14D04F1A9B32D0FE /* Read Me.txt */,
+				E7997606DEB646048601A88C /* www.dfonts.org.url */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -249,6 +294,18 @@
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				54CAFE0C298AEE5F00933648 /* GoogleService-Info.plist in Resources */,
+				5796C531EF6B4ACAA3C32FB8 /* CircularStd-Black.otf in Resources */,
+				3651F0E6E32242E0B201D79E /* CircularStd-BlackItalic.otf in Resources */,
+				C05EAE2BB566467F80C952BD /* CircularStd-Bold.otf in Resources */,
+				CA565B4CDF414EFBBFB1B517 /* CircularStd-BoldItalic.otf in Resources */,
+				2B8364D6A23F46E1B5EC417D /* CircularStd-Book.otf in Resources */,
+				BF3004F1F5EA425D8ECB6785 /* CircularStd-BookItalic.otf in Resources */,
+				C9FE0750BEF64DC8AC9484D5 /* CircularStd-Light Italic.otf in Resources */,
+				48FEB2DF2DB943C8BE3575DE /* CircularStd-Light.otf in Resources */,
+				62E22E3D916C44D99202978D /* CircularStd-Medium.otf in Resources */,
+				796538AB773747E5B79B64E4 /* CircularStd-MediumItalic.otf in Resources */,
+				9B5F807E21E74317A023E284 /* Read Me.txt in Resources */,
+				1F86DC92476343E4BE9C4A9B /* www.dfonts.org.url in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

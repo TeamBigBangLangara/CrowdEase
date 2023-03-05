@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Image, Text, StyleSheet } from 'react-native'
+import { View, Image, Text, StyleSheet, Pressable } from 'react-native'
 
 import BookmarkButton from './BookmarkButton'
 import IconText from './IconText'
@@ -10,36 +10,78 @@ const EventCard = (props: {
   eventName: string
   eventLocation: string
   eventParticipantsQty: number
-  onBookmarkPress: () => void
+  eventDate?: string
+  onBookmarkPress?: () => void
+  onGiveRatingPress?: () => void
+  eventType: string
 }) => {
+  const renderDate = () => {
+    if (props.eventType === 'past') {
+      return (
+        <View style={styles.dateContainer}>
+          <Text style={styles.text}>{props.eventDate}</Text>
+          <Text style={styles.text}>{props.eventTime}</Text>
+        </View>
+      )
+    } else {
+      return (
+        <View>
+          <Text style={styles.text}>{props.eventTime}</Text>
+        </View>
+      )
+    }
+  }
+
+  const renderBookmarkButton = () => {
+    if (props.eventType !== 'past') {
+      return <BookmarkButton onBookmarkPress={props.onBookmarkPress} />
+    }
+  }
+
+  const renderRatingButton = () => {
+    if (props.eventType === 'past') {
+      return (
+        <Pressable onPress={props.onGiveRatingPress} style={styles.giveRatingContainer}>
+          <Text style={styles.text}>Give a Rating</Text>
+          <Image source={require('../assets/downIcon.png')} />
+        </Pressable>
+      )
+    }
+  }
+
   return (
     <View style={styles.container}>
-      <Image source={props.eventImage} style={styles.eventImage} />
       <View style={styles.eventContainer}>
-        <Text style={styles.text}>{props.eventTime}</Text>
-        <Text style={styles.text}>{props.eventName}</Text>
-        <IconText icon={require('../assets/pin.png')} text={props.eventLocation} />
-        <View style={styles.participantsContainer}>
-          <IconText
-            icon={require('../assets/participants.png')}
-            text={`${props.eventParticipantsQty} participants`}
-          />
-          <BookmarkButton onBookmarkPress={props.onBookmarkPress} />
+        <Image source={props.eventImage} style={styles.eventImage} />
+        <View style={styles.leftContainer}>
+          {renderDate()}
+          <IconText icon={require('../assets/pin.png')} text={props.eventLocation} />
+          <View style={styles.participantsContainer}>
+            <IconText
+              icon={require('../assets/participants.png')}
+              text={`${props.eventParticipantsQty} participants`}
+            />
+            {renderBookmarkButton()}
+          </View>
         </View>
       </View>
+      <View>{renderRatingButton()}</View>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'nowrap',
-    borderRadius: 22,
     backgroundColor: 'rgba(12, 12, 14, 0.5)',
     paddingHorizontal: 20,
-    paddingVertical: 20
+    paddingVertical: 20,
+    flexDirection: 'column',
+    display: 'flex',
+    borderRadius: 22
+  },
+  eventContainer: {
+    display: 'flex',
+    flexDirection: 'row'
   },
   text: {
     color: '#FAFBFC',
@@ -50,23 +92,32 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     display: 'flex',
-    backgroundColor: 'red',
+    backgroundColor: 'beige',
     borderRadius: 10
   },
-  eventContainer: {
+  leftContainer: {
     flex: 1,
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'stretch',
     justifyContent: 'space-between',
     marginLeft: 10,
     paddingHorizontal: 5
   },
   participantsContainer: {
-    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between'
+  },
+  dateContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+
+  //Give Rating Button
+  giveRatingContainer: {
+    alignItems: 'center',
+    marginTop: 20,
+    gap: 4
   }
 })
 

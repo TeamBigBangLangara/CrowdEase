@@ -1,44 +1,38 @@
 import React from 'react'
 import { View, Image, Text, StyleSheet } from 'react-native'
 
-import BookMarked from '../components/BookMarked'
+import BookmarkButton from './BookmarkButton'
+import IconText from './IconText'
 
 const EventCard = (props: {
-  eventImage: any
+  eventImage?: any
   eventTime: string
   eventName: string
   eventLocation: string
-  eventParticipantsQty: string
+  eventParticipantsQty: number
+  onBookmarkPress: () => void
 }) => {
   return (
-    <View style={styles.generalWrapper}>
+    <View style={styles.container}>
       <Image source={props.eventImage} style={styles.eventImage} />
-      <View style={styles.infoWrapper}>
+      <View style={styles.eventContainer}>
         <Text style={styles.text}>{props.eventTime}</Text>
         <Text style={styles.text}>{props.eventName}</Text>
-        <View style={styles.location}>
-          <View style={styles.iconsWrapper}>
-            <Image source={require('../assets/Pin.png')} />
-          </View>
-          <Text style={styles.text}>{props.eventLocation}</Text>
-        </View>
-        <View style={styles.participantsBookMarkWrapper}>
-          <View style={styles.participants}>
-            <View style={styles.iconsWrapper}>
-              <Image source={require('../assets/Participants.png')} />
-            </View>
-            <Text style={styles.text}>{props.eventParticipantsQty} participants</Text>
-          </View>
-          <BookMarked clicked={true} />
+        <IconText icon={require('../assets/pin.png')} text={props.eventLocation} />
+        <View style={styles.participantsContainer}>
+          <IconText
+            icon={require('../assets/participants.png')}
+            text={`${props.eventParticipantsQty} participants`}
+          />
+          <BookmarkButton onBookmarkPress={props.onBookmarkPress} />
         </View>
       </View>
     </View>
   )
 }
 
-//Style
 const styles = StyleSheet.create({
-  generalWrapper: {
+  container: {
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'nowrap',
@@ -59,36 +53,20 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
     borderRadius: 10
   },
-  infoWrapper: {
+  eventContainer: {
     flex: 1,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'stretch',
     justifyContent: 'space-between',
     marginLeft: 10,
-    paddingHorizontal: 5,
+    paddingHorizontal: 5
   },
-  location: {
+  participantsContainer: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center'
-  },
-  iconsWrapper: {
     alignItems: 'center',
-    justifyContent: 'center',
-    width: 25,
-    marginRight: 5,
-  },
-  participantsBookMarkWrapper: {
-    display: 'flex',
-    flexDirection: 'row',
-    borderWidth: 1,
-    justifyContent: 'space-between',
-  },
-  participants: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center'
+    justifyContent: 'space-between'
   }
 })
 

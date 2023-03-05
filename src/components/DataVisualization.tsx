@@ -1,14 +1,14 @@
-import React from 'react'
-import { Text, Pressable, GestureResponderEvent, StyleSheet } from 'react-native'
+import React from 'react';
+import { Text, Pressable, GestureResponderEvent, StyleSheet } from 'react-native';
 
 const PlaceNameHere = (props: {
   onClick: (event: GestureResponderEvent) => void
   label: string
 }) => {
-  return console.log('Test')
-}
+  return console.log('Test');
+};
 
 //Style
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});
 
-export default PlaceNameHere
+export default PlaceNameHere;

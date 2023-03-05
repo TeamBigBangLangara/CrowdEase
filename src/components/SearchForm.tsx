@@ -1,7 +1,7 @@
-import React from 'react'
-import { TextInput, StyleSheet, Image, View } from 'react-native'
+import React from 'react';
+import { TextInput, StyleSheet, Image, View } from 'react-native';
 
-import IconButton from './IconButton'
+import IconButton from './IconButton';
 
 const SearchForm = (props: {
   placeHolder: string
@@ -23,8 +23,8 @@ const SearchForm = (props: {
       </View>
       <IconButton iconPath={require('../assets/filter.png')} style={styles.iconButton} />
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     height: 42,
     borderRadius: 22,
-    gap: 20
+    gap: 20,
   },
   searchContainer: {
     display: 'flex',
@@ -45,16 +45,16 @@ const styles = StyleSheet.create({
     borderColor: '#938F99',
     paddingHorizontal: 16,
     height: 42,
-    borderRadius: 20
+    borderRadius: 20,
   },
   input: {
     flex: 1,
     marginHorizontal: 12,
     paddingHorizontal: 10,
     borderColor: '#938F99',
-    color: '#FFFFFF'
+    color: '#FFFFFF',
   },
-  iconButton: {}
-})
+  iconButton: {},
+});
 
-export default SearchForm
+export default SearchForm;

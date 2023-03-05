@@ -1,8 +1,8 @@
-import React from 'react'
-import { View, Image, Text, StyleSheet, Pressable } from 'react-native'
+import React from 'react';
+import { View, Image, Text, StyleSheet, Pressable } from 'react-native';
 
-import BookmarkButton from './BookmarkButton'
-import IconText from './IconText'
+import BookmarkButton from './BookmarkButton';
+import IconText from './IconText';
 
 const EventCard = (props: {
   eventImage?: any
@@ -22,21 +22,21 @@ const EventCard = (props: {
           <Text style={styles.text}>{props.eventDate}</Text>
           <Text style={styles.text}>{props.eventTime}</Text>
         </View>
-      )
+      );
     } else {
       return (
         <View>
           <Text style={styles.text}>{props.eventTime}</Text>
         </View>
-      )
+      );
     }
-  }
+  };
 
   const renderBookmarkButton = () => {
     if (props.eventType !== 'past') {
-      return <BookmarkButton onBookmarkPress={props.onBookmarkPress} />
+      return <BookmarkButton onBookmarkPress={props.onBookmarkPress} />;
     }
-  }
+  };
 
   const renderRatingButton = () => {
     if (props.eventType === 'past') {
@@ -45,9 +45,9 @@ const EventCard = (props: {
           <Text style={styles.text}>Give a Rating</Text>
           <Image source={require('../assets/downIcon.png')} />
         </Pressable>
-      )
+      );
     }
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -67,8 +67,8 @@ const EventCard = (props: {
       </View>
       <View>{renderRatingButton()}</View>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -77,23 +77,23 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     flexDirection: 'column',
     display: 'flex',
-    borderRadius: 22
+    borderRadius: 22,
   },
   eventContainer: {
     display: 'flex',
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   text: {
     color: '#FAFBFC',
     fontSize: 14,
-    lineHeight: 18
+    lineHeight: 18,
   },
   eventImage: {
     width: 100,
     height: 100,
     display: 'flex',
     backgroundColor: 'beige',
-    borderRadius: 10
+    borderRadius: 10,
   },
   leftContainer: {
     flex: 1,
@@ -101,24 +101,24 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-between',
     marginLeft: 10,
-    paddingHorizontal: 5
+    paddingHorizontal: 5,
   },
   participantsContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   dateContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
 
   //Give Rating Button
   giveRatingContainer: {
     alignItems: 'center',
     marginTop: 20,
-    gap: 4
-  }
-})
+    gap: 4,
+  },
+});
 
-export default EventCard
+export default EventCard;

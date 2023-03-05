@@ -1,21 +1,20 @@
 import React from 'react'
-import { View, Image, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 
-import BookMarked from '../components/BookMarked'
 import IconText from './IconText'
 
-const PassedEventCard = (props: {
+const PastEventCard = (props: {
   eventDate: string
   eventName: string
   eventLocation: string
-  eventParticipantsQty: string
+  eventParticipantsQty: number
 }) => {
   return (
-    <View style={styles.generalWrapper}>
+    <View style={styles.container}>
       <Text style={styles.text}>{props.eventDate}</Text>
       <Text style={styles.text}>{props.eventName}</Text>
       <View style={styles.locationParticipantsWrapper}>
-        <IconText icon={require('../assets/Pin.png')} text={`${props.eventLocation}`} />
+        <IconText icon={require('../assets/pin.png')} text={`${props.eventLocation}`} />
         <IconText
           icon={require('../assets/Participants.png')}
           text={`${props.eventParticipantsQty} participants`}
@@ -27,7 +26,7 @@ const PassedEventCard = (props: {
 
 //Style
 const styles = StyleSheet.create({
-  generalWrapper: {
+  container: {
     display: 'flex',
     flexDirection: 'column',
     flexWrap: 'nowrap',
@@ -52,4 +51,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default PassedEventCard
+export default PastEventCard

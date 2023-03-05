@@ -1,40 +1,40 @@
-import React, { useState } from 'react'
-import { StyleSheet, Text, View, TextInput, Button, Pressable, Alert } from 'react-native'
-import { isEmailValid } from '../utils/email'
-import { isPasswordValid } from '../utils/password'
-import { signIn, signUp } from '../auth/user'
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, TextInput, Button, Pressable, Alert } from 'react-native';
+import { isEmailValid } from '../utils/email';
+import { isPasswordValid } from '../utils/password';
+import { signIn, signUp } from '../auth/user';
 
-const SignUpScreen = ({ navigation }: { navigation: any }) => {
-  const [email, setEmail] = useState('')
-  const [businessName, setBusinessName] = useState('')
-  const [password, setPassword] = useState('')
+const SignUpScreen = ({ navigation, }: { navigation: any }) => {
+  const [email, setEmail] = useState('');
+  const [businessName, setBusinessName] = useState('');
+  const [password, setPassword] = useState('');
 
   const onSignUpPress = async () => {
     if (signUpValidation()) {
-      await signUp(email, password)
-      await signIn(email, password)
-      navigation.navigate('Home')
+      await signUp(email, password);
+      await signIn(email, password);
+      navigation.navigate('Home');
     }
-  }
+  };
 
   const onAppleSignUpPress = () => {
-    navigation.navigate('Home')
-  }
+    navigation.navigate('Home');
+  };
 
   const onGoogleSignUpPress = () => {
-    navigation.navigate('Home')
-  }
+    navigation.navigate('Home');
+  };
 
   const signUpValidation = (): boolean => {
     if (isEmailValid(email)) {
     }
     if (isPasswordValid(password)) {
-      return true
+      return true;
     } else {
-      Alert.alert('Error', 'Invalid Email or Password')
-      return false
+      Alert.alert('Error', 'Invalid Email or Password');
+      return false;
     }
-  }
+  };
 
   return (
     <View style={styles.wrapper}>
@@ -68,8 +68,8 @@ const SignUpScreen = ({ navigation }: { navigation: any }) => {
         <Text>Already a user? Log in</Text>
       </Pressable>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignItems: 'center',
     margin: 20,
-    padding: 16
+    padding: 16,
   },
   buttonStyle: {
     height: 40,
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     margin: 20,
     borderWidth: 1,
     borderRadius: 6,
-    padding: 2
+    padding: 2,
   },
   textInputStyle: {
     height: 40,
@@ -93,14 +93,14 @@ const styles = StyleSheet.create({
     margin: 12,
     borderWidth: 1,
     padding: 10,
-    backgroundColor: 'lightgrey'
+    backgroundColor: 'lightgrey',
   },
   iconStyle: {
     gap: 5,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center'
-  }
-})
+    justifyContent: 'center',
+  },
+});
 
-export default SignUpScreen
+export default SignUpScreen;

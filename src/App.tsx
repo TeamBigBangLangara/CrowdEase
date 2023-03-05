@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import { NavigationContainer } from '@react-navigation/native'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { firebase } from '@react-native-firebase/auth'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import { GoogleSignin } from '@react-native-google-signin/google-signin'
+import React, { useEffect, useState } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { firebase } from '@react-native-firebase/auth';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
-import SignUp from './screens/SignUpScreen'
-import SplashScreen from './screens/SplashScreen'
-import Login from './screens/LoginScreen'
+import SignUp from './screens/SignUpScreen';
+import SplashScreen from './screens/SplashScreen';
+import Login from './screens/LoginScreen';
 
-import NavigationBottomTab from './components/navigation/NavigationBottomTab'
+import NavigationBottomTab from './components/navigation/NavigationBottomTab';
 
 export type MainStackParams = {
   HomeScreen: undefined
@@ -22,27 +22,27 @@ export type TabParams = {
   EventsStack: undefined
 }
 
-const Stack = createNativeStackNavigator()
+const Stack = createNativeStackNavigator();
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        setIsLoggedIn(true)
+        setIsLoggedIn(true);
       } else {
-        setIsLoggedIn(false)
+        setIsLoggedIn(false);
       }
-    })
+    });
 
     GoogleSignin.configure({
-      webClientId: '259021060250-a486v22la0hut46k5f0r3rntoevh9unt.apps.googleusercontent.com'
-    })
-  }, [])
+      webClientId: '259021060250-a486v22la0hut46k5f0r3rntoevh9unt.apps.googleusercontent.com',
+    });
+  }, []);
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, }}>
       <NavigationContainer>
         {!isLoggedIn && (
           <Stack.Navigator initialRouteName={'Splash'}>
@@ -52,13 +52,13 @@ const App = () => {
           </Stack.Navigator>
         )}
         {isLoggedIn && (
-          <Stack.Navigator initialRouteName="BottomTabs" screenOptions={{ headerShown: false }}>
+          <Stack.Navigator initialRouteName="BottomTabs" screenOptions={{ headerShown: false, }}>
             <Stack.Screen name={'BottomTabs'} component={NavigationBottomTab} />
           </Stack.Navigator>
         )}
       </NavigationContainer>
     </SafeAreaView>
-  )
-}
+  );
+};
 
-export default App
+export default App;

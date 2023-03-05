@@ -1,4 +1,4 @@
-import { Text, StyleSheet, View } from 'react-native'
+import { Text, StyleSheet, View } from 'react-native';
 
 const DayEventCard = (props: {
   eventName: string
@@ -6,7 +6,7 @@ const DayEventCard = (props: {
   percentage: number
   category: string
 }) => {
-  const progressBarWidth = `${props.percentage}%`
+  const progressBarWidth = `${props.percentage}%`;
   return (
     <View style={styles.container}>
       <View style={styles.nameContainer}>
@@ -17,12 +17,12 @@ const DayEventCard = (props: {
         {props.percentage}% over {props.category} category
       </Text>
       <View style={styles.progressBar}>
-        <View style={[styles.absoluteFill, { width: progressBarWidth }]} />
+        <View style={[styles.absoluteFill, { width: progressBarWidth, }]} />
       </View>
       <Text style={styles.text}>Get ready for your inventory, staff and, your online orders.</Text>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -31,43 +31,43 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     padding: 5,
-    marginHorizontal: 12
+    marginHorizontal: 12,
   },
   nameContainer: {
-    margin: 10
+    margin: 10,
   },
   eventName: {
     fontWeight: '500',
     fontSize: 20,
-    color: '#E6E1E5'
+    color: '#E6E1E5',
   },
   participants: {
     fontWeight: '500',
     fontSize: 16,
-    color: '#E6E1E5'
+    color: '#E6E1E5',
   },
   info: {
     fontWeight: '400',
     fontSize: 14,
     color: '#E6E1E5',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   progressBar: {
     width: 337,
     height: 22,
     backgroundColor: '#938F99',
-    borderRadius: 22
+    borderRadius: 22,
   },
   absoluteFill: {
     height: 22,
     backgroundColor: '#90EE90',
-    borderRadius: 22
+    borderRadius: 22,
   },
   text: {
     fontWeight: '400',
     fontSize: 12,
-    color: '#E6E1E5'
-  }
-})
+    color: '#E6E1E5',
+  },
+});
 
-export default DayEventCard
+export default DayEventCard;

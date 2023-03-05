@@ -7,8 +7,8 @@ return (
   onChangeText={props.onChange}
   placeholder={props.placeHolder}
   />
-)
-}
+);
+};
 
 const styles = StyleSheet.create ({
   input: {
@@ -22,7 +22,7 @@ const styles = StyleSheet.create ({
     },
     shadowOpacity: 1,
     borderRadius: 100,
-  }
-})
+  },
+});
 
-export default InputText
+export default InputText;

@@ -1,42 +1,42 @@
-import React, { useState } from 'react'
-import { StyleSheet, Text, View, TextInput, Button, Pressable, Alert, ImageBackground, Image, TouchableHighlight } from 'react-native'
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, TextInput, Button, Pressable, Alert, ImageBackground, Image, TouchableHighlight } from 'react-native';
 
-import { isEmailValid } from '../utils/email'
-import { onGoogleButtonPress } from '../auth/googleSignIn'
-import { signIn } from '../auth/user'
-import PrimaryButton from '../components/PrimaryButton'
+import { isEmailValid } from '../utils/email';
+import { onGoogleButtonPress } from '../auth/googleSignIn';
+import { signIn } from '../auth/user';
+import PrimaryButton from '../components/PrimaryButton';
 
-const LoginScreen = ({ navigation }: { navigation: any }) => {
+const LoginScreen = ({ navigation, }: { navigation: any }) => {
   //user: jane.doe@example.com
   //pass: SuperSecretPassword!
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const onLoginPress = () => {
     if (loginValidation()) {
-      signIn(email, password)
+      signIn(email, password);
     }
-  }
+  };
 
   const onAppleLoginPress = () => {
-    navigation.navigate('Home')
-  }
+    navigation.navigate('Home');
+  };
 
   const onGoogleLoginPress = () => {
     onGoogleButtonPress().then(() => {
-      navigation.navigate('Home')
-      console.log('User logged in')
-    })
-  }
+      navigation.navigate('Home');
+      console.log('User logged in');
+    });
+  };
 
   const loginValidation = (): boolean => {
     if (isEmailValid(email)) {
-      return true
+      return true;
     } else {
-      Alert.alert('Error', 'Invalid Email')
-      return false
+      Alert.alert('Error', 'Invalid Email');
+      return false;
     }
-  }
+  };
 
   const uri = require('../assets/images/backgroundOfLoginScreen.jpg');
 
@@ -85,8 +85,8 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
         </View>
       </View>
     </ImageBackground>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -95,19 +95,19 @@ const styles = StyleSheet.create({
     padding: 16,
     backgroundColor: 'rgba(33, 33, 33, 0.9)',
     height: '100%',
-    width: '100%'
+    width: '100%',
   },
   header:{
     fontWeight: '700',
     fontSize: 28,
     textAlign: 'center',
     color: '#E6E1E5',
-    margin: 20
+    margin: 20,
   },
   image: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   buttonContainer: {
     margin: 30,
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     height: 42,
     backgroundColor: '#B687F4',
     shadowColor: '#6D5192',
-    shadowOffset: { width: 1, height: 1 },
+    shadowOffset: { width: 1, height: 1, },
     shadowOpacity: 0.5,
     shadowRadius: 2,
     borderRadius: 22,
@@ -126,14 +126,14 @@ const styles = StyleSheet.create({
   passwordIcon: {
     position: 'absolute',
     top: 205,
-    right: 45
+    right: 45,
   },
   iconContainer: {
     gap: 40,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 40
+    marginTop: 40,
   },
   textInputStyle: {
     width: 330,
@@ -162,19 +162,19 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   text: {
     fontWeight: "500",
     fontSize: 16,
     color: '#E6E1E5',
-    margin: 20
+    margin: 20,
   },
   line:{
     backgroundColor: '#E6E1E5',
     height: 2,
-    width: 90
-  }
-})
+    width: 90,
+  },
+});
 
-export default LoginScreen
+export default LoginScreen;

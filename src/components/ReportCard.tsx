@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text } from 'react-native'
+import { View, StyleSheet, Text } from 'react-native';
 
 const ReportCard = (props: { date: string; eventNumber: number; participantsQty: number }) => {
   return (
@@ -16,8 +16,8 @@ const ReportCard = (props: { date: string; eventNumber: number; participantsQty:
         <Text style={styles.info}>{props.participantsQty}</Text>
       </View>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -28,19 +28,19 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     paddingVertical: 10,
     paddingHorizontal: 6,
-    marginHorizontal: 12
+    marginHorizontal: 12,
   },
   header: {
     fontWeight: '500',
     fontSize: 12,
     color: '#E6E1E5',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   info: {
     fontWeight: '500',
     fontSize: 16,
-    color: '#E6E1E5'
-  }
-})
+    color: '#E6E1E5',
+  },
+});
 
-export default ReportCard
+export default ReportCard;

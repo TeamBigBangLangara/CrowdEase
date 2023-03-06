@@ -1,5 +1,7 @@
 import React from 'react';
 import { View, Image, Text, StyleSheet } from 'react-native';
+import { fontFamily, fontSize } from "../styles/fonts";
+import { colors } from "../styles/colors";
 
 const IconText = (props: { icon: any; text: string }) => {
   return (
@@ -18,8 +20,9 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   text: {
-    color: '#FAFBFC',
-    fontSize: 14,
+    color: colors.netural.backgroundWhite,
+    fontSize: fontSize.body,
+    fontFamily: fontFamily.body,
     lineHeight: 18,
   },
 });

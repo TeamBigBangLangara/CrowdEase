@@ -1,8 +1,8 @@
-import React from 'react'
-import { Pressable, Text, View } from 'react-native'
-import { AuthStackNavigationProps } from '../types/types'
+import React from 'react';
+import { Pressable, Text, View } from 'react-native';
+import { AuthStackNavigationProps } from '../types/types';
 
-const SplashScreen = ({ navigation }: AuthStackNavigationProps<'SplashScreen'>) => {
+const SplashScreen = ({ navigation, }: AuthStackNavigationProps<'SplashScreen'>) => {
   return (
     <View style={{ flex: 1, }}>
       <Text>Splash Screen</Text>

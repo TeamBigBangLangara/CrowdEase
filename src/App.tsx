@@ -9,8 +9,8 @@ import SignUp from './screens/SignUpScreen';
 import SplashScreen from './screens/SplashScreen';
 import Login from './screens/LoginScreen';
 
-import NavigationBottomTab from './components/navigation/NavigationBottomTab'
-import LocationScreen from './screens/LocationScreen'
+import NavigationBottomTab from './components/navigation/NavigationBottomTab';
+import LocationScreen from './screens/LocationScreen';
 
 export type AuthStackParams = {
   SplashScreen: undefined
@@ -31,7 +31,7 @@ export type TabParams = {
   EventsStack: undefined
 }
 
-const Stack = createNativeStackNavigator<AuthStackParams>()
+const Stack = createNativeStackNavigator<AuthStackParams>();
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

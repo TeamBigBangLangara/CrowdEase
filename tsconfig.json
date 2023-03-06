@@ -4,6 +4,6 @@
     "jsx": "react-jsx",
     "skipLibCheck": true, // Skip type checking all .d.ts files.
     "baseUrl": "./src",
-    "moduleResolution": "node",
+    "moduleResolution": "node"
   }
 }

@@ -1,30 +1,29 @@
-import React, { useState } from 'react'
-import { StyleSheet, Text, View, TextInput, Button, Pressable, Alert } from 'react-native'
-import { isEmailValid } from '../utils/email'
-import { isPasswordValid } from '../utils/password'
-import { signIn, signUp } from '../auth/user'
-import { AuthStackNavigationProps } from '../types/types'
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, TextInput, Button, Pressable, Alert } from 'react-native';
+import { isEmailValid } from '../utils/email';
+import { isPasswordValid } from '../utils/password';
+import { signIn, signUp } from '../auth/user';
+import { AuthStackNavigationProps } from '../types/types';
 
-const SignUpScreen = ({ navigation }: AuthStackNavigationProps<'SignUpScreen'>) => {
-  const [email, setEmail] = useState('')
-  const [businessName, setBusinessName] = useState('')
-  const [password, setPassword] = useState('')
+const SignUpScreen = ({ navigation, }: AuthStackNavigationProps<'SignUpScreen'>) => {
+  const [email, setEmail] = useState('');
+  const [businessName, setBusinessName] = useState('');
+  const [password, setPassword] = useState('');
 
   const onSignUpPress = async () => {
     if (signUpValidation()) {
       await signUp(email, password);
       await signIn(email, password);
-      navigation.navigate('Home');
     }
   };
 
   const onAppleSignUpPress = () => {
-    navigation.navigate('LocationScreen')
-  }
+    navigation.navigate('LocationScreen');
+  };
 
   const onGoogleSignUpPress = () => {
-    navigation.navigate('LocationScreen')
-  }
+    navigation.navigate('LocationScreen');
+  };
 
   const signUpValidation = (): boolean => {
     if (isEmailValid(email)) {

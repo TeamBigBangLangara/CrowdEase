@@ -8,6 +8,7 @@ export const fontWeight = {
  heading: "600",
  subtitle: "500",
  body: "400",
+  label: "700",
 };
 
 export const fontSize = {

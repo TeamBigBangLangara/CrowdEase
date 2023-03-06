@@ -4,7 +4,7 @@ import { AuthStackNavigationProps } from '../types/types'
 
 const SplashScreen = ({ navigation }: AuthStackNavigationProps<'SplashScreen'>) => {
   return (
-    <View>
+    <View style={{ flex: 1, }}>
       <Text>Splash Screen</Text>
       <Pressable onPress={() => navigation.navigate('LoginScreen')}>
         <Text>Login</Text>
@@ -13,7 +13,7 @@ const SplashScreen = ({ navigation }: AuthStackNavigationProps<'SplashScreen'>) 
         <Text>Sign up</Text>
       </Pressable>
     </View>
-  )
-}
+  );
+};
 
-export default SplashScreen
+export default SplashScreen;

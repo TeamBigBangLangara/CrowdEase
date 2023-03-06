@@ -164,8 +164,8 @@ const LocationScreen = ({ navigation }: AuthStackNavigationProps<'LocationScreen
         <Button onPress={getLocation} title="Get Location" accessibilityLabel="Get Location" />
       </View>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -231,4 +231,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default LocationScreen
+export default LocationScreen;

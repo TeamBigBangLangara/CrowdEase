@@ -1,5 +1,5 @@
-import React from 'react'
-import { Text, View } from 'react-native'
+import React from 'react';
+import { Text, View } from 'react-native';
 
 const EventDetailsScreen = () => {
   return (
@@ -7,7 +7,7 @@ const EventDetailsScreen = () => {
       <Text>SingleEvent Screen</Text>
       <Text>Event of Details will be here</Text>
     </View>
-  )
-}
+  );
+};
 
-export default EventDetailsScreen
+export default EventDetailsScreen;

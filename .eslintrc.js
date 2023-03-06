@@ -19,7 +19,11 @@ module.exports = {
           { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }
         ],
         'no-shadow': 'off',
-        'no-undef': 'off'
+        'no-undef': 'off',
+        'comma-dangle': ['error', {
+          "objects": "always"
+        }],
+        "semi": ["error", "always"],
       }
     }
   ]

@@ -1,7 +1,7 @@
 export interface Event {
   id?: string
   name: string
-  images?: Image
+  image: string
   dates: Dates
   category: Category
   location: Location
@@ -10,9 +10,6 @@ export interface Event {
   participants: number
 }
 
-export interface Image {
-  url: string
-}
 
 export interface Dates {
     date: string

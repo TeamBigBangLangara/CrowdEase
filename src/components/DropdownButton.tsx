@@ -2,6 +2,7 @@ import { Image, Pressable, StyleSheet, Text } from "react-native";
 import React from "react";
 import { colors } from "../styles/colors";
 import { fontFamily, fontSize, fontWeight } from "../styles/fonts";
+import { margin } from "../styles/basic";
 
 const DropdownButton = (props: {onDropdownPress: () => void, label: string}) => {
   return (
@@ -15,7 +16,7 @@ const DropdownButton = (props: {onDropdownPress: () => void, label: string}) => 
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    marginTop: 8,
+    marginTop: margin.tertiary,
     gap: 4,
   },
   label: {

@@ -42,7 +42,9 @@ const EventCard = (props: {
   const renderRatingButton = () => {
     if (props.eventType === 'past') {
       return (
-       <DropdownButton onDropdownPress={() => setShowRating(true)} label={"Give a Rating"}/>
+        <View style={styles.ratingButton}>
+          <DropdownButton onDropdownPress={() => setShowRating(true)} label={"Give a Rating"}/>
+        </View>
       );
     }
   };
@@ -56,8 +58,19 @@ const EventCard = (props: {
     );
   };
 
+  const renderDragUpButton = () => {
+    if (props.eventType === "mapEvent") {
+      return (
+        <View style={styles.dragUpContainer}>
+            <Image source={require('../assets/dragUp.png')}/>
+        </View>
+      );
+    }
+  };
+
   return (
     <View style={styles.container}>
+      {renderDragUpButton()}
       <View style={styles.eventContainer}>
         <Image source={require('../assets/eventImage.png')} style={styles.eventImage} />
         <View style={styles.leftContainer}>
@@ -75,7 +88,7 @@ const EventCard = (props: {
           </View>
         </View>
       </View>
-      <View style={styles.ratingButton}>{!showRating ? renderRatingButton() : ""}</View>
+      <View>{!showRating ? renderRatingButton() : ""}</View>
       {showRating ? renderRatingCard() : ""}
     </View>
   );
@@ -84,8 +97,8 @@ const EventCard = (props: {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.netural.surfaceBlack,
-    paddingHorizontal: 20,
-    paddingVertical: 20,
+    paddingHorizontal: 24,
+    paddingVertical: 16,
     flexDirection: 'column',
     display: 'flex',
     borderRadius: 22,
@@ -111,8 +124,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    marginLeft: 10,
-    paddingHorizontal: 5,
+    marginLeft: 15,
   },
   participantsContainer: {
     flexDirection: 'row',
@@ -134,6 +146,10 @@ const styles = StyleSheet.create({
   },
   ratingButton: {
     marginTop: 12,
+  },
+  dragUpContainer: {
+    alignItems: "center",
+    marginBottom: 13,
   },
 });
 

@@ -34,9 +34,9 @@ const RateCard = (props: { onSubmitPress: () => void; onSkipPress: () => void, o
     <View style={styles.container}>
       <Text style={styles.header}>Please tell how much this event affected your business?</Text>
       {renderStars()}
-      <SecondaryButton onClick={props.onSubmitPress} label={'Submit'} />
+      <SecondaryButton onPress={props.onSubmitPress} label={'Submit'} />
       <View style={styles.skipLabel}>
-        <LinkButton onClick={props.onSkipPress} label={'Skip'} />
+        <LinkButton onPress={props.onSkipPress} label={'Skip'} />
       </View>
     </View>
   );

@@ -2,7 +2,7 @@ import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { Event } from "../types/types";
 import { borderRadius, margin } from "../styles/basic";
 import { colors } from "../styles/colors";
-import { fontFamily, fontSize, fontWeight } from "../styles/fonts";
+import { fontFamily, fontSize, fontWeightBody, fontWeightSubtitle } from "../styles/fonts";
 import DropdownButton from "./DropdownButton";
 import React, { useState } from "react";
 
@@ -39,22 +39,16 @@ const DayEventCard = (props: {
     switch (props.event.category.name) {
       case "sport":
         return <Image source={require("../assets/category/sport.png")} />;
-        break;
       case "music":
         return <Image source={require("../assets/category/music.png")} />;
-        break;
       case "festival":
         return <Image source={require("../assets/category/festival.png")} />;
-        break;
       case "business":
         return <Image source={require("../assets/category/business.png")} />;
-        break;
       case "show":
         return <Image source={require("../assets/category/show.png")} />;
-        break;
       case "other":
         return <Text> </Text>;
-        break;
       default:
         return <Text>No Icon</Text>;
     }
@@ -94,7 +88,7 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   eventName: {
-    fontWeight: fontWeight.subtitle,
+    fontWeight: fontWeightSubtitle,
     fontSize: fontSize.subtitle1,
     color: colors.netural.surfaceWhite,
   },
@@ -103,13 +97,13 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   participants: {
-    fontWeight: fontWeight.subtitle,
+    fontWeight: fontWeightSubtitle,
     fontSize: fontSize.subtitle2,
     color: colors.netural.surfaceWhite,
     lineHeight: 18,
   },
   categoryLabel: {
-    fontWeight: fontWeight.body,
+    fontWeight: fontWeightBody,
     fontSize: fontSize.body,
     fontFamily: fontFamily.body,
     color: colors.netural.surfaceWhite,

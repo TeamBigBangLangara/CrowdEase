@@ -1,8 +1,10 @@
 import { Text, Pressable, GestureResponderEvent, StyleSheet } from 'react-native';
+import { colors } from "../styles/colors";
+import { fontFamily, fontSize, fontWeightSubtitle2} from "../styles/fonts";
 
-const LinkButton = (props: { onClick: (event: GestureResponderEvent) => void; label: string }) => {
+const LinkButton = (props: { onPress: (event: GestureResponderEvent) => void; label: string }) => {
   return (
-    <Pressable onPress={props.onClick}>
+    <Pressable onPress={props.onPress}>
       <Text style={styles.text}>{props.label}</Text>
     </Pressable>
   );
@@ -10,10 +12,10 @@ const LinkButton = (props: { onClick: (event: GestureResponderEvent) => void; la
 
 const styles = StyleSheet.create({
   text: {
-    color: '#90EE90',
-    fontSize: 14,
-    borderBottomColor: '#90EE90',
-    borderBottomWidth: 1,
+    color: colors.netural.surfaceWhite,
+    fontSize: fontSize.body,
+    fontFamily: fontFamily.body,
+    fontWeight: fontWeightSubtitle2,
   },
 });
 

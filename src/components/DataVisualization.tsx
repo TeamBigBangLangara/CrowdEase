@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, Pressable, GestureResponderEvent, StyleSheet } from 'react-native';
 
 const PlaceNameHere = (props: {
-  onClick: (event: GestureResponderEvent) => void
+  onPress: (event: GestureResponderEvent) => void
   label: string
 }) => {
   return console.log('Test');

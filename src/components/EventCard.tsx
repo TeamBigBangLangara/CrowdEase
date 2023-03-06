@@ -1,18 +1,16 @@
 import React, { useState } from "react";
-import { View, Image, Text, StyleSheet, Pressable, Alert } from "react-native";
+import { View, Image, Text, StyleSheet } from "react-native";
 
 import BookmarkButton from './BookmarkButton';
 import IconText from './IconText';
 import RateCard from "./RateCard";
 import DropdownButton from "./DropdownButton";
+import { Event } from "../types/types";
+import { colors } from "../styles/colors";
+import { fontFamily, fontSize } from "../styles/fonts";
 
 const EventCard = (props: {
-  eventImage?: any
-  eventTime: string
-  eventName: string
-  eventLocation: string
-  eventParticipantsQty: number
-  eventDate?: string
+  event: Event
   onBookmarkPress?: () => void
   eventType: string
 }) => {
@@ -22,14 +20,14 @@ const EventCard = (props: {
     if (props.eventType === 'past') {
       return (
         <View style={styles.dateContainer}>
-          <Text style={styles.text}>{props.eventDate}</Text>
-          <Text style={styles.text}>{props.eventTime}</Text>
+          <Text style={styles.label}>{props.event.dates.date}</Text>
+          <Text style={styles.label}>{props.event.dates.time}</Text>
         </View>
       );
     } else {
       return (
         <View>
-          <Text style={styles.text}>{props.eventTime}</Text>
+          <Text style={styles.label}>{props.event.dates.time}</Text>
         </View>
       );
     }
@@ -61,20 +59,23 @@ const EventCard = (props: {
   return (
     <View style={styles.container}>
       <View style={styles.eventContainer}>
-        <Image source={props.eventImage} style={styles.eventImage} />
+        <Image source={require('../assets/eventImage.png')} style={styles.eventImage} />
         <View style={styles.leftContainer}>
-          {renderDate()}
-          <IconText icon={require('../assets/pin.png')} text={props.eventLocation} />
+          <View style={styles.upContainer}>
+            {renderDate()}
+            <Text style={styles.eventTitle}>{props.event.name}</Text>
+            <IconText icon={require('../assets/pin.png')} text={props.event.address} />
+          </View>
           <View style={styles.participantsContainer}>
             <IconText
               icon={require('../assets/participants.png')}
-              text={`${props.eventParticipantsQty} participants`}
+              text={`${props.event.participants} participants`}
             />
             {renderBookmarkButton()}
           </View>
         </View>
       </View>
-      <View>{!showRating ? renderRatingButton() : ""}</View>
+      <View style={styles.ratingButton}>{!showRating ? renderRatingButton() : ""}</View>
       {showRating ? renderRatingCard() : ""}
     </View>
   );
@@ -82,7 +83,7 @@ const EventCard = (props: {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'rgba(12, 12, 14, 0.5)',
+    backgroundColor: colors.netural.surfaceBlack,
     paddingHorizontal: 20,
     paddingVertical: 20,
     flexDirection: 'column',
@@ -93,17 +94,17 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
   },
-  text: {
-    color: '#FAFBFC',
-    fontSize: 14,
+  label: {
+    color: colors.netural.backgroundWhite,
+    fontSize: fontSize.body,
     lineHeight: 18,
+    fontFamily: fontFamily.body,
   },
   eventImage: {
-    width: 100,
-    height: 100,
+    width: 92,
+    height: 102,
     display: 'flex',
-    backgroundColor: 'beige',
-    borderRadius: 10,
+    borderRadius: 11,
   },
   leftContainer: {
     flex: 1,
@@ -117,10 +118,22 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    marginTop: 18,
   },
   dateContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  eventTitle: {
+    fontSize: fontSize.subtitle2,
+    color: colors.netural.backgroundWhite,
+    fontFamily: fontFamily.body,
+  },
+  upContainer: {
+    gap: 4,
+  },
+  ratingButton: {
+    marginTop: 12,
   },
 });
 

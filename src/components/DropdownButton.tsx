@@ -1,7 +1,7 @@
 import { Image, Pressable, StyleSheet, Text } from "react-native";
 import React from "react";
 import { colors } from "../styles/colors";
-import { fontSize } from "../styles/fonts";
+import { fontFamily, fontSize, fontWeight } from "../styles/fonts";
 
 const DropdownButton = (props: {onDropdownPress: () => void, label: string}) => {
   return (
@@ -21,6 +21,8 @@ const styles = StyleSheet.create({
   label: {
     color: colors.netural.backgroundWhite,
     fontSize: fontSize.body,
+    fontFamily: fontFamily.body,
+    fontWeight: fontWeight.label,
     lineHeight: 18,
   },
 });

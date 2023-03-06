@@ -2,7 +2,8 @@ import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import SecondaryButton from './SecondaryButton';
 import LinkButton from './LinkButton';
 import { colors } from "../styles/colors";
-import { fontFamily, fontSize, fontWeight } from "../styles/fonts";
+import { fontFamily, fontSize } from "../styles/fonts";
+import { margin } from "../styles/basic";
 
 const RateCard = (props: { onSubmitPress: () => void; onSkipPress: () => void, onStarPress: () => void}) => {
 
@@ -46,22 +47,22 @@ const styles = StyleSheet.create({
     borderTopWidth: 2,
     borderTopColor: colors.netural.surfaceWhite,
     alignItems: 'center',
-    marginTop: 16,
+    marginTop: margin.secondary,
     backgroundColor: colors.netural.surfaceBlack,
   },
   starContainer: {
     flexDirection: "row",
     gap: 4,
     marginBottom: 24,
-    marginTop: 8,
+    marginTop: margin.tertiary,
   },
   skipLabel: {
-    marginTop: 16,
+    marginTop: margin.secondary,
     alignItems: "center",
   },
   header: {
-    marginTop: 16,
-    marginBottom: 8,
+    marginTop: margin.secondary,
+    marginBottom: margin.tertiary,
     color: colors.netural.backgroundWhite,
     fontFamily: fontFamily.body,
     fontSize: fontSize.body,

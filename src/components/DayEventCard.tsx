@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     padding: 8,
   },
   headerContainer: {
-    marginTop: 16,
+    marginTop: margin.secondary,
     gap: 4,
   },
   eventName: {
@@ -142,10 +142,10 @@ const styles = StyleSheet.create({
     fontFamily: fontFamily.subtitle,
     letterSpacing: 0.0128,
     lineHeight: 20,
-    marginTop: 8,
+    marginTop: margin.tertiary,
   },
   upIcon: {
-    marginTop: 16,
+    marginTop: margin.secondary,
   },
 });
 

@@ -8,6 +8,7 @@ import { GoogleSignin } from '@react-native-google-signin/google-signin'
 import SignUp from './screens/SignUpScreen'
 import SplashScreen from './screens/SplashScreen'
 import Login from './screens/LoginScreen'
+import Map from './screens/MapScreen'
 
 import NavigationBottomTab from './components/navigation/NavigationBottomTab'
 
@@ -49,6 +50,7 @@ const App = () => {
             <Stack.Screen name={'Splash'} component={SplashScreen} />
             <Stack.Screen name={'Login'} component={Login} />
             <Stack.Screen name={'Sign Up'} component={SignUp} />
+            <Stack.Screen name={'Map'} component={Map} />
           </Stack.Navigator>
         )}
         {isLoggedIn && (

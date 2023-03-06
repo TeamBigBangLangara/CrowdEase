@@ -4,6 +4,7 @@ import { View, Image, Text, StyleSheet, Pressable, Alert } from "react-native";
 import BookmarkButton from './BookmarkButton';
 import IconText from './IconText';
 import RateCard from "./RateCard";
+import DropdownButton from "./DropdownButton";
 
 const EventCard = (props: {
   eventImage?: any
@@ -43,10 +44,7 @@ const EventCard = (props: {
   const renderRatingButton = () => {
     if (props.eventType === 'past') {
       return (
-        <Pressable onPress={() => setShowRating(true)} style={styles.giveRatingContainer}>
-          <Text style={styles.text}>Give a Rating</Text>
-          <Image source={require('../assets/downIcon.png')} />
-        </Pressable>
+       <DropdownButton onDropdownPress={() => setShowRating(true)} label={"Give a Rating"}/>
       );
     }
   };
@@ -123,13 +121,6 @@ const styles = StyleSheet.create({
   dateContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-  },
-
-  //Give Rating Button
-  giveRatingContainer: {
-    alignItems: 'center',
-    marginTop: 20,
-    gap: 4,
   },
 });
 

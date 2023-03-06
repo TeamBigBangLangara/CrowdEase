@@ -3,9 +3,9 @@ import { View, Image, Text, StyleSheet } from 'react-native';
 import { fontFamily, fontSize } from "../styles/fonts";
 import { colors } from "../styles/colors";
 
-const IconText = (props: { icon: any; text: string }) => {
+const IconText = (props: { icon: any; text: string, style: object }) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, props.style]}>
       <Image source={props.icon} />
       <Text style={styles.text}>{props.text}</Text>
     </View>
@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'flex-end',
     gap: 4,
   },
   text: {

@@ -1,12 +1,13 @@
 export interface Event {
-  id: string
+  id?: string
   name: string
-  images: Image
+  images?: Image
   dates: Dates
-  classifications: Classification
+  category: Category
   location: Location
   venue: Venue
   address: string
+  participants: number
 }
 
 export interface Image {
@@ -14,17 +15,13 @@ export interface Image {
 }
 
 export interface Dates {
-  start: {
-    localDate: string
-    localTime: string
-  }
+    date: string
+    time: string
 }
 
-export interface Classification {
-  segment: {
+export interface Category {
     id: string
     name: string
-  }
 }
 
 export interface Venue {

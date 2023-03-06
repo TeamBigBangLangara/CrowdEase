@@ -8,6 +8,7 @@ export const fontWeightTitle = '600';
 export const fontWeightSubtitle = '500';
 export const fontWeightBody = '400';
 export const fontWeightLabel = '400';
+export const fontWeightSubtitle2 = '700';
 
 export const fontSize = {
   heading1: 28,

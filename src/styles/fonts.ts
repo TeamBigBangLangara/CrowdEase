@@ -4,7 +4,7 @@ export const fontFamily = {
     body: 'CircularStd-Medium',
 };
 
-export const fontWeight: {[fontWeight: string]: string} = {
+export const fontWeight = {
  heading: "600",
  subtitle: "500",
  body: "400",

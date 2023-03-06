@@ -1,9 +1,9 @@
 import { Pressable, Text, GestureResponderEvent, StyleSheet } from 'react-native';
 
-const PrimaryButton = (props: { onClick: ((event: GestureResponderEvent) => void) ; label: string; }) => {
+const PrimaryButton = (props: { onPress: ((event: GestureResponderEvent) => void) ; label: string; }) => {
   return (
   <Pressable
-  onPress={props.onClick}
+  onPress={props.onPress}
   style={({ pressed, }) => [
     pressed ? styles.pressedShadow : styles.shadowProp,
     styles.button

@@ -66,7 +66,7 @@ const LoginScreen = ({ navigation, }: { navigation: any }) => {
           <Text style={styles.link}>Forgot Password</Text>
         </Pressable>
         <View style={styles.buttonContainer}>
-          <PrimaryButton label="Login" onClick={onLoginPress} />
+          <PrimaryButton label="Login" onPress={onLoginPress} />
         </View>
         <View style={styles.textContainer}>
           <View style={styles.line}></View>

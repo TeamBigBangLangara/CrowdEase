@@ -77,12 +77,13 @@ const EventCard = (props: {
           <View style={styles.upContainer}>
             {renderDate()}
             <Text style={styles.eventTitle}>{props.event.name}</Text>
-            <IconText icon={require('../assets/pin.png')} text={props.event.address} />
+            <IconText icon={require('../assets/pin.png')} text={props.event.address} style={styles.icon}/>
           </View>
           <View style={styles.participantsContainer}>
             <IconText
               icon={require('../assets/participants.png')}
               text={`${props.event.participants} participants`}
+              style={styles.icon}
             />
             {renderBookmarkButton()}
           </View>
@@ -150,6 +151,9 @@ const styles = StyleSheet.create({
   dragUpContainer: {
     alignItems: "center",
     marginBottom: 13,
+  },
+  icon: {
+    alignItems: "flex-end",
   },
 });
 

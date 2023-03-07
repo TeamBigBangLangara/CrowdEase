@@ -1,27 +1,44 @@
-import React from 'react';
-import { TextInput, StyleSheet, Image, View } from 'react-native';
+import React, {useState} from 'react';
+import { TextInput, StyleSheet, Image, View, Pressable, Text } from 'react-native';
 
 import IconButton from './IconButton';
+
+import { colors } from "../styles/colors";
+import { fontSize, fontFamily } from "../styles/fonts";
 
 const SearchForm = (props: {
   placeHolder: string
   onChangeText: () => void
-  searchText: string
+
 }) => {
+  const [searchOnFocus, setSearchOnFocus] = useState(false);
+  
+
+
   return (
     <View style={styles.container}>
-      <View style={styles.searchContainer}>
+      <View style={searchOnFocus?styles.searchContainerFocus: styles.searchContainerNoFocus}>
         <Image source={require('../assets/search.png')} />
         <TextInput
           onChangeText={props.onChangeText}
-          value={props.searchText}
+          // onFocus={setSearchOnFocus(true)}
           placeholder={props.placeHolder}
           style={styles.input}
-          placeholderTextColor="#FFFFFF"
+          placeholderTextColor={styles.input.color}
         />
         <Image source={require('../assets/mic.png')} />
       </View>
-      <IconButton iconPath={require('../assets/filter.png')} style={styles.iconButton} />
+      {searchOnFocus ? 
+      <Pressable
+        onPress={()=> console.log("test")}
+        style={styles.cancelButton}
+        >
+          <Text style={styles.cancelText}>Cancel</Text>
+        </Pressable>
+      :
+      <IconButton iconPath={require('../assets/filter.png')} onPress={()=>console.log()} />
+    }
+
     </View>
   );
 };
@@ -31,30 +48,61 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 16,
     height: 42,
     borderRadius: 22,
     gap: 20,
   },
-  searchContainer: {
+  searchContainerNoFocus: {
     display: 'flex',
     flexDirection: 'row',
     flex: 1,
     alignItems: 'center',
     borderWidth: 2,
-    borderColor: '#938F99',
-    paddingHorizontal: 16,
+    paddingLeft: 20,
+    paddingRight: 16,
     height: 42,
     borderRadius: 20,
+    gap: 12,
+
+    borderColor: colors.netural.surfaceWhite,
+  },
+  searchContainerFocus: {
+    display: 'flex',
+    flexDirection: 'row',
+    flex: 1,
+    alignItems: 'center',
+    borderWidth: 2,
+    paddingLeft: 20,
+    paddingRight: 16,
+    height: 42,
+    borderRadius: 20,
+    gap: 12,
+
+    borderColor: colors.primaryPurpleLight,
+    shadowColor: 'rgba(255, 0, 50, 0.25)',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 1,
   },
   input: {
     flex: 1,
-    marginHorizontal: 12,
-    paddingHorizontal: 10,
-    borderColor: '#938F99',
-    color: '#FFFFFF',
+    borderColor: colors.netural.surfaceWhite,
+    color: colors.netural.surfaceWhite,
   },
-  iconButton: {},
+  iconButton: {
+    flex: 1,
+  },
+  cancelButton: {
+    display: "flex",
+    alignItems: 'center',
+  },
+  cancelText: {
+    fontSize: fontSize.body,
+    fontFamily: fontFamily.body,
+    color: colors.netural.surfaceWhite,
+  },
 });
 
 export default SearchForm;

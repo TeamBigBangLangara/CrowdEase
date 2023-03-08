@@ -1,7 +1,7 @@
 export const fontFamily = {
     heading: 'CircularStd-Bold',
     subtitle: 'CircularStd-Medium',
-    body: 'CircularStd-Medium',
+    body: 'CircularStd-Book',
 };
 
 export const fontWeightTitle = '600';

@@ -9,8 +9,8 @@ import PrimaryButton from '../components/PrimaryButton';
 const LoginScreen = ({ navigation, }: { navigation: any }) => {
   //user: jane.doe@example.com
   //pass: SuperSecretPassword!
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('jane.doe@example.com');
+  const [password, setPassword] = useState('SuperSecretPassword!');
 
   const onLoginPress = () => {
     if (loginValidation()) {

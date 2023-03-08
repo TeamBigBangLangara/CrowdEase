@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pressable, Text, View } from 'react-native';
-import { AuthStackNavigationProps } from '../types/types';
+import { AuthStackNavigationProps } from '../types/navigationTypes';
 
 const SplashScreen = ({ navigation, }: AuthStackNavigationProps<'SplashScreen'>) => {
   return (

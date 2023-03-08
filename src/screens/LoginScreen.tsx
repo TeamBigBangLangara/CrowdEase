@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, TextInput, Pressable, Alert, ImageBackground, I
 import { isEmailValid } from '../utils/email';
 import { onGoogleButtonPress } from '../auth/googleSignIn';
 import { signIn } from '../auth/user';
-import { AuthStackNavigationProps } from '../types/types';
+import { AuthStackNavigationProps } from '../types/navigationTypes';
 import PrimaryButton from '../components/PrimaryButton';
 
 const LoginScreen = ({ navigation, }: AuthStackNavigationProps<'LoginScreen'>) => {
@@ -63,7 +63,7 @@ const LoginScreen = ({ navigation, }: AuthStackNavigationProps<'LoginScreen'>) =
           <Text style={styles.link}>Forgot Password</Text>
         </Pressable>
         <View style={styles.buttonContainer}>
-          <PrimaryButton label="Login" onClick={onLoginPress} />
+          <PrimaryButton label="Login" onPress={onLoginPress} />
         </View>
         <View style={styles.textContainer}>
           <View style={styles.line}></View>

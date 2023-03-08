@@ -1,21 +1,33 @@
 import { Text, StyleSheet, View, Image } from 'react-native';
+import IconText from "./IconText";
+import { colors } from "../styles/colors";
+import { fontFamily, fontSize, fontWeightSubtitle } from "../styles/fonts";
+import { margin } from "../styles/basic";
 
 const ParticipantsByMeal = (props: {
   mealTime: string
   crowdNumber: number
-  iconPath?: string
 }) => {
-  const renderTime = () => {
+  const renderLabelWithIcon = () => {
     switch (props.mealTime) {
       case 'morning':
-        return '6am-12pm';
-        break;
-      case 'lunch':
-        return '1pm-5pm';
-        break;
-      case 'dinner':
-        return '6pm-10pm';
-        break;
+        return (
+          <View>
+            <IconText icon={require('../assets/morning.png')} text={'6am-12pm'} style={styles.icon}/>
+          </View>
+        );
+        case 'lunch':
+        return (
+          <View>
+            <IconText icon={require('../assets/lunch.png')} text={'1pm-5pm'} style={styles.icon}/>
+          </View>
+        );
+        case 'dinner':
+        return (
+          <View>
+            <IconText icon={require('../assets/dinner.png')} text={'6pm-10pm'} style={styles.icon}/>
+          </View>
+        );
       default:
         return 'The specified meal is not correct';
     }
@@ -23,8 +35,7 @@ const ParticipantsByMeal = (props: {
 
   return (
     <View style={styles.container}>
-      <Image source={{ uri: props.iconPath, }} />
-      <Text style={styles.time}>{renderTime()}</Text>
+      {renderLabelWithIcon()}
       <Text style={styles.number}>{props.crowdNumber}</Text>
     </View>
   );
@@ -32,27 +43,26 @@ const ParticipantsByMeal = (props: {
 
 const styles = StyleSheet.create({
   container: {
+    alignItems: "center",
+    justifyContent: 'space-evenly',
     width: 115,
     height: 89,
-    backgroundColor: '#121214',
+    backgroundColor: colors.netural.surfaceBlack,
     borderRadius: 12,
     display: 'flex',
-    justifyContent: 'center',
-    marginHorizontal: 12,
-  },
-  time: {
-    color: '#E6E1E5',
-    fontWeight: '400',
-    fontSize: 12,
-    lineHeight: 16,
-    textAlign: 'center',
-  },
+    
+   },
   number: {
-    color: '#FAFBFC',
-    fontWeight: '500',
+    color: colors.netural.backgroundWhite,
+    fontWeight: fontWeightSubtitle,
     fontSize: 22,
     textAlign: 'center',
-    margin: 10,
+    
+  },
+  icon: {
+    alignItems: "center",
+    justifyContent: 'center',
+    
   },
 });
 export default ParticipantsByMeal;

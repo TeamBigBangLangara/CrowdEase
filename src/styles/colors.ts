@@ -1,4 +1,4 @@
-export const darkMode = {
+export const colors = {
   errorRed: "#B9414A",
   secondaryGreenDark: "#90EE90",
   primaryPurpleLight: "#8335FD",

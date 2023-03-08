@@ -2,11 +2,11 @@ import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { signOut } from '../auth/user';
-import { MainStackNavigationProps } from '../types/types';
+import { MainStackNavigationProps } from '../types/navigationTypes';
 
 const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => {
   return (
-    <View style={styles.wrapper}>
+    <View style={styles.container}>
       <Text>Home Screen</Text>
       <Pressable onPress={signOut}>
         <Text>Sign out</Text>
@@ -16,7 +16,7 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
 };
 
 const styles = StyleSheet.create({
-  wrapper: {
+  container: {
     justifyContent: 'center',
     alignItems: 'center',
   },

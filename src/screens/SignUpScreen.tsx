@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TextInput, Button, Pressable, Alert } from 'rea
 import { isEmailValid } from '../utils/email';
 import { isPasswordValid } from '../utils/password';
 import { signIn, signUp } from '../auth/user';
-import { AuthStackNavigationProps } from '../types/types';
+import { AuthStackNavigationProps } from '../types/navigationTypes';
 
 const SignUpScreen = ({ navigation, }: AuthStackNavigationProps<'SignUpScreen'>) => {
   const [email, setEmail] = useState('');

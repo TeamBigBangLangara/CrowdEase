@@ -13,7 +13,7 @@ import {
 import Geolocation from 'react-native-geolocation-service';
 import { GeoPositionState } from 'types/geoPositionState';
 import { getPostalCodeCoordinates } from '../services/postalCodeApi';
-import { AuthStackNavigationProps } from '../types/types';
+import { AuthStackNavigationProps } from '../types/navigationTypes';
 import { isPostalCodeValid } from '../utils/postalCode';
 
 const LocationScreen = ({ navigation, }: AuthStackNavigationProps<'LocationScreen'>) => {

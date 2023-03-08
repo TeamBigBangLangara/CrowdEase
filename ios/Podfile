@@ -3,7 +3,7 @@ $RNFirebaseAsStaticFramework = true
 require_relative '../node_modules/react-native/scripts/react_native_pods'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
-platform :ios, min_ios_version_supported
+platform :ios, '13.0'
 prepare_react_native_project!
 
 # If you are using a `react-native-flipper` your iOS build will fail when `NO_FLIPPER=1` is set.
@@ -23,10 +23,43 @@ if linkage != nil
   use_frameworks! :linkage => linkage.to_sym
 end
 
-
 target 'CrowdEease' do
+    rn_maps_path = '../node_modules/react-native-maps'
+    pod 'react-native-google-maps', :path => rn_maps_path
+
   config = use_native_modules!
-    use_frameworks! :linkage => :static
+  $static_framework = []
+  $static_library = [
+    'React',
+    'Google-Maps-iOS-Utils',
+    'GoogleMaps',
+    'react-native-google-maps',
+    'react-native-maps',
+    'React-hermes'
+  ]
+
+  $RNFirebaseAsStaticFramework = true
+  $RNGoogleMobileAdsAsStaticFramework = true
+  $RNAdMobAsStaticFramework = true
+  $FirebaseSDKVersion = '10.2.0'
+  use_frameworks! :linkage => :static
+  pre_install do |installer|
+  Pod::Installer::Xcode::TargetValidator.send(:define_method, :verify_no_static_framework_transitive_dependencies) {}
+      installer.pod_targets.each do |pod|
+        bt = pod.send(:build_type)
+        if $static_library.include?(pod.name)
+          puts "Overriding the build_type to static_library from static_framework for #{pod.name}"
+          def pod.build_type;
+            Pod::BuildType.static_library
+          end
+        end
+      end
+      installer.pod_targets.each do |pod|
+        bt = pod.send(:build_type)
+        puts "#{pod.name} (#{bt})"
+        puts "  linkage: #{bt.send(:linkage)} packaging: #{bt.send(:packaging)}"
+      end
+  end
 
 
 
@@ -55,6 +88,7 @@ target 'CrowdEease' do
   end
 
   post_install do |installer|
+    react_native_post_install(installer)
     react_native_post_install(
       installer,
       # Set `mac_catalyst_enabled` to `true` in order to apply patches
@@ -62,5 +96,13 @@ target 'CrowdEease' do
       :mac_catalyst_enabled => false
     )
     __apply_Xcode_12_5_M1_post_install_workaround(installer)
+    installer.pods_project.targets.each do |target|
+      if target.name == 'react-native-google-maps'
+        target.build_configurations.each do |config|
+          config.build_settings['CLANG_ENABLE_MODULES'] = 'No'
+        end
+      end
+    end
   end
 end
+

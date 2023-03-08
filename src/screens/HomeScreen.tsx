@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, TextStyle, View, ScrollView, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, TextStyle, View, ScrollView, SafeAreaView } from 'react-native';
 
 import { signOut } from '../auth/user';
 import { MainStackNavigationProps } from '../types/navigationTypes';
@@ -11,6 +11,24 @@ import PrimaryButton from '../components/PrimaryButton';
 import SecondaryButton from '../components/SecondaryButton';
 import ParticipantsByMealCard from '../components/ParticipantsByMealCard';
 import LinkButton from '../components/LinkButton';
+import EventCard from '../components/EventCard';
+
+const Event = {
+  name: "Coldplay",
+  dates: {
+    date: "12 March",
+    time: "12:00 AM",
+  },
+  images: "require('../assets/images/backgroundOfLoginScreen.jpg')",
+  category: { name: "music", },
+  location: {
+    longitude: 49.262955,
+    latitude: -123.110409,
+  },
+  venue: "BC place",
+  address: "238 West Broadway",
+  participants: 5000,
+};
 
 const HomeScreen = ({ navigation }: MainStackNavigationProps<'HomeScreen'>) => {
 
@@ -25,55 +43,64 @@ const HomeScreen = ({ navigation }: MainStackNavigationProps<'HomeScreen'>) => {
   }
 
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        {/* <Pressable onPress={signOut}>
-        <Text>Sign out</Text>
-      </Pressable> */}
-        <Text style={styles.title}>Preview of this week's events</Text>
-        <View style={styles.participantsNumberContainer}>
-          <IconText icon={require('../assets/icons/participants.png')} text={'total participants:'} />
-          <Text style={styles.participantsNumber}>8,425</Text>
-        </View>
-        <View style={styles.dataVisualizationContainer}>
-          <Text>Data Visualization</Text>
-          <Text style={styles.date}>Feb01-Feb07</Text>
-          <PrimaryButton onClick={onFullReportPress} label={'View Full Report'} />
-        </View>
-        <View style={styles.suggestionContainer}>
-          <Text style={styles.subtitle}>It seems that {<Text style={styles.busyDay}>February 07</Text>} Sunday is the busiest day of this week, would you like to see some promotional opportunities?</Text>
-          <SecondaryButton onClick={onSeeSuggestionPress} label={'See Suggestions'} />
-        </View>
-        <View style={styles.todayParticipantsContainer}>
-          <View style={styles.todayParticipantTitle}>
-            <Text style={styles.title}>Event Participants for today</Text>
-            <Text style={styles.todayDate}>Feb04</Text>
+    <View style={{flex:1}}>
+      <ScrollView>
+        <View style={styles.container}>
+          {/* <Pressable onPress={signOut}>
+          <Text>Sign out</Text>
+        </Pressable> */}
+          <Text style={styles.title}>Preview of this week's events</Text>
+          <View style={styles.participantsNumberContainer}>
+            <IconText icon={require('../assets/icons/participants.png')} text={'total participants:'} />
+            <Text style={styles.participantsNumber}>8,425</Text>
           </View>
-          <View style={styles.numberContainer}>
-            <IconText icon={require('../assets/icons/participants.png')} text={'Total Participants'} />
-            <Text style={styles.todayParticipantsNumber}>8,963</Text>
+          <View style={styles.dataVisualizationContainer}>
+            <Text>Data Visualization</Text>
+            <Text style={styles.date}>Feb01-Feb07</Text>
+            <PrimaryButton onClick={onFullReportPress} label={'View Full Report'} />
           </View>
-          <Text style={styles.subtitle}>Participants Breakdown</Text>
-          <View style={styles.breakdownContainer}>
-            <ParticipantsByMealCard mealTime={'morning'} crowdNumber={2453} iconPath={'../assets/icons/morning.png'} />
-            <ParticipantsByMealCard mealTime={'lunch'} crowdNumber={1320} iconPath={'../assets/icons/evening.png'} />
-            <ParticipantsByMealCard mealTime={'dinner'} crowdNumber={2653} iconPath={'../assets/icons/night.png'} />
+          <View style={styles.suggestionContainer}>
+            <Text style={styles.subtitle}>It seems that {<Text style={styles.busyDay}>February 07</Text>} Sunday is the busiest day of this week, would you like to see some promotional opportunities?</Text>
+            <SecondaryButton onClick={onSeeSuggestionPress} label={'See Suggestions'} />
           </View>
+          <View style={styles.todayParticipantsContainer}>
+            <View style={styles.todayParticipantTitle}>
+              <Text style={styles.title}>Event Participants for today</Text>
+              <Text style={styles.todayDate}>Feb04</Text>
+            </View>
+            <View style={styles.numberContainer}>
+              <IconText icon={require('../assets/icons/participants.png')} text={'Total Participants'} />
+              <Text style={styles.todayParticipantsNumber}>8,963</Text>
+            </View>
+            <Text style={styles.subtitle}>Participants Breakdown</Text>
+            <View style={styles.breakdownContainer}>
+              <ParticipantsByMealCard mealTime={'morning'} crowdNumber={2453} iconPath={'../assets/icons/morning.png'} />
+              <ParticipantsByMealCard mealTime={'lunch'} crowdNumber={1320} iconPath={'../assets/icons/evening.png'} />
+              <ParticipantsByMealCard mealTime={'dinner'} crowdNumber={2653} iconPath={'../assets/icons/night.png'} />
+            </View>
+          </View>
+          <View style={styles.todayEventTitleContainer}>
+            <Text style={styles.title}>Today's Event</Text>
+            <LinkButton onClick={onSeeMorePress} label={'See More'} />
+          </View>
+          <EventCard
+            eventImage={require('../assets/images/eventimage.png')}
+            eventTime={Event.dates.time}
+            eventName={Event.name}
+            eventLocation={Event.venue}
+            eventParticipantsQty={1230}
+            eventDate={Event.dates.date}
+            onBookmarkPress={() => { }}
+            eventType={Event.category.name} />
         </View>
-        <View style={styles.todayEventTitleContainer}>
-          <Text>Today's Event</Text>
-          <LinkButton onClick={onSeeMorePress} label={'See More'}/>
-        </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: darkMode.netural.backgroundBlack,
-    flex: 1,
-    alignItems: 'center'
   },
   title: {
     color: darkMode.primary.primaryPurpleDark,
@@ -194,7 +221,11 @@ const styles = StyleSheet.create({
 
   },
   todayEventTitleContainer: {
-
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 30
   },
 });
 

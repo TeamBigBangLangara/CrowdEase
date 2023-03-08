@@ -2,6 +2,7 @@ import { View, StyleSheet, Text, Image } from 'react-native';
 
 import { colors } from "../styles/colors";
 import { fontSize, fontFamily, fontWeightSubtitle } from "../styles/fonts";
+import { borderRadius } from "../styles/basic";
 
 const ParticipantsByCategory = (props: {
   participants: number
@@ -131,28 +132,33 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     flexDirection: 'column',
-    marginVertical: 12,
+    marginTop: 4,
     backgroundColor: colors.netural.surfaceBlack,
-    borderRadius: 12,
+    borderRadius: borderRadius.primary,
     padding: 8,
+    paddingVertical: 16,
   },
   participants: {
     fontWeight: fontWeightSubtitle,
-    fontSize: 20,
+    fontSize: fontSize.subtitle1,
+    fontFamily: fontFamily.body,
     color: colors.netural.surfaceWhite,
+    marginBottom: 4,
   },
   infoPercentage: {
     fontWeight: fontWeightSubtitle,
     fontSize: 16,
     color: colors.netural.surfaceWhite,
+    fontFamily: fontFamily.body,
   },
   progressbar: {
     height: 38,
     backgroundColor: colors.netural.outlineGrey,
-    borderRadius: 22,
+    borderRadius: borderRadius.primary,
     position: 'relative',
     overflow: 'hidden',
-    marginVertical: 20,
+    marginTop: 24,
+    marginBottom: 16,
   },
   bar: {
     height: 38,
@@ -173,8 +179,9 @@ const styles = StyleSheet.create({
   },
   name: {
     fontWeight: fontWeightSubtitle,
-    fontSize: 16,
+    fontSize: fontSize.subtitle2,
     color: colors.netural.surfaceWhite,
+    fontFamily: fontFamily.body,
   },
   sign: {
     width: 50,
@@ -184,6 +191,7 @@ const styles = StyleSheet.create({
   percentage: {
     color: colors.netural.surfaceWhite,
     textAlign: 'center',
+    fontFamily: fontFamily.body,
   },
 });
 

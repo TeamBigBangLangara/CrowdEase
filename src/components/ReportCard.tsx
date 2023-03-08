@@ -1,7 +1,7 @@
 import { View, StyleSheet, Text } from 'react-native';
 
 import { colors } from "../styles/colors";
-import { fontSize, fontFamily, fontWeightSubtitle } from "../styles/fonts";
+import { fontFamily, fontSize, fontWeightSubtitle } from "../styles/fonts";
 import { borderRadius, margin } from "../styles/basic";
 
 const ReportCard = (props: { date: string; eventNumber: number; participantsQty: number }) => {
@@ -42,11 +42,13 @@ const styles = StyleSheet.create({
     color: colors.netural.surfaceWhite,
     textAlign: 'center',
     marginBottom: margin.tertiary,
+    fontFamily: fontFamily.body,
   },
   info: {
     fontWeight: fontWeightSubtitle,
     fontSize: fontSize.subtitle2,
     color: colors.netural.surfaceWhite,
+    fontFamily: fontFamily.subtitle,
   },
 });
 

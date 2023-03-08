@@ -2,6 +2,7 @@ import { View, StyleSheet, Text } from 'react-native';
 
 import { colors } from "../styles/colors";
 import { fontSize, fontFamily, fontWeightSubtitle } from "../styles/fonts";
+import { borderRadius, margin } from "../styles/basic";
 
 const ReportCard = (props: { date: string; eventNumber: number; participantsQty: number }) => {
   return (
@@ -28,13 +29,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: colors.netural.surfaceBlack,
     justifyContent: 'space-between',
-    borderRadius: 22,
+    borderRadius: borderRadius.primary,
     paddingVertical: 16,
     paddingHorizontal: 18,
   },
   infoContainer: {
-    display: 'flex',
-    flexDirection: 'column',
     alignItems: 'center',
   },
   header: {
@@ -42,11 +41,12 @@ const styles = StyleSheet.create({
     fontSize: fontSize.caption,
     color: colors.netural.surfaceWhite,
     textAlign: 'center',
+    marginBottom: margin.tertiary,
   },
   info: {
     fontWeight: fontWeightSubtitle,
     fontSize: fontSize.subtitle2,
-    color: colors.netural.outlineGrey,
+    color: colors.netural.surfaceWhite,
   },
 });
 

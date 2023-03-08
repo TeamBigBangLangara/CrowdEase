@@ -7,7 +7,6 @@ import { margin } from "../styles/basic";
 const ParticipantsByMeal = (props: {
   mealTime: string
   crowdNumber: number
-  iconPath?: string
 }) => {
   const renderLabelWithIcon = () => {
     switch (props.mealTime) {
@@ -26,7 +25,7 @@ const ParticipantsByMeal = (props: {
         case 'dinner':
         return (
           <View>
-            <IconText icon={require('../assets/lunch.png')} text={'6pm-10pm'} style={styles.icon}/>
+            <IconText icon={require('../assets/dinner.png')} text={'6pm-10pm'} style={styles.icon}/>
           </View>
         );
       default:
@@ -44,20 +43,26 @@ const ParticipantsByMeal = (props: {
 
 const styles = StyleSheet.create({
   container: {
+    alignItems: "center",
+    justifyContent: 'space-evenly',
     width: 115,
     height: 89,
     backgroundColor: colors.netural.surfaceBlack,
     borderRadius: 12,
     display: 'flex',
+    
    },
   number: {
     color: colors.netural.backgroundWhite,
     fontWeight: fontWeightSubtitle,
     fontSize: 22,
     textAlign: 'center',
+    
   },
   icon: {
     alignItems: "center",
+    justifyContent: 'center',
+    
   },
 });
 export default ParticipantsByMeal;

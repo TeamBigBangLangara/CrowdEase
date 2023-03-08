@@ -44,9 +44,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   info: {
-    fontWeight: '500',
+    fontWeight: fontWeightSubtitle,
     fontSize: fontSize.subtitle2,
-    color: '#E6E1E5',
+    color: colors.netural.outlineGrey,
   },
 });
 

@@ -1,12 +1,13 @@
 #import <Firebase.h>
 #import "AppDelegate.h"
-
+#import <GoogleMaps/GoogleMaps.h>
 #import <React/RCTBundleURLProvider.h>
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  [GMSServices provideAPIKey:@"AIzaSyBw83rQgDHA8scDJo1a5hDb7fg3044ZV6I"];
   [FIRApp configure];
   self.moduleName = @"CrowdEease";
   // You can add your custom initial props in the dictionary below.

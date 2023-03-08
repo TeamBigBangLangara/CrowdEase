@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import { TextInput, StyleSheet, Image, View, Pressable, Text } from 'react-native';
 
 import IconButton from './IconButton';
@@ -7,22 +7,27 @@ import { colors } from "../styles/colors";
 import { fontSize, fontFamily } from "../styles/fonts";
 
 const SearchForm = (props: {
-  placeHolder: string
   onChangeText: () => void
 
 }) => {
+  const textInputRef = useRef(null);
   const [searchOnFocus, setSearchOnFocus] = useState(false);
   
-
+  const cancelButtonHandling = () => {
+    textInputRef.current.clear();  
+    textInputRef.current.blur();    
+  };
 
   return (
     <View style={styles.container}>
-      <View style={searchOnFocus?styles.searchContainerFocus: styles.searchContainerNoFocus}>
+      <View style={[styles.searchContainer, searchOnFocus?styles.searchContainerFocus: styles.searchContainerNoFocus]}>
         <Image source={require('../assets/search.png')} />
         <TextInput
+          ref={textInputRef}
           onChangeText={props.onChangeText}
-          // onFocus={setSearchOnFocus(true)}
-          placeholder={props.placeHolder}
+          onFocus={() => setSearchOnFocus(true)}
+          onBlur={() => setSearchOnFocus(false)}
+          placeholder="Search for ..."
           style={styles.input}
           placeholderTextColor={styles.input.color}
         />
@@ -30,7 +35,7 @@ const SearchForm = (props: {
       </View>
       {searchOnFocus ? 
       <Pressable
-        onPress={()=> console.log("test")}
+        onPress={cancelButtonHandling}
         style={styles.cancelButton}
         >
           <Text style={styles.cancelText}>Cancel</Text>
@@ -52,7 +57,7 @@ const styles = StyleSheet.create({
     borderRadius: 22,
     gap: 20,
   },
-  searchContainerNoFocus: {
+  searchContainer: {
     display: 'flex',
     flexDirection: 'row',
     flex: 1,
@@ -63,29 +68,16 @@ const styles = StyleSheet.create({
     height: 42,
     borderRadius: 20,
     gap: 12,
+  },
 
+  searchContainerNoFocus: {
     borderColor: colors.netural.surfaceWhite,
   },
-  searchContainerFocus: {
-    display: 'flex',
-    flexDirection: 'row',
-    flex: 1,
-    alignItems: 'center',
-    borderWidth: 2,
-    paddingLeft: 20,
-    paddingRight: 16,
-    height: 42,
-    borderRadius: 20,
-    gap: 12,
 
+  searchContainerFocus: {
     borderColor: colors.primaryPurpleLight,
-    shadowColor: 'rgba(255, 0, 50, 0.25)',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 1,
   },
+
   input: {
     flex: 1,
     borderColor: colors.netural.surfaceWhite,

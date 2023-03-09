@@ -15,9 +15,12 @@ import { GeoPositionState } from 'types/geoPositionState';
 import { getPostalCodeCoordinates } from '../services/postalCodeApi';
 import { AuthStackNavigationProps } from '../types/navigationTypes';
 import { isPostalCodeValid } from '../utils/postalCode';
+import { onGoogleButtonPress } from '../auth/googleSignIn';
+import { signUp, signIn } from '../auth/user';
 
-const LocationScreen = ({ navigation, }: AuthStackNavigationProps<'LocationScreen'>) => {
+const LocationScreen = ({ route, navigation, }: AuthStackNavigationProps<'LocationScreen'>) => {
   const [isEnabled, setIsEnabled] = useState(false);
+  const { emailParam, passwordParam, } = route?.params;
   const [postalCode, setPostalCode] = useState('');
   const [location, setLocation] = useState<GeoPositionState>({
     latitude: null,
@@ -25,10 +28,25 @@ const LocationScreen = ({ navigation, }: AuthStackNavigationProps<'LocationScree
     error: null,
   });
 
+  const signInOnLocationFetch = async() => {
+
+    if(emailParam != ''){
+      console.log(emailParam + ' And Pwd:' + passwordParam);
+      await signUp(emailParam, passwordParam);
+      await signIn(emailParam, passwordParam);
+    }
+    else{
+      await onGoogleButtonPress().then(() => {
+      });
+    }
+
+  };
+
   const getLocation = async () => {
     if (signUpValidation()) {
       if (isEnabled) {
-        navigation.navigate('BottomTabs');
+        await signInOnLocationFetch();
+        //await signIn(emailParam, passwordParam);
       } else if (isPostalCodeValid(postalCode)) {
         try {
           let results = await getPostalCodeCoordinates(postalCode);
@@ -40,7 +58,7 @@ const LocationScreen = ({ navigation, }: AuthStackNavigationProps<'LocationScree
         } catch (error) {
           Alert.alert('Error', `${error}`);
         }
-        navigation.navigate('BottomTabs');
+        await signInOnLocationFetch();
       } else {
         Alert.alert('Error', 'Enter a valid Postal Code to proceed');
       }

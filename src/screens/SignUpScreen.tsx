@@ -12,17 +12,27 @@ const SignUpScreen = ({ navigation, }: AuthStackNavigationProps<'SignUpScreen'>)
 
   const onSignUpPress = async () => {
     if (signUpValidation()) {
-      await signUp(email, password);
-      await signIn(email, password);
+     // await signUp(email, password);
+      navigation.navigate('LocationScreen', {
+        emailParam: email,
+        passwordParam: password,
+      });
     }
   };
 
   const onAppleSignUpPress = () => {
-    navigation.navigate('LocationScreen');
+    
+    navigation.navigate('LocationScreen', {
+      emailParam: '',
+      passwordParam: '',
+    });
   };
 
   const onGoogleSignUpPress = () => {
-    navigation.navigate('LocationScreen');
+    navigation.navigate('LocationScreen', {
+    emailParam: '',
+    passwordParam: '',
+    });
   };
 
   const signUpValidation = (): boolean => {

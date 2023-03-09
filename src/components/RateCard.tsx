@@ -11,19 +11,19 @@ const RateCard = (props: { onSubmitPress: () => void; onSkipPress: () => void, o
       return (
         <View style={styles.starContainer}>
           <Pressable onPress={props.onStarPress}>
-            <Image source={require("../assets/star.png")}/>
+            <Image source={require("../assets/icons/star.png")}/>
           </Pressable>
           <Pressable onPress={props.onStarPress}>
-            <Image source={require("../assets/star.png")}/>
+            <Image source={require("../assets/icons/star.png")}/>
           </Pressable>
           <Pressable onPress={props.onStarPress}>
-            <Image source={require("../assets/star.png")}/>
+            <Image source={require("../assets/icons/star.png")}/>
           </Pressable>
           <Pressable onPress={props.onStarPress}>
-            <Image source={require("../assets/star.png")}/>
+            <Image source={require("../assets/icons/star.png")}/>
           </Pressable>
           <Pressable onPress={props.onStarPress}>
-            <Image source={require("../assets/star.png")}/>
+            <Image source={require("../assets/icons/star.png")}/>
           </Pressable>
         </View>
 

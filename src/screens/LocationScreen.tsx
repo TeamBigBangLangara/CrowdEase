@@ -11,27 +11,25 @@ import {
   TextInput
 } from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
-import { GeoPositionState } from 'types/geoPositionState';
 import { getPostalCodeCoordinates } from '../services/postalCodeApi';
 import { AuthStackNavigationProps } from '../types/navigationTypes';
 import { isPostalCodeValid } from '../utils/postalCode';
 import { onGoogleButtonPress } from '../auth/googleSignIn';
 import { signUp, signIn } from '../auth/user';
+import { Location } from 'types/types';
 
 const LocationScreen = ({ route, navigation, }: AuthStackNavigationProps<'LocationScreen'>) => {
   const [isEnabled, setIsEnabled] = useState(false);
   const { emailParam, passwordParam, } = route?.params;
   const [postalCode, setPostalCode] = useState('');
-  const [location, setLocation] = useState<GeoPositionState>({
-    latitude: null,
-    longitude: null,
-    error: null,
+  const [location, setLocation] = useState<Location>({
+    latitude: '',
+    longitude: '',
   });
 
   const signInOnLocationFetch = async() => {
 
     if(emailParam != ''){
-      console.log(emailParam + ' And Pwd:' + passwordParam);
       await signUp(emailParam, passwordParam);
       await signIn(emailParam, passwordParam);
     }
@@ -46,14 +44,12 @@ const LocationScreen = ({ route, navigation, }: AuthStackNavigationProps<'Locati
     if (signUpValidation()) {
       if (isEnabled) {
         await signInOnLocationFetch();
-        //await signIn(emailParam, passwordParam);
       } else if (isPostalCodeValid(postalCode)) {
         try {
           let results = await getPostalCodeCoordinates(postalCode);
           setLocation({
             latitude: results?.latt,
             longitude: results?.longt,
-            error: null,
           });
         } catch (error) {
           Alert.alert('Error', `${error}`);
@@ -130,9 +126,8 @@ const LocationScreen = ({ route, navigation, }: AuthStackNavigationProps<'Locati
     return Geolocation.getCurrentPosition(
       position => {
         setLocation({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-          error: null,
+          latitude: `${position.coords.latitude}`,
+          longitude: `${position.coords.longitude}`,
         });
       },
       error => {

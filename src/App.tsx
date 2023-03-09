@@ -8,6 +8,7 @@ import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import SignUp from './screens/SignUpScreen';
 import SplashScreen from './screens/SplashScreen';
 import Login from './screens/LoginScreen';
+import {colors} from './styles/colors'
 
 import NavigationBottomTab from './components/navigation/NavigationBottomTab';
 
@@ -52,7 +53,9 @@ const App = () => {
           </Stack.Navigator>
         )}
         {isLoggedIn && (
-          <Stack.Navigator initialRouteName="BottomTabs" screenOptions={{ headerShown: false, }}>
+          <Stack.Navigator initialRouteName="BottomTabs" screenOptions={{ headerShown: false, contentStyle: {
+            backgroundColor: colors.netural.backgroundBlack, paddingHorizontal:20
+          }}}>
             <Stack.Screen name={'BottomTabs'} component={NavigationBottomTab} />
           </Stack.Navigator>
         )}

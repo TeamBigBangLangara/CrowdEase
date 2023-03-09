@@ -2,10 +2,10 @@ import { StyleSheet, Text, TextStyle, View, ScrollView, SafeAreaView } from 'rea
 
 import { signOut } from '../auth/user';
 import { MainStackNavigationProps } from '../types/navigationTypes';
-import { darkMode } from '../styles/colors'
+import { colors } from '../styles/colors'
 import { fontFamily } from '../styles/fonts'
 import { fontSize } from '../styles/fonts'
-import { fontWeight } from '../styles/fonts'
+import { fontWeightTitle, fontWeightSubtitle, fontWeightBody, fontWeightLabel, fontWeightSubtitle2 } from '../styles/fonts'
 import IconText from '../components/IconText';
 import PrimaryButton from '../components/PrimaryButton';
 import SecondaryButton from '../components/SecondaryButton';
@@ -13,19 +13,41 @@ import ParticipantsByMealCard from '../components/ParticipantsByMealCard';
 import LinkButton from '../components/LinkButton';
 import EventCard from '../components/EventCard';
 
+
+// Get the dates
+const today = new Date();
+const monday = new Date(today);
+monday.setDate(today.getDate() - today.getDay() + 1);
+const tuesday = new Date(monday);
+tuesday.setDate(monday.getDate() + 1);
+const wednesday = new Date(today);
+const thursday = new Date(wednesday);
+thursday.setDate(wednesday.getDate() + 1);
+const friday = new Date(thursday);
+friday.setDate(thursday.getDate() + 1);
+const saturday = new Date(friday);
+saturday.setDate(friday.getDate() + 1);
+const sunday = new Date(saturday);
+sunday.setDate(saturday.getDate() + 1);
+
 const Event = {
+  id: "2u63t821hi27",
   name: "Coldplay",
+  image: "../assets/eventImage.png",
   dates: {
     date: "12 March",
     time: "12:00 AM",
   },
-  images: "require('../assets/images/backgroundOfLoginScreen.jpg')",
-  category: { name: "music", },
+  category: { name: "music", id: "87362hf"},
   location: {
-    longitude: 49.262955,
-    latitude: -123.110409,
+    longitude: "49.262955",
+    latitude: "-123.110409",
   },
-  venue: "BC place",
+  venue:{
+  name: "BC place",
+  id: "ufc76fcu",
+  type: "music"
+},
   address: "238 West Broadway",
   participants: 5000,
 };
@@ -51,17 +73,16 @@ const HomeScreen = ({ navigation }: MainStackNavigationProps<'HomeScreen'>) => {
         </Pressable> */}
           <Text style={styles.title}>Preview of this week's events</Text>
           <View style={styles.participantsNumberContainer}>
-            <IconText icon={require('../assets/icons/participants.png')} text={'total participants:'} />
+            <IconText icon={require('../assets/icons/participants.png')} text={'total participants:'} style={styles.participantIcon}/>
             <Text style={styles.participantsNumber}>8,425</Text>
           </View>
           <View style={styles.dataVisualizationContainer}>
-            <Text>Data Visualization</Text>
             <Text style={styles.date}>Feb01-Feb07</Text>
-            <PrimaryButton onClick={onFullReportPress} label={'View Full Report'} />
+            <PrimaryButton onPress={onFullReportPress} label={'View Full Report'} />
           </View>
           <View style={styles.suggestionContainer}>
             <Text style={styles.subtitle}>It seems that {<Text style={styles.busyDay}>February 07</Text>} Sunday is the busiest day of this week, would you like to see some promotional opportunities?</Text>
-            <SecondaryButton onClick={onSeeSuggestionPress} label={'See Suggestions'} />
+            <SecondaryButton onPress={onSeeSuggestionPress} label={'See Suggestions'} />
           </View>
           <View style={styles.todayParticipantsContainer}>
             <View style={styles.todayParticipantTitle}>
@@ -69,29 +90,25 @@ const HomeScreen = ({ navigation }: MainStackNavigationProps<'HomeScreen'>) => {
               <Text style={styles.todayDate}>Feb04</Text>
             </View>
             <View style={styles.numberContainer}>
-              <IconText icon={require('../assets/icons/participants.png')} text={'Total Participants'} />
+              <IconText icon={require('../assets/icons/participants.png')} text={'Total Participants'} style={styles.participantIcon}/>
               <Text style={styles.todayParticipantsNumber}>8,963</Text>
             </View>
             <Text style={styles.subtitle}>Participants Breakdown</Text>
             <View style={styles.breakdownContainer}>
-              <ParticipantsByMealCard mealTime={'morning'} crowdNumber={2453} iconPath={'../assets/icons/morning.png'} />
-              <ParticipantsByMealCard mealTime={'lunch'} crowdNumber={1320} iconPath={'../assets/icons/evening.png'} />
-              <ParticipantsByMealCard mealTime={'dinner'} crowdNumber={2653} iconPath={'../assets/icons/night.png'} />
+              <ParticipantsByMealCard mealTime={'morning'} crowdNumber={2453} />
+              <ParticipantsByMealCard mealTime={'lunch'} crowdNumber={1320} />
+              <ParticipantsByMealCard mealTime={'dinner'} crowdNumber={2653} />
             </View>
           </View>
           <View style={styles.todayEventTitleContainer}>
             <Text style={styles.title}>Today's Event</Text>
-            <LinkButton onClick={onSeeMorePress} label={'See More'} />
+            <LinkButton onPress={onSeeMorePress} label={'See More'} style={styles.linkButton} />
           </View>
           <EventCard
-            eventImage={require('../assets/images/eventimage.png')}
-            eventTime={Event.dates.time}
-            eventName={Event.name}
-            eventLocation={Event.venue}
-            eventParticipantsQty={1230}
-            eventDate={Event.dates.date}
-            onBookmarkPress={() => { }}
-            eventType={Event.category.name} />
+            event= {Event}
+            onBookmarkPress= {() => {console.log('click');
+            }}
+            eventType= 'music' />
         </View>
       </ScrollView>
     </View>
@@ -100,19 +117,22 @@ const HomeScreen = ({ navigation }: MainStackNavigationProps<'HomeScreen'>) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: darkMode.netural.backgroundBlack,
+    backgroundColor: colors.netural.backgroundBlack,
   },
   title: {
-    color: darkMode.primary.primaryPurpleDark,
+    color: colors.primary.primaryPurpleDark,
     fontFamily: fontFamily.subtitle,
     fontSize: fontSize.subtitle1,
-    fontWeight: fontWeight.body as TextStyle['fontWeight']
+    fontWeight: fontWeightBody
   },
   participantsNumber: {
-    color: darkMode.secondaryGreenDark,
+    color: colors.secondaryGreenDark,
     fontFamily: fontFamily.heading,
     fontSize: fontSize.heading2,
-    fontWeight: fontWeight.heading as TextStyle['fontWeight']
+    fontWeight: fontWeightTitle
+  },
+  participantIcon:{
+    alignItems: "center",
   },
   participantsNumberContainer: {
     display: 'flex',
@@ -126,15 +146,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   date: {
-    color: darkMode.netural.surfaceWhite,
+    color: colors.netural.surfaceWhite,
     fontFamily: fontFamily.body,
     fontSize: fontSize.body,
-    fontWeight: fontWeight.body as TextStyle['fontWeight'],
+    fontWeight: fontWeightBody,
     marginBottom: 15
   },
   suggestionContainer: {
     display: 'flex',
-    backgroundColor: darkMode.netural.surfaceBlack,
+    alignSelf: 'center',
+    backgroundColor: colors.netural.surfaceBlack,
     width: 356,
     height: 150,
     borderRadius: 22,
@@ -154,15 +175,14 @@ const styles = StyleSheet.create({
     marginTop: 35,
     padding: 10,
     alignItems: 'center'
-
   },
   subtitle: {
-    color: darkMode.netural.surfaceWhite,
+    color: colors.netural.surfaceWhite,
     fontFamily: fontFamily.subtitle,
     fontSize: fontSize.subtitle2,
-    fontWeight: fontWeight.subtitle as TextStyle['fontWeight'],
+    fontWeight: fontWeightSubtitle,
     marginBottom: 20,
-    marginTop: 5
+    marginTop: 10
   },
   busyDay: {
     fontFamily: fontFamily.heading,
@@ -171,6 +191,7 @@ const styles = StyleSheet.create({
   },
   todayParticipantsContainer: {
     display: 'flex',
+    alignSelf: 'center',
     marginTop: 30,
   },
   todayParticipantTitle: {
@@ -180,13 +201,14 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   todayDate: {
-    color: darkMode.secondaryGreenDark,
+    color: colors.secondaryGreenDark,
     fontFamily: fontFamily.subtitle,
-    fontSize: fontSize.subtitle2
+    fontSize: fontSize.subtitle2,
+    fontWeight: fontWeightSubtitle
   },
   numberContainer: {
     display: 'flex',
-    backgroundColor: darkMode.netural.surfaceBlack,
+    backgroundColor: colors.netural.surfaceBlack,
     width: 358,
     height: 86,
     borderRadius: 22,
@@ -203,30 +225,35 @@ const styles = StyleSheet.create({
       shadowOpacity: 0.1,
       shadowRadius: 6,
     },
-    padding: 10,
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 10,
     marginBottom: 20
   },
   todayParticipantsNumber: {
-    color: darkMode.netural.surfaceWhite,
+    color: colors.netural.surfaceWhite,
     marginTop: 10,
     fontFamily: fontFamily.heading,
-    fontSize: fontSize.heading2
+    fontSize: fontSize.heading2,
+    fontWeight: fontWeightSubtitle2
   },
   breakdownContainer: {
     display: 'flex',
     flexDirection: 'row',
-
+    justifyContent: 'space-between'
   },
   todayEventTitleContainer: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 30
+    marginTop: 30,
+    marginBottom: 10
   },
+  linkButton : {
+    color: colors.accent.accentBlueDark,
+    borderBottomColor: colors.accent.accentBlueDark
+  }
 });
 
 export default HomeScreen;

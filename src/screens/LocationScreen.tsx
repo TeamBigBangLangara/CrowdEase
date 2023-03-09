@@ -28,7 +28,6 @@ const LocationScreen = ({ route, navigation, }: AuthStackNavigationProps<'Locati
   });
 
   const signInOnLocationFetch = async() => {
-
     if(emailParam != ''){
       await signUp(emailParam, passwordParam);
       await signIn(emailParam, passwordParam);
@@ -37,7 +36,6 @@ const LocationScreen = ({ route, navigation, }: AuthStackNavigationProps<'Locati
       await onGoogleButtonPress().then(() => {
       });
     }
-
   };
 
   const getLocation = async () => {

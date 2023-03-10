@@ -25,10 +25,6 @@ export interface Venue {
   name: string
   id: string
   type: string
-  address: {
-    line1: string
-  }
-  location: Location
 }
 
 export interface Location {

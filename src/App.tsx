@@ -11,6 +11,9 @@ import Login from './screens/LoginScreen';
 import NavigationBottomTab from './components/navigation/NavigationBottomTab';
 import LocationScreen from './screens/LocationScreen';
 import { SafeAreaView } from "react-native";
+import WeekManagerScreen from "./screens/WeekManagerScreen";
+import SuggestionScreen from "./screens/SuggestionScreen";
+import EventScreen from "./screens/EventScreen";
 
 export type AuthStackParams = {
   SplashScreen: undefined
@@ -22,7 +25,7 @@ export type AuthStackParams = {
 
 export type MainStackParams = {
   HomeScreen: undefined
-  ReportScreen: undefined
+  WeekManagerScreen: undefined
   SuggestionScreen: undefined
   EventScreen: undefined
 }
@@ -35,9 +38,20 @@ export type TabParams = {
 }
 
 const Stack = createNativeStackNavigator<AuthStackParams>();
+const MainStack = createNativeStackNavigator<MainStackParams>();
+
+
+const Main = () => {
+  return (
+    <MainStack.Navigator>
+      <MainStack.Screen name={"WeekManagerScreen"} component={WeekManagerScreen}/>
+      <MainStack.Screen name={"SuggestionScreen"} component={SuggestionScreen}/>
+      <MainStack.Screen name={"EventScreen"} component={EventScreen}/>
+    </MainStack.Navigator>
+  );
+};
 
 const queryClient = new QueryClient();
-
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -59,7 +73,7 @@ const App = () => {
   return (
     <SafeAreaView style={{ flex: 1, }}>
       <QueryClientProvider client={queryClient}>
-      <NavigationContainer>
+        <NavigationContainer>
         {!isLoggedIn && (
           <Stack.Navigator initialRouteName={'SplashScreen'}>
             <Stack.Screen name={'SplashScreen'} component={SplashScreen} />
@@ -70,11 +84,11 @@ const App = () => {
         )}
         {isLoggedIn && (
           <Stack.Navigator screenOptions={{ headerShown: false,}}>
-            <Stack.Screen name={'BottomTabs'} component={NavigationBottomTab}
-          />
+            <Stack.Screen name={'BottomTabs'} component={NavigationBottomTab} />
+            <MainStack.Screen name={"Main"} component={Main} />
           </Stack.Navigator>
         )}
-      </NavigationContainer>
+          </NavigationContainer>
       </QueryClientProvider>
     </SafeAreaView>
   );

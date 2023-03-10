@@ -17,7 +17,7 @@ import { getDate } from '../utils/getDate';
 
 
 // Get the dates
-const { formattedFirstDay, formattedLastDay, today } = getDate();
+const { formattedFirstDay, formattedLastDay, today, } = getDate();
 
 const Event = {
   id: "2u63t821hi27",
@@ -44,13 +44,13 @@ const Event = {
 const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => {
 
   const onFullReportPress = () => {
-    navigation.navigate("ReportScreen");
+    navigation.navigate('Main', { screen: 'WeekManagerScreen', });
   };
   const onSeeSuggestionPress = () => {
-    navigation.navigate("SuggestionScreen");
+    navigation.navigate('Main', { screen: 'SuggestionScreen', });
   };
   const onSeeMorePress = () => {
-    navigation.navigate("EventScreen");
+    navigation.navigate('Main', { screen: 'EventScreen', });
   };
 
   return (
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.netural.backgroundBlack,
     paddingHorizontal: 20,
-    paddingVertical: 24
+    paddingVertical: 24,
   },
   title: {
     color: colors.primary.primaryPurpleDark,
@@ -130,14 +130,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     fontFamily: fontWeightSubtitle2,
     fontSize: fontSize.subtitle1,
-    fontWeight: fontWeightTitle
+    fontWeight: fontWeightTitle,
   },
   participantsNumberContainer: {
     display: 'flex',
     flexDirection: 'row',
     gap: 5,
     alignItems: 'center',
-    marginTop: 4
+    marginTop: 4,
   },
   dataVisualizationContainer: {
     height: 200,
@@ -245,7 +245,7 @@ const styles = StyleSheet.create({
     fontFamily: fontFamily.subtitle,
     fontSize: fontSize.subtitle2,
     fontWeight: fontWeightSubtitle,
-    marginTop: 18
+    marginTop: 18,
   },
   breakdownContainer: {
     display: 'flex',

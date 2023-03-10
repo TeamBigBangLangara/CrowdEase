@@ -8,6 +8,7 @@ import DropdownButton from "./DropdownButton";
 import { Event } from "../types/types";
 import { colors } from "../styles/colors";
 import { fontFamily, fontSize } from "../styles/fonts";
+import { timeFormat } from "../utils/timeFormat";
 
 const EventCard = (props: {
   event: Event
@@ -21,13 +22,13 @@ const EventCard = (props: {
       return (
         <View style={styles.dateContainer}>
           <Text style={styles.label}>{props.event.dates.date}</Text>
-          <Text style={styles.label}>{props.event.dates.time}</Text>
+          <Text style={styles.label}>{timeFormat(props.event.dates.time)}</Text>
         </View>
       );
     } else {
       return (
         <View>
-          <Text style={styles.label}>{props.event.dates.time}</Text>
+          <Text style={styles.label}>{timeFormat(props.event.dates.time)}</Text>
         </View>
       );
     }

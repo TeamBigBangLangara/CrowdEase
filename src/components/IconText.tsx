@@ -3,7 +3,7 @@ import { View, Image, Text, StyleSheet } from 'react-native';
 import { fontFamily, fontSize } from "../styles/fonts";
 import { colors } from "../styles/colors";
 
-const IconText = (props: { icon: any; text: string, style: object }) => {
+const IconText = (props: { icon: any; text: string, style?: object }) => {
   return (
     <View style={[styles.container, props.style]}>
       <Image source={props.icon} />

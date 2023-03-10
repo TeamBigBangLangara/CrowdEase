@@ -36,7 +36,10 @@ const EventCard = (props: {
 
   const renderBookmarkButton = () => {
     if (props.eventType !== 'past') {
-      return <BookmarkButton onBookmarkPress={props.onBookmarkPress} />;
+      return <BookmarkButton 
+      eventId={props.event.id} 
+      onBookmarkPress={props.onBookmarkPress} 
+      />;
     }
   };
 

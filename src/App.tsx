@@ -10,6 +10,7 @@ import SplashScreen from './screens/SplashScreen';
 import Login from './screens/LoginScreen';
 
 import NavigationBottomTab from './components/navigation/NavigationBottomTab';
+import { QueryClient, QueryClientProvider } from "react-query";
 
 export type MainStackParams = {
   HomeScreen: undefined
@@ -23,6 +24,9 @@ export type TabParams = {
 }
 
 const Stack = createNativeStackNavigator();
+
+const queryClient = new QueryClient();
+
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -43,6 +47,7 @@ const App = () => {
 
   return (
     <SafeAreaView style={{ flex: 1, }}>
+      <QueryClientProvider client={queryClient}>
       <NavigationContainer>
         {!isLoggedIn && (
           <Stack.Navigator initialRouteName={'Splash'}>
@@ -57,6 +62,7 @@ const App = () => {
           </Stack.Navigator>
         )}
       </NavigationContainer>
+      </QueryClientProvider>
     </SafeAreaView>
   );
 };

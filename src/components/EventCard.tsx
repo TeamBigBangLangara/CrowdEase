@@ -103,6 +103,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     display: 'flex',
     borderRadius: 22,
+    marginVertical: 8,
   },
   eventContainer: {
     display: 'flex',

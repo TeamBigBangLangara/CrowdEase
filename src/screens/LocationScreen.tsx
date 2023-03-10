@@ -17,7 +17,7 @@ import { isPostalCodeValid } from '../utils/postalCode';
 import { onGoogleButtonPress } from '../auth/googleSignIn';
 import { signUp, signIn } from '../auth/user';
 import { Location } from 'types/types';
-import { postUser } from '../api/bigBangAPI';
+import { addUser } from '../api/bigBangAPI/users';
 
 const LocationScreen = ({ route, navigation, }: AuthStackNavigationProps<'LocationScreen'>) => {
   const [isEnabled, setIsEnabled] = useState(false);
@@ -31,7 +31,8 @@ const LocationScreen = ({ route, navigation, }: AuthStackNavigationProps<'Locati
   const signInOnLocationFetch = async() => {
     if(emailParam != ''){
       await signUp(emailParam, passwordParam);
-      await postUser(emailParam);
+      //await postUser(emailParam);
+      await addUser(emailParam);
       await signIn(emailParam, passwordParam);
     }
     else{

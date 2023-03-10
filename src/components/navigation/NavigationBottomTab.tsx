@@ -6,16 +6,17 @@ import HomeScreen from '../../screens/HomeScreen';
 import MapScreen from '../../screens/MapScreen';
 import EventScreen from '../../screens/EventScreen';
 import WeekManager from '../../screens/WeekManagerScreen';
-import { getUsers } from '../../api/bigBangAPI';
+import { requestUsers } from '../../api/bigBangAPI/users';
 
 const Tab = createBottomTabNavigator();
 
 const NavigationBottomTab = () => {
   const loadItems = async () => {
-    const response = await getUsers();
-    console.log('Data Here:');
-    console.log(response);
+    //const response = await getUsers();
+    const response = await requestUsers();
 
+    console.log(response); //For Demo, to be removed.
+    
 };
 
 useEffect(() => {

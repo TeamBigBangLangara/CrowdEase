@@ -10,6 +10,7 @@ import SplashScreen from './screens/SplashScreen';
 import Login from './screens/LoginScreen';
 import NavigationBottomTab from './components/navigation/NavigationBottomTab';
 import LocationScreen from './screens/LocationScreen';
+import { SafeAreaView } from "react-native";
 
 export type AuthStackParams = {
   SplashScreen: undefined

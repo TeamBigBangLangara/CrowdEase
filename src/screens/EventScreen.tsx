@@ -1,18 +1,134 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from "react";
+import { Alert, Button, FlatList, Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { getEvents } from "../api/event";
+import { useMutation, useQuery } from "react-query";
+
+import SearchForm from "../components/SearchForm";
+import EventCard from "../components/EventCard";
+import FilterCategory from "../components/FilterCategory";
+import { fontFamily, fontSize, fontWeightSubtitle } from "../styles/fonts";
+import { colors } from "../styles/colors";
+import Calendar from "../components/Calendar";
 
 const EventScreen = () => {
+
+  const [searchFilter, setSearchFilter] = useState("");
+  const [dateFilter, setDateFilter] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const requestEvents = useQuery("events", () => getEvents(),
+    {
+      select: (events) => { return events.filter((event) => {
+        return searchFilter ? event.name.toLowerCase().includes(searchFilter.toLowerCase()) : true;
+        })
+        .filter((event) => {
+          return dateFilter ? event.dates.date === dateFilter : true;
+        });
+      },
+      onError: (error) => {
+        Alert.alert("Error", error.message);
+      },
+    }
+  );
+
+  const onSearchTextChanged = (searchText: string) => {
+    setSearchFilter(searchText);
+  };
+
+  const onBookMarkPress = () => {
+    Alert.alert("here", "Book Mark pressed");
+  };
+
+  const onHandleData = (date: Date | null) => {
+    setDateFilter(date.dateString);
+    Alert.alert("DATE IS " +  date.dateString);
+  };
+
+  const renderEvents = () => {
+  if (searchFilter) {
+    return (
+      <FlatList
+        data={requestEvents.data}
+        renderItem={({ item, }) =>
+          <EventCard
+            event={item}
+            eventType={"actual"}
+            onBookmarkPress={onBookMarkPress}
+          />
+        }
+      />
+    );} else {
+    return (
+      <FlatList
+        data={requestEvents.data}
+        renderItem={({ item, }) =>
+          <EventCard
+            event={item}
+            eventType={"actual"}
+            onBookmarkPress={onBookMarkPress}
+          />
+        }
+      />
+    );
+  }
+  };
+
   return (
-    <View style={styles.wrapper}>
-      <Text>Event Screen</Text>
+    <View style={styles.container}>
+      <SearchForm
+        onChangeText={(keyword: string) => onSearchTextChanged(keyword)}
+        onFilterPress={() => {
+          setModalVisible(true);
+        }}
+      />
+      <Calendar onDayPress={onHandleData}/>
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>{requestEvents.data?.length} event(s)</Text>
+        <View style={styles.imageContainer}>
+          <Image source={require('../assets/icons/layout1.png')} />
+          <View style={styles.separator} ></View>
+          <Image source={require('../assets/icons/layout2.png')} />
+        </View>
+      </View>
+      {renderEvents()}
+      <FilterCategory
+        visible={modalVisible}
+        onClosePress={() => setModalVisible(false)}
+        //onRequestClose={() => console.log("here close")}
+       // onTouchStart={() => console.log("here close")}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  wrapper: {
-    justifyContent: 'center',
-    alignItems: 'center',
+  container: {
+    flex: 1,
+    marginHorizontal: 20,
+    backgroundColor: 'black',
+    marginTop: 14,
+  },
+  titleContainer: {
+    backgroundColor: "black",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 6,
+    marginTop: 24,
+  },
+  title: {
+    fontSize: fontSize.subtitle1,
+    fontFamily: fontFamily.subtitle,
+    fontWeight: fontWeightSubtitle,
+    color: colors.primary.primaryPurpleDark,
+  },
+  imageContainer: {
+    flexDirection: "row",
+  },
+  separator: {
+    borderRightWidth: 2,
+    borderColor: colors.netural.backgroundWhite,
+    marginHorizontal: 8,
   },
 });
 

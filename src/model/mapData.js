@@ -1,6 +1,6 @@
 const Images = [
-  { image: require("../assets/images/background of lauch screen.jpg") },
-  { image: require("../assets/images/background of lauch screen.jpg") },
+  { image: require("../assets/images/launchScreenBackground.jpg") },
+  { image: require("../assets/images/launchScreenBackground.jpg") },
 ];
 export const markers = [
   {

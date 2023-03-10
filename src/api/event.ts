@@ -35,7 +35,6 @@ export const getEvents = () => {
             participants: 15555,
           };
         });
-      //console.log(events);
         return events;
       }
     );

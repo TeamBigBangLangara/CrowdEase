@@ -11,7 +11,7 @@ import {
   TextInput
 } from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
-import { getPostalCodeCoordinates } from '../services/postalCodeApi';
+import { getPostalCodeCoordinates } from '../api/postalCodeApi';
 import { AuthStackNavigationProps } from '../types/navigationTypes';
 import { isPostalCodeValid } from '../utils/postalCode';
 import { onGoogleButtonPress } from '../auth/googleSignIn';

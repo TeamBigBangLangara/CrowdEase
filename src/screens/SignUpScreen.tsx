@@ -3,26 +3,36 @@ import { StyleSheet, Text, View, TextInput, Button, Pressable, Alert } from 'rea
 import { isEmailValid } from '../utils/email';
 import { isPasswordValid } from '../utils/password';
 import { signIn, signUp } from '../auth/user';
+import { AuthStackNavigationProps } from '../types/navigationTypes';
 
-const SignUpScreen = ({ navigation, }: { navigation: any }) => {
+const SignUpScreen = ({ navigation, }: AuthStackNavigationProps<'SignUpScreen'>) => {
   const [email, setEmail] = useState('');
   const [businessName, setBusinessName] = useState('');
   const [password, setPassword] = useState('');
 
   const onSignUpPress = async () => {
     if (signUpValidation()) {
-      await signUp(email, password);
-      await signIn(email, password);
-      navigation.navigate('Home');
+     // await signUp(email, password);
+      navigation.navigate('LocationScreen', {
+        emailParam: email,
+        passwordParam: password,
+      });
     }
   };
 
   const onAppleSignUpPress = () => {
-    navigation.navigate('Home');
+    
+    navigation.navigate('LocationScreen', {
+      emailParam: '',
+      passwordParam: '',
+    });
   };
 
   const onGoogleSignUpPress = () => {
-    navigation.navigate('Home');
+    navigation.navigate('LocationScreen', {
+    emailParam: '',
+    passwordParam: '',
+    });
   };
 
   const signUpValidation = (): boolean => {
@@ -64,7 +74,7 @@ const SignUpScreen = ({ navigation, }: { navigation: any }) => {
         <Button onPress={onAppleSignUpPress} title="Apple" accessibilityLabel="Login" />
         <Button onPress={onGoogleSignUpPress} title="Google" accessibilityLabel="Login" />
       </View>
-      <Pressable onPress={() => navigation.navigate('Login')}>
+      <Pressable onPress={() => navigation.navigate('LoginScreen')}>
         <Text>Already a user? Log in</Text>
       </Pressable>
     </View>

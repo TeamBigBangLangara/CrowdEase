@@ -19,10 +19,16 @@ const BookmarkButton = (props: {eventId?:string,
     },
 });
 
-const onBookmarkPress = () => {
+const onBookmarkPress = async() => {
+  if(!bookmarkIsAdded)
+  {
   console.log('Bookmark Is Pressed!!');
-  saveBookmark.mutate();
+  await saveBookmark.mutate();
   setBookmarkIsAdded(!bookmarkIsAdded);
+  }
+  else{
+    setBookmarkIsAdded(!bookmarkIsAdded);
+  }
 };
 
 
@@ -32,8 +38,11 @@ const [bookmarkIsAdded, setBookmarkIsAdded] = useState(false);
     <Pressable onPress={
       //props.onBookmarkPress
       onBookmarkPress
-      }>
-      <Image source={require('../assets/bookmark.png')} />
+      }> 
+      {
+        bookmarkIsAdded ? ( <Image source={require('../assets/bookmarkSaved.png')} />) : ( <Image source={require('../assets/bookmark.png')} />)
+      }
+      {/* <Image source={require('../assets/bookmark.png')} /> */}
     </Pressable>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Image, Text, StyleSheet } from "react-native";
+import { View, Image, Text, StyleSheet, Dimensions } from "react-native";
 
 import BookmarkButton from './BookmarkButton';
 import IconText from './IconText';
@@ -9,6 +9,11 @@ import { Event } from "../types/types";
 import { colors } from "../styles/colors";
 import { fontFamily, fontSize } from "../styles/fonts";
 import { timeFormat } from "../utils/timeFormat";
+
+const { width, height, } = Dimensions.get('window');
+const CARD_HEIGHT = 150;
+const CARD_WIDTH = width * 0.8;
+const SPACING_FOR_CARD_INSET = width * 0.1 - 10;
 
 const EventCard = (props: {
   event: Event

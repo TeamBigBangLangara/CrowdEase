@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
+  Alert,
   Animated,
   Dimensions, FlatList,
   Image,
@@ -13,6 +14,8 @@ import uuid from 'uuid-random';
 import { markers } from '../model/mapData';
 import { mapDarkStyle } from "../styles/maps";
 import EventCard from '../components/EventCard';
+import { useQuery } from "react-query";
+import { getEvents } from "../api/event";
 
 const { width, height, } = Dimensions.get('window');
 const CARD_HEIGHT = 150;
@@ -20,6 +23,15 @@ const CARD_WIDTH = width * 0.8;
 const SPACING_FOR_CARD_INSET = width * 0.1 + 5;
 
 const MapScreen = () => {
+
+  const requestEvents = useQuery("events", () => getEvents(),
+    {
+      onError: (error: TypeError) => {
+        Alert.alert("Error", error.message);
+      },
+    }
+  );
+
   const initialMapState = {
     markers,
     region: {

@@ -80,6 +80,7 @@ const styles = StyleSheet.create({
   },
   linkButton: {
     color: colors.netural.surfaceWhite,
+    borderBottomColor: 'rgba(12,25,88,0)',
   },
 });
 

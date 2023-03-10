@@ -1,19 +1,18 @@
-import React, { useState } from 'react';
-import { Text, Pressable, GestureResponderEvent, StyleSheet, View } from 'react-native';
+import React, { useCallback, useState } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { Calendar, CalendarProvider, WeekCalendar, CalendarList } from "react-native-calendars";
 
-import { WeekCalendar, CalendarProvider } from 'react-native-calendars';
 
-const ITEMS: any[] = [];
+const CalendarComponent = () => {
 
-const CalendarComponent = (props: {}) => {
-  const [day, setDay] = useState('');
 
   return (
-    <CalendarProvider date={new Date().toISOString()}>
-      <WeekCalendar onDayPress={day => console.log(day)} firstDay={1} />
-    </CalendarProvider>
+      <CalendarProvider style={{backgroundColor: 'black',}} date={new Date().toISOString() } >
+        <WeekCalendar current={'2023-03-09'} onDayPress={(day) => console.log(day)} firstDay={1} pagingEnabled={false} style={{backgroundColor: 'black',}}/>
+      </CalendarProvider>
   );
-};
+
+  };
 
 //Style
 const styles = StyleSheet.create({});

@@ -2,10 +2,10 @@ import { StyleSheet, Text, TextStyle, View, ScrollView, SafeAreaView } from 'rea
 
 import { signOut } from '../auth/user';
 import { MainStackNavigationProps } from '../types/navigationTypes';
-import { colors } from '../styles/colors'
-import { fontFamily } from '../styles/fonts'
-import { fontSize } from '../styles/fonts'
-import { fontWeightTitle, fontWeightSubtitle, fontWeightBody, fontWeightLabel, fontWeightSubtitle2 } from '../styles/fonts'
+import { colors } from '../styles/colors';
+import { fontFamily } from '../styles/fonts';
+import { fontSize } from '../styles/fonts';
+import { fontWeightTitle, fontWeightSubtitle, fontWeightBody, fontWeightLabel, fontWeightSubtitle2 } from '../styles/fonts';
 import IconText from '../components/IconText';
 import PrimaryButton from '../components/PrimaryButton';
 import SecondaryButton from '../components/SecondaryButton';
@@ -17,7 +17,7 @@ import DataVisualization from '../components/DataVisualization';
 
 // Get the dates
 const today = new Date();
-const todayString = today.toLocaleString('default', { month: 'long', day: 'numeric' });
+const todayString = today.toLocaleString('default', { month: 'long', day: 'numeric', });
 const monday = new Date(today);
 monday.setDate(today.getDate() - today.getDay() + 1);
 const tuesday = new Date(monday);
@@ -40,7 +40,7 @@ const Event = {
     date: "12 March",
     time: "12:00 AM",
   },
-  category: { name: "music", id: "87362hf" },
+  category: { name: "music", id: "87362hf", },
   location: {
     longitude: "49.262955",
     latitude: "-123.110409",
@@ -48,26 +48,26 @@ const Event = {
   venue: {
     name: "BC place",
     id: "ufc76fcu",
-    type: "music"
+    type: "music",
   },
   address: "238 West Broadway",
   participants: 5000,
 };
 
-const HomeScreen = ({ navigation }: MainStackNavigationProps<'HomeScreen'>) => {
+const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => {
 
   const onFullReportPress = () => {
-    console.log('fuul report clicked');
-  }
+    navigation.navigate("ReportScreen");
+  };
   const onSeeSuggestionPress = () => {
-    console.log('seesuggestion clicked');
-  }
+   navigation.navigate("SuggestionScreen");
+  };
   const onSeeMorePress = () => {
     console.log('seemore clicked');
-  }
+  };
 
   return (
-    <View style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, }}>
       <ScrollView>
         <View style={styles.container}>
           {/* <Pressable onPress={signOut}>
@@ -75,14 +75,14 @@ const HomeScreen = ({ navigation }: MainStackNavigationProps<'HomeScreen'>) => {
         </Pressable> */}
           <Text style={styles.title}>Preview of this week's events</Text>
           <View style={styles.participantsNumberContainer}>
-            <IconText icon={require('../assets/icons/participants.png')} text={'total participants:'} style={styles.participantIcon} />
+            <IconText icon={require('../assets/icons/participants.png')} text={'Total participants:'} style={styles.participantIcon} />
             <Text style={styles.participantsNumber}>8,425</Text>
           </View>
           <View style={styles.dataVisualizationContainer}>
             <DataVisualization />
           </View>
           <View style={styles.dataBox}>
-            <Text style={styles.date}>{`${monday.toLocaleString('default', { month: 'long', day: 'numeric' })} - ${saturday.toLocaleString('default', { month: 'long', day: 'numeric' })}`}</Text>
+            <Text style={styles.date}>{`${monday.toLocaleString('default', { month: 'long', day: 'numeric', })} - ${saturday.toLocaleString('default', { month: 'long', day: 'numeric', })}`}</Text>
             <PrimaryButton onPress={onFullReportPress} label={'View Full Report'} />
           </View>
           <View style={styles.suggestionContainer}>
@@ -117,26 +117,26 @@ const HomeScreen = ({ navigation }: MainStackNavigationProps<'HomeScreen'>) => {
             eventType='music' />
         </View>
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.netural.backgroundBlack,
-    paddingHorizontal: 2
+    paddingHorizontal: 20,
   },
   title: {
     color: colors.primary.primaryPurpleDark,
     fontFamily: fontFamily.subtitle,
     fontSize: fontSize.subtitle1,
-    fontWeight: fontWeightBody
+    fontWeight: fontWeightBody,
   },
   participantsNumber: {
     color: colors.secondaryGreenDark,
     fontFamily: fontFamily.heading,
     fontSize: fontSize.heading2,
-    fontWeight: fontWeightTitle
+    fontWeight: fontWeightTitle,
   },
   participantIcon: {
     alignItems: "center",
@@ -145,11 +145,11 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     gap: 5,
-    alignItems: 'center'
+    alignItems: 'center',
   },
   dataVisualizationContainer: {
     height: 200,
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
   dataBox: {
     display: 'flex',
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
     fontFamily: fontFamily.body,
     fontSize: fontSize.body,
     fontWeight: fontWeightBody,
-    marginBottom: 15
+    marginBottom: 15,
   },
   suggestionContainer: {
     display: 'flex',
@@ -172,20 +172,20 @@ const styles = StyleSheet.create({
     borderRadius: 22,
     elevation: 5,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
+    shadowOffset: { width: 0, height: 1, },
     shadowOpacity: 0.3,
     shadowRadius: 2,
     //add an inset shadow using negative elevation
     insetShadow: {
       elevation: -4,
       shadowColor: '#000',
-      shadowOffset: { width: 0, height: 4 },
+      shadowOffset: { width: 0, height: 4, },
       shadowOpacity: 0.1,
       shadowRadius: 6,
     },
     marginTop: 35,
     padding: 10,
-    alignItems: 'center'
+    alignItems: 'center',
   },
   subtitle: {
     color: colors.netural.surfaceWhite,
@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
     fontSize: fontSize.subtitle2,
     fontWeight: fontWeightSubtitle,
     marginBottom: 20,
-    marginTop: 10
+    marginTop: 10,
   },
   busyDay: {
     fontFamily: fontFamily.heading,
@@ -209,13 +209,13 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   todayDate: {
     color: colors.secondaryGreenDark,
     fontFamily: fontFamily.subtitle,
     fontSize: fontSize.subtitle2,
-    fontWeight: fontWeightSubtitle
+    fontWeight: fontWeightSubtitle,
   },
   numberContainer: {
     display: 'flex',
@@ -225,33 +225,33 @@ const styles = StyleSheet.create({
     borderRadius: 22,
     elevation: 5,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
+    shadowOffset: { width: 0, height: 1, },
     shadowOpacity: 0.3,
     shadowRadius: 2,
     //add an inset shadow using negative elevation
     insetShadow: {
       elevation: -4,
       shadowColor: '#000',
-      shadowOffset: { width: 0, height: 4 },
+      shadowOffset: { width: 0, height: 4, },
       shadowOpacity: 0.1,
       shadowRadius: 6,
     },
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 10,
-    marginBottom: 20
+    marginBottom: 20,
   },
   todayParticipantsNumber: {
     color: colors.netural.surfaceWhite,
     marginTop: 10,
     fontFamily: fontFamily.heading,
     fontSize: fontSize.heading2,
-    fontWeight: fontWeightSubtitle2
+    fontWeight: fontWeightSubtitle2,
   },
   breakdownContainer: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   todayEventTitleContainer: {
     display: 'flex',
@@ -259,12 +259,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginTop: 30,
-    marginBottom: 10
+    marginBottom: 10,
   },
   linkButton: {
     color: colors.accent.accentBlueDark,
-    borderBottomColor: colors.accent.accentBlueDark
-  }
+    borderBottomColor: colors.accent.accentBlueDark,
+  },
 });
 
 export default HomeScreen;

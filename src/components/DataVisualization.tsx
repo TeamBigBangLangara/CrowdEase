@@ -18,7 +18,7 @@ const DataVisualization = () => {
     fill: colors.netural.surfaceWhite,
   };
 
-  
+
   const barChartSvg = {
     fill: colors.secondaryGreenDark,
   };
@@ -31,7 +31,7 @@ const DataVisualization = () => {
         spacingInner={0.6}
         style={styles.barChart}
         data={data}
-        svg={{...barChartSvg}}
+        svg={{...barChartSvg,}}
         contentInset={{ top: 20, }}
       >
       </BarChart>
@@ -40,7 +40,7 @@ const DataVisualization = () => {
         formatLabel={(value: string, index:  number) => days[index].label}
         contentInset={{ left: 15, right: 15, }}
         style={styles.xaxis}
-        svg={{...styles.xaxisSvg, ...textColor}}
+        svg={{...styles.xaxisSvg, ...textColor,}}
       />
     </View>
   );
@@ -49,6 +49,7 @@ const DataVisualization = () => {
 const styles = StyleSheet.create({
   barChart: {
     height: 166,
+    width: 357,
     borderBottomWidth: 2,
     borderBottomColor: colors.netural.surfaceWhite,
   },

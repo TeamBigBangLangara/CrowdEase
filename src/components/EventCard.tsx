@@ -62,7 +62,7 @@ const EventCard = (props: {
     if (props.eventType === "mapEvent") {
       return (
         <View style={styles.dragUpContainer}>
-            <Image source={require('../assets/dragUp.png')}/>
+            <Image source={require('../assets/icons/dragUp.png')}/>
         </View>
       );
     }

@@ -12,10 +12,12 @@ import SecondaryButton from '../components/SecondaryButton';
 import ParticipantsByMealCard from '../components/ParticipantsByMealCard';
 import LinkButton from '../components/LinkButton';
 import EventCard from '../components/EventCard';
+import DataVisualization from '../components/DataVisualization';
 
 
 // Get the dates
 const today = new Date();
+const todayString = today.toLocaleString('default', { month: 'long', day: 'numeric' });
 const monday = new Date(today);
 monday.setDate(today.getDate() - today.getDay() + 1);
 const tuesday = new Date(monday);
@@ -38,16 +40,16 @@ const Event = {
     date: "12 March",
     time: "12:00 AM",
   },
-  category: { name: "music", id: "87362hf"},
+  category: { name: "music", id: "87362hf" },
   location: {
     longitude: "49.262955",
     latitude: "-123.110409",
   },
-  venue:{
-  name: "BC place",
-  id: "ufc76fcu",
-  type: "music"
-},
+  venue: {
+    name: "BC place",
+    id: "ufc76fcu",
+    type: "music"
+  },
   address: "238 West Broadway",
   participants: 5000,
 };
@@ -65,7 +67,7 @@ const HomeScreen = ({ navigation }: MainStackNavigationProps<'HomeScreen'>) => {
   }
 
   return (
-    <View style={{flex:1}}>
+    <View style={{ flex: 1 }}>
       <ScrollView>
         <View style={styles.container}>
           {/* <Pressable onPress={signOut}>
@@ -73,24 +75,27 @@ const HomeScreen = ({ navigation }: MainStackNavigationProps<'HomeScreen'>) => {
         </Pressable> */}
           <Text style={styles.title}>Preview of this week's events</Text>
           <View style={styles.participantsNumberContainer}>
-            <IconText icon={require('../assets/icons/participants.png')} text={'total participants:'} style={styles.participantIcon}/>
+            <IconText icon={require('../assets/icons/participants.png')} text={'total participants:'} style={styles.participantIcon} />
             <Text style={styles.participantsNumber}>8,425</Text>
           </View>
           <View style={styles.dataVisualizationContainer}>
-            <Text style={styles.date}>Feb01-Feb07</Text>
+            <DataVisualization />
+          </View>
+          <View style={styles.dataBox}>
+            <Text style={styles.date}>{`${monday.toLocaleString('default', { month: 'long', day: 'numeric' })} - ${saturday.toLocaleString('default', { month: 'long', day: 'numeric' })}`}</Text>
             <PrimaryButton onPress={onFullReportPress} label={'View Full Report'} />
           </View>
           <View style={styles.suggestionContainer}>
-            <Text style={styles.subtitle}>It seems that {<Text style={styles.busyDay}>February 07</Text>} Sunday is the busiest day of this week, would you like to see some promotional opportunities?</Text>
+            <Text style={styles.subtitle}>It seems that {<Text style={styles.busyDay}>March 12</Text>} Sunday is the busiest day of this week, would you like to see some promotional opportunities?</Text>
             <SecondaryButton onPress={onSeeSuggestionPress} label={'See Suggestions'} />
           </View>
           <View style={styles.todayParticipantsContainer}>
             <View style={styles.todayParticipantTitle}>
               <Text style={styles.title}>Event Participants for today</Text>
-              <Text style={styles.todayDate}>Feb04</Text>
+              <Text style={styles.todayDate}>{todayString}</Text>
             </View>
             <View style={styles.numberContainer}>
-              <IconText icon={require('../assets/icons/participants.png')} text={'Total Participants'} style={styles.participantIcon}/>
+              <IconText icon={require('../assets/icons/participants.png')} text={'Total Participants'} style={styles.participantIcon} />
               <Text style={styles.todayParticipantsNumber}>8,963</Text>
             </View>
             <Text style={styles.subtitle}>Participants Breakdown</Text>
@@ -105,10 +110,11 @@ const HomeScreen = ({ navigation }: MainStackNavigationProps<'HomeScreen'>) => {
             <LinkButton onPress={onSeeMorePress} label={'See More'} style={styles.linkButton} />
           </View>
           <EventCard
-            event= {Event}
-            onBookmarkPress= {() => {console.log('click');
+            event={Event}
+            onBookmarkPress={() => {
+              console.log('click');
             }}
-            eventType= 'music' />
+            eventType='music' />
         </View>
       </ScrollView>
     </View>
@@ -118,6 +124,7 @@ const HomeScreen = ({ navigation }: MainStackNavigationProps<'HomeScreen'>) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.netural.backgroundBlack,
+    paddingHorizontal: 2
   },
   title: {
     color: colors.primary.primaryPurpleDark,
@@ -131,7 +138,7 @@ const styles = StyleSheet.create({
     fontSize: fontSize.heading2,
     fontWeight: fontWeightTitle
   },
-  participantIcon:{
+  participantIcon: {
     alignItems: "center",
   },
   participantsNumberContainer: {
@@ -141,6 +148,10 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   dataVisualizationContainer: {
+    height: 200,
+    alignSelf: 'center'
+  },
+  dataBox: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -250,7 +261,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
     marginBottom: 10
   },
-  linkButton : {
+  linkButton: {
     color: colors.accent.accentBlueDark,
     borderBottomColor: colors.accent.accentBlueDark
   }

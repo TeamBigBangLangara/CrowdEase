@@ -14,15 +14,24 @@ const DataVisualization = () => {
     { label: "SUN", }
   ];
 
+  const textColor = {
+    fill: colors.netural.surfaceWhite,
+  };
+
+  
+  const barChartSvg = {
+    fill: colors.secondaryGreenDark,
+  };
+
   const data = [5, 6, 4, 10, 8, 7, 10];
 
   return (
-    <View style={{ marginHorizontal: 20, }}>
+    <View style={{ marginHorizontal: 1,}}>
       <BarChart
         spacingInner={0.6}
         style={styles.barChart}
         data={data}
-        svg={styles.barChartSvg}
+        svg={{...barChartSvg}}
         contentInset={{ top: 20, }}
       >
       </BarChart>
@@ -31,7 +40,7 @@ const DataVisualization = () => {
         formatLabel={(value: string, index:  number) => days[index].label}
         contentInset={{ left: 15, right: 15, }}
         style={styles.xaxis}
-        svg={styles.xaxisSvg}
+        svg={{...styles.xaxisSvg, ...textColor}}
       />
     </View>
   );
@@ -50,10 +59,6 @@ const styles = StyleSheet.create({
     fontSize: fontSize.caption,
     fontFamily: fontFamily.body,
     fill: colors.netural.surfaceWhite,
-
-  },
-  barChartSvg: {
-    fill: colors.secondaryGreenDark,
   },
 });
 

@@ -13,24 +13,11 @@ import ParticipantsByMealCard from '../components/ParticipantsByMealCard';
 import LinkButton from '../components/LinkButton';
 import EventCard from '../components/EventCard';
 import DataVisualization from '../components/DataVisualization';
+import { getDate } from '../utils/getDate';
 
 
 // Get the dates
-const today = new Date();
-const todayString = today.toLocaleString('default', { month: 'long', day: 'numeric', });
-const monday = new Date(today);
-monday.setDate(today.getDate() - today.getDay() + 1);
-const tuesday = new Date(monday);
-tuesday.setDate(monday.getDate() + 1);
-const wednesday = new Date(today);
-const thursday = new Date(wednesday);
-thursday.setDate(wednesday.getDate() + 1);
-const friday = new Date(thursday);
-friday.setDate(thursday.getDate() + 1);
-const saturday = new Date(friday);
-saturday.setDate(friday.getDate() + 1);
-const sunday = new Date(saturday);
-sunday.setDate(saturday.getDate() + 1);
+const { formattedFirstDay, formattedLastDay, today } = getDate();
 
 const Event = {
   id: "2u63t821hi27",
@@ -60,7 +47,7 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
     navigation.navigate("ReportScreen");
   };
   const onSeeSuggestionPress = () => {
-   navigation.navigate("SuggestionScreen");
+    navigation.navigate("SuggestionScreen");
   };
   const onSeeMorePress = () => {
     navigation.navigate("EventScreen");
@@ -82,7 +69,7 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
             <DataVisualization />
           </View>
           <View style={styles.dataBox}>
-            <Text style={styles.date}>{`${monday.toLocaleString('default', { month: 'long', day: 'numeric', })} - ${saturday.toLocaleString('default', { month: 'long', day: 'numeric', })}`}</Text>
+            <Text style={styles.date}>{`${formattedFirstDay} - ${formattedLastDay}`}</Text>
             <PrimaryButton onPress={onFullReportPress} label={'View Full Report'} />
           </View>
           <View style={styles.suggestionContainer}>
@@ -92,7 +79,7 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
           <View style={styles.todayParticipantsContainer}>
             <View style={styles.todayParticipantTitle}>
               <Text style={styles.title}>Event Participants for today</Text>
-              <Text style={styles.todayDate}>{todayString}</Text>
+              <Text style={styles.todayDate}>{today}</Text>
             </View>
             <View style={styles.numberContainer}>
               <IconText icon={require('../assets/icons/participants.png')} text={'Total Participants'} style={styles.participantIcon} />
@@ -253,7 +240,7 @@ const styles = StyleSheet.create({
     fontSize: fontSize.heading2,
     fontWeight: fontWeightSubtitle2,
   },
-  subtitleBreakdown:{
+  subtitleBreakdown: {
     color: colors.netural.surfaceWhite,
     fontFamily: fontFamily.subtitle,
     fontSize: fontSize.subtitle2,

@@ -4,13 +4,21 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { firebase } from '@react-native-firebase/auth';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { QueryClient, QueryClientProvider } from "react-query";
 
 import SignUp from './screens/SignUpScreen';
 import SplashScreen from './screens/SplashScreen';
 import Login from './screens/LoginScreen';
-
 import NavigationBottomTab from './components/navigation/NavigationBottomTab';
-import { QueryClient, QueryClientProvider } from "react-query";
+import LocationScreen from './screens/LocationScreen';
+
+export type AuthStackParams = {
+  SplashScreen: undefined
+  LoginScreen: undefined
+  SignUpScreen: undefined
+  LocationScreen: { emailParam: string, passwordParam: string }
+  BottomTabs: undefined
+}
 
 export type MainStackParams = {
   HomeScreen: undefined
@@ -23,7 +31,7 @@ export type TabParams = {
   EventsStack: undefined
 }
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<AuthStackParams>();
 
 const queryClient = new QueryClient();
 
@@ -50,10 +58,11 @@ const App = () => {
       <QueryClientProvider client={queryClient}>
       <NavigationContainer>
         {!isLoggedIn && (
-          <Stack.Navigator initialRouteName={'Splash'}>
-            <Stack.Screen name={'Splash'} component={SplashScreen} />
-            <Stack.Screen name={'Login'} component={Login} />
-            <Stack.Screen name={'Sign Up'} component={SignUp} />
+          <Stack.Navigator initialRouteName={'SplashScreen'}>
+            <Stack.Screen name={'SplashScreen'} component={SplashScreen} />
+            <Stack.Screen name={'LoginScreen'} component={Login} />
+            <Stack.Screen name={'SignUpScreen'} component={SignUp} />
+            <Stack.Screen name={'LocationScreen'} component={LocationScreen} />
           </Stack.Navigator>
         )}
         {isLoggedIn && (

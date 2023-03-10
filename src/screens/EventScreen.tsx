@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     paddingTop: 14,
   },
   titleContainer: {
-    backgroundColor: "black",
+    backgroundColor: colors.netural.backgroundBlack,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",

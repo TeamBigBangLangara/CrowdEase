@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -6,9 +6,23 @@ import HomeScreen from '../../screens/HomeScreen';
 import MapScreen from '../../screens/MapScreen';
 import EventScreen from '../../screens/EventScreen';
 import WeekManager from '../../screens/WeekManagerScreen';
+import { requestUsers } from '../../api/bigBangAPI/users';
 
 const Tab = createBottomTabNavigator();
+
 const NavigationBottomTab = () => {
+  const loadItems = async () => {
+    //const response = await getUsers();
+    const response = await requestUsers();
+
+    console.log(response); //For Demo, to be removed.
+    
+};
+
+useEffect(() => {
+  loadItems();
+}, []);
+
   return (
     <Tab.Navigator initialRouteName="Home">
       <Tab.Screen

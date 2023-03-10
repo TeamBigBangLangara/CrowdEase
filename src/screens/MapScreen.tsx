@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import {
   Animated,
-  Dimensions,
+  Dimensions, FlatList,
   Image,
   Platform,
   StyleSheet,
   Text,
   View
-} from 'react-native';
+} from "react-native";
 import MapView, { Heatmap, Marker } from "react-native-maps";
 import uuid from 'uuid-random';
 import { markers } from '../model/mapData';
@@ -70,7 +70,7 @@ const MapScreen = () => {
           setActiveCoordinate(coordinate);
         }
       }, 10);
-      
+
     });
   }, [activeCoordinate]);
 
@@ -111,10 +111,9 @@ const MapScreen = () => {
               key={Math.random()}></Marker>
           );
         })}
-        
+
         {<Heatmap points={heatmapData} radius={50}/> }
       </MapView>
-
       <Animated.ScrollView
         ref={_scrollView}
         horizontal
@@ -169,8 +168,8 @@ const MapScreen = () => {
                   },
                   address: marker.location,
                   participants: marker.participants,
-                          }} 
-                      eventType={'mapEvent'} 
+                          }}
+                      eventType={'mapEvent'}
                       key={uuid()} />
         ))}
       </Animated.ScrollView>

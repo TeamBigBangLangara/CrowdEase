@@ -52,7 +52,7 @@ const EventScreen = () => {
           <EventCard
             event={item}
             eventType={"actual"}
-            onBookmarkPress={onBookMarkPress}
+            //onBookmarkPress={onBookMarkPress}
           />
         }
       />
@@ -64,7 +64,7 @@ const EventScreen = () => {
           <EventCard
             event={item}
             eventType={"actual"}
-            onBookmarkPress={onBookMarkPress}
+            //onBookmarkPress={onBookMarkPress}
           />
         }
       />

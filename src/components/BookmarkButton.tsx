@@ -1,12 +1,13 @@
-import { addBookmark } from 'api/bigBangAPI/bookmark';
+import { addBookmark } from '../api/bigBangAPI/bookmark';
 import React from 'react';
 import { useState } from "react";
 import { Image, Pressable } from 'react-native';
 import { useMutation } from 'react-query';
 
-const BookmarkButton = (props: {eventId?:string, onBookmarkPress?: () => void }) => {
+const BookmarkButton = (props: {eventId?:string, 
+  //onBookmarkPress?: () => void 
+}) => {
 
-  
   const saveBookmark = useMutation(["bookmark"], () => addBookmark({
     "user_id": ' ',
     "event_id": props.eventId,
@@ -18,10 +19,20 @@ const BookmarkButton = (props: {eventId?:string, onBookmarkPress?: () => void })
     },
 });
 
+const onBookmarkPress = () => {
+  console.log('Bookmark Is Pressed!!');
+  saveBookmark.mutate();
+  setBookmarkIsAdded(!bookmarkIsAdded);
+};
+
+
 const [bookmarkIsAdded, setBookmarkIsAdded] = useState(false);
 
   return (
-    <Pressable onPress={props.onBookmarkPress}>
+    <Pressable onPress={
+      //props.onBookmarkPress
+      onBookmarkPress
+      }>
       <Image source={require('../assets/bookmark.png')} />
     </Pressable>
   );

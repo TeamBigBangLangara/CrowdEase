@@ -12,7 +12,7 @@ import { timeFormat } from "../utils/timeFormat";
 
 const EventCard = (props: {
   event: Event
-  onBookmarkPress?: () => void
+  //onBookmarkPress?: () => void
   eventType: string
 }) => {
   const [showRating, setShowRating] = useState(false);
@@ -38,7 +38,7 @@ const EventCard = (props: {
     if (props.eventType !== 'past') {
       return <BookmarkButton 
       eventId={props.event.id} 
-      onBookmarkPress={props.onBookmarkPress} 
+      //onBookmarkPress={props.onBookmarkPress} 
       />;
     }
   };

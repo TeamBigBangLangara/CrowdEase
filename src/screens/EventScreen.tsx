@@ -104,9 +104,9 @@ const EventScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginHorizontal: 20,
-    backgroundColor: 'black',
-    marginTop: 14,
+    paddingHorizontal: 20,
+    backgroundColor: colors.netural.backgroundBlack,
+    paddingTop: 14,
   },
   titleContainer: {
     backgroundColor: "black",

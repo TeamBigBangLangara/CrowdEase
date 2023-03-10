@@ -6,7 +6,7 @@ import HomeScreen from '../../screens/HomeScreen';
 import MapScreen from '../../screens/MapScreen';
 import EventScreen from '../../screens/EventScreen';
 import WeekManager from '../../screens/WeekManagerScreen';
-import { getUsers } from '../../services/bigBangAPI';
+import { getUsers } from '../../api/bigBangAPI';
 
 const Tab = createBottomTabNavigator();
 

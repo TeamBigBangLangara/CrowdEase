@@ -4,11 +4,11 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { firebase } from '@react-native-firebase/auth';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { QueryClient, QueryClientProvider } from "react-query";
 
 import SignUp from './screens/SignUpScreen';
 import SplashScreen from './screens/SplashScreen';
 import Login from './screens/LoginScreen';
-
 import NavigationBottomTab from './components/navigation/NavigationBottomTab';
 import LocationScreen from './screens/LocationScreen';
 
@@ -33,6 +33,9 @@ export type TabParams = {
 
 const Stack = createNativeStackNavigator<AuthStackParams>();
 
+const queryClient = new QueryClient();
+
+
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -52,6 +55,7 @@ const App = () => {
 
   return (
     <SafeAreaView style={{ flex: 1, }}>
+      <QueryClientProvider client={queryClient}>
       <NavigationContainer>
         {!isLoggedIn && (
           <Stack.Navigator initialRouteName={'SplashScreen'}>
@@ -67,6 +71,7 @@ const App = () => {
           </Stack.Navigator>
         )}
       </NavigationContainer>
+      </QueryClientProvider>
     </SafeAreaView>
   );
 };

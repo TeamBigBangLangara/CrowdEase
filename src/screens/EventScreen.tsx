@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Alert, Button, FlatList, Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { Alert, FlatList, Image, StyleSheet, Text, View } from "react-native";
 import { getEvents } from "../api/event";
-import { useMutation, useQuery } from "react-query";
+import {  useQuery } from "react-query";
 
 import SearchForm from "../components/SearchForm";
 import EventCard from "../components/EventCard";
@@ -13,7 +13,7 @@ import Calendar from "../components/Calendar";
 const EventScreen = () => {
 
   const [searchFilter, setSearchFilter] = useState("");
-  const [dateFilter, setDateFilter] = useState(null);
+  const [dateFilter, setDateFilter] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
 
   const requestEvents = useQuery("events", () => getEvents(),
@@ -25,7 +25,7 @@ const EventScreen = () => {
           return dateFilter ? event.dates.date === dateFilter : true;
         });
       },
-      onError: (error) => {
+      onError: (error: TypeError) => {
         Alert.alert("Error", error.message);
       },
     }
@@ -39,9 +39,8 @@ const EventScreen = () => {
     Alert.alert("here", "Book Mark pressed");
   };
 
-  const onHandleData = (date: Date | null) => {
-    setDateFilter(date.dateString);
-    Alert.alert("DATE IS " +  date.dateString);
+  const onHandleData = (date: string) => {
+    setDateFilter(date);
   };
 
   const renderEvents = () => {
@@ -94,8 +93,6 @@ const EventScreen = () => {
       <FilterCategory
         visible={modalVisible}
         onClosePress={() => setModalVisible(false)}
-        //onRequestClose={() => console.log("here close")}
-       // onTouchStart={() => console.log("here close")}
       />
     </View>
   );

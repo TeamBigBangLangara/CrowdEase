@@ -24,6 +24,7 @@ export type MainStackParams = {
   HomeScreen: undefined
   ReportScreen: undefined
   SuggestionScreen: undefined
+  EventScreen: undefined
 }
 
 export type TabParams = {

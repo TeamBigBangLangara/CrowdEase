@@ -63,7 +63,7 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
    navigation.navigate("SuggestionScreen");
   };
   const onSeeMorePress = () => {
-    console.log('seemore clicked');
+    navigation.navigate("EventScreen");
   };
 
   return (
@@ -98,7 +98,7 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
               <IconText icon={require('../assets/icons/participants.png')} text={'Total Participants'} style={styles.participantIcon} />
               <Text style={styles.todayParticipantsNumber}>8,963</Text>
             </View>
-            <Text style={styles.subtitle}>Participants Breakdown</Text>
+            <Text style={styles.subtitleBreakdown}>Participants Breakdown</Text>
             <View style={styles.breakdownContainer}>
               <ParticipantsByMealCard mealTime={'morning'} crowdNumber={2453} />
               <ParticipantsByMealCard mealTime={'lunch'} crowdNumber={1320} />
@@ -106,8 +106,8 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
             </View>
           </View>
           <View style={styles.todayEventTitleContainer}>
-            <Text style={styles.title}>Today's Event</Text>
-            <LinkButton onPress={onSeeMorePress} label={'See More'} style={styles.linkButton} />
+            <Text style={styles.title}>Today's Events</Text>
+            <LinkButton onPress={onSeeMorePress} label={'See All'} style={styles.linkButton} />
           </View>
           <EventCard
             event={Event}
@@ -125,6 +125,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.netural.backgroundBlack,
     paddingHorizontal: 20,
+    paddingVertical: 24
   },
   title: {
     color: colors.primary.primaryPurpleDark,
@@ -140,12 +141,16 @@ const styles = StyleSheet.create({
   },
   participantIcon: {
     alignItems: "center",
+    fontFamily: fontWeightSubtitle2,
+    fontSize: fontSize.subtitle1,
+    fontWeight: fontWeightTitle
   },
   participantsNumberContainer: {
     display: 'flex',
     flexDirection: 'row',
     gap: 5,
     alignItems: 'center',
+    marginTop: 4
   },
   dataVisualizationContainer: {
     height: 200,
@@ -159,7 +164,7 @@ const styles = StyleSheet.create({
   date: {
     color: colors.netural.surfaceWhite,
     fontFamily: fontFamily.body,
-    fontSize: fontSize.body,
+    fontSize: fontSize.subtitle2,
     fontWeight: fontWeightBody,
     marginBottom: 15,
   },
@@ -185,6 +190,7 @@ const styles = StyleSheet.create({
     },
     marginTop: 35,
     padding: 10,
+    paddingBottom: 20,
     alignItems: 'center',
   },
   subtitle: {
@@ -203,7 +209,7 @@ const styles = StyleSheet.create({
   todayParticipantsContainer: {
     display: 'flex',
     alignSelf: 'center',
-    marginTop: 30,
+    marginTop: 40,
   },
   todayParticipantTitle: {
     display: 'flex',
@@ -239,7 +245,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 10,
-    marginBottom: 20,
   },
   todayParticipantsNumber: {
     color: colors.netural.surfaceWhite,
@@ -248,17 +253,25 @@ const styles = StyleSheet.create({
     fontSize: fontSize.heading2,
     fontWeight: fontWeightSubtitle2,
   },
+  subtitleBreakdown:{
+    color: colors.netural.surfaceWhite,
+    fontFamily: fontFamily.subtitle,
+    fontSize: fontSize.subtitle2,
+    fontWeight: fontWeightSubtitle,
+    marginTop: 18
+  },
   breakdownContainer: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    marginTop: 8,
   },
   todayEventTitleContainer: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 30,
+    marginTop: 45,
     marginBottom: 10,
   },
   linkButton: {

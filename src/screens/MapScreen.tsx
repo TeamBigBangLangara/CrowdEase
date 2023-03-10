@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import {
   Animated,
-  Dimensions,
+  Dimensions, FlatList,
   Image,
   Platform,
   StyleSheet,
   Text,
   View
-} from 'react-native';
+} from "react-native";
 import MapView, { Heatmap, Marker } from "react-native-maps";
-
+import uuid from 'uuid-random';
 import { markers } from '../model/mapData';
 import { mapDarkStyle } from "../styles/maps";
+import EventCard from '../components/EventCard';
 
 const { width, height, } = Dimensions.get('window');
 const CARD_HEIGHT = 150;
 const CARD_WIDTH = width * 0.8;
-const SPACING_FOR_CARD_INSET = width * 0.1 - 10;
+const SPACING_FOR_CARD_INSET = width * 0.1 + 5;
 
 const MapScreen = () => {
   const initialMapState = {
@@ -32,7 +33,7 @@ const MapScreen = () => {
   let mapAnimation = new Animated.Value(0);
 
   const [state, setState] = useState(initialMapState);
-  const [activeCoordinate, setActiveCoordinate] = useState({});
+  const [activeCoordinate, setActiveCoordinate] = useState<any>(null);
   const [heatmapData, setHeatmapData] = useState([
     { latitude: 49.2803897, longitude: -123.1126552, },
     { latitude: 49.2797959, longitude: -123.0974419, },
@@ -69,36 +70,23 @@ const MapScreen = () => {
           setActiveCoordinate(coordinate);
         }
       }, 10);
-      // clearTimeout(regionTimeout);
+
     });
-  });
+  }, [activeCoordinate]);
 
-  const interpolations = markers.map((marker, index) => {
-    const inputRange: number[] = [
-      (index - 1) * CARD_WIDTH,
-      index * CARD_WIDTH,
-      (index + 1) * CARD_WIDTH
-    ];
+  const onMarkerPress = (mapEventData: any, coordinate: any) => {
+    const markerID = mapEventData._targetInst.return.key;
 
-    const scale = mapAnimation.interpolate({
-      inputRange,
-      outputRange: [1, 1.5, 1],
-      extrapolate: 'clamp',
-    });
+    let x = (markerID * CARD_WIDTH) + (markerID * 20);
+    if (Platform.OS === 'ios') {
+      x = x - SPACING_FOR_CARD_INSET;
+    }
 
-    return { scale, };
-  });
-
-  // const onMarkerPress = (mapEventData) => {
-  //   const markerID = mapEventData._targetInst.return.key;
-
-  //   let x = (markerID * CARD_WIDTH) + (markerID * 20);
-  //   if (Platform.OS === 'ios') {
-  //     x = x - SPACING_FOR_CARD_INSET;
-  //   }
-
-  //   _scrollView.current.scrollTo({x: x, y: 0, animated: true});
-  // }
+    //setTimeout(() => {
+      _scrollView.current.scrollTo({x: x , y: 0, animated: true,});
+    //}, 1000);
+    setActiveCoordinate(coordinate);
+  };
 
   return (
     <View style={styles.container}>
@@ -119,17 +107,13 @@ const MapScreen = () => {
             <Marker
               coordinate={marker.coordinate}
               pinColor={activeCoordinate !== marker.coordinate ? "purple" : "green"}
+              onPress={(e) => onMarkerPress(e, marker.coordinate)}
               key={Math.random()}></Marker>
           );
         })}
-        {<Marker
-            coordinate={{ latitude: 37.78825, longitude: -122.4324, }}
-            title="Marker Title"
-            description="Marker Description"
-          /> }
+
         {<Heatmap points={heatmapData} radius={50}/> }
       </MapView>
-
       <Animated.ScrollView
         ref={_scrollView}
         horizontal
@@ -138,7 +122,7 @@ const MapScreen = () => {
         pagingEnabled
         snapToAlignment="center"
         snapToInterval={CARD_WIDTH + 20}
-        style={styles.scrollView}
+        style={[styles.scrollView, (activeCoordinate !== null ? visibility.visible : visibility.hidden)]}
         contentContainerStyle={{
           paddingHorizontal: Platform.OS === 'android' ? SPACING_FOR_CARD_INSET : 0,
         }}
@@ -155,23 +139,38 @@ const MapScreen = () => {
           { useNativeDriver: true, }
         )}>
         {markers.map((marker, index) => (
-          <View style={styles.card} key={index}>
-            <Image source={marker.image} style={styles.cardImage} resizeMode="cover" />
-            <View style={styles.textContent}>
-              <Text numberOfLines={1} style={styles.cardDescription}>
-                {marker.timing}
-              </Text>
-              <Text numberOfLines={1} style={styles.cardTitle}>
-                {marker.title}
-              </Text>
-              <Text numberOfLines={1} style={styles.cardDescription}>
-                {marker.location}
-              </Text>
-              <Text numberOfLines={1} style={styles.cardDescription}>
-                {marker.participants}
-              </Text>
-            </View>
-          </View>
+          <EventCard event={{
+            name: marker.title,
+                  image: '',
+                  dates: {
+                    date: marker.timing,
+                    time: marker.timing,
+                },
+                  category: {
+                    id: 'string',
+                    name: 'string',
+                },
+                  location: {
+                    longitude:  'string',
+                    latitude: 'string',
+                  },
+                  venue: {
+                    name: 'string',
+                    id: 'string',
+                    type: 'string',
+                    address: {
+                      line1: marker.location ,
+                    },
+                    location: {
+                      longitude: 'string',
+                      latitude: 'string',
+                    },
+                  },
+                  address: marker.location,
+                  participants: marker.participants,
+                          }}
+                      eventType={'mapEvent'}
+                      key={uuid()} />
         ))}
       </Animated.ScrollView>
     </View>
@@ -186,35 +185,6 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-  card: {
-    elevation: 2,
-    backgroundColor: '#FFF',
-    borderTopLeftRadius: 5,
-    borderTopRightRadius: 5,
-    marginHorizontal: 10,
-    shadowColor: '#000',
-    shadowRadius: 5,
-    shadowOpacity: 0.3,
-    //shadowOffset: { x: 2, y: -2 },
-    height: CARD_HEIGHT,
-    width: CARD_WIDTH,
-    overflow: 'hidden',
-  },
-  cardImage: {
-    flex: 3,
-    width: '100%',
-    height: '100%',
-    alignSelf: 'center',
-  },
-  textContent: {
-    flex: 2,
-    padding: 10,
-  },
-  cardTitle: {
-    fontSize: 12,
-    // marginTop: 5,
-    fontWeight: 'bold',
-  },
   scrollView: {
     position: 'absolute',
     bottom: 0,
@@ -222,9 +192,15 @@ const styles = StyleSheet.create({
     right: 0,
     paddingVertical: 10,
   },
-  cardDescription: {
-    fontSize: 12,
-    color: '#444',
+});
+
+
+const visibility = StyleSheet.create({
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
   },
 });
 

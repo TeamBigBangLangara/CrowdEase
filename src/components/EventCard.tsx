@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Image, Text, StyleSheet } from "react-native";
+import { View, Image, Text, StyleSheet, Dimensions } from "react-native";
 
 import BookmarkButton from './BookmarkButton';
 import IconText from './IconText';
@@ -8,6 +8,11 @@ import DropdownButton from "./DropdownButton";
 import { Event } from "../types/types";
 import { colors } from "../styles/colors";
 import { fontFamily, fontSize } from "../styles/fonts";
+
+const { width, height, } = Dimensions.get('window');
+const CARD_HEIGHT = 150;
+const CARD_WIDTH = width * 0.8;
+const SPACING_FOR_CARD_INSET = width * 0.1 - 10;
 
 const EventCard = (props: {
   event: Event
@@ -103,6 +108,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     display: 'flex',
     borderRadius: 22,
+    marginHorizontal: 5,
   },
   eventContainer: {
     display: 'flex',

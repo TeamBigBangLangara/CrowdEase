@@ -8,7 +8,7 @@ const DropdownButton = (props: {onDropdownPress: () => void, label: string}) => 
   return (
     <Pressable onPress={props.onDropdownPress} style={styles.container}>
       <Text style={styles.label}>{props.label}</Text>
-      <Image source={require('../assets/downIcon.png')} />
+      <Image source={require('../assets/icons/downIcon.png')} />
     </Pressable>
   );
 };

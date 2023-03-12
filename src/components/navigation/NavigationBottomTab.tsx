@@ -2,10 +2,10 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import HomeScreen from '../../screens/HomeScreen';
 import MapScreen from '../../screens/MapScreen';
 import EventScreen from '../../screens/EventScreen';
 import WeekManager from '../../screens/WeekManagerScreen';
+import { HomeStack } from "../../App";
 
 const Tab = createBottomTabNavigator();
 const NavigationBottomTab = () => {
@@ -13,7 +13,7 @@ const NavigationBottomTab = () => {
     <Tab.Navigator initialRouteName="Home">
       <Tab.Screen
         name="Home"
-        component={HomeScreen}
+        component={HomeStack}
         options={{
           tabBarIcon: () => (
             <View>

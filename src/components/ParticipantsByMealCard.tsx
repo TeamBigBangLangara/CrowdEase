@@ -13,19 +13,19 @@ const ParticipantsByMeal = (props: {
       case 'morning':
         return (
           <View>
-            <IconText icon={require('../assets/morning.png')} text={'6am-12pm'} style={styles.icon}/>
+            <IconText icon={require('../assets/icons/morning.png')} text={'6am-12pm'} style={styles.icon}/>
           </View>
         );
         case 'lunch':
         return (
           <View>
-            <IconText icon={require('../assets/lunch.png')} text={'1pm-5pm'} style={styles.icon}/>
+            <IconText icon={require('../assets/icons/lunch.png')} text={'1pm-5pm'} style={styles.icon}/>
           </View>
         );
         case 'dinner':
         return (
           <View>
-            <IconText icon={require('../assets/dinner.png')} text={'6pm-10pm'} style={styles.icon}/>
+            <IconText icon={require('../assets/icons/dinner.png')} text={'6pm-10pm'} style={styles.icon}/>
           </View>
         );
       default:

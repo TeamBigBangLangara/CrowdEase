@@ -1,10 +1,10 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import HomeScreen from '../../screens/HomeScreen';
 import MapScreen from '../../screens/MapScreen';
 import EventScreen from '../../screens/EventScreen';
 import WeekManager from '../../screens/WeekManagerScreen';
+import { HomeStack } from "../../App";
 import { colors } from '../../styles/colors';
 import { fontFamily, fontWeightSubtitle2, fontSize } from '../../styles/fonts'
 import GradientText from '../GradientText';
@@ -15,14 +15,13 @@ const NavigationBottomTab = () => {
   return (
     <Tab.Navigator initialRouteName="Home"
       screenOptions={{
-        headerShown: false,
         tabBarShowLabel: false,
         tabBarStyle: { backgroundColor: colors.netural.surfaceBlack, height: 60, borderTopWidth: 2, borderTopColor: colors.netural.outlineGrey },
         tabBarActiveTintColor: colors.primary.primaryPurpleDark,
       }}>
       <Tab.Screen
         name="Home"
-        component={HomeScreen}
+        component={HomeStack}
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={styles.iconContainer}>

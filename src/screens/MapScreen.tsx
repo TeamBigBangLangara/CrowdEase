@@ -153,7 +153,7 @@ const MapScreen = () => {
         {markers.map((marker, index) => (
           <EventCard event={{
             name: marker.title,
-                  image: '',
+                  image: '../assets/eventImage.png',
                   dates: {
                     date: marker.timing,
                     time: marker.timing,

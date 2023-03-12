@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TextStyle, View, ScrollView, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, TextStyle, View, ScrollView, SafeAreaView, Pressable } from "react-native";
 
 import { signOut } from '../auth/user';
 import { MainStackNavigationProps } from '../types/navigationTypes';
@@ -57,9 +57,9 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
     <SafeAreaView style={{ flex: 1, }}>
       <ScrollView>
         <View style={styles.container}>
-          {/* <Pressable onPress={signOut}>
-          <Text>Sign out</Text>
-        </Pressable> */}
+          <Pressable onPress={signOut}>
+          <Text style={{color: "white",}} >Sign out</Text>
+        </Pressable>
           <Text style={styles.title}>Preview of this week's events</Text>
           <View style={styles.participantsNumberContainer}>
             <IconText icon={require('../assets/icons/participants.png')} text={'Total participants:'} style={styles.participantIcon} />

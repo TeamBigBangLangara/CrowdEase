@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Alert, FlatList, Image, StyleSheet, Text, View } from "react-native";
+import { Alert, FlatList, Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { getEvents } from "../api/event";
 import {  useQuery } from "react-query";
 
@@ -73,7 +73,7 @@ const EventScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <SearchForm
         onChangeText={(keyword: string) => onSearchTextChanged(keyword)}
         onFilterPress={() => {
@@ -94,7 +94,7 @@ const EventScreen = () => {
         visible={modalVisible}
         onClosePress={() => setModalVisible(false)}
       />
-    </View>
+    </ScrollView>
   );
 };
 

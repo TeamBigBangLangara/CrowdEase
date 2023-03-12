@@ -14,7 +14,7 @@ import LinkButton from '../components/LinkButton';
 import EventCard from '../components/EventCard';
 import DataVisualization from '../components/DataVisualization';
 import { getDate } from '../utils/getDate';
-
+import { borderRadius } from "../styles/basic";
 
 // Get the dates
 const { formattedFirstDay, formattedLastDay, today, } = getDate();
@@ -44,13 +44,13 @@ const Event = {
 const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => {
 
   const onFullReportPress = () => {
-    navigation.navigate('Main', { screen: 'WeekManagerScreen', });
+    navigation.navigate('WeekManagerScreen');
   };
   const onSeeSuggestionPress = () => {
-    navigation.navigate('Main', { screen: 'SuggestionScreen', });
+    navigation.navigate('SuggestionScreen');
   };
   const onSeeMorePress = () => {
-    navigation.navigate('Main', { screen: 'EventScreen', });
+    navigation.navigate('EventScreen');
   };
 
   return (
@@ -128,15 +128,11 @@ const styles = StyleSheet.create({
   },
   participantIcon: {
     alignItems: "center",
-    fontFamily: fontWeightSubtitle2,
-    fontSize: fontSize.subtitle1,
-    fontWeight: fontWeightTitle,
   },
   participantsNumberContainer: {
-    display: 'flex',
     flexDirection: 'row',
     gap: 5,
-    alignItems: 'center',
+    alignItems: 'flex-end',
     marginTop: 4,
   },
   dataVisualizationContainer: {
@@ -156,12 +152,9 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   suggestionContainer: {
-    display: 'flex',
     alignSelf: 'center',
     backgroundColor: colors.netural.surfaceBlack,
-    width: 356,
-    height: 150,
-    borderRadius: 22,
+    borderRadius: borderRadius.primary,
     elevation: 5,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1, },
@@ -175,10 +168,9 @@ const styles = StyleSheet.create({
       shadowOpacity: 0.1,
       shadowRadius: 6,
     },
-    marginTop: 35,
-    padding: 10,
-    paddingBottom: 20,
-    alignItems: 'center',
+    marginTop: 40,
+    paddingHorizontal: 13,
+    paddingVertical: 16,
   },
   subtitle: {
     color: colors.netural.surfaceWhite,
@@ -194,12 +186,10 @@ const styles = StyleSheet.create({
     fontSize: fontSize.subtitle2,
   },
   todayParticipantsContainer: {
-    display: 'flex',
     alignSelf: 'center',
     marginTop: 40,
   },
   todayParticipantTitle: {
-    display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -211,11 +201,8 @@ const styles = StyleSheet.create({
     fontWeight: fontWeightSubtitle,
   },
   numberContainer: {
-    display: 'flex',
     backgroundColor: colors.netural.surfaceBlack,
-    width: 358,
-    height: 86,
-    borderRadius: 22,
+    borderRadius: borderRadius.primary,
     elevation: 5,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1, },
@@ -232,6 +219,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 10,
+    paddingVertical: 15,
   },
   todayParticipantsNumber: {
     color: colors.netural.surfaceWhite,
@@ -245,16 +233,15 @@ const styles = StyleSheet.create({
     fontFamily: fontFamily.subtitle,
     fontSize: fontSize.subtitle2,
     fontWeight: fontWeightSubtitle,
-    marginTop: 18,
+    marginTop: 16,
   },
   breakdownContainer: {
-    display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 8,
+    gap: 6,
   },
   todayEventTitleContainer: {
-    display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',

@@ -14,6 +14,7 @@ import { SafeAreaView } from "react-native";
 import WeekManagerScreen from "./screens/WeekManagerScreen";
 import SuggestionScreen from "./screens/SuggestionScreen";
 import EventScreen from "./screens/EventScreen";
+import HomeScreen from "./screens/HomeScreen";
 
 export type AuthStackParams = {
   SplashScreen: undefined
@@ -41,9 +42,10 @@ const Stack = createNativeStackNavigator<AuthStackParams>();
 const MainStack = createNativeStackNavigator<MainStackParams>();
 
 
-const Main = () => {
+export const HomeStack = () => {
   return (
     <MainStack.Navigator>
+      <MainStack.Screen name={"HomeScreen"} component={HomeScreen}/>
       <MainStack.Screen name={"WeekManagerScreen"} component={WeekManagerScreen}/>
       <MainStack.Screen name={"SuggestionScreen"} component={SuggestionScreen}/>
       <MainStack.Screen name={"EventScreen"} component={EventScreen}/>
@@ -85,7 +87,6 @@ const App = () => {
         {isLoggedIn && (
           <Stack.Navigator screenOptions={{ headerShown: false,}}>
             <Stack.Screen name={'BottomTabs'} component={NavigationBottomTab} />
-            <MainStack.Screen name={"Main"} component={Main} />
           </Stack.Navigator>
         )}
           </NavigationContainer>

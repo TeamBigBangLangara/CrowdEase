@@ -44,7 +44,7 @@ const MainStack = createNativeStackNavigator<MainStackParams>();
 
 export const HomeStack = () => {
   return (
-    <MainStack.Navigator>
+    <MainStack.Navigator screenOptions={{ headerShown: false,}}>
       <MainStack.Screen name={"HomeScreen"} component={HomeScreen}/>
       <MainStack.Screen name={"WeekManagerScreen"} component={WeekManagerScreen}/>
       <MainStack.Screen name={"SuggestionScreen"} component={SuggestionScreen}/>

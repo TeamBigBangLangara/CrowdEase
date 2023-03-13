@@ -15,13 +15,13 @@ import { getPostalCodeCoordinates } from '../api/postalCodeApi';
 import { AuthStackNavigationProps } from '../types/navigationTypes';
 import { isPostalCodeValid } from '../utils/postalCode';
 import { onGoogleButtonPress } from '../auth/googleSignIn';
-import { signUp, signIn } from '../auth/user';
+import { signUp, signIn, getUser } from '../auth/user';
 import { Location } from 'types/types';
 import { addUser } from '../api/bigBangAPI/users';
 
 const LocationScreen = ({ route, navigation, }: AuthStackNavigationProps<'LocationScreen'>) => {
   const [isEnabled, setIsEnabled] = useState(false);
-  const { emailParam, passwordParam, } = route?.params;
+  const { emailParam, passwordParam, userName, } = route?.params;
   const [postalCode, setPostalCode] = useState('');
   const [location, setLocation] = useState<Location>({
     latitude: '',
@@ -31,12 +31,14 @@ const LocationScreen = ({ route, navigation, }: AuthStackNavigationProps<'Locati
   const signInOnLocationFetch = async() => {
     if(emailParam != ''){
       await signUp(emailParam, passwordParam);
-      //await postUser(emailParam);
-      await addUser(emailParam);
+      const userinfo = await getUser();
+      await addUser(emailParam, userinfo.uid, userName);
       await signIn(emailParam, passwordParam);
     }
     else{
-      await onGoogleButtonPress().then(() => {
+      await onGoogleButtonPress().then(async () => {
+        const userinfo = await getUser();
+        await addUser(userinfo.email, userinfo.uid,userName);
       });
     }
   };

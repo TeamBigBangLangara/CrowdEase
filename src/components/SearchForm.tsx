@@ -41,7 +41,7 @@ const SearchForm = (props: {
           <Text style={styles.cancelText}>Cancel</Text>
         </Pressable>
       :
-      <IconButton iconPath={require('../assets/icons/filter.png')} onPress={()=>console.log()} />
+        <IconButton iconPath={require('../assets/icons/filter.png')} onPress={props.onFilterPress} />
     }
     </View>
   );

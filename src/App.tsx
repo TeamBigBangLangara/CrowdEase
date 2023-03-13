@@ -20,7 +20,7 @@ export type AuthStackParams = {
   SplashScreen: undefined
   LoginScreen: undefined
   SignUpScreen: undefined
-  LocationScreen: { emailParam: string, passwordParam: string }
+  LocationScreen: { emailParam: string, passwordParam: string, userName: string }
   BottomTabs: undefined
 }
 

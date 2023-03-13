@@ -48,9 +48,9 @@ const EventScreen = () => {
     return (
       <FlatList
         data={requestEvents.data}
-        renderItem={({ item,index, }) =>
+        renderItem={({ item, }) =>
           <EventCard
-            key={index}
+            key={item.id}
             event={item}
             eventType={"actual"}
             onBookmarkPress={onBookMarkPress}
@@ -61,9 +61,9 @@ const EventScreen = () => {
     return (
       <FlatList
         data={requestEvents.data}
-        renderItem={({ item, index,}) =>
+        renderItem={({ item,}) =>
           <EventCard
-            key={index}
+            key={item.id}
             event={item}
             eventType={"actual"}
             onBookmarkPress={onBookMarkPress}

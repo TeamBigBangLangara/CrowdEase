@@ -1,6 +1,11 @@
-export const general = {
+export const margin = {
   //Margin left and right
-  screenMargin: 20,
-  borderRadiusPrimary: 22,
-  borderRadiusSecondary: 16,
+  primary: 20,
+  secondary: 16,
+  tertiary: 8,
+};
+
+export const borderRadius = {
+  primary: 22,
+  secondary: 16,
 };

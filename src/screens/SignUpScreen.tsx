@@ -1,28 +1,39 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Pressable, Alert } from 'react-native';
+
 import { isEmailValid } from '../utils/email';
 import { isPasswordValid } from '../utils/password';
-import { signIn, signUp } from '../auth/user';
+import { AuthStackNavigationProps } from '../types/navigationTypes';
 
-const SignUpScreen = ({ navigation, }: { navigation: any }) => {
+const SignUpScreen = ({ navigation, }: AuthStackNavigationProps<'SignUpScreen'>) => {
   const [email, setEmail] = useState('');
   const [businessName, setBusinessName] = useState('');
   const [password, setPassword] = useState('');
 
   const onSignUpPress = async () => {
     if (signUpValidation()) {
-      await signUp(email, password);
-      await signIn(email, password);
-      navigation.navigate('Home');
+      navigation.navigate('LocationScreen', {
+        emailParam: email,
+        passwordParam: password,
+        userName: businessName ? businessName : ' ',//Passing single space for empty value to avoid type error for null value
+      });
     }
   };
 
   const onAppleSignUpPress = () => {
-    navigation.navigate('Home');
+    navigation.navigate('LocationScreen', {
+      emailParam: '',
+      passwordParam: '',
+      userName: ' ', //Passing single space for empty value to avoid type error for null value
+    });
   };
 
   const onGoogleSignUpPress = () => {
-    navigation.navigate('Home');
+    navigation.navigate('LocationScreen', {
+    emailParam: '',
+    passwordParam: '',
+    userName: ' ', //Passing single space for empty value to avoid type error for null value
+    });
   };
 
   const signUpValidation = (): boolean => {
@@ -40,6 +51,7 @@ const SignUpScreen = ({ navigation, }: { navigation: any }) => {
     <View style={styles.wrapper}>
       <Text>Sign Up</Text>
       <TextInput
+        autoCapitalize={"none"}
         style={styles.textInputStyle}
         onChangeText={setEmail}
         value={email}
@@ -47,6 +59,7 @@ const SignUpScreen = ({ navigation, }: { navigation: any }) => {
       />
       <TextInput
         style={styles.textInputStyle}
+        autoCapitalize={"none"}
         onChangeText={setPassword}
         value={password}
         placeholder="Enter Password"
@@ -54,6 +67,7 @@ const SignUpScreen = ({ navigation, }: { navigation: any }) => {
       <TextInput
         style={styles.textInputStyle}
         onChangeText={setBusinessName}
+        autoCapitalize={"none"}
         value={businessName}
         placeholder="Enter Business Name"
       />
@@ -64,7 +78,7 @@ const SignUpScreen = ({ navigation, }: { navigation: any }) => {
         <Button onPress={onAppleSignUpPress} title="Apple" accessibilityLabel="Login" />
         <Button onPress={onGoogleSignUpPress} title="Google" accessibilityLabel="Login" />
       </View>
-      <Pressable onPress={() => navigation.navigate('Login')}>
+      <Pressable onPress={() => navigation.navigate('LoginScreen')}>
         <Text>Already a user? Log in</Text>
       </Pressable>
     </View>

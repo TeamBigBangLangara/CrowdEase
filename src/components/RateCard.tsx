@@ -1,6 +1,9 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import SecondaryButton from './SecondaryButton';
 import LinkButton from './LinkButton';
+import { colors } from "../styles/colors";
+import { fontFamily, fontSize } from "../styles/fonts";
+import { margin } from "../styles/basic";
 
 const RateCard = (props: { onSubmitPress: () => void; onSkipPress: () => void, onStarPress: () => void}) => {
 
@@ -8,19 +11,19 @@ const RateCard = (props: { onSubmitPress: () => void; onSkipPress: () => void, o
       return (
         <View style={styles.starContainer}>
           <Pressable onPress={props.onStarPress}>
-            <Image source={require("../assets/star.png")}/>
+            <Image source={require("../assets/icons/star.png")}/>
           </Pressable>
           <Pressable onPress={props.onStarPress}>
-            <Image source={require("../assets/star.png")}/>
+            <Image source={require("../assets/icons/star.png")}/>
           </Pressable>
           <Pressable onPress={props.onStarPress}>
-            <Image source={require("../assets/star.png")}/>
+            <Image source={require("../assets/icons/star.png")}/>
           </Pressable>
           <Pressable onPress={props.onStarPress}>
-            <Image source={require("../assets/star.png")}/>
+            <Image source={require("../assets/icons/star.png")}/>
           </Pressable>
           <Pressable onPress={props.onStarPress}>
-            <Image source={require("../assets/star.png")}/>
+            <Image source={require("../assets/icons/star.png")}/>
           </Pressable>
         </View>
 
@@ -31,9 +34,9 @@ const RateCard = (props: { onSubmitPress: () => void; onSkipPress: () => void, o
     <View style={styles.container}>
       <Text style={styles.header}>Please tell how much this event affected your business?</Text>
       {renderStars()}
-      <SecondaryButton onClick={props.onSubmitPress} label={'Submit'} />
+      <SecondaryButton onPress={props.onSubmitPress} label={'Submit'} />
       <View style={styles.skipLabel}>
-        <LinkButton onClick={props.onSkipPress} label={'Skip'} />
+        <LinkButton onPress={props.onSkipPress} label={'Skip'} />
       </View>
     </View>
   );
@@ -42,27 +45,27 @@ const RateCard = (props: { onSubmitPress: () => void; onSkipPress: () => void, o
 const styles = StyleSheet.create({
   container: {
     borderTopWidth: 2,
-    borderTopColor: '#E6E1E5',
+    borderTopColor: colors.netural.surfaceWhite,
     alignItems: 'center',
-    marginHorizontal: 11,
-    marginTop: 16,
-    backgroundColor: "black",
+    marginTop: margin.secondary,
+    backgroundColor: colors.netural.surfaceBlack,
   },
   starContainer: {
     flexDirection: "row",
     gap: 4,
     marginBottom: 24,
-    marginTop: 8,
+    marginTop: margin.tertiary,
   },
   skipLabel: {
-    marginTop: 16,
+    marginTop: margin.secondary,
     alignItems: "center",
   },
   header: {
-    marginTop: 16,
-    marginBottom: 8,
-    color: "white",
-    marginHorizontal: 20,
+    marginTop: margin.secondary,
+    marginBottom: margin.tertiary,
+    color: colors.netural.backgroundWhite,
+    fontFamily: fontFamily.body,
+    fontSize: fontSize.body,
   },
 });
 

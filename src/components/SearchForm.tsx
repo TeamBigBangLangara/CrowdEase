@@ -1,27 +1,48 @@
-import React from 'react';
-import { TextInput, StyleSheet, Image, View } from 'react-native';
+import React, {useState, useRef} from 'react';
+import { TextInput, StyleSheet, Image, View, Pressable, Text, Alert } from "react-native";
 
 import IconButton from './IconButton';
 
+import { colors } from "../styles/colors";
+import { fontSize, fontFamily } from "../styles/fonts";
+
 const SearchForm = (props: {
-  placeHolder: string
-  onChangeText: () => void
-  searchText: string
+  onChangeText: (searchKeyword: string) => void
+  onFilterPress: () => void
 }) => {
+  const textInputRef = useRef(null);
+  const [searchOnFocus, setSearchOnFocus] = useState(false);
+
+  const cancelButtonHandling = () => {
+    textInputRef.current.clear();
+    textInputRef.current.blur();
+  };
+
   return (
     <View style={styles.container}>
-      <View style={styles.searchContainer}>
-        <Image source={require('../assets/search.png')} />
+      <View style={[styles.searchContainer, searchOnFocus?styles.searchContainerFocus: styles.searchContainerNoFocus]}>
+        <Image source={require('../assets/icons/search.png')} />
         <TextInput
+          ref={textInputRef}
           onChangeText={props.onChangeText}
-          value={props.searchText}
-          placeholder={props.placeHolder}
+          onFocus={() => setSearchOnFocus(true)}
+          onBlur={() => setSearchOnFocus(false)}
+          placeholder="Search for ..."
           style={styles.input}
-          placeholderTextColor="#FFFFFF"
+          placeholderTextColor={styles.input.color}
         />
-        <Image source={require('../assets/mic.png')} />
+        <Image source={require('../assets/icons/mic.png')} />
       </View>
-      <IconButton iconPath={require('../assets/filter.png')} style={styles.iconButton} />
+      {searchOnFocus ?
+      <Pressable
+        onPress={cancelButtonHandling}
+        style={styles.cancelButton}
+        >
+          <Text style={styles.cancelText}>Cancel</Text>
+        </Pressable>
+      :
+        <IconButton iconPath={require('../assets/icons/filter.png')} onPress={props.onFilterPress} />
+    }
     </View>
   );
 };
@@ -31,7 +52,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 16,
     height: 42,
     borderRadius: 22,
     gap: 20,
@@ -42,19 +62,38 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     borderWidth: 2,
-    borderColor: '#938F99',
-    paddingHorizontal: 16,
+    paddingLeft: 20,
+    paddingRight: 16,
     height: 42,
     borderRadius: 20,
+    gap: 12,
   },
+
+  searchContainerNoFocus: {
+    borderColor: colors.netural.surfaceWhite,
+  },
+
+  searchContainerFocus: {
+    borderColor: colors.primaryPurpleLight,
+  },
+
   input: {
     flex: 1,
-    marginHorizontal: 12,
-    paddingHorizontal: 10,
-    borderColor: '#938F99',
-    color: '#FFFFFF',
+    borderColor: colors.netural.surfaceWhite,
+    color: colors.netural.surfaceWhite,
   },
-  iconButton: {},
+  iconButton: {
+    flex: 1,
+  },
+  cancelButton: {
+    display: "flex",
+    alignItems: 'center',
+  },
+  cancelText: {
+    fontSize: fontSize.body,
+    fontFamily: fontFamily.body,
+    color: colors.netural.surfaceWhite,
+  },
 });
 
 export default SearchForm;

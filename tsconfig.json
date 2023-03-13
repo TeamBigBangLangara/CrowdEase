@@ -5,5 +5,9 @@
     "skipLibCheck": true, // Skip type checking all .d.ts files.
     "baseUrl": "./src",
     "moduleResolution": "node",
-  }
+  },
+  "typeRoots": [
+    "../node_modules/@types",
+    "../@types/alltypes.d.ts"
+  ]
 }

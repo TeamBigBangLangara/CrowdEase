@@ -1,5 +1,9 @@
 import { View, StyleSheet, Text, Image } from 'react-native';
 
+import { colors } from "../styles/colors";
+import { fontSize, fontFamily, fontWeightSubtitle } from "../styles/fonts";
+import { borderRadius } from "../styles/basic";
+
 const ParticipantsByCategory = (props: {
   participants: number
   percentage: number
@@ -12,12 +16,12 @@ const ParticipantsByCategory = (props: {
 }) => {
   const parent = {
     readings: [
-      { value: props.musicQty, color: '#90EE90', },
-      { value: props.sportQty, color: '##B687FF', },
-      { value: props.showsQty, color: '#FFB9A1', },
-      { value: props.festivalsQty, color: '#FFFA6E', },
-      { value: props.businessQty, color: '##68B5DE', },
-      { value: props.otherQty, color: '#938F99', }
+      { value: props.musicQty, color: colors.secondaryGreenDark, },
+      { value: props.sportQty, color: colors.primary.primaryPurpleDark, },
+      { value: props.showsQty, color: colors.accent.darkModeRed, },
+      { value: props.festivalsQty, color: colors.accent.accentYellowDark, },
+      { value: props.businessQty, color: colors.accent.accentBlueDark, },
+      { value: props.otherQty, color: colors.netural.outlineGrey, }
     ],
   };
 
@@ -61,62 +65,62 @@ const ParticipantsByCategory = (props: {
         <View>{values}</View>
       </View>
       <View style={styles.categoryContainer}>
-        <View>
-          {/* <Image source={require('')} /> */}
+        <View style={styles.iconNameContainer}>
+          <Image source={require('../assets/category/music.png')} />
           <Text style={styles.name}>Music</Text>
         </View>
         <View>
-          <View style={[styles.sign, { backgroundColor: '#90EE90', }]}></View>
+          <View style={[styles.sign, { backgroundColor: colors.secondaryGreenDark, }]}></View>
           <Text style={styles.percentage}>{props.musicQty}</Text>
         </View>
       </View>
       <View style={styles.categoryContainer}>
-        <View>
-          {/* <Image source={require('')} /> */}
+        <View style={styles.iconNameContainer}>
+          <Image source={require('../assets/category/sport.png')} />
           <Text style={styles.name}>Sport</Text>
         </View>
         <View>
-          <View style={[styles.sign, { backgroundColor: '#B687FF', }]}></View>
+          <View style={[styles.sign, { backgroundColor: colors.primary.primaryPurpleDark, }]}></View>
           <Text style={styles.percentage}>{props.sportQty}</Text>
         </View>
       </View>
       <View style={styles.categoryContainer}>
-        <View>
-          {/* <Image source={require('')} /> */}
+        <View style={styles.iconNameContainer}>
+          <Image source={require('../assets/category/show.png')} />
           <Text style={styles.name}>Shows</Text>
         </View>
         <View>
-          <View style={[styles.sign, { backgroundColor: '#FFB9A1', }]}></View>
+          <View style={[styles.sign, { backgroundColor: colors.accent.darkModeRed, }]}></View>
           <Text style={styles.percentage}>{props.showsQty}</Text>
         </View>
       </View>
       <View style={styles.categoryContainer}>
-        <View>
-          {/* <Image source={require('')} /> */}
+        <View style={styles.iconNameContainer}>
+          <Image source={require('../assets/category/festival.png')} />
           <Text style={styles.name}>Festivals</Text>
         </View>
         <View>
-          <View style={[styles.sign, { backgroundColor: '#FFFA6E', }]}></View>
+          <View style={[styles.sign, { backgroundColor: colors.accent.accentYellowDark, }]}></View>
           <Text style={styles.percentage}>{props.festivalsQty}</Text>
         </View>
       </View>
       <View style={styles.categoryContainer}>
-        <View>
-          {/* <Image source={require('')} /> */}
+        <View style={styles.iconNameContainer}>
+          <Image source={require('../assets/category/business.png')} />
           <Text style={styles.name}>Business</Text>
         </View>
         <View>
-          <View style={[styles.sign, { backgroundColor: '#68B5DE', }]}></View>
+          <View style={[styles.sign, { backgroundColor: colors.accent.accentBlueDark, }]}></View>
           <Text style={styles.percentage}>{props.businessQty}</Text>
         </View>
       </View>
       <View style={styles.categoryContainer}>
-        <View>
-          {/* <Image source={require('')} /> */}
+        <View style={styles.iconNameContainer}>
+          <Image source={require('../assets/category/other.png')} />
           <Text style={styles.name}>Other</Text>
         </View>
         <View>
-          <View style={[styles.sign, { backgroundColor: '#938F99', }]}></View>
+          <View style={[styles.sign, { backgroundColor: colors.netural.outlineGrey, }]}></View>
           <Text style={styles.percentage}>{props.otherQty}</Text>
         </View>
       </View>
@@ -126,35 +130,38 @@ const ParticipantsByCategory = (props: {
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 12,
-    marginVertical: 12,
-    backgroundColor: '#121214',
-    borderRadius: 12,
     display: 'flex',
     flexDirection: 'column',
-    padding: 10,
+    marginTop: 4,
+    backgroundColor: colors.netural.surfaceBlack,
+    borderRadius: borderRadius.primary,
+    padding: 8,
+    paddingVertical: 16,
   },
   participants: {
-    fontWeight: '500',
-    fontSize: 20,
-    color: '#E6E1E5',
+    fontWeight: fontWeightSubtitle,
+    fontSize: fontSize.subtitle1,
+    fontFamily: fontFamily.body,
+    color: colors.netural.surfaceWhite,
+    marginBottom: 4,
   },
   infoPercentage: {
-    fontWeight: '500',
+    fontWeight: fontWeightSubtitle,
     fontSize: 16,
-    color: '#E6E1E5',
+    color: colors.netural.surfaceWhite,
+    fontFamily: fontFamily.body,
   },
   progressbar: {
-    height: 22,
-    backgroundColor: '#938F99',
-    borderRadius: 22,
+    height: 38,
+    backgroundColor: colors.netural.outlineGrey,
+    borderRadius: borderRadius.primary,
     position: 'relative',
-    width: '90%',
     overflow: 'hidden',
-    margin: 20,
+    marginTop: 24,
+    marginBottom: 16,
   },
   bar: {
-    height: 22,
+    height: 38,
     position: 'absolute',
     top: 0,
   },
@@ -162,11 +169,19 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    marginVertical: 12,
+    paddingHorizontal: 40,
+  },
+  iconNameContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    gap: 8,
   },
   name: {
-    fontWeight: '500',
-    fontSize: 16,
-    color: '#E6E1E5',
+    fontWeight: fontWeightSubtitle,
+    fontSize: fontSize.subtitle2,
+    color: colors.netural.surfaceWhite,
+    fontFamily: fontFamily.body,
   },
   sign: {
     width: 50,
@@ -174,8 +189,9 @@ const styles = StyleSheet.create({
     borderRadius: 22,
   },
   percentage: {
-    color: '#E6E1E5',
+    color: colors.netural.surfaceWhite,
     textAlign: 'center',
+    fontFamily: fontFamily.body,
   },
 });
 

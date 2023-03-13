@@ -1,19 +1,29 @@
 import { Text, Pressable, GestureResponderEvent, StyleSheet } from 'react-native';
+import { fontFamily, fontSize, fontWeightBody} from "../styles/fonts";
 
-const LinkButton = (props: { onClick: (event: GestureResponderEvent) => void; label: string }) => {
+const LinkButton = (props: {
+  onPress: (event: GestureResponderEvent) => void
+  label: string
+  style: {
+    color: string,
+    borderBottomColor: string
+  } }) => {
   return (
-    <Pressable onPress={props.onClick}>
-      <Text style={styles.text}>{props.label}</Text>
+    <Pressable onPress={props.onPress} style={[styles.textContainer, props.style]}>
+      <Text style={[styles.text, props.style]}>{props.label}</Text>
     </Pressable>
   );
 };
 
 const styles = StyleSheet.create({
-  text: {
-    color: '#90EE90',
-    fontSize: 14,
-    borderBottomColor: '#90EE90',
+  textContainer: {
+    alignSelf: 'flex-end',
     borderBottomWidth: 1,
+  },
+  text: {
+    fontSize: fontSize.body,
+    fontFamily: fontFamily.body,
+    fontWeight: fontWeightBody,
   },
 });
 

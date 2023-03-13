@@ -1,11 +1,11 @@
 import { Pressable, Text, GestureResponderEvent, StyleSheet } from 'react-native';
 
 const SecondaryButton = (props: {
-  onClick: (event: GestureResponderEvent) => void
+  onPress: (event: GestureResponderEvent) => void
   label: string
 }) => {
   return (
-    <Pressable onPress={props.onClick} style={styles.button}>
+    <Pressable onPress={props.onPress} style={styles.button}>
       <Text style={styles.text}>{props.label}</Text>
     </Pressable>
   );
@@ -19,7 +19,6 @@ const styles = StyleSheet.create({
     borderColor: '#90EE90',
     borderRadius: 22,
     borderWidth: 2,
-    width: 330,
     height: 42,
     // backgroundColor: 'black'
   },

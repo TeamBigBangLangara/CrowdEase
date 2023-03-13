@@ -1,40 +1,30 @@
 export interface Event {
-  id: string
+  id?: string
   name: string
-  images: Image
+  image: string
   dates: Dates
-  classifications: Classification
+  category: Category
   location: Location
   venue: Venue
   address: string
+  participants: number
 }
 
-export interface Image {
-  url: string
-}
 
 export interface Dates {
-  start: {
-    localDate: string
-    localTime: string
-  }
+    date: string
+    time: string
 }
 
-export interface Classification {
-  segment: {
+export interface Category {
     id: string
     name: string
-  }
 }
 
 export interface Venue {
   name: string
   id: string
   type: string
-  address: {
-    line1: string
-  }
-  location: Location
 }
 
 export interface Location {

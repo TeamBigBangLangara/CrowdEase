@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Button, Pressable, Alert, ImageBackground, Image, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Pressable, Alert, ImageBackground, Image, TouchableHighlight } from 'react-native';
 
 import { isEmailValid } from '../utils/email';
 import { onGoogleButtonPress } from '../auth/googleSignIn';
 import { signIn } from '../auth/user';
+import { AuthStackNavigationProps } from '../types/navigationTypes';
 import PrimaryButton from '../components/PrimaryButton';
 
-const LoginScreen = ({ navigation, }: { navigation: any }) => {
-  //user: jane.doe@example.com
-  //pass: SuperSecretPassword!
+const LoginScreen = ({ navigation, }: AuthStackNavigationProps<'LoginScreen'>) => {
   const [email, setEmail] = useState('jane.doe@example.com');
   const [password, setPassword] = useState('SuperSecretPassword!');
 
@@ -19,13 +18,11 @@ const LoginScreen = ({ navigation, }: { navigation: any }) => {
   };
 
   const onAppleLoginPress = () => {
-    navigation.navigate('Home');
+    // navigation.navigate('Home')
   };
 
   const onGoogleLoginPress = () => {
     onGoogleButtonPress().then(() => {
-      navigation.navigate('Home');
-      console.log('User logged in');
     });
   };
 
@@ -62,11 +59,11 @@ const LoginScreen = ({ navigation, }: { navigation: any }) => {
         />
         <Image source={require('../assets/icons/show.png')} style={styles.passwordIcon}/>
         {/* <Image source={require('../assets/icons/hidden.png')} style={styles.passwordIcon} /> */}
-        <Pressable onPress={() => navigation.navigate('Home')} style={styles.textWrapper}>
+        <Pressable style={styles.textWrapper}>
           <Text style={styles.link}>Forgot Password</Text>
         </Pressable>
         <View style={styles.buttonContainer}>
-          <PrimaryButton label="Login" onClick={onLoginPress} />
+          <PrimaryButton label="Login" onPress={onLoginPress} />
         </View>
         <View style={styles.textContainer}>
           <View style={styles.line}></View>

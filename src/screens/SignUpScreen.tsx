@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Pressable, Alert } from 'react-native';
+
 import { isEmailValid } from '../utils/email';
 import { isPasswordValid } from '../utils/password';
 import { AuthStackNavigationProps } from '../types/navigationTypes';
@@ -20,7 +21,6 @@ const SignUpScreen = ({ navigation, }: AuthStackNavigationProps<'SignUpScreen'>)
   };
 
   const onAppleSignUpPress = () => {
-    
     navigation.navigate('LocationScreen', {
       emailParam: '',
       passwordParam: '',

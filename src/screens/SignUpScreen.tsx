@@ -7,8 +7,8 @@ import { AuthStackNavigationProps } from '../types/navigationTypes';
 
 const SignUpScreen = ({ navigation, }: AuthStackNavigationProps<'SignUpScreen'>) => {
   const [email, setEmail] = useState('');
-  const [businessName, setBusinessName] = useState(''); 
-  const [password, setPassword] = useState(''); 
+  const [businessName, setBusinessName] = useState('');
+  const [password, setPassword] = useState('');
 
   const onSignUpPress = async () => {
     if (signUpValidation()) {
@@ -51,6 +51,7 @@ const SignUpScreen = ({ navigation, }: AuthStackNavigationProps<'SignUpScreen'>)
     <View style={styles.wrapper}>
       <Text>Sign Up</Text>
       <TextInput
+        autoCapitalize={"none"}
         style={styles.textInputStyle}
         onChangeText={setEmail}
         value={email}
@@ -58,6 +59,7 @@ const SignUpScreen = ({ navigation, }: AuthStackNavigationProps<'SignUpScreen'>)
       />
       <TextInput
         style={styles.textInputStyle}
+        autoCapitalize={"none"}
         onChangeText={setPassword}
         value={password}
         placeholder="Enter Password"
@@ -65,6 +67,7 @@ const SignUpScreen = ({ navigation, }: AuthStackNavigationProps<'SignUpScreen'>)
       <TextInput
         style={styles.textInputStyle}
         onChangeText={setBusinessName}
+        autoCapitalize={"none"}
         value={businessName}
         placeholder="Enter Business Name"
       />

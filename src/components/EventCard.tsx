@@ -8,6 +8,7 @@ import DropdownButton from "./DropdownButton";
 import { Event } from "../types/types";
 import { colors } from "../styles/colors";
 import { fontFamily, fontSize } from "../styles/fonts";
+import { timeFormat } from "../utils/timeFormat";
 
 const EventCard = (props: {
   event: Event
@@ -21,13 +22,13 @@ const EventCard = (props: {
       return (
         <View style={styles.dateContainer}>
           <Text style={styles.label}>{props.event.dates.date}</Text>
-          <Text style={styles.label}>{props.event.dates.time}</Text>
+          <Text style={styles.label}>{timeFormat(props.event.dates.time)}</Text>
         </View>
       );
     } else {
       return (
         <View>
-          <Text style={styles.label}>{props.event.dates.time}</Text>
+          <Text style={styles.label}>{timeFormat(props.event.dates.time)}</Text>
         </View>
       );
     }
@@ -62,7 +63,7 @@ const EventCard = (props: {
     if (props.eventType === "mapEvent") {
       return (
         <View style={styles.dragUpContainer}>
-            <Image source={require('../assets/dragUp.png')}/>
+            <Image source={require('../assets/icons/dragUp.png')}/>
         </View>
       );
     }
@@ -77,11 +78,11 @@ const EventCard = (props: {
           <View style={styles.upContainer}>
             {renderDate()}
             <Text style={styles.eventTitle}>{props.event.name}</Text>
-            <IconText icon={require('../assets/pin.png')} text={props.event.address} style={styles.icon}/>
+            <IconText icon={require('../assets/icons/pin.png')} text={props.event.address} style={styles.icon}/>
           </View>
           <View style={styles.participantsContainer}>
             <IconText
-              icon={require('../assets/participants.png')}
+              icon={require('../assets/icons/participants.png')}
               text={`${props.event.participants} participants`}
               style={styles.icon}
             />
@@ -103,6 +104,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     display: 'flex',
     borderRadius: 22,
+    marginVertical: 8,
   },
   eventContainer: {
     display: 'flex',

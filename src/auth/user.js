@@ -36,3 +36,9 @@ export const signOut = async () => {
     .signOut()
     .then(() => console.log('User signed out!'));
 };
+
+export const getUser = async () => 
+{ 
+  const user = await auth().currentUser;
+  return {uid:user.uid,email:user.email ? user.email:' '};
+}

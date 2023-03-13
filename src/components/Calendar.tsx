@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Calendar, CalendarProvider, WeekCalendar, CalendarList, ExpandableCalendar } from "react-native-calendars";
 
@@ -8,7 +8,7 @@ const CalendarComponent = () => {
       <CalendarProvider date={'2023-03-10'}>
         <ExpandableCalendar
         hideDayNames={false}
-        onDayPress={(day) => console.log(day)} 
+        onDayPress={(day) => console.log(day)}
         firstDay={0}
         hideKnob={true}
         closeOnDayPress={false}
@@ -25,13 +25,16 @@ const CalendarComponent = () => {
           monthTextColor: "#90EE90",
         }}
         enableSwipeMonths={false}
-        /> 
-      </CalendarProvider>  
+        />
+      </CalendarProvider>
   );
-
   };
-
 //Style
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  calendar: {
+    height:55,
+    marginVertical: 24,
+  },
+});
 
 export default CalendarComponent;

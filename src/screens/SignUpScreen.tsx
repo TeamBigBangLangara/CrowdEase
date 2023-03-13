@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Pressable, Alert } from 'react-native';
+
 import { isEmailValid } from '../utils/email';
 import { isPasswordValid } from '../utils/password';
-import { signIn, signUp } from '../auth/user';
 import { AuthStackNavigationProps } from '../types/navigationTypes';
 
 const SignUpScreen = ({ navigation, }: AuthStackNavigationProps<'SignUpScreen'>) => {
@@ -12,19 +12,19 @@ const SignUpScreen = ({ navigation, }: AuthStackNavigationProps<'SignUpScreen'>)
 
   const onSignUpPress = async () => {
     if (signUpValidation()) {
-     // await signUp(email, password);
       navigation.navigate('LocationScreen', {
         emailParam: email,
         passwordParam: password,
+        userName: businessName ? businessName : ' ',//Passing single space for empty value to avoid type error for null value
       });
     }
   };
 
   const onAppleSignUpPress = () => {
-    
     navigation.navigate('LocationScreen', {
       emailParam: '',
       passwordParam: '',
+      userName: ' ', //Passing single space for empty value to avoid type error for null value
     });
   };
 
@@ -32,6 +32,7 @@ const SignUpScreen = ({ navigation, }: AuthStackNavigationProps<'SignUpScreen'>)
     navigation.navigate('LocationScreen', {
     emailParam: '',
     passwordParam: '',
+    userName: ' ', //Passing single space for empty value to avoid type error for null value
     });
   };
 
@@ -50,6 +51,7 @@ const SignUpScreen = ({ navigation, }: AuthStackNavigationProps<'SignUpScreen'>)
     <View style={styles.wrapper}>
       <Text>Sign Up</Text>
       <TextInput
+        autoCapitalize={"none"}
         style={styles.textInputStyle}
         onChangeText={setEmail}
         value={email}
@@ -57,6 +59,7 @@ const SignUpScreen = ({ navigation, }: AuthStackNavigationProps<'SignUpScreen'>)
       />
       <TextInput
         style={styles.textInputStyle}
+        autoCapitalize={"none"}
         onChangeText={setPassword}
         value={password}
         placeholder="Enter Password"
@@ -64,6 +67,7 @@ const SignUpScreen = ({ navigation, }: AuthStackNavigationProps<'SignUpScreen'>)
       <TextInput
         style={styles.textInputStyle}
         onChangeText={setBusinessName}
+        autoCapitalize={"none"}
         value={businessName}
         placeholder="Enter Business Name"
       />

@@ -12,7 +12,6 @@ import GradientText from '../GradientText';
 const Tab = createBottomTabNavigator();
 
 const NavigationBottomTab = () => {
- 
   return (
     <Tab.Navigator initialRouteName="Home"
       screenOptions={{

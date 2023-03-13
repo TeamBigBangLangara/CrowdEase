@@ -1,30 +1,30 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Pressable, Alert } from 'react-native';
+
 import { isEmailValid } from '../utils/email';
 import { isPasswordValid } from '../utils/password';
-import { signIn, signUp } from '../auth/user';
 import { AuthStackNavigationProps } from '../types/navigationTypes';
 
 const SignUpScreen = ({ navigation, }: AuthStackNavigationProps<'SignUpScreen'>) => {
   const [email, setEmail] = useState('');
-  const [businessName, setBusinessName] = useState('');
-  const [password, setPassword] = useState('');
+  const [businessName, setBusinessName] = useState(''); 
+  const [password, setPassword] = useState(''); 
 
   const onSignUpPress = async () => {
     if (signUpValidation()) {
-     // await signUp(email, password);
       navigation.navigate('LocationScreen', {
         emailParam: email,
         passwordParam: password,
+        userName: businessName ? businessName : ' ',//Passing single space for empty value to avoid type error for null value
       });
     }
   };
 
   const onAppleSignUpPress = () => {
-    
     navigation.navigate('LocationScreen', {
       emailParam: '',
       passwordParam: '',
+      userName: ' ', //Passing single space for empty value to avoid type error for null value
     });
   };
 
@@ -32,6 +32,7 @@ const SignUpScreen = ({ navigation, }: AuthStackNavigationProps<'SignUpScreen'>)
     navigation.navigate('LocationScreen', {
     emailParam: '',
     passwordParam: '',
+    userName: ' ', //Passing single space for empty value to avoid type error for null value
     });
   };
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Image, Text, StyleSheet } from 'react-native';
-import { fontFamily, fontSize } from "../styles/fonts";
+import { fontFamily, fontSize, fontWeightSubtitle } from "../styles/fonts";
 import { colors } from "../styles/colors";
 
 const IconText = (props: { icon: any; text: string, style?: object }) => {
@@ -20,8 +20,9 @@ const styles = StyleSheet.create({
   },
   text: {
     color: colors.netural.backgroundWhite,
-    fontSize: fontSize.body,
-    fontFamily: fontFamily.body,
+    fontFamily: fontFamily.subtitle,
+    fontSize: fontSize.subtitle2,
+    fontWeight: fontWeightSubtitle,
     lineHeight: 18,
   },
 });

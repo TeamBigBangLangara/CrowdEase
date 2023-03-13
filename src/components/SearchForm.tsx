@@ -21,7 +21,7 @@ const SearchForm = (props: {
   return (
     <View style={styles.container}>
       <View style={[styles.searchContainer, searchOnFocus?styles.searchContainerFocus: styles.searchContainerNoFocus]}>
-        <Image source={require('../assets/search.png')} />
+        <Image source={require('../assets/icons/search.png')} />
         <TextInput
           ref={textInputRef}
           onChangeText={props.onChangeText}
@@ -31,7 +31,7 @@ const SearchForm = (props: {
           style={styles.input}
           placeholderTextColor={styles.input.color}
         />
-        <Image source={require('../assets/mic.png')} />
+        <Image source={require('../assets/icons/mic.png')} />
       </View>
       {searchOnFocus ?
       <Pressable
@@ -41,7 +41,7 @@ const SearchForm = (props: {
           <Text style={styles.cancelText}>Cancel</Text>
         </Pressable>
       :
-        <IconButton iconPath={require('../assets/filter.png')} onPress={props.onFilterPress} />
+      <IconButton iconPath={require('../assets/icons/filter.png')} onPress={()=>console.log()} />
     }
     </View>
   );

@@ -6,13 +6,11 @@ export const requestUsers = async () => {
     });
 };
 
-export const addUser = async(email:string) => { 
-    const UID='';
-    const user_name='';
+export const addUser = async(email:string, UUID:string, userName: string) => { 
     const postData = {
             email: email,
-            UID: ' ',
-            user_name: ' ',
+            UID: UUID,
+            user_name: userName,
     };
 
     await project.post('/user', postData).then((res) => {

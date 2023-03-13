@@ -29,7 +29,7 @@ const DayEventCard = (props: {
           <Text style={styles.suggestionText}>• Prepare your inventory, staff, and manage your online orders.</Text>
         </View>
         <Pressable style={styles.upIcon} onPress={() => setShowSuggestion(false)}>
-          <Image source={require("../assets/upIcon.png")} />
+          <Image source={require("../assets/icons/upIcon.png")} />
         </Pressable>
       </View>
     );

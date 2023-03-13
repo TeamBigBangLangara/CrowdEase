@@ -4,7 +4,7 @@ import { Image, Pressable } from 'react-native';
 const BookmarkButton = (props: { onBookmarkPress?: () => void }) => {
   return (
     <Pressable onPress={props.onBookmarkPress}>
-      <Image source={require('../assets/bookmark.png')} />
+      <Image source={require('../assets/icons/bookmark.png')} />
     </Pressable>
   );
 };

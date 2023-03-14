@@ -1,14 +1,16 @@
+import { AxiosRequestConfig } from "axios";
 import project from "./baseURL";
 
 
-export const addBookmark = async(postData: {user_id:string, event_id?:string}) => { 
+export const addBookmark = async(postData: {user_id?:string, event_id?:string}) : Promise<any> => { 
 
-    // const postData = {
-    //         user_id: ' ',
-    //         event_id: eventId,
-    // };
+    console.log(postData);
+    const res = await project.post('/bookmark', postData);
+    return res.data._id;
+};
 
-    await project.post('/bookmark', postData).then((res) => {
-    console.log( res.status);
-    });
+
+export const removeBookmark = async(id:string) => { 
+    const url= `/bookmark/${id}`;
+    const res = await project.delete(url);
 };

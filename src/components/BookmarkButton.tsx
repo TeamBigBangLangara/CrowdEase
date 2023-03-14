@@ -1,38 +1,62 @@
-import { addBookmark } from '../api/bigBangAPI/bookmark';
+import { addBookmark, removeBookmark } from '../api/bigBangAPI/bookmark';
 import React from 'react';
 import { useState } from "react";
-import { Image, Pressable } from 'react-native';
+import { Alert, Image, Pressable } from 'react-native';
 import { useMutation } from 'react-query';
 
-const BookmarkButton = (props: {eventId?:string, 
-  //onBookmarkPress?: () => void 
-}) => {
+const BookmarkButton = (props: {eventId?:string, userID?:string}) => {
 
   const saveBookmark = useMutation(["bookmark"], () => addBookmark({
-    "user_id": ' ',
+    "user_id": props.userID,
     "event_id": props.eventId,
 }), {
-    onSuccess: () => {
+    onSuccess: (data) => {
+      console.log('Success :added');
+      setBookmarkID(data);
     },
     onError: () => {
         console.log("Something went wrong, please try again.");
     },
 });
 
+const deleteBookmark = useMutation(["bookmark"], () => removeBookmark(bookmarkID
+), {
+  onSuccess: (data) => {
+    console.log("Deleted ID "+bookmarkID);
+    console.log('Success: removed');
+    setBookmarkID('');
+  },
+  onError: () => {
+      console.log("Something went wrong, please try again.");
+  },
+});
+
+
 const onBookmarkPress = async() => {
   if(!bookmarkIsAdded)
   {
-  console.log('Bookmark Is Pressed!!');
-  await saveBookmark.mutate();
+  try {
+  const saveBookmarkData : any = await saveBookmark.mutate();
   setBookmarkIsAdded(!bookmarkIsAdded);
   }
+  catch(error){
+    Alert.alert('Unable to save data' +error);
+  }
+}
   else{
-    setBookmarkIsAdded(!bookmarkIsAdded);
+    try{
+      await deleteBookmark.mutate();
+      setBookmarkIsAdded(!bookmarkIsAdded);
+    }
+    catch(error){
+      Alert.alert('Unable to save data' +error);
+    }
   }
 };
 
 
 const [bookmarkIsAdded, setBookmarkIsAdded] = useState(false);
+const [bookmarkID, setBookmarkID] = useState('');
 
   return (
     <Pressable onPress={
@@ -40,7 +64,7 @@ const [bookmarkIsAdded, setBookmarkIsAdded] = useState(false);
       onBookmarkPress
       }> 
       {
-        bookmarkIsAdded ? ( <Image source={require('../assets/bookmarkSaved.png')} />) : ( <Image source={require('../assets/bookmark.png')} />)
+        bookmarkIsAdded ? ( <Image source={require('../assets/icons/bookmarkSaved.png')} />) : ( <Image source={require('../assets/icons/bookmark.png')} />)
       }
       {/* <Image source={require('../assets/bookmark.png')} /> */}
     </Pressable>

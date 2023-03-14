@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Alert, FlatList, Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { getEvents } from "../api/event";
 import {  useQuery } from "react-query";
@@ -9,12 +9,24 @@ import FilterCategory from "../components/FilterCategory";
 import { fontFamily, fontSize, fontWeightSubtitle } from "../styles/fonts";
 import { colors } from "../styles/colors";
 import Calendar from "../components/Calendar";
+import { getUser } from '../auth/user';
+import { LoggedUser } from "types/types";
 
 const EventScreen = () => {
 
   const [searchFilter, setSearchFilter] = useState("");
   const [dateFilter, setDateFilter] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
+  const [userInfo, setUserInfo]  = useState<LoggedUser>({uid: '',email: '',});
+  // let userinfo:  any;
+  useEffect( () => {
+    async function fetchUser() {
+      const user = await getUser();
+      setUserInfo(user);
+      console.log(user.uid);
+    }
+    fetchUser();
+  }, []);
 
   const requestEvents = useQuery("events", () => getEvents(),
     {
@@ -53,7 +65,7 @@ const EventScreen = () => {
             key={item.id}
             event={item}
             eventType={"actual"}
-            //onBookmarkPress={onBookMarkPress}
+            userID= {userInfo?.uid}
           />
         }
       />
@@ -66,7 +78,7 @@ const EventScreen = () => {
             key={item.id}
             event={item}
             eventType={"actual"}
-            //onBookmarkPress={onBookMarkPress}
+            userID= {userInfo?.uid}
           />
         }
       />

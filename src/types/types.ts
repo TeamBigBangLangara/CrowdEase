@@ -49,3 +49,8 @@ export interface Bookmark {
   user_id: string
   event_id: string
 }
+
+export interface LoggedUser {
+  uid: string;
+  email: string;
+}

@@ -27,6 +27,11 @@ export interface Venue {
   type: string
 }
 
+export interface LoggedUser {
+  uid: string;
+  email: string;
+}
+
 export interface Location {
   longitude: string
   latitude: string

@@ -5,30 +5,25 @@ import { colors } from "../styles/colors";
 import { fontFamily, fontSize } from "../styles/fonts";
 import { margin } from "../styles/basic";
 
-const RateCard = (props: { onSubmitPress: () => void; onSkipPress: () => void, onStarPress: () => void}) => {
+const RateCard = (props: { onSubmitPress: () => void; onSkipPress: () => void; onStarPress: (id: number) => void; imageActive: object; imageInactive: object; activeStarCount: number }) => {
 
   const renderStars = () => {
-      return (
-        <View style={styles.starContainer}>
-          <Pressable onPress={props.onStarPress}>
-            <Image source={require("../assets/icons/star.png")}/>
+    const starIds = [1, 2, 3, 4, 5];
+    return (
+      <View style={styles.starContainer}>
+        {starIds.map(id => (
+          <Pressable key={id} onPress={() => props.onStarPress(id)}>
+            <Image source={id <= props.activeStarCount ? props.imageActive : props.imageInactive} />
           </Pressable>
-          <Pressable onPress={props.onStarPress}>
-            <Image source={require("../assets/icons/star.png")}/>
-          </Pressable>
-          <Pressable onPress={props.onStarPress}>
-            <Image source={require("../assets/icons/star.png")}/>
-          </Pressable>
-          <Pressable onPress={props.onStarPress}>
-            <Image source={require("../assets/icons/star.png")}/>
-          </Pressable>
-          <Pressable onPress={props.onStarPress}>
-            <Image source={require("../assets/icons/star.png")}/>
-          </Pressable>
-        </View>
+        ))}
+      </View>
+    );
+  }
 
-      );
-  };
+
+  const renderEventCard = () => {
+    
+  }
 
   return (
     <View style={styles.container}>
@@ -36,7 +31,7 @@ const RateCard = (props: { onSubmitPress: () => void; onSkipPress: () => void, o
       {renderStars()}
       <SecondaryButton onPress={props.onSubmitPress} label={'Submit'} />
       <View style={styles.skipLabel}>
-        <LinkButton onPress={props.onSkipPress} label={'Skip'} />
+        <LinkButton onPress={props.onSkipPress} label={'Skip'} style={styles.linkBtn} />
       </View>
     </View>
   );
@@ -67,6 +62,10 @@ const styles = StyleSheet.create({
     fontFamily: fontFamily.body,
     fontSize: fontSize.body,
   },
+  linkBtn: {
+    color: '#ffff',
+    borderBottomColor: '#ffffff0'
+  }
 });
 
 export default RateCard;

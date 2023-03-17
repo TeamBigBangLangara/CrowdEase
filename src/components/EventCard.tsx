@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Image, Text, StyleSheet } from "react-native";
+import { View, Image, Text, StyleSheet, Pressable } from "react-native";
 
 import BookmarkButton from './BookmarkButton';
 import IconText from './IconText';
@@ -15,7 +15,13 @@ const EventCard = (props: {
   onBookmarkPress?: () => void
   eventType: string
 }) => {
+
   const [showRating, setShowRating] = useState(false);
+  const [starRating, setStarRating] = useState(0);
+
+  const onStarPress = (id: number) => {
+    setStarRating(id);
+  };
 
   const renderDate = () => {
     if (props.eventType === 'past') {
@@ -44,7 +50,7 @@ const EventCard = (props: {
     if (props.eventType === 'past') {
       return (
         <View style={styles.ratingButton}>
-          <DropdownButton onDropdownPress={() => setShowRating(true)} label={"Give a Rating"}/>
+          <DropdownButton onDropdownPress={() => setShowRating(true)} label={"Give a Rating"} />
         </View>
       );
     }
@@ -53,9 +59,13 @@ const EventCard = (props: {
   const renderRatingCard = () => {
     return (
       <RateCard
-        onSubmitPress={() => { console.log("to do");}}
-        onSkipPress={() => setShowRating(false)}
-        onStarPress={() => { console.log("to do");}}/>
+        onSubmitPress={() => { console.log("to do") }}
+        onSkipPress={() => { setShowRating(false) }}
+        onStarPress={onStarPress}
+        imageActive={require("../assets/icons/StarActive.png")}
+        imageInactive={require("../assets/icons/star.png")}
+        activeStarCount={starRating}
+      />
     );
   };
 
@@ -63,7 +73,7 @@ const EventCard = (props: {
     if (props.eventType === "mapEvent") {
       return (
         <View style={styles.dragUpContainer}>
-            <Image source={require('../assets/icons/dragUp.png')}/>
+          <Image source={require('../assets/icons/dragUp.png')} />
         </View>
       );
     }
@@ -78,7 +88,7 @@ const EventCard = (props: {
           <View style={styles.upContainer}>
             {renderDate()}
             <Text style={styles.eventTitle}>{props.event.name}</Text>
-            <IconText icon={require('../assets/icons/pin.png')} text={props.event.address} style={styles.icon}/>
+            <IconText icon={require('../assets/icons/pin.png')} text={props.event.address} style={styles.icon} />
           </View>
           <View style={styles.participantsContainer}>
             <IconText

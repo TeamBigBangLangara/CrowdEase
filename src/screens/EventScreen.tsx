@@ -19,7 +19,7 @@ const EventScreen = () => {
   const [dateFilter, setDateFilter] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
   const [userInfo, setUserInfo]  = useState<LoggedUser>({uid: '',email: '',});
-  // let userinfo:  any;
+  
   useEffect( () => {
     async function fetchUser() {
       const user = await getUser();
@@ -50,10 +50,6 @@ const EventScreen = () => {
 
   const onSearchTextChanged = (searchText: string) => {
     setSearchFilter(searchText);
-  };
-
-  const onBookMarkPress = () => {
-    Alert.alert("here", "Book Mark pressed");
   };
 
   const onHandleData = (date: string) => {

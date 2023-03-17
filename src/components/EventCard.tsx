@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { View, Image, Text, StyleSheet } from "react-native";
+import { useMutation } from 'react-query';
+import { View, Image, Text, StyleSheet, Alert } from "react-native";
 
 import BookmarkButton from './BookmarkButton';
 import IconText from './IconText';
@@ -9,13 +10,67 @@ import { Event } from "../types/types";
 import { colors } from "../styles/colors";
 import { fontFamily, fontSize } from "../styles/fonts";
 import { timeFormat } from "../utils/timeFormat";
+import { addBookmark, removeBookmark } from '../api/bigBangAPI/bookmark';
+
+
 
 const EventCard = (props: {
   event: Event
   eventType: string
   userID: string
-}) => {
+  }) => {
+
+  const saveBookmark = useMutation(["bookmark"], () => addBookmark({
+    "user_id": props.userID,
+    "event_id": props.event.id,
+  }), {
+    onSuccess: (data) => {
+      console.log('Success :added');
+      setBookmarkID(data);
+    },
+    onError: () => {
+        console.log("Something went wrong, please try again.");
+    },
+  });
+
+  const deleteBookmark = useMutation(["bookmark"], () => removeBookmark(bookmarkID
+  ), {
+    onSuccess: (data) => {
+      console.log("Deleted ID "+bookmarkID);
+      console.log('Success: removed');
+      setBookmarkID('');
+    },
+    onError: () => {
+        console.log("Something went wrong, please try again.");
+    },
+  });
+
+
   const [showRating, setShowRating] = useState(false);
+  const [bookmarkIsAdded, setBookmarkIsAdded] = useState(false);
+  const [bookmarkID, setBookmarkID] = useState('');
+
+  const onBookmarkPress = async() => {
+    if(!bookmarkIsAdded)
+    {
+    try {
+    const saveBookmarkData : any = await saveBookmark.mutate();
+    setBookmarkIsAdded(!bookmarkIsAdded);
+    }
+    catch(error){
+      Alert.alert('Unable to save data' +error);
+    }
+  }
+    else{
+      try{
+        await deleteBookmark.mutate();
+        setBookmarkIsAdded(!bookmarkIsAdded);
+      }
+      catch(error){
+        Alert.alert('Unable to save data' +error);
+      }
+    }
+  };
 
   const renderDate = () => {
     if (props.eventType === 'past') {
@@ -39,6 +94,8 @@ const EventCard = (props: {
       return <BookmarkButton 
       eventId={props.event.id}
       userID= {props.userID}
+      bookmarkIsAdded= {bookmarkIsAdded}
+      onBookmarkPress={onBookmarkPress}
       />;
     }
   };

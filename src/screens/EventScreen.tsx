@@ -8,13 +8,19 @@ import EventCard from "../components/EventCard";
 import FilterCategory from "../components/FilterCategory";
 import { fontFamily, fontSize, fontWeightSubtitle } from "../styles/fonts";
 import { colors } from "../styles/colors";
-import Calendar from "../components/Calendar";
+import WeekCalendar from "../components/WeekCalendar";
 
 const EventScreen = () => {
 
   const [searchFilter, setSearchFilter] = useState("");
   const [dateFilter, setDateFilter] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
+
+
+  //TesDate
+  const [date, setDate] = useState(new Date());
+
+
 
   const requestEvents = useQuery("events", () => getEvents(),
     {
@@ -82,7 +88,7 @@ const EventScreen = () => {
           setModalVisible(true);
         }}
       />
-      <Calendar onDayPress={onHandleData}/>
+      <WeekCalendar date={date} onChange={(newDate) => setDate(newDate)} />
       <View style={styles.titleContainer}>
         <Text style={styles.title}>{requestEvents.data?.length} event(s)</Text>
         <View style={styles.imageContainer}>

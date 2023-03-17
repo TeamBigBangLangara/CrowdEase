@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Image, Text, StyleSheet, Pressable } from "react-native";
+import { View, Image, Text, StyleSheet, Pressable, Alert } from "react-native";
 
 import BookmarkButton from './BookmarkButton';
 import IconText from './IconText';
@@ -9,19 +9,46 @@ import { Event } from "../types/types";
 import { colors } from "../styles/colors";
 import { fontFamily, fontSize } from "../styles/fonts";
 import { timeFormat } from "../utils/timeFormat";
+import { useMutation } from "react-query";
+import { addRating } from "../api/bigBangAPI/rating";
 
 const EventCard = (props: {
   event: Event
   onBookmarkPress?: () => void
   eventType: string
+  userID: string
 }) => {
 
   const [showRating, setShowRating] = useState(false);
   const [starRating, setStarRating] = useState(0);
+  const [ratingID, setRatingID] = useState('');
+
+  const saveRating = useMutation(["rating"], () => addRating({
+    "user_id": props.userID,
+    "event_id": props.event.id,
+}), {
+    onSuccess: (data) => {
+      console.log('Success :added');
+      setRatingID(data);
+    },
+    onError: () => {
+        console.log("Something went wrong, please try again.");
+    },
+});
 
   const onStarPress = (id: number) => {
     setStarRating(id);
   };
+
+  const onSubmitPress = async() => {
+    try {
+    const saveRatingData : any = await saveRating.mutate();
+    starRating
+    }
+    catch(error){
+      Alert.alert('Unable to save data' +error);
+    }
+  }
 
   const renderDate = () => {
     if (props.eventType === 'past') {
@@ -59,12 +86,14 @@ const EventCard = (props: {
   const renderRatingCard = () => {
     return (
       <RateCard
-        onSubmitPress={() => { console.log("to do") }}
+        onSubmitPress={ onSubmitPress }
         onSkipPress={() => { setShowRating(false) }}
         onStarPress={onStarPress}
         imageActive={require("../assets/icons/StarActive.png")}
         imageInactive={require("../assets/icons/star.png")}
         activeStarCount={starRating}
+        eventId={props.event.id}
+        userID= {props.userID}
       />
     );
   };

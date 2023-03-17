@@ -18,12 +18,7 @@ const RateCard = (props: { onSubmitPress: () => void; onSkipPress: () => void; o
         ))}
       </View>
     );
-  }
-
-
-  const renderEventCard = () => {
-    
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -64,8 +59,7 @@ const styles = StyleSheet.create({
   },
   linkBtn: {
     color: '#ffff',
-    borderBottomColor: '#ffffff0'
-  }
+  },
 });
 
 export default RateCard;

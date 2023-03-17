@@ -6,7 +6,7 @@ const LinkButton = (props: {
   label: string
   style: {
     color: string,
-    borderBottomColor: string
+    borderBottomColor?: string
   } }) => {
   return (
     <Pressable onPress={props.onPress} style={[styles.textContainer, props.style]}>

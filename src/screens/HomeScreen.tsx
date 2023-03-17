@@ -50,7 +50,7 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
     navigation.navigate('SuggestionScreen');
   };
   const onSeeMorePress = () => {
-    navigation.navigate('EventScreen');
+    navigation.navigate('PastEventScreen');
   };
 
   return (
@@ -58,8 +58,8 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
       <ScrollView>
         <View style={styles.container}>
           <Pressable onPress={signOut}>
-          <Text style={{color: colors.netural.surfaceWhite,}}>Sign out</Text>
-        </Pressable>
+            <Text style={{ color: colors.netural.surfaceWhite, }}>Sign out</Text>
+          </Pressable>
           <Text style={styles.title}>Preview of this week's events</Text>
           <View style={styles.participantsNumberContainer}>
             <IconText icon={require('../assets/icons/participants.png')} text={'Total participants:'} style={styles.participantIcon} />
@@ -101,7 +101,8 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
             onBookmarkPress={() => {
               console.log('click');
             }}
-            eventType='music' />
+            eventType='music'
+            userID="" />
         </View>
       </ScrollView>
     </SafeAreaView>

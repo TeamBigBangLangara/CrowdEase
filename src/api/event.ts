@@ -24,7 +24,7 @@ export const getEvents = () => {
             },
             location: {
               longitude: response._embedded.venues[0].location.longitude,
-              latitude: response._embedded.venues[0].location.longitude,
+              latitude: response._embedded.venues[0].location.latitude,
             },
             venue: {
               name: response._embedded.venues[0].name,

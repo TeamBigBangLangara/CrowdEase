@@ -77,8 +77,8 @@ const EventCard = (props: {
         <View style={styles.leftContainer}>
           <View style={styles.upContainer}>
             {renderDate()}
-            <Text style={styles.eventTitle}>{props.event.name}</Text>
-            <IconText icon={require('../assets/icons/pin.png')} text={props.event.address} style={styles.icon}/>
+            <Text style={styles.eventTitle} numberOfLines={1}>{props.event.name}</Text>
+            <IconText icon={require('../assets/icons/pin.png')} numberOfLines={1} text={props.event.address} style={styles.icon}/>
           </View>
           <View style={styles.participantsContainer}>
             <IconText

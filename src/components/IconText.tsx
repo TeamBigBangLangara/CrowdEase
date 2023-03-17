@@ -3,11 +3,11 @@ import { View, Image, Text, StyleSheet } from 'react-native';
 import { fontFamily, fontSize, fontWeightSubtitle } from "../styles/fonts";
 import { colors } from "../styles/colors";
 
-const IconText = (props: { icon: any; text: string, style?: object }) => {
+const IconText = (props: { icon: any; text: string, style?: object, numberOfLines?: number }) => {
   return (
     <View style={[styles.container, props.style]}>
       <Image source={props.icon} />
-      <Text style={styles.text}>{props.text}</Text>
+      <Text numberOfLines={props.numberOfLines} style={styles.text}>{props.text}</Text>
     </View>
   );
 };

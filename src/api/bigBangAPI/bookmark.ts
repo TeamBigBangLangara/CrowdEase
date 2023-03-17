@@ -14,3 +14,11 @@ export const removeBookmark = async(id:string) => {
     const url= `/bookmark/${id}`;
     const res = await project.delete(url);
 };
+
+
+export const getBookmarks = async(user_id?:string) : Promise<any> => { 
+
+    return await project.get(`/bookmark/user/${user_id}`).then((res) => {
+        return res.data;
+    });
+};

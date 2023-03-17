@@ -11,6 +11,7 @@ import { colors } from "../styles/colors";
 import Calendar from "../components/Calendar";
 import { getUser } from '../auth/user';
 import { LoggedUser } from "types/types";
+import { getBookmarks } from "../api/bigBangAPI/bookmark";
 
 const EventScreen = () => {
 
@@ -24,6 +25,10 @@ const EventScreen = () => {
       const user = await getUser();
       setUserInfo(user);
       console.log(user.uid);
+
+      const bookmarks = await getBookmarks(user.uid);
+      console.log(bookmarks);
+
     }
     fetchUser();
   }, []);

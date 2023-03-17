@@ -11,7 +11,7 @@ import { colors } from "../styles/colors";
 import Calendar from "../components/Calendar";
 import { getUser } from '../auth/user';
 import { LoggedUser } from "types/types";
-import { getBookmarks } from "../api/bigBangAPI/bookmark";
+import { fetchBookmarks } from "../api/bigBangAPI/bookmark";
 
 const EventScreen = () => {
 
@@ -19,19 +19,13 @@ const EventScreen = () => {
   const [dateFilter, setDateFilter] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
   const [userInfo, setUserInfo]  = useState<LoggedUser>({uid: '',email: '',});
-  
-  useEffect( () => {
-    async function fetchUser() {
-      const user = await getUser();
-      setUserInfo(user);
-      console.log(user.uid);
 
-      const bookmarks = await getBookmarks(user.uid);
-      console.log(bookmarks);
-
-    }
-    fetchUser();
-  }, []);
+  const getUserQuery = useQuery ('getUserData',getUser, {
+      onSuccess:(data)  => {
+        setUserInfo(data);
+      },
+      }
+  );
 
   const requestEvents = useQuery("events", () => getEvents(),
     {
@@ -47,6 +41,23 @@ const EventScreen = () => {
       },
     }
   );
+
+  const getUSerBookmarks =  useQuery ('getUserBookmarks', () => {
+        return fetchBookmarks(userInfo.uid);
+    }, {
+      onSuccess:(data)  => {
+        mergeBookmarkAndEvents();
+      },
+    enabled: !!userInfo.uid && requestEvents.isSuccess,
+    }
+  );
+
+  const mergeBookmarkAndEvents = () => {
+    requestEvents.data.map((data) => {
+      console.log("Mememe");
+      console.log(data?.id);
+    });
+  };
 
   const onSearchTextChanged = (searchText: string) => {
     setSearchFilter(searchText);

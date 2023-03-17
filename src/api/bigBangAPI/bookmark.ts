@@ -16,8 +16,8 @@ export const removeBookmark = async(id:string) => {
 };
 
 
-export const getBookmarks = async(user_id?:string) : Promise<any> => { 
-
+export const fetchBookmarks = async(user_id?:string) : Promise<any> => { 
+    console.log("Inside API");
     return await project.get(`/bookmark/user/${user_id}`).then((res) => {
         return res.data;
     });

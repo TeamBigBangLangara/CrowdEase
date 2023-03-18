@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useMutation } from 'react-query';
 import { View, Image, Text, StyleSheet, Alert } from "react-native";
 
@@ -18,6 +18,7 @@ const EventCard = (props: {
   event: Event
   eventType: string
   userID: string
+  bookmarkID: string
   }) => {
 
   const saveBookmark = useMutation(["bookmark"], () => addBookmark({
@@ -33,8 +34,7 @@ const EventCard = (props: {
     },
   });
 
-  const deleteBookmark = useMutation(["bookmark"], () => removeBookmark(bookmarkID
-  ), {
+  const deleteBookmark = useMutation(["bookmark"], () => removeBookmark(bookmarkID), {
     onSuccess: (data) => {
       console.log("Deleted ID "+bookmarkID);
       console.log('Success: removed');
@@ -46,9 +46,33 @@ const EventCard = (props: {
   });
 
 
+  useEffect(() => {
+    console.log("here "+ props?.bookmarkID);
+    // console.log(props.event);
+    if(props.bookmarkID !== undefined)
+    {
+      setBookmarkID(props.bookmarkID);
+      console.log("Bookmark set");
+      setBookmarkIsAdded(true);
+    }
+    
+  }, []);
+
+  // const loadBookmark = () => {
+  //   console.log("here "+ props?.bookmarkID);
+  //   // console.log(props.event);
+  //   if(props.bookmarkID !== undefined)
+  //   {
+  //     setBookmarkID(props.bookmarkID);
+  //     console.log("Bookmark set");
+  //     setBookmarkIsAdded(true);
+  //   }
+  // };
+
+
   const [showRating, setShowRating] = useState(false);
   const [bookmarkIsAdded, setBookmarkIsAdded] = useState(false);
-  const [bookmarkID, setBookmarkID] = useState('');
+  const [bookmarkID, setBookmarkID] =  useState("");
 
   const onBookmarkPress = async() => {
     if(!bookmarkIsAdded)
@@ -90,6 +114,7 @@ const EventCard = (props: {
   };
 
   const renderBookmarkButton = () => {
+    // loadBookmark();
     if (props.eventType !== 'past') {
       return <BookmarkButton 
       eventId={props.event.id}

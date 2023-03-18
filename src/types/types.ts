@@ -1,4 +1,5 @@
 export interface Event {
+  bookmarkID: any
   id?: string
   name: string
   image: string

@@ -20,7 +20,7 @@ const EventScreen = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [userInfo, setUserInfo]  = useState<LoggedUser>({uid: '',email: '',});
 
-  const getUserQuery = useQuery ('getUserData',getUser, {
+  const requestUser = useQuery ('getUserData',getUser, {
       onSuccess:(data)  => {
         setUserInfo(data);
       },
@@ -42,22 +42,47 @@ const EventScreen = () => {
     }
   );
 
-  const getUSerBookmarks =  useQuery ('getUserBookmarks', () => {
+  const requestUserBookmarks =  useQuery ('getUserBookmarks', () => {
         return fetchBookmarks(userInfo.uid);
     }, {
       onSuccess:(data)  => {
-        mergeBookmarkAndEvents();
+        // mergeBookmarkAndEvents();
       },
     enabled: !!userInfo.uid && requestEvents.isSuccess,
     }
   );
 
+
   const mergeBookmarkAndEvents = () => {
-    requestEvents.data.map((data) => {
-      console.log("Mememe");
-      console.log(data?.id);
+    if(requestEvents.data && requestUserBookmarks.data)
+    {
+     const mergedEvents = requestEvents.data.map((event) => {
+      console.log("All Events");
+      const bookmark = requestUserBookmarks.data.find((bookmark:any) => bookmark.event_id === event.id);
+      if(bookmark)
+      {
+       console.log(bookmark.event_id+ " and bookmark ID" + bookmark._id);
+       return  {
+          ...event,
+          bookmarkID: bookmark._id,
+        };
+      }
+      return event;
     });
+    return mergedEvents;
+  }
+  
   };
+
+
+  
+  const mergedEvents = mergeBookmarkAndEvents();
+  console.log(mergedEvents);
+  // useEffect(() => {
+  //   if (requestEvents.isSuccess && requestUserBookmarks.isSuccess) {
+  //     mergeBookmarkAndEvents();
+  //   }
+  // }, [requestEvents.isSuccess, requestUserBookmarks.isSuccess]);
 
   const onSearchTextChanged = (searchText: string) => {
     setSearchFilter(searchText);
@@ -71,26 +96,28 @@ const EventScreen = () => {
   if (searchFilter) {
     return (
       <FlatList
-        data={requestEvents.data}
+        data={mergedEvents}
         renderItem={({ item, }) =>
           <EventCard
             key={item.id}
             event={item}
             eventType={"actual"}
             userID= {userInfo?.uid}
+            bookmarkID={item.bookmarkID}
           />
         }
       />
     );} else {
     return (
       <FlatList
-        data={requestEvents.data}
+        data={mergedEvents}
         renderItem={({ item,}) =>
           <EventCard
             key={item.id}
             event={item}
             eventType={"actual"}
             userID= {userInfo?.uid}
+            bookmarkID={item.bookmarkID}
           />
         }
       />

@@ -1,5 +1,7 @@
 export interface Event {
   id?: string
+  ratingID: string
+  rate: number
   name: string
   image: string
   dates: Dates

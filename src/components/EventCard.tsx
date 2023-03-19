@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { View, Image, Text, StyleSheet, Pressable, Alert } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Image, Text, StyleSheet, Alert } from "react-native";
+import { useMutation } from "react-query";
 
 import BookmarkButton from './BookmarkButton';
 import IconText from './IconText';
@@ -9,7 +10,6 @@ import { Event } from "../types/types";
 import { colors } from "../styles/colors";
 import { fontFamily, fontSize } from "../styles/fonts";
 import { timeFormat } from "../utils/timeFormat";
-import { useMutation } from "react-query";
 import { addRating } from "../api/bigBangAPI/rating";
 
 const EventCard = (props: {
@@ -17,24 +17,41 @@ const EventCard = (props: {
   onBookmarkPress?: () => void
   eventType: string
   userID: string
+  rate: number
+  ratingID: string
 }) => {
 
   const [showRating, setShowRating] = useState(false);
   const [starRating, setStarRating] = useState(0);
-  const [ratingID, setRatingID] = useState('');
+  const [ratingID, setRatingID] = useState("");
 
-  const saveRating = useMutation(["rating"], () => addRating({
-    "user_id": props.userID,
-    "event_id": props.event.id,
-}), {
+  const saveRating = useMutation(["rating"], () =>
+  addRating({
+    user_id: props.userID,
+    event_id: props.event.id,
+    category: props.event.category,
+    rate: starRating,
+  }),
+  {
     onSuccess: (data) => {
-      console.log('Success :added');
+      console.log("Success: added", data);
       setRatingID(data);
+      console.log("ratingID", props?.ratingID);
     },
     onError: () => {
-        console.log("Something went wrong, please try again.");
+      console.log("Something went wrong, please try again.");
     },
-});
+  }
+);
+
+useEffect(() => {
+  if(props.ratingID !== undefined)
+  {
+    setRatingID(props.ratingID);
+    console.log("Rating set", props.ratingID);
+  }
+
+}, []);
 
   const onStarPress = (id: number) => {
     setStarRating(id);
@@ -43,7 +60,8 @@ const EventCard = (props: {
   const onSubmitPress = async() => {
     try {
     const saveRatingData : any = await saveRating.mutate();
-    starRating
+    console.log("saveRatingData", saveRatingData);
+    
     }
     catch(error){
       Alert.alert('Unable to save data' +error);

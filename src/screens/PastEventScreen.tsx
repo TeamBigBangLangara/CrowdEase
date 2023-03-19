@@ -1,4 +1,4 @@
-import { Alert, FlatList, StyleSheet, View, ScrollView, SafeAreaView } from "react-native";
+import { Alert, FlatList, StyleSheet, SafeAreaView } from "react-native";
 import { useQuery } from "react-query";
 import { getEvents } from "../api/event";
 
@@ -20,6 +20,16 @@ const PastEventScreen = () => {
       },
     });
 
+  const requestUserRating = useQuery('getUserRating', () => {
+    return getRating(userInfo.uid);
+  }, {
+    onSuccess: (data) => {
+      mergeRatingAndEvents();
+    },
+    enabled: !!userInfo.uid && requestEvents.isSuccess,
+  }
+  );
+
   useEffect(() => {
     async function fetchUser() {
       const user = await getUser();
@@ -30,23 +40,45 @@ const PastEventScreen = () => {
     fetchUser();
   }, []);
 
+  const mergeRatingAndEvents = () => {
+    if (requestEvents.data && requestUserRating.data) {
+      const mergedEvents = requestEvents.data.map((event) => {
+        const rating = requestUserRating.data.find((rating: any) => rating.event_id === event.id);
+        if (rating) {
+          console.log("mergeRatingandEvent |:");
+          console.log(rating.event_id + " and rating ID" + rating._id);
+          return {
+            ...event,
+            ratingID: rating._id,
+          };
+        }
+        return event;
+      });
+      return mergedEvents;
+    }
+    return [];
+  };
+  
+
+
+
+  const mergedEvents = mergeRatingAndEvents();
+
   return (
-    <SafeAreaView style={{ flex: 1, }}>
-      <ScrollView>
-        <View style={styles.container}>
-          <FlatList
-            data={requestEvents.data}
-            renderItem={({ item, }) =>
-              <EventCard
-                key={item.id}
-                event={item}
-                eventType={"past"}
-                userID={userInfo?.uid}
-              />
-            }
-          />
-        </View>
-      </ScrollView>
+    <SafeAreaView style={{ flex: 1 }}>
+      <FlatList
+        data={mergedEvents}
+        renderItem={({ item, }) =>
+          <EventCard
+            key={item.id}
+            event={item}
+            eventType={"past"}
+            userID={userInfo?.uid}
+            rate={item.rate}
+            ratingID={item.ratingID} />
+        }
+        contentContainerStyle={styles.container}
+      />
     </SafeAreaView>
   );
 };
@@ -56,7 +88,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.netural.backgroundBlack,
     paddingHorizontal: 20,
     paddingVertical: 24,
-},
+  },
 });
 
 export default PastEventScreen;

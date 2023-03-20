@@ -73,7 +73,7 @@ const EventCard = (props: {
     <View style={styles.container}>
       {renderDragUpButton()}
       <View style={styles.eventContainer}>
-        <Image source={require('../assets/eventImage.png')} style={styles.eventImage} />
+        <Image source={{ uri: props.event.image,}} style={styles.eventImage} />
         <View style={styles.leftContainer}>
           <View style={styles.upContainer}>
             {renderDate()}

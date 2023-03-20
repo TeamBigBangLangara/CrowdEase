@@ -26,7 +26,6 @@ const EventCard = (props: {
     "event_id": props.event.id,
   }), {
     onSuccess: (data) => {
-      console.log('Success :added');
       setBookmarkID(data);
     },
     onError: () => {
@@ -36,8 +35,6 @@ const EventCard = (props: {
 
   const deleteBookmark = useMutation(["bookmark"], () => removeBookmark(bookmarkID), {
     onSuccess: (data) => {
-      console.log("Deleted ID "+bookmarkID);
-      console.log('Success: removed');
       setBookmarkID('');
     },
     onError: () => {
@@ -47,28 +44,13 @@ const EventCard = (props: {
 
 
   useEffect(() => {
-    console.log("here "+ props?.bookmarkID);
-    // console.log(props.event);
     if(props.bookmarkID !== undefined)
     {
       setBookmarkID(props.bookmarkID);
-      console.log("Bookmark set");
       setBookmarkIsAdded(true);
     }
     
   }, []);
-
-  // const loadBookmark = () => {
-  //   console.log("here "+ props?.bookmarkID);
-  //   // console.log(props.event);
-  //   if(props.bookmarkID !== undefined)
-  //   {
-  //     setBookmarkID(props.bookmarkID);
-  //     console.log("Bookmark set");
-  //     setBookmarkIsAdded(true);
-  //   }
-  // };
-
 
   const [showRating, setShowRating] = useState(false);
   const [bookmarkIsAdded, setBookmarkIsAdded] = useState(false);

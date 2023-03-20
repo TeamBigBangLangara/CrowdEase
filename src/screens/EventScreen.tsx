@@ -45,9 +45,6 @@ const EventScreen = () => {
   const requestUserBookmarks =  useQuery ('getUserBookmarks', () => {
         return fetchBookmarks(userInfo.uid);
     }, {
-      onSuccess:(data)  => {
-        // mergeBookmarkAndEvents();
-      },
     enabled: !!userInfo.uid && requestEvents.isSuccess,
     }
   );
@@ -57,11 +54,9 @@ const EventScreen = () => {
     if(requestEvents.data && requestUserBookmarks.data)
     {
      const mergedEvents = requestEvents.data.map((event) => {
-      console.log("All Events");
       const bookmark = requestUserBookmarks.data.find((bookmark:any) => bookmark.event_id === event.id);
       if(bookmark)
       {
-       console.log(bookmark.event_id+ " and bookmark ID" + bookmark._id);
        return  {
           ...event,
           bookmarkID: bookmark._id,
@@ -70,19 +65,12 @@ const EventScreen = () => {
       return event;
     });
     return mergedEvents;
-  }
-  
+    }
+
   };
 
-
-  
   const mergedEvents = mergeBookmarkAndEvents();
-  console.log(mergedEvents);
-  // useEffect(() => {
-  //   if (requestEvents.isSuccess && requestUserBookmarks.isSuccess) {
-  //     mergeBookmarkAndEvents();
-  //   }
-  // }, [requestEvents.isSuccess, requestUserBookmarks.isSuccess]);
+
 
   const onSearchTextChanged = (searchText: string) => {
     setSearchFilter(searchText);

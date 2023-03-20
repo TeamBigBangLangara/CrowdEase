@@ -15,6 +15,7 @@ import EventCard from '../components/EventCard';
 import DataVisualization from '../components/DataVisualization';
 import { getDate } from '../utils/getDate';
 import { borderRadius } from "../styles/basic";
+import EventCarousel from "../components/EventCarousel";
 
 // Get the dates
 const { formattedFirstDay, formattedLastDay, today, } = getDate();
@@ -58,8 +59,8 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
       <ScrollView>
         <View style={styles.container}>
           <Pressable onPress={signOut}>
-          <Text style={{color: colors.netural.surfaceWhite,}}>Sign out</Text>
-        </Pressable>
+            <Text style={{ color: colors.netural.surfaceWhite, }}>Sign out</Text>
+          </Pressable>
           <Text style={styles.title}>Preview of this week's events</Text>
           <View style={styles.participantsNumberContainer}>
             <IconText icon={require('../assets/icons/participants.png')} text={'Total participants:'} style={styles.participantIcon} />
@@ -96,12 +97,9 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
             <Text style={styles.title}>Today's Events</Text>
             <LinkButton onPress={onSeeMorePress} label={'See All'} style={styles.linkButton} />
           </View>
-          <EventCard
-            event={Event}
-            onBookmarkPress={() => {
-              console.log('click');
-            }}
-            eventType='music' />
+          <View style={styles.carouselContainer}>
+            <EventCarousel />
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -251,6 +249,11 @@ const styles = StyleSheet.create({
   linkButton: {
     color: colors.accent.accentBlueDark,
     borderBottomColor: colors.accent.accentBlueDark,
+  },
+  carouselContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
 });
 

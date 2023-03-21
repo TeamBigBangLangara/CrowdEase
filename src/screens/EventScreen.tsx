@@ -17,8 +17,8 @@ const EventScreen = () => {
   const [modalVisible, setModalVisible] = useState(false);
 
 
-  //TesDate
-  const [date, setDate] = useState(new Date());
+  // //TesDate
+  // const [date, setDate] = useState(new Date());
 
 
 
@@ -88,7 +88,7 @@ const EventScreen = () => {
           setModalVisible(true);
         }}
       />
-      <WeekCalendar date={date} onChange={(newDate) => setDate(newDate)} />
+      <WeekCalendar onDaySelection={() => console.log("test")} />
       <View style={styles.titleContainer}>
         <Text style={styles.title}>{requestEvents.data?.length} event(s)</Text>
         <View style={styles.imageContainer}>

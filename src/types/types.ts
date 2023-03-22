@@ -1,5 +1,5 @@
 export interface Event {
-  bookmarkID: any
+  bookmarkId: any
   id?: string
   name: string
   image: string
@@ -48,7 +48,7 @@ export interface Rating {
 
 export interface Bookmark {
   user_id: string
-  event_id: string
+  event_id?: string
 }
 
 export interface LoggedUser {

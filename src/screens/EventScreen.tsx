@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Alert, FlatList, Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { getEvents } from "../api/event";
 import {  useQuery } from "react-query";
@@ -59,14 +59,13 @@ const EventScreen = () => {
       {
        return  {
           ...event,
-          bookmarkID: bookmark._id,
+          bookmarkId: bookmark._id,
         };
       }
       return event;
     });
     return mergedEvents;
     }
-
   };
 
   const mergedEvents = mergeBookmarkAndEvents();
@@ -91,7 +90,7 @@ const EventScreen = () => {
             event={item}
             eventType={"actual"}
             userID= {userInfo?.uid}
-            bookmarkID={item.bookmarkID}
+            bookmarkId={item.bookmarkId}
           />
         }
       />
@@ -105,7 +104,7 @@ const EventScreen = () => {
             event={item}
             eventType={"actual"}
             userID= {userInfo?.uid}
-            bookmarkID={item.bookmarkID}
+            bookmarkId={item.bookmarkId}
           />
         }
       />

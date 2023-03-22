@@ -12,19 +12,17 @@ import { fontFamily, fontSize } from "../styles/fonts";
 import { timeFormat } from "../utils/timeFormat";
 import { addBookmark, removeBookmark } from '../api/bigBangAPI/bookmark';
 
-
-
 const EventCard = (props: {
   event: Event
   eventType: string
   userID: string
-  bookmarkID: string
+  bookmarkId: string
   }) => {
-
   const saveBookmark = useMutation(["bookmark"], () => addBookmark({
     "user_id": props.userID,
     "event_id": props.event.id,
   }), {
+
     onSuccess: (data) => {
       setBookmarkID(data);
     },
@@ -44,24 +42,24 @@ const EventCard = (props: {
 
 
   useEffect(() => {
-    if(props.bookmarkID !== undefined)
+    if(props.bookmarkId !== undefined)
     {
-      setBookmarkID(props.bookmarkID);
-      setBookmarkIsAdded(true);
+      setBookmarkID(props.bookmarkId);
+      setIsBookmarkAdded(true);
     }
     
   }, []);
 
   const [showRating, setShowRating] = useState(false);
-  const [bookmarkIsAdded, setBookmarkIsAdded] = useState(false);
+  const [isBookmarkAdded, setIsBookmarkAdded] = useState(false);
   const [bookmarkID, setBookmarkID] =  useState("");
 
-  const onBookmarkPress = async() => {
-    if(!bookmarkIsAdded)
+  const onBookmarkPress = () => {
+    if(!isBookmarkAdded)
     {
     try {
-    const saveBookmarkData : any = await saveBookmark.mutate();
-    setBookmarkIsAdded(!bookmarkIsAdded);
+    const saveBookmarkData : any =  saveBookmark.mutate();
+    setIsBookmarkAdded(!isBookmarkAdded);
     }
     catch(error){
       Alert.alert('Unable to save data' +error);
@@ -69,8 +67,8 @@ const EventCard = (props: {
   }
     else{
       try{
-        await deleteBookmark.mutate();
-        setBookmarkIsAdded(!bookmarkIsAdded);
+         deleteBookmark.mutate();
+        setIsBookmarkAdded(!isBookmarkAdded);
       }
       catch(error){
         Alert.alert('Unable to save data' +error);
@@ -101,7 +99,7 @@ const EventCard = (props: {
       return <BookmarkButton 
       eventId={props.event.id}
       userID= {props.userID}
-      bookmarkIsAdded= {bookmarkIsAdded}
+      isBookmarkAdded= {isBookmarkAdded}
       onBookmarkPress={onBookmarkPress}
       />;
     }

@@ -14,6 +14,7 @@ const PastEventScreen = () => {
   const [userInfo, setUserInfo] = useState<LoggedUser>({ uid: '', email: '', });
 
   const requestEvents = useQuery("events", () => getEvents(),
+
     {
       onError: (error: TypeError) => {
         Alert.alert("Error", error.message);
@@ -45,22 +46,18 @@ const PastEventScreen = () => {
       const mergedEvents = requestEvents.data.map((event) => {
         const rating = requestUserRating.data.find((rating: any) => rating.event_id === event.id);
         if (rating) {
-          console.log("mergeRatingandEvent |:");
-          console.log(rating.event_id + " and rating ID" + rating._id);
           return {
             ...event,
+            rate: rating.rate,
             ratingID: rating._id,
           };
         }
         return event;
       });
+
       return mergedEvents;
     }
-    return [];
   };
-  
-
-
 
   const mergedEvents = mergeRatingAndEvents();
 

@@ -29,14 +29,12 @@ const EventCard = (props: {
   addRating({
     user_id: props.userID,
     event_id: props.event.id,
-    category: props.event.category,
+    category: props.event.category.name,
     rate: starRating,
   }),
   {
     onSuccess: (data) => {
-      console.log("Success: added", data);
       setRatingID(data);
-      console.log("ratingID", props?.ratingID);
     },
     onError: () => {
       console.log("Something went wrong, please try again.");
@@ -47,8 +45,8 @@ const EventCard = (props: {
 useEffect(() => {
   if(props.ratingID !== undefined)
   {
+    
     setRatingID(props.ratingID);
-    console.log("Rating set", props.ratingID);
   }
 
 }, []);
@@ -60,9 +58,7 @@ useEffect(() => {
   const onSubmitPress = async() => {
     try {
     const saveRatingData : any = await saveRating.mutate();
-    console.log("saveRatingData", saveRatingData);
-    
-    }
+  }
     catch(error){
       Alert.alert('Unable to save data' +error);
     }
@@ -103,13 +99,13 @@ useEffect(() => {
 
   const renderRatingCard = () => {
     return (
-      <RateCard
+     <RateCard
         onSubmitPress={ onSubmitPress }
         onSkipPress={() => { setShowRating(false) }}
         onStarPress={onStarPress}
         imageActive={require("../assets/icons/StarActive.png")}
         imageInactive={require("../assets/icons/star.png")}
-        activeStarCount={starRating}
+        activeStarCount={props.rate}
         eventId={props.event.id}
         userID= {props.userID}
       />

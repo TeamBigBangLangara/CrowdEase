@@ -1,4 +1,4 @@
-import { Alert, Dimensions, StyleSheet, View } from "react-native";
+import { Alert, Dimensions, Image, StyleSheet, View } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import { useQuery } from "react-query";
 import React, { useRef, useState } from "react";
@@ -12,6 +12,7 @@ const MapScreen = () => {
 
   const mapRef = React.useRef<any>(null);
   const carouselRef = useRef<Carousel<{uri: string}>>(null);
+  const [isSelectedMarker, setIsSelectedMarker] = useState({});
 
   const [isCarouselVisible, setIsCarouselVisible] = useState(false);
   const ITEM_WIDTH = Dimensions.get('screen').width * 0.8;
@@ -48,18 +49,21 @@ const MapScreen = () => {
             latitude: Number(event.location.latitude) ,
             longitude: Number(event.location.longitude),
              }}
-          pinColor={"#B687FF"}
-          onPress={() => onMarkerPress(index)}
+          pinColor={isSelectedMarker !== event.location ? "#B687FF"  : "green"}
+          onPress={() => {
+            onMarkerPress(index, event.location);
+          }}
          ></Marker>
       );
     });
   };
 
-  const onMarkerPress = (index) =>  {
+  const onMarkerPress = (index: number, coordinate: object) =>  {
     setIsCarouselVisible(true);
     setTimeout(() => {
-      carouselRef.current.snapToItem(index);
+      carouselRef.current?.snapToItem(index);
     }, 100);
+    setIsSelectedMarker(coordinate);
   };
 
   return (
@@ -70,21 +74,23 @@ const MapScreen = () => {
         customMapStyle={mapDarkStyle}
         style={styles.map}
         initialRegion={{
-          latitude: 49.264131,
-          longitude: -123.1569595,
-          latitudeDelta: 0.2,
-          longitudeDelta: 0.3,
+          latitude: 49.2820,
+          longitude: -123.1171,
+          latitudeDelta: 0.0003,
+          longitudeDelta: 0.04,
         }}
       >
         <Marker
           key={1}
           coordinate={{
-            latitude: 49.264131,
-            longitude: -123.1569595,
+            latitude:  49.27699862052147,
+            longitude: -123.11528432004984,
           }}
           onPress={() => Alert.alert("Home", "My location")}
           pinColor={"#90EE90"}
-        ></Marker>
+        >
+          <Image style={styles.myLocationIcon} source={require('../assets/icons/mylocation.png')}/>
+        </Marker>
         {renderEventMarkers()}
       </MapView>
       { isCarouselVisible ?
@@ -106,6 +112,10 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     width: '100%',
+  },
+  myLocationIcon: {
+    width: 30,
+    height: 30,
   },
 });
 

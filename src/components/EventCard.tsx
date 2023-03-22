@@ -94,7 +94,6 @@ const EventCard = (props: {
   };
 
   const renderBookmarkButton = () => {
-    // loadBookmark();
     if (props.eventType !== 'past') {
       return <BookmarkButton 
       eventId={props.event.id}

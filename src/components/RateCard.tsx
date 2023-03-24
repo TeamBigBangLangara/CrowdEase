@@ -5,14 +5,21 @@ import { colors } from "../styles/colors";
 import { fontFamily, fontSize } from "../styles/fonts";
 import { margin } from "../styles/basic";
 
-const RateCard = (props: { onSubmitPress: () => void; onSkipPress: () => void; onStarPress: (id: number) => void; imageActive: object; imageInactive: object; activeStarCount: number, eventId?:string, userID?:string }) => {
+const RateCard = (props: { onSubmitPress: () => void; 
+  onSkipPress: () => void; 
+  onStarPress: (id: number) => void; 
+  imageActive: object; 
+  imageInactive: object; 
+  activeStarCount: number, 
+  eventId?:string, 
+  userID?:string }) => {
 
   const renderStars = () => {
     const starIds = [1, 2, 3, 4, 5];
     return (
       <View style={styles.starContainer}>
         {starIds.map(id => (
-          <Pressable key={id} onPress={() => props.onStarPress(id)}>
+          <Pressable key={id} onPress={() => props.onStarPress}>
             <Image source={id <= props.activeStarCount ? props.imageActive : props.imageInactive} />
           </Pressable>
         ))}

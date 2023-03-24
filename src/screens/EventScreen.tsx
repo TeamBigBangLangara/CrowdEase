@@ -17,11 +17,6 @@ const EventScreen = () => {
   const [modalVisible, setModalVisible] = useState(false);
 
 
-  // //TesDate
-  // const [date, setDate] = useState(new Date());
-
-
-
   const requestEvents = useQuery("events", () => getEvents(),
     {
       select: (events) => { return events.filter((event) => {
@@ -45,7 +40,7 @@ const EventScreen = () => {
     Alert.alert("here", "Book Mark pressed");
   };
 
-  const onHandleData = (date: string) => {
+  const daySelectionHandler = (date: string) => {
     setDateFilter(date);
   };
 
@@ -88,7 +83,7 @@ const EventScreen = () => {
           setModalVisible(true);
         }}
       />
-      <WeekCalendar onDaySelection={() => console.log("test")} />
+      <WeekCalendar onDaySelection={daySelectionHandler} isExpanded={true}/>
       <View style={styles.titleContainer}>
         <Text style={styles.title}>{requestEvents.data?.length} event(s)</Text>
         <View style={styles.imageContainer}>

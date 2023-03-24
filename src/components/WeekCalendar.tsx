@@ -3,25 +3,28 @@ import React, {useEffect, useState} from 'react';
 import {Pressable, StyleSheet, Text, TouchableOpacity, View, Image} from 'react-native';
 
 import { colors } from "../styles/colors";
+import { fontFamily, fontSize, fontWeightSubtitle, fontWeightSubtitle2 } from "../styles/fonts";
+
+import LinearGradient from 'react-native-linear-gradient';
 
 
 //////////////////// TYPES ////////////////////
 
 type Props = {
-  onDaySelection: (value: Date) => void;
+  onDaySelection: (value: string) => void;
+  isExpanded: boolean,
 };
 
 type WeekDay = {
   date: Date;
   dayName: string;
-  dayNumber: number;
+  dayNumber: string;
 };
-
 
 //////////////////// FUNCTIONS ////////////////////
 
 //getWeekDays
-export const getWeekDays = (selectedWeekStartDay: Date): WeekDay[] => {
+const getWeekDays = (selectedWeekStartDay: Date): WeekDay[] => {
   const firstDayOfWeek = startOfWeek(selectedWeekStartDay, {weekStartsOn: 1,});
   const daysOfWeek = [];
 
@@ -30,23 +33,22 @@ export const getWeekDays = (selectedWeekStartDay: Date): WeekDay[] => {
     daysOfWeek.push({
       date: dayOfWeek,
       dayName: format(dayOfWeek, 'EEE'),
-      dayNumber: getDate(dayOfWeek),
+      dayNumber: format(dayOfWeek, 'dd'),
     });
   }
+
   return daysOfWeek;
-};
-
-//daySelection
-export const daySelection = () => {
-
 };
 
 //////////////////// MAIN COMPONENT ////////////////////
 
-const WeekCalendar = ({onDaySelection,}: Props) => {
+const WeekCalendar = ({onDaySelection, isExpanded = true,}: Props) => {
+
   const [selectedDay, setSelectedDay] = useState<Date>(new Date());
   const [selectedWeekStartDay, setSelectedWeekStartDay] = useState<Date>(startOfWeek(new Date(), { weekStartsOn: 1, }));
 
+
+  //////////////////// VARIABLES ////////////////////
   //WeekDays
   const weekdays = getWeekDays(selectedWeekStartDay);
 
@@ -54,6 +56,14 @@ const WeekCalendar = ({onDaySelection,}: Props) => {
   const monthAndFirstDayOfWeek = selectedWeekStartDay.toLocaleDateString('en-CA', { month: 'short', day: '2-digit',});
   const monthAndLastDayOfWeek = addDays(selectedWeekStartDay,6).toLocaleDateString('en-CA', { month: 'short', day: '2-digit',});
   const weekRangeText = `${monthAndFirstDayOfWeek}   -   ${monthAndLastDayOfWeek}`;
+
+  //////////////////// HANDLERS ////////////////////
+  //Day Selection Handler
+  const daySelectionHandler = (pressedDateOfWeek:Date) => {
+    console.log(pressedDateOfWeek);
+    onDaySelection(format(pressedDateOfWeek, 'yyyy-MM-dd'));
+    setSelectedDay(pressedDateOfWeek);
+  };  
 
   return (
     <View style={styles.container}>
@@ -70,31 +80,28 @@ const WeekCalendar = ({onDaySelection,}: Props) => {
         </Pressable>
       </View>
 
+      {isExpanded &&
       <View style={styles.daySelectorContainer}>
       {weekdays.map((weekDay) => {
-        const textStyles = [styles.label];
-        const touchable = [styles.touchable];
-
-        const sameDay = isSameDay(weekDay.date, selectedDay);
-        if (sameDay) {
-          textStyles.push(styles.selectedLabel);
-          touchable.push(styles.selectedTouchable);
-        }
-
+      
         return (
-            <View style={styles.weekDayItem} key={weekDay.dayName}>
-              <TouchableOpacity
-                onPress={() => onDaySelection(weekDay.date)}
-                style={touchable}>
-                <Text style={styles.weekDayName}>{weekDay.dayName}</Text>
-                <Text style={styles.weekDayNumber}>{weekDay.dayNumber}</Text>
-              </TouchableOpacity>
-            </View>
-
+          <LinearGradient
+            colors={colors.primary.gradientDark.colors}
+            start={colors.primary.gradientDark.start} 
+            end={colors.primary.gradientDark.end}
+            style={[styles.linearGradient, isSameDay(weekDay.date, selectedDay) && {padding: 2,}]}
+          >
+            <Pressable
+              onPress={() => daySelectionHandler(weekDay.date)}
+              style={styles.weekDayItem} key={weekDay.dayName}>
+              <Text style={[styles.weekDayName, isSameDay(weekDay.date, selectedDay) && styles.selectedDay]}>{weekDay.dayName}</Text>
+              <Text style={[styles.weekDayNumber, isSameDay(weekDay.date, selectedDay) && styles.selectedDay]}>{weekDay.dayNumber}</Text>
+            </Pressable>
+          </LinearGradient>
 
         );
       })}
-      </View>
+      </View>}
     </View>
   );
   };
@@ -122,10 +129,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flex: 1,
     justifyContent: 'space-between',
+    alignItems: 'center',
   },
 
   weekRangeText: {
-    fontSize: 20,
+    fontSize: 16,
+    fontFamily: fontFamily.body,
     color: colors.secondaryGreenDark,
   },
 
@@ -134,35 +143,37 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     alignItems: 'center',
     justifyContent: 'space-around',
+    height: 45,
+    width: 35,
+    borderRadius: 8,
+    backgroundColor: colors.netural.backgroundBlack,
   },
 
   weekDayName: {
     fontSize: 14,
+    fontFamily: fontFamily.body,
     color: colors.netural.surfaceWhite,
     textAlign: 'center',
   },
 
   weekDayNumber: {
     fontSize: 14,
+    fontFamily: fontFamily.body,
     color: 'white',
     textAlign: 'center',
   },
 
+  linearGradient: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 8,
+  },
+
   selectedDay: {
-    color: 'white',
+    color: colors.secondaryGreenDark,
+    fontFamily: fontFamily.body,
+    fontWeight: fontWeightSubtitle2,
   },
-
-  touchable: {
-    borderRadius: 2,
-    height: 35,
-    width: 35,
-  },
-
-  selectedTouchable: {
-    backgroundColor: 'black',
-
-  },
-
 
 });
 

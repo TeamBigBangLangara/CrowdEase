@@ -94,7 +94,6 @@ const DataVisualization = () => {
                     {
                       target: 'data',
                       mutation: (props: any, clickedData: { datum: { day: string, value: number } }) => {
-                        console.log(data.datum.value);
                         setSelectedBar(data?.datum.value);
                         return {
                           style: { fill: colors.secondaryGreenDark },

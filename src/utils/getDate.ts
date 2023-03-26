@@ -1,6 +1,6 @@
 export const getDate= () => {
-  const curr = new Date() ; // get current date
-  const first = curr.getDate() - curr.getDay(); // First day is Sunday of the current week
+  const curr = new Date(); // get current date
+  const first = curr.getDate() - curr.getDay() + (curr.getDay() === 0 ? -6 : 1); // First day is Monday of the current week
   const last = first + 6; // last day is the first day + 6
 
   const firstDay = new Date(curr.setDate(first));

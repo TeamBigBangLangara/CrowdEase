@@ -62,10 +62,6 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
             <Text style={{ color: colors.netural.surfaceWhite, }}>Sign out</Text>
           </Pressable>
           <Text style={styles.title}>Preview of this week's events</Text>
-          <View style={styles.participantsNumberContainer}>
-            <IconText icon={require('../assets/icons/participants.png')} text={'Total participants:'} style={styles.participantIcon} />
-            <Text style={styles.participantsNumber}>8,425</Text>
-          </View>
           <View style={styles.dataVisualizationContainer}>
             <DataVisualization />
           </View>
@@ -118,20 +114,8 @@ const styles = StyleSheet.create({
     fontSize: fontSize.subtitle1,
     fontWeight: fontWeightBody,
   },
-  participantsNumber: {
-    color: colors.secondaryGreenDark,
-    fontFamily: fontFamily.heading,
-    fontSize: fontSize.heading2,
-    fontWeight: fontWeightTitle,
-  },
   participantIcon: {
     alignItems: "center",
-  },
-  participantsNumberContainer: {
-    flexDirection: 'row',
-    gap: 5,
-    alignItems: 'flex-end',
-    marginTop: 4,
   },
   dataVisualizationContainer: {
     height: 200,
@@ -148,6 +132,7 @@ const styles = StyleSheet.create({
     fontSize: fontSize.subtitle2,
     fontWeight: fontWeightBody,
     marginBottom: 15,
+    marginTop: 30
   },
   suggestionContainer: {
     alignSelf: 'center',

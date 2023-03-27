@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     fontSize: fontSize.subtitle1,
     fontFamily: fontFamily.subtitle,
     fontWeight: fontWeightSubtitle,
-    color: colors.netural.surfaceWhite,
+    color: colors.neutral.surfaceWhite,
   },
   buttonContainer: {
     flexDirection: "row",
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
   linkButton: {
-    color: colors.netural.surfaceWhite,
+    color: colors.neutral.surfaceWhite,
     borderBottomColor: 'rgba(12,25,88,0)',
   },
 });

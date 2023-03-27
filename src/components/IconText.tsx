@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   text: {
-    color: colors.netural.backgroundWhite,
+    color: colors.neutral.backgroundWhite,
     fontFamily: fontFamily.subtitle,
     fontSize: fontSize.subtitle2,
     fontWeight: fontWeightSubtitle,

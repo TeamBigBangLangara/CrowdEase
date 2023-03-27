@@ -15,7 +15,7 @@ const DataVisualization = () => {
   ];
 
   const textColor = {
-    fill: colors.netural.surfaceWhite,
+    fill: colors.neutral.surfaceWhite,
   };
 
 
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     height: 166,
     width: 357,
     borderBottomWidth: 2,
-    borderBottomColor: colors.netural.surfaceWhite,
+    borderBottomColor: colors.neutral.surfaceWhite,
   },
   xaxis: {
     marginTop: 2,
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
   xaxisSvg: {
     fontSize: fontSize.caption,
     fontFamily: fontFamily.body,
-    fill: colors.netural.surfaceWhite,
+    fill: colors.neutral.surfaceWhite,
   },
 });
 

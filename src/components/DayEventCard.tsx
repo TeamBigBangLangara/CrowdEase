@@ -77,7 +77,7 @@ const DayEventCard = (props: {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.netural.surfaceBlack,
+    backgroundColor: colors.neutral.surfaceBlack,
     borderRadius: borderRadius.primary,
     display: "flex",
     justifyContent: "center",
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
   eventName: {
     fontWeight: fontWeightSubtitle,
     fontSize: fontSize.subtitle1,
-    color: colors.netural.surfaceWhite,
+    color: colors.neutral.surfaceWhite,
   },
   eventNameContainer: {
     flexDirection: "row",
@@ -99,20 +99,20 @@ const styles = StyleSheet.create({
   participants: {
     fontWeight: fontWeightSubtitle,
     fontSize: fontSize.subtitle2,
-    color: colors.netural.surfaceWhite,
+    color: colors.neutral.surfaceWhite,
     lineHeight: 18,
   },
   categoryLabel: {
     fontWeight: fontWeightBody,
     fontSize: fontSize.body,
     fontFamily: fontFamily.body,
-    color: colors.netural.surfaceWhite,
+    color: colors.neutral.surfaceWhite,
     textAlign: "center",
     marginTop: margin.primary,
     marginBottom: 2,
   },
   progressBar: {
-    backgroundColor: colors.netural.outlineGrey,
+    backgroundColor: colors.neutral.outlineGrey,
     borderRadius: borderRadius.primary,
   },
   absoluteFill: {
@@ -126,12 +126,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   suggestionText: {
-    color: colors.netural.surfaceWhite,
+    color: colors.neutral.surfaceWhite,
     fontSize: fontSize.body,
     fontFamily: fontFamily.body,
   },
   suggestionHeader: {
-    color: colors.netural.surfaceWhite,
+    color: colors.neutral.surfaceWhite,
     fontSize: fontSize.subtitle2,
     fontFamily: fontFamily.subtitle,
     letterSpacing: 0.0128,

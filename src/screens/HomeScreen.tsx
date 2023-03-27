@@ -1,45 +1,23 @@
-import { StyleSheet, Text, TextStyle, View, ScrollView, SafeAreaView, Pressable } from "react-native";
+import { StyleSheet, Text, View, ScrollView, SafeAreaView, Pressable } from "react-native";
 
 import { signOut } from '../auth/user';
 import { MainStackNavigationProps } from '../types/navigationTypes';
 import { colors } from '../styles/colors';
 import { fontFamily } from '../styles/fonts';
 import { fontSize } from '../styles/fonts';
-import { fontWeightTitle, fontWeightSubtitle, fontWeightBody, fontWeightLabel, fontWeightSubtitle2 } from '../styles/fonts';
+import { fontWeightTitle, fontWeightSubtitle, fontWeightBody, fontWeightSubtitle2 } from '../styles/fonts';
 import IconText from '../components/IconText';
 import PrimaryButton from '../components/PrimaryButton';
 import SecondaryButton from '../components/SecondaryButton';
 import ParticipantsByMealCard from '../components/ParticipantsByMealCard';
 import LinkButton from '../components/LinkButton';
-import EventCard from '../components/EventCard';
 import DataVisualization from '../components/DataVisualization';
 import { getDate } from '../utils/getDate';
 import { borderRadius } from "../styles/basic";
+import EventCarousel from "../components/EventCarousel";
 
 // Get the dates
 const { formattedFirstDay, formattedLastDay, today, } = getDate();
-
-const Event = {
-  id: "2u63t821hi27",
-  name: "Coldplay",
-  image: "../assets/eventImage.png",
-  dates: {
-    date: "12 March",
-    time: "12:00 AM",
-  },
-  category: { name: "music", id: "87362hf", },
-  location: {
-    longitude: "49.262955",
-    latitude: "-123.110409",
-  },
-  venue: {
-    name: "BC place",
-    id: "ufc76fcu",
-    type: "music",
-  },
-  address: "238 West Broadway",
-  participants: 5000,
-};
 
 const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => {
 
@@ -58,8 +36,8 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
       <ScrollView>
         <View style={styles.container}>
           <Pressable onPress={signOut}>
-          <Text style={{color: colors.netural.surfaceWhite,}}>Sign out</Text>
-        </Pressable>
+            <Text style={{ color: colors.neutral.surfaceWhite, }}>Sign out</Text>
+          </Pressable>
           <Text style={styles.title}>Preview of this week's events</Text>
           <View style={styles.participantsNumberContainer}>
             <IconText icon={require('../assets/icons/participants.png')} text={'Total participants:'} style={styles.participantIcon} />
@@ -96,12 +74,9 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
             <Text style={styles.title}>Today's Events</Text>
             <LinkButton onPress={onSeeMorePress} label={'See All'} style={styles.linkButton} />
           </View>
-          <EventCard
-            event={Event}
-            onBookmarkPress={() => {
-              console.log('click');
-            }}
-            eventType='music' />
+          <View style={styles.carouselContainer}>
+            <EventCarousel />
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -110,7 +85,7 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.netural.backgroundBlack,
+    backgroundColor: colors.neutral.backgroundBlack,
     paddingHorizontal: 20,
     paddingVertical: 24,
   },
@@ -145,7 +120,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   date: {
-    color: colors.netural.surfaceWhite,
+    color: colors.neutral.surfaceWhite,
     fontFamily: fontFamily.body,
     fontSize: fontSize.subtitle2,
     fontWeight: fontWeightBody,
@@ -153,7 +128,7 @@ const styles = StyleSheet.create({
   },
   suggestionContainer: {
     alignSelf: 'center',
-    backgroundColor: colors.netural.surfaceBlack,
+    backgroundColor: colors.neutral.surfaceBlack,
     borderRadius: borderRadius.primary,
     elevation: 5,
     shadowColor: '#000',
@@ -173,7 +148,7 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
   },
   subtitle: {
-    color: colors.netural.surfaceWhite,
+    color: colors.neutral.surfaceWhite,
     fontFamily: fontFamily.subtitle,
     fontSize: fontSize.subtitle2,
     fontWeight: fontWeightSubtitle,
@@ -201,7 +176,7 @@ const styles = StyleSheet.create({
     fontWeight: fontWeightSubtitle,
   },
   numberContainer: {
-    backgroundColor: colors.netural.surfaceBlack,
+    backgroundColor: colors.neutral.surfaceBlack,
     borderRadius: borderRadius.primary,
     elevation: 5,
     shadowColor: '#000',
@@ -222,14 +197,14 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
   },
   todayParticipantsNumber: {
-    color: colors.netural.surfaceWhite,
+    color: colors.neutral.surfaceWhite,
     marginTop: 10,
     fontFamily: fontFamily.heading,
     fontSize: fontSize.heading2,
     fontWeight: fontWeightSubtitle2,
   },
   subtitleBreakdown: {
-    color: colors.netural.surfaceWhite,
+    color: colors.neutral.surfaceWhite,
     fontFamily: fontFamily.subtitle,
     fontSize: fontSize.subtitle2,
     fontWeight: fontWeightSubtitle,
@@ -251,6 +226,10 @@ const styles = StyleSheet.create({
   linkButton: {
     color: colors.accent.accentBlueDark,
     borderBottomColor: colors.accent.accentBlueDark,
+  },
+  carouselContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

@@ -47,13 +47,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     width: 115,
     height: 89,
-    backgroundColor: colors.netural.surfaceBlack,
+    backgroundColor: colors.neutral.surfaceBlack,
     borderRadius: 12,
     display: 'flex',
     
    },
   number: {
-    color: colors.netural.backgroundWhite,
+    color: colors.neutral.backgroundWhite,
     fontWeight: fontWeightSubtitle,
     fontSize: 22,
     textAlign: 'center',

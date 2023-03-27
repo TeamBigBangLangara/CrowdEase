@@ -36,7 +36,7 @@ const RateCard = (props: { onSubmitPress: () => void; onSkipPress: () => void, o
       {renderStars()}
       <SecondaryButton onPress={props.onSubmitPress} label={'Submit'} />
       <View style={styles.skipLabel}>
-        <LinkButton onPress={props.onSkipPress} label={'Skip'} />
+        <LinkButton onPress={props.onSkipPress} label={'Skip'} style={styles.linkButton} />
       </View>
     </View>
   );
@@ -66,6 +66,10 @@ const styles = StyleSheet.create({
     color: colors.neutral.backgroundWhite,
     fontFamily: fontFamily.body,
     fontSize: fontSize.body,
+  },
+  linkButton: {
+    color: colors.neutral.surfaceWhite,
+    borderBottomColor: 'rgba(12,25,88,0)',
   },
 });
 

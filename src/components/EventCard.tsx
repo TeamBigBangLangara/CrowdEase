@@ -58,7 +58,7 @@ const EventCard = (props: {
     if(!isBookmarkAdded)
     {
     try {
-    const saveBookmarkData : any =  saveBookmark.mutate();
+    const saveBookmarkData =  saveBookmark.mutate();
     setIsBookmarkAdded(!isBookmarkAdded);
     }
     catch(error){

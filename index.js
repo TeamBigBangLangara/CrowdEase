@@ -42,7 +42,7 @@ OneSignal.setNotificationOpenedHandler(notification => {
 OneSignal.getDeviceState().then(deviceState => {
   const playerId = deviceState.userId;
   console.log(playerId);
-  const sendAfter = new Date(Date.now() + 1 * 60 * 1000);
+  const sendAfter = new Date(Date.now() + 0.5 * 60 * 1000);
   const options = {
     method: 'POST',
     url: 'https://onesignal.com/api/v1/notifications',
@@ -53,8 +53,8 @@ OneSignal.getDeviceState().then(deviceState => {
     },
     data: {
       app_id:ONESIGNAL_APP_ID,
-      include_player_ids: ["be03fb54-37f9-4c0a-88b1-3a597809e921"],
-      contents: {en: 'Do be do be do', es: 'Spanish Message'},
+      include_player_ids: [playerId],
+      contents: {en: 'Do be do be do', es: 'He hehe'},
       send_after: sendAfter.toISOString(),
     }
   };
@@ -69,9 +69,5 @@ OneSignal.getDeviceState().then(deviceState => {
     });
   // Store playerId in your local database or send it to your server
   });
-
-
-
-
 
 AppRegistry.registerComponent(appName, () => App)

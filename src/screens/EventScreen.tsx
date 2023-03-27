@@ -142,11 +142,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 20,
-    backgroundColor: colors.netural.backgroundBlack,
+    backgroundColor: colors.neutral.backgroundBlack,
     paddingTop: 14,
   },
   titleContainer: {
-    backgroundColor: colors.netural.backgroundBlack,
+    backgroundColor: colors.neutral.backgroundBlack,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
   },
   separator: {
     borderRightWidth: 2,
-    borderColor: colors.netural.backgroundWhite,
+    borderColor: colors.neutral.backgroundWhite,
     marginHorizontal: 8,
   },
 });

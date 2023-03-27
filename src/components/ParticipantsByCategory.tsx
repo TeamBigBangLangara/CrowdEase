@@ -21,7 +21,7 @@ const ParticipantsByCategory = (props: {
       { value: props.showsQty, color: colors.accent.darkModeRed, },
       { value: props.festivalsQty, color: colors.accent.accentYellowDark, },
       { value: props.businessQty, color: colors.accent.accentBlueDark, },
-      { value: props.otherQty, color: colors.netural.outlineGrey, }
+      { value: props.otherQty, color: colors.neutral.outlineGrey, }
     ],
   };
 
@@ -120,7 +120,7 @@ const ParticipantsByCategory = (props: {
           <Text style={styles.name}>Other</Text>
         </View>
         <View>
-          <View style={[styles.sign, { backgroundColor: colors.netural.outlineGrey, }]}></View>
+          <View style={[styles.sign, { backgroundColor: colors.neutral.outlineGrey, }]}></View>
           <Text style={styles.percentage}>{props.otherQty}</Text>
         </View>
       </View>
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     marginTop: 4,
-    backgroundColor: colors.netural.surfaceBlack,
+    backgroundColor: colors.neutral.surfaceBlack,
     borderRadius: borderRadius.primary,
     padding: 8,
     paddingVertical: 16,
@@ -142,18 +142,18 @@ const styles = StyleSheet.create({
     fontWeight: fontWeightSubtitle,
     fontSize: fontSize.subtitle1,
     fontFamily: fontFamily.body,
-    color: colors.netural.surfaceWhite,
+    color: colors.neutral.surfaceWhite,
     marginBottom: 4,
   },
   infoPercentage: {
     fontWeight: fontWeightSubtitle,
     fontSize: 16,
-    color: colors.netural.surfaceWhite,
+    color: colors.neutral.surfaceWhite,
     fontFamily: fontFamily.body,
   },
   progressbar: {
     height: 38,
-    backgroundColor: colors.netural.outlineGrey,
+    backgroundColor: colors.neutral.outlineGrey,
     borderRadius: borderRadius.primary,
     position: 'relative',
     overflow: 'hidden',
@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
   name: {
     fontWeight: fontWeightSubtitle,
     fontSize: fontSize.subtitle2,
-    color: colors.netural.surfaceWhite,
+    color: colors.neutral.surfaceWhite,
     fontFamily: fontFamily.body,
   },
   sign: {
@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
     borderRadius: 22,
   },
   percentage: {
-    color: colors.netural.surfaceWhite,
+    color: colors.neutral.surfaceWhite,
     textAlign: 'center',
     fontFamily: fontFamily.body,
   },

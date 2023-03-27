@@ -20,28 +20,6 @@ import EventCarousel from "../components/EventCarousel";
 // Get the dates
 const { formattedFirstDay, formattedLastDay, today, } = getDate();
 
-const Event = {
-  id: "2u63t821hi27",
-  name: "Coldplay",
-  image: "../assets/eventImage.png",
-  dates: {
-    date: "12 March",
-    time: "12:00 AM",
-  },
-  category: { name: "music", id: "87362hf", },
-  location: {
-    longitude: "49.262955",
-    latitude: "-123.110409",
-  },
-  venue: {
-    name: "BC place",
-    id: "ufc76fcu",
-    type: "music",
-  },
-  address: "238 West Broadway",
-  participants: 5000,
-};
-
 const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => {
 
   const onFullReportPress = () => {
@@ -251,9 +229,8 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.accent.accentBlueDark,
   },
   carouselContainer: {
-    display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
 });
 

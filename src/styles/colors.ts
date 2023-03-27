@@ -32,7 +32,7 @@ export const colors = {
       style: { flex: 1, },
     },
   },
-  netural: {
+  neutral: {
     surfaceBlack: "#121214",
     backgroundBlack: "#272628",
     grey: "#49454F",

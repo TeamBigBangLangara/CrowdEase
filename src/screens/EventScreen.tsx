@@ -9,12 +9,23 @@ import FilterCategory from "../components/FilterCategory";
 import { fontFamily, fontSize, fontWeightSubtitle } from "../styles/fonts";
 import { colors } from "../styles/colors";
 import Calendar from "../components/Calendar";
+import { getUser } from '../auth/user';
+import { LoggedUser } from "types/types";
+import { fetchBookmarks } from "../api/bigBangAPI/bookmark";
 
 const EventScreen = () => {
 
   const [searchFilter, setSearchFilter] = useState("");
   const [dateFilter, setDateFilter] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
+  const [userInfo, setUserInfo]  = useState<LoggedUser>({uid: '',email: '',});
+
+  const requestUser = useQuery ('getUserData',getUser, {
+      onSuccess:(data)  => {
+        setUserInfo(data);
+      },
+      }
+  );
 
   const requestEvents = useQuery("events", () => getEvents(),
     {
@@ -31,12 +42,37 @@ const EventScreen = () => {
     }
   );
 
-  const onSearchTextChanged = (searchText: string) => {
-    setSearchFilter(searchText);
+  const requestUserBookmarks =  useQuery ('getUserBookmarks', () => {
+        return fetchBookmarks(userInfo.uid);
+    }, {
+    enabled: !!userInfo.uid && requestEvents.isSuccess,
+    }
+  );
+
+
+  const mergeBookmarkAndEvents = () => {
+    if(requestEvents.data && requestUserBookmarks.data)
+    {
+     const mergedEvents = requestEvents.data.map((event) => {
+      const bookmark = requestUserBookmarks.data.find((bookmark:any) => bookmark.event_id === event.id);
+      if(bookmark)
+      {
+       return  {
+          ...event,
+          bookmarkId: bookmark._id,
+        };
+      }
+      return event;
+    });
+    return mergedEvents;
+    }
   };
 
-  const onBookMarkPress = () => {
-    Alert.alert("here", "Book Mark pressed");
+  const mergedEvents = mergeBookmarkAndEvents();
+
+
+  const onSearchTextChanged = (searchText: string) => {
+    setSearchFilter(searchText);
   };
 
   const onHandleData = (date: string) => {
@@ -47,26 +83,28 @@ const EventScreen = () => {
   if (searchFilter) {
     return (
       <FlatList
-        data={requestEvents.data}
+        data={mergedEvents}
         renderItem={({ item, }) =>
           <EventCard
             key={item.id}
             event={item}
             eventType={"actual"}
-            onBookmarkPress={onBookMarkPress}
+            userID= {userInfo?.uid}
+            bookmarkId={item.bookmarkId}
           />
         }
       />
     );} else {
     return (
       <FlatList
-        data={requestEvents.data}
+        data={mergedEvents}
         renderItem={({ item,}) =>
           <EventCard
             key={item.id}
             event={item}
             eventType={"actual"}
-            onBookmarkPress={onBookMarkPress}
+            userID= {userInfo?.uid}
+            bookmarkId={item.bookmarkId}
           />
         }
       />

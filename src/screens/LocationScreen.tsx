@@ -177,7 +177,7 @@ const LocationScreen = ({ route, navigation, }: AuthStackNavigationProps<'Locati
         </View>
       </View>
       <View style={styles.buttonStyle}>
-        <Button onPress={getLocation} title="Get Location" accessibilityLabel="Get Location" />
+        <Button onPress={getLocation} title="Sign Up" accessibilityLabel="Sing Up" />
       </View>
     </View>
   );

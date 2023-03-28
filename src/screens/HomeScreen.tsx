@@ -1,4 +1,5 @@
-import { StyleSheet, Text, View, ScrollView, SafeAreaView, Pressable } from "react-native";
+import { StyleSheet, Text, View, ScrollView, SafeAreaView, Pressable, Alert } from "react-native";
+import { useQuery } from "react-query";
 
 import { signOut } from '../auth/user';
 import { MainStackNavigationProps } from '../types/navigationTypes';
@@ -15,12 +16,20 @@ import DataVisualization from '../components/DataVisualization';
 import { getDate } from '../utils/getDate';
 import { borderRadius } from "../styles/basic";
 import EventCarousel from "../components/EventCarousel";
+import { getEvents } from "../api/event";
 
 // Get the dates
-const { formattedFirstDay, formattedLastDay, today, } = getDate();
+const { formattedFirstDay, formattedLastDay, today, todayFormatted, week, getWeekday } = getDate();
 
 const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => {
 
+  const requestEvents = useQuery("events", () => getEvents(),
+    {
+      onError: (error: TypeError) => {
+        Alert.alert("Error", error.message);
+      },
+    }
+  );
   const onFullReportPress = () => {
     navigation.navigate('WeekManagerScreen');
   };
@@ -29,6 +38,54 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
   };
   const onSeeMorePress = () => {
     navigation.navigate('EventScreen');
+  };
+  const renderTodayParticipants = () => {
+    let participants = 0;
+    requestEvents.data?.forEach((event) => {
+      if (event.dates.date === todayFormatted) {
+        participants += event.participants;
+      }
+    });
+    return (
+      <Text style={styles.todayParticipantsNumber}>{participants}</Text>
+    );
+  }
+  const renderBusyDay = () => {
+    const weekParticipants = [];
+    //get each day with  participants
+    for (let i = 0; i < 7; i++) {
+      const dayParticipants = {
+        day: week[i],
+        participants: 0,
+      };
+      requestEvents.data?.forEach((event) => {
+        if (event.dates.date === week[i]) {
+          dayParticipants.participants += event.participants;
+        }
+      });
+      weekParticipants.push(dayParticipants);
+    }
+
+    //find the busiest day
+    let highestIndex = 0;
+    for (let i = 1; i < weekParticipants.length; i++) {
+      if (
+        weekParticipants[i].participants >
+        weekParticipants[highestIndex].participants
+      ) {
+        highestIndex = i;
+      }
+    }
+    const dateWithHighestParticipants =
+      weekParticipants[highestIndex].day;
+
+    //format the busiest day
+    const dateObj = new Date(dateWithHighestParticipants);
+    dateObj.setDate(dateObj.getDate() + 1);
+    const formattedDate = dateObj.toLocaleString('en-US', { month: 'long', day: 'numeric' });
+    const day = getWeekday(dateWithHighestParticipants)
+
+    return <Text style={styles.busyDay}>{formattedDate} {day}</Text>;
   };
 
   return (
@@ -47,7 +104,7 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
             <PrimaryButton onPress={onFullReportPress} label={'View Full Report'} />
           </View>
           <View style={styles.suggestionContainer}>
-            <Text style={styles.subtitle}>It seems that {<Text style={styles.busyDay}>March 12</Text>} Sunday is the busiest day of this week, would you like to see some promotional opportunities?</Text>
+            <Text style={styles.subtitle}>It seems that {renderBusyDay()} is the busiest day of this week, would you like to see some promotional opportunities?</Text>
             <SecondaryButton onPress={onSeeSuggestionPress} label={'See Suggestions'} />
           </View>
           <View style={styles.todayParticipantsContainer}>
@@ -57,7 +114,7 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
             </View>
             <View style={styles.numberContainer}>
               <IconText icon={require('../assets/icons/participants.png')} text={'Total Participants'} style={styles.participantIcon} />
-              <Text style={styles.todayParticipantsNumber}>8,963</Text>
+              <View>{renderTodayParticipants()}</View>
             </View>
             <Text style={styles.subtitleBreakdown}>Participants Breakdown</Text>
             <View style={styles.breakdownContainer}>

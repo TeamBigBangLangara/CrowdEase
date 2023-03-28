@@ -7,14 +7,14 @@ import { VictoryBar, VictoryChart, VictoryAxis, VictoryLabel } from "victory-nat
 import { colors } from "../styles/colors";
 import { fontFamily, fontSize } from "../styles/fonts";
 import { getDate } from "../utils/getDate";
-import { fontWeightTitle } from '../styles/fonts'
+import { fontWeightTitle } from '../styles/fonts';
 import IconText from "./IconText";
 
 const DataVisualization = () => {
-  const { week } = getDate();
+  const { week, } = getDate();
 
-  const [dateFilter, setDateFilter] = useState(week[0])
-  const [selectedBar, setSelectedBar] = useState(0)
+  const [dateFilter, setDateFilter] = useState(week[0]);
+  const [selectedBar, setSelectedBar] = useState(0);
 
   const requestEvents = useQuery("events", () => getEvents(),
     {
@@ -25,13 +25,13 @@ const DataVisualization = () => {
   );
 
   const data = [
-    { day: "MON", value: 0 },
-    { day: "TUE", value: 0 },
-    { day: "WED", value: 0 },
-    { day: "THU", value: 0 },
-    { day: "FRI", value: 0 },
-    { day: "SAT", value: 0 },
-    { day: "SUN", value: 0 },
+    { day: "MON", value: 0, },
+    { day: "TUE", value: 0, },
+    { day: "WED", value: 0, },
+    { day: "THU", value: 0, },
+    { day: "FRI", value: 0, },
+    { day: "SAT", value: 0, },
+    { day: "SUN", value: 0, }
   ];
 
   requestEvents.data?.forEach((event) => {
@@ -44,17 +44,17 @@ const DataVisualization = () => {
 
 
   const barChartSvg = {
-    fill: colors.netural.surfaceWhite,
+    fill: colors.neutral.surfaceWhite,
   };
 
   const axisStyles = {
     axis: {
-      stroke: colors.netural.surfaceWhite,
+      stroke: colors.neutral.surfaceWhite,
     },
     tickLabels: {
       fontSize: fontSize.caption,
       fontFamily: fontFamily.body,
-      fill: colors.netural.surfaceWhite,
+      fill: colors.neutral.surfaceWhite,
     },
   };
 
@@ -73,8 +73,8 @@ const DataVisualization = () => {
           data={data}
           x="day"
           y="value"
-          style={{ data: barChartSvg }}
-          barWidth={20} cornerRadius={{ bottomLeft: (0), bottomRight: (0), topLeft: (10), topRight: (10) }}
+          style={{ data: barChartSvg, }}
+          barWidth={20} cornerRadius={{ bottomLeft: (0), bottomRight: (0), topLeft: (10), topRight: (10), }}
           events={[
             {
               target: 'data',
@@ -86,9 +86,9 @@ const DataVisualization = () => {
                       eventKey: 'all',
                       mutation: (props: any, clickedData: { datum: { day: string, value: number } }) => {
                         const fill = props.style?.fill;
-                        return fill === colors.netural.surfaceWhite
-                          ? colors.netural.surfaceWhite
-                          : { fill: colors.secondaryGreenDark };
+                        return fill === colors.neutral.surfaceWhite
+                          ? colors.neutral.surfaceWhite
+                          : { fill: colors.secondaryGreenDark, };
                       },
                     },
                     {
@@ -96,14 +96,14 @@ const DataVisualization = () => {
                       mutation: (props: any, clickedData: { datum: { day: string, value: number } }) => {
                         setSelectedBar(data?.datum.value);
                         return {
-                          style: { fill: colors.secondaryGreenDark },
+                          style: { fill: colors.secondaryGreenDark, },
                         };
                       },
-                    },
+                    }
                   ];
                 },
               },
-            },
+            }
           ]}
         />
       </VictoryChart>
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     gap: 5,
     alignItems: 'flex-end',
     marginTop: 4,
-    marginLeft: 20
+    marginLeft: 20,
   },
   participantsNumber: {
     color: colors.secondaryGreenDark,
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
   },
   participantIcon: {
     alignItems: "center",
-  }
+  },
 });
 
 export default DataVisualization;

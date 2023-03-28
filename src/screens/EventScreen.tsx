@@ -8,13 +8,14 @@ import EventCard from "../components/EventCard";
 import FilterCategory from "../components/FilterCategory";
 import { fontFamily, fontSize, fontWeightSubtitle } from "../styles/fonts";
 import { colors } from "../styles/colors";
-import Calendar from "../components/Calendar";
+import WeekCalendar from "../components/WeekCalendar";
 
 const EventScreen = () => {
 
   const [searchFilter, setSearchFilter] = useState("");
   const [dateFilter, setDateFilter] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
+
 
   const requestEvents = useQuery("events", () => getEvents(),
     {
@@ -39,7 +40,7 @@ const EventScreen = () => {
     Alert.alert("here", "Book Mark pressed");
   };
 
-  const onHandleData = (date: string) => {
+  const daySelectionHandler = (date: string) => {
     setDateFilter(date);
   };
 
@@ -82,7 +83,7 @@ const EventScreen = () => {
           setModalVisible(true);
         }}
       />
-      <Calendar onDayPress={onHandleData}/>
+      <WeekCalendar onDaySelection={daySelectionHandler} isExpanded={true}/>
       <View style={styles.titleContainer}>
         <Text style={styles.title}>{requestEvents.data?.length} event(s)</Text>
         <View style={styles.imageContainer}>

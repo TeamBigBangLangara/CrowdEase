@@ -23,5 +23,7 @@ export const getDate = () => {
     week.push(formattedDate);
   }
 
-  return { formattedFirstDay, formattedLastDay, today, week };
+  const todayFormatted = curr.toISOString().substring(0, 10);
+
+  return { formattedFirstDay, formattedLastDay, today, week, todayFormatted };
 };

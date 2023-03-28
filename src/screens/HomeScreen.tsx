@@ -1,4 +1,5 @@
-import { StyleSheet, Text, View, ScrollView, SafeAreaView, Pressable } from "react-native";
+import { StyleSheet, Text, View, ScrollView, SafeAreaView, Pressable, Alert } from "react-native";
+import { useQuery } from "react-query";
 
 import { signOut } from '../auth/user';
 import { MainStackNavigationProps } from '../types/navigationTypes';
@@ -15,12 +16,20 @@ import DataVisualization from '../components/DataVisualization';
 import { getDate } from '../utils/getDate';
 import { borderRadius } from "../styles/basic";
 import EventCarousel from "../components/EventCarousel";
+import { getEvents } from "../api/event";
 
 // Get the dates
-const { formattedFirstDay, formattedLastDay, today, } = getDate();
+const { formattedFirstDay, formattedLastDay, today, todayFormatted } = getDate();
 
 const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => {
 
+  const requestEvents = useQuery("events", () => getEvents(),
+    {
+      onError: (error: TypeError) => {
+        Alert.alert("Error", error.message);
+      },
+    }
+  );
   const onFullReportPress = () => {
     navigation.navigate('WeekManagerScreen');
   };
@@ -30,6 +39,17 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
   const onSeeMorePress = () => {
     navigation.navigate('EventScreen');
   };
+  const renderTodayParticipants = () => {
+    let participants = 0;
+    requestEvents.data?.forEach((event) => {
+      if (event.dates.date === todayFormatted) {
+        participants += event.participants;
+      }
+    });
+    return (
+      <Text style={styles.todayParticipantsNumber}>{participants}</Text>
+    );
+  }
 
   return (
     <SafeAreaView style={{ flex: 1, }}>
@@ -57,7 +77,7 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
             </View>
             <View style={styles.numberContainer}>
               <IconText icon={require('../assets/icons/participants.png')} text={'Total Participants'} style={styles.participantIcon} />
-              <Text style={styles.todayParticipantsNumber}>8,963</Text>
+              <View>{renderTodayParticipants()}</View>
             </View>
             <Text style={styles.subtitleBreakdown}>Participants Breakdown</Text>
             <View style={styles.breakdownContainer}>

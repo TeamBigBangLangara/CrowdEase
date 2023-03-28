@@ -36,10 +36,10 @@
     "react-native-screens": "^3.19.0",
     "react-native-snap-carousel": "^3.9.1",
     "react-native-svg": "^13.8.0",
-    "react-native-svg-charts": "^5.4.0",
     "react-native-text-gradient": "^0.1.7",
     "react-native-vector-icons": "^9.2.0",
-    "react-query": "^3.39.3"
+    "react-query": "^3.39.3",
+    "victory-native": "^36.6.8"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

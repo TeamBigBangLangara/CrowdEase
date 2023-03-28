@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   label: {
-    color: colors.netural.backgroundWhite,
+    color: colors.neutral.backgroundWhite,
     fontSize: fontSize.body,
     fontFamily: fontFamily.body,
     fontWeight: fontWeightSubtitle2,

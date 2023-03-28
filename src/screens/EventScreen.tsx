@@ -9,12 +9,23 @@ import FilterCategory from "../components/FilterCategory";
 import { fontFamily, fontSize, fontWeightSubtitle } from "../styles/fonts";
 import { colors } from "../styles/colors";
 import WeekCalendar from "../components/WeekCalendar";
+import { getUser } from "../auth/user";
+import { Bookmark, LoggedUser } from "types/types";
+import { fetchBookmarks } from "../api/bigBangAPI/bookmark";
 
 const EventScreen = () => {
 
   const [searchFilter, setSearchFilter] = useState("");
   const [dateFilter, setDateFilter] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
+  const [userInfo, setUserInfo] = useState<LoggedUser>({ uid: "", email: "", });
+
+  useQuery("getUserData", getUser, {
+      onSuccess: (data) => {
+        setUserInfo(data);
+      },
+    }
+  );
 
 
   const requestEvents = useQuery("events", () => getEvents(),
@@ -33,12 +44,32 @@ const EventScreen = () => {
     }
   );
 
-  const onSearchTextChanged = (searchText: string) => {
-    setSearchFilter(searchText);
+  const requestUserBookmarks = useQuery("getUserBookmarks", () => {
+      return fetchBookmarks(userInfo.uid);
+    }, {
+      enabled: !!userInfo.uid && requestEvents.isSuccess,
+    }
+  );
+
+
+  const mergeBookmarkAndEvents = () => {
+    if (requestEvents.data && requestUserBookmarks.data) {
+      const mergedEvents = requestEvents.data.map((event) => {
+        const bookmark = requestUserBookmarks.data.find((bookmark: Bookmark) => bookmark.event_id === event.id);
+        if (bookmark) {
+          return {
+            ...event,
+            bookmarkId: bookmark._id,
+          };
+        }
+        return event;
+      });
+      return mergedEvents;
+    }
   };
 
-  const onBookMarkPress = () => {
-    Alert.alert("here", "Book Mark pressed");
+  const onSearchTextChanged = (searchText: string) => {
+    setSearchFilter(searchText);
   };
 
   const daySelectionHandler = (date: string) => {
@@ -49,14 +80,14 @@ const EventScreen = () => {
     if (searchFilter) {
       return (
         <FlatList
-          data={requestEvents.data}
-          style={styles.eventList}
+          data={mergeBookmarkAndEvents()}
           renderItem={({ item, }) =>
             <EventCard
               key={item.id}
               event={item}
               eventType={"actual"}
-              onBookmarkPress={onBookMarkPress}
+              userID={userInfo?.uid}
+              bookmarkId={item.bookmarkId}
             />
           }
         />
@@ -64,14 +95,14 @@ const EventScreen = () => {
     } else {
       return (
         <FlatList
-          data={requestEvents.data}
-          style={styles.eventList}
+          data={mergeBookmarkAndEvents()}
           renderItem={({ item, }) =>
             <EventCard
               key={item.id}
               event={item}
               eventType={"actual"}
-              onBookmarkPress={onBookMarkPress}
+              userID={userInfo?.uid}
+              bookmarkId={item.bookmarkId}
             />
           }
         />
@@ -91,9 +122,9 @@ const EventScreen = () => {
       <View style={styles.titleContainer}>
         <Text style={styles.title}>{requestEvents.data?.length} event(s)</Text>
         <View style={styles.imageContainer}>
-          <Image source={require('../assets/icons/layout1.png')} />
-          <View style={styles.separator} ></View>
-          <Image source={require('../assets/icons/layout2.png')} />
+          <Image source={require("../assets/icons/layout1.png")} />
+          <View style={styles.separator}></View>
+          <Image source={require("../assets/icons/layout2.png")} />
         </View>
       </View>
       {renderEvents()}

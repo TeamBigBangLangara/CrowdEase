@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   },
 
   searchContainerNoFocus: {
-    borderColor: colors.netural.surfaceWhite,
+    borderColor: colors.neutral.surfaceWhite,
   },
 
   searchContainerFocus: {
@@ -79,8 +79,8 @@ const styles = StyleSheet.create({
 
   input: {
     flex: 1,
-    borderColor: colors.netural.surfaceWhite,
-    color: colors.netural.surfaceWhite,
+    borderColor: colors.neutral.surfaceWhite,
+    color: colors.neutral.surfaceWhite,
   },
   iconButton: {
     flex: 1,
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
   cancelText: {
     fontSize: fontSize.body,
     fontFamily: fontFamily.body,
-    color: colors.netural.surfaceWhite,
+    color: colors.neutral.surfaceWhite,
   },
 });
 

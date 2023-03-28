@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
   xaxisSvg: {
     fontSize: fontSize.caption,
     fontFamily: fontFamily.body,
-    fill: colors.netural.surfaceWhite,
+    fill: colors.neutral.surfaceWhite,
   },
   participantsNumberContainer: {
     flexDirection: 'row',

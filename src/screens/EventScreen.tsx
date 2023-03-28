@@ -8,7 +8,7 @@ import EventCard from "../components/EventCard";
 import FilterCategory from "../components/FilterCategory";
 import { fontFamily, fontSize, fontWeightSubtitle } from "../styles/fonts";
 import { colors } from "../styles/colors";
-import Calendar from "../components/Calendar";
+import WeekCalendar from "../components/WeekCalendar";
 import { getUser } from "../auth/user";
 import { Bookmark, LoggedUser } from "types/types";
 import { fetchBookmarks } from "../api/bigBangAPI/bookmark";
@@ -26,6 +26,7 @@ const EventScreen = () => {
       },
     }
   );
+
 
   const requestEvents = useQuery("events", () => getEvents(),
     {
@@ -71,7 +72,7 @@ const EventScreen = () => {
     setSearchFilter(searchText);
   };
 
-  const onHandleData = (date: string) => {
+  const daySelectionHandler = (date: string) => {
     setDateFilter(date);
   };
 
@@ -117,7 +118,7 @@ const EventScreen = () => {
           setModalVisible(true);
         }}
       />
-      <Calendar onDayPress={onHandleData} />
+      <WeekCalendar onDaySelection={daySelectionHandler} isExpanded={true}/>
       <View style={styles.titleContainer}>
         <Text style={styles.title}>{requestEvents.data?.length} event(s)</Text>
         <View style={styles.imageContainer}>
@@ -141,6 +142,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     backgroundColor: colors.neutral.backgroundBlack,
     paddingTop: 14,
+  },
+  eventList: {
+    marginBottom: 30,
   },
   titleContainer: {
     backgroundColor: colors.neutral.backgroundBlack,

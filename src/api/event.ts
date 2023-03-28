@@ -32,7 +32,7 @@ export const getEvents = () => {
               type: response._embedded.venues[0].type,
             },
             address: response._embedded.venues[0].address.line1,
-            participants: 15555,
+            participants: Math.floor(Math.random() * (12200 - 2200 + 1)) + 2200,
           };
         });
         return events;

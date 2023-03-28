@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Alert, FlatList, Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { getEvents } from "../api/event";
-import {  useQuery } from "react-query";
+import { useQuery } from "react-query";
 
 import SearchForm from "../components/SearchForm";
 import EventCard from "../components/EventCard";
@@ -19,12 +19,13 @@ const EventScreen = () => {
 
   const requestEvents = useQuery("events", () => getEvents(),
     {
-      select: (events) => { return events.filter((event) => {
-        return searchFilter ? event.name.toLowerCase().includes(searchFilter.toLowerCase()) : true;
+      select: (events) => {
+        return events.filter((event) => {
+          return searchFilter ? event.name.toLowerCase().includes(searchFilter.toLowerCase()) : true;
         })
-        .filter((event) => {
-          return dateFilter ? event.dates.date === dateFilter : true;
-        });
+          .filter((event) => {
+            return dateFilter ? event.dates.date === dateFilter : true;
+          });
       },
       onError: (error: TypeError) => {
         Alert.alert("Error", error.message);
@@ -45,34 +46,37 @@ const EventScreen = () => {
   };
 
   const renderEvents = () => {
-  if (searchFilter) {
-    return (
-      <FlatList
-        data={requestEvents.data}
-        renderItem={({ item, }) =>
-          <EventCard
-            key={item.id}
-            event={item}
-            eventType={"actual"}
-            onBookmarkPress={onBookMarkPress}
-          />
-        }
-      />
-    );} else {
-    return (
-      <FlatList
-        data={requestEvents.data}
-        renderItem={({ item,}) =>
-          <EventCard
-            key={item.id}
-            event={item}
-            eventType={"actual"}
-            onBookmarkPress={onBookMarkPress}
-          />
-        }
-      />
-    );
-  }
+    if (searchFilter) {
+      return (
+        <FlatList
+          data={requestEvents.data}
+          style={styles.eventList}
+          renderItem={({ item, }) =>
+            <EventCard
+              key={item.id}
+              event={item}
+              eventType={"actual"}
+              onBookmarkPress={onBookMarkPress}
+            />
+          }
+        />
+      );
+    } else {
+      return (
+        <FlatList
+          data={requestEvents.data}
+          style={styles.eventList}
+          renderItem={({ item, }) =>
+            <EventCard
+              key={item.id}
+              event={item}
+              eventType={"actual"}
+              onBookmarkPress={onBookMarkPress}
+            />
+          }
+        />
+      );
+    }
   };
 
   return (
@@ -107,6 +111,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     backgroundColor: colors.neutral.backgroundBlack,
     paddingTop: 14,
+  },
+  eventList: {
+    marginBottom: 30,
   },
   titleContainer: {
     backgroundColor: colors.neutral.backgroundBlack,

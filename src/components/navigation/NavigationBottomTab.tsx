@@ -101,6 +101,8 @@ const styles = StyleSheet.create({
     fontFamily: fontFamily.body,
     fontSize: fontSize.body,
     fontWeight: fontWeightSubtitle2,
+    marginBottom: 5
+    
   },
   inactiveLabel: {
     color: colors.neutral.surfaceWhite,

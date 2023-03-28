@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { useMutation } from 'react-query';
-import { View, Image, Text, StyleSheet, Alert } from "react-native";
+import { useMutation } from "react-query";
+import { Alert, Image, StyleSheet, Text, View } from "react-native";
 
-import BookmarkButton from './BookmarkButton';
-import IconText from './IconText';
+import BookmarkButton from "./BookmarkButton";
+import IconText from "./IconText";
 import RateCard from "./RateCard";
 import DropdownButton from "./DropdownButton";
 import { Event } from "../types/types";
 import { colors } from "../styles/colors";
 import { fontFamily, fontSize } from "../styles/fonts";
 import { timeFormat } from "../utils/timeFormat";
-import { addBookmark, removeBookmark } from '../api/bigBangAPI/bookmark';
+import { addBookmark, removeBookmark } from "../api/bigBangAPI/bookmark";
 import { cancelNotification, createNotification } from "../api/oneSignal";
 
 const EventCard = (props: {
@@ -18,7 +18,7 @@ const EventCard = (props: {
   eventType: string
   userID: string
   bookmarkId: string
-  }) => {
+}) => {
   const saveBookmark = useMutation(["bookmark"], () => addBookmark({
     "user_id": props.userID,
     "event_id": props.event.id,
@@ -28,16 +28,16 @@ const EventCard = (props: {
       setBookmarkID(data);
     },
     onError: () => {
-        console.log("Something went wrong, please try again.");
+      console.log("Something went wrong, please try again.");
     },
   });
 
   const deleteBookmark = useMutation(["bookmark"], () => removeBookmark(bookmarkID), {
-    onSuccess: (data) => {
-      setBookmarkID('');
+    onSuccess: () => {
+      setBookmarkID("");
     },
     onError: () => {
-        console.log("Something went wrong, please try again.");
+      console.log("Something went wrong, please try again.");
     },
   });
 
@@ -57,23 +57,22 @@ const EventCard = (props: {
     onSuccess: (data) => {
     },
     onError: () => {
-        console.log("Something went wrong, please try again.");
+      console.log("Something went wrong, please try again.");
     },
   });
 
 
   useEffect(() => {
-    if(props.bookmarkId !== undefined)
-    {
+    if (props.bookmarkId !== undefined) {
       setBookmarkID(props.bookmarkId);
       setIsBookmarkAdded(true);
     }
-    
+
   }, []);
 
   const [showRating, setShowRating] = useState(false);
   const [isBookmarkAdded, setIsBookmarkAdded] = useState(false);
-  const [bookmarkID, setBookmarkID] =  useState("");
+  const [bookmarkID, setBookmarkID] = useState("");
   const [notificationID, setNotificationID] = useState("");
 
   const onBookmarkPress = () => {
@@ -106,7 +105,7 @@ const EventCard = (props: {
   };
 
   const renderDate = () => {
-    if (props.eventType === 'past') {
+    if (props.eventType === "past") {
       return (
         <View style={styles.dateContainer}>
           <Text style={styles.label}>{props.event.dates.date}</Text>
@@ -123,21 +122,21 @@ const EventCard = (props: {
   };
 
   const renderBookmarkButton = () => {
-    if (props.eventType !== 'past') {
-      return <BookmarkButton 
-      eventId={props.event.id}
-      userID= {props.userID}
-      isBookmarkAdded= {isBookmarkAdded}
-      onBookmarkPress={onBookmarkPress}
+    if (props.eventType !== "past") {
+      return <BookmarkButton
+        eventId={props.event.id}
+        userID={props.userID}
+        isBookmarkAdded={isBookmarkAdded}
+        onBookmarkPress={onBookmarkPress}
       />;
     }
   };
 
   const renderRatingButton = () => {
-    if (props.eventType === 'past') {
+    if (props.eventType === "past") {
       return (
         <View style={styles.ratingButton}>
-          <DropdownButton onDropdownPress={() => setShowRating(true)} label={"Give a Rating"}/>
+          <DropdownButton onDropdownPress={() => setShowRating(true)} label={"Give a Rating"} />
         </View>
       );
     }
@@ -146,9 +145,13 @@ const EventCard = (props: {
   const renderRatingCard = () => {
     return (
       <RateCard
-        onSubmitPress={() => { console.log("to do");}}
+        onSubmitPress={() => {
+          console.log("to do");
+        }}
         onSkipPress={() => setShowRating(false)}
-        onStarPress={() => { console.log("to do");}}/>
+        onStarPress={() => {
+          console.log("to do");
+        }} />
     );
   };
 
@@ -156,7 +159,7 @@ const EventCard = (props: {
     if (props.eventType === "mapEvent") {
       return (
         <View style={styles.dragUpContainer}>
-            <Image source={require('../assets/icons/dragUp.png')}/>
+          <Image source={require("../assets/icons/dragUp.png")} />
         </View>
       );
     }
@@ -166,16 +169,17 @@ const EventCard = (props: {
     <View style={styles.container}>
       {renderDragUpButton()}
       <View style={styles.eventContainer}>
-        <Image source={{ uri: props.event.image,}} style={styles.eventImage} />
+        <Image source={{ uri: props.event.image, }} style={styles.eventImage} />
         <View style={styles.leftContainer}>
           <View style={styles.upContainer}>
             {renderDate()}
             <Text style={styles.eventTitle} numberOfLines={1}>{props.event.name}</Text>
-            <IconText icon={require('../assets/icons/pin.png')} numberOfLines={1} text={props.event.address} style={styles.icon}/>
+            <IconText icon={require("../assets/icons/pin.png")} numberOfLines={1} text={props.event.address}
+                      style={styles.icon} />
           </View>
           <View style={styles.participantsContainer}>
             <IconText
-              icon={require('../assets/icons/participants.png')}
+              icon={require("../assets/icons/participants.png")}
               text={`${props.event.participants} participants`}
               style={styles.icon}
             />
@@ -194,14 +198,14 @@ const styles = StyleSheet.create({
     backgroundColor: colors.neutral.surfaceBlack,
     paddingHorizontal: 24,
     paddingVertical: 16,
-    flexDirection: 'column',
-    display: 'flex',
+    flexDirection: "column",
+    display: "flex",
     borderRadius: 22,
     marginVertical: 8,
   },
   eventContainer: {
-    display: 'flex',
-    flexDirection: 'row',
+    display: "flex",
+    flexDirection: "row",
   },
   label: {
     color: colors.neutral.backgroundWhite,
@@ -212,25 +216,25 @@ const styles = StyleSheet.create({
   eventImage: {
     width: 92,
     height: 102,
-    display: 'flex',
+    display: "flex",
     borderRadius: 11,
   },
   leftContainer: {
     flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
     marginLeft: 15,
   },
   participantsContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     marginTop: 18,
   },
   dateContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   eventTitle: {
     fontSize: fontSize.subtitle2,

@@ -7,7 +7,7 @@ export const getDate = () => {
   const lastDay = new Date(monday); // create new date object for the last day
   lastDay.setDate(monday.getDate() + 6); // set last day by adding 6 days to the first day
 
-  const options = { month: 'long', day: 'numeric' } as Intl.DateTimeFormatOptions;
+  const options = { month: 'long', day: 'numeric',} as Intl.DateTimeFormatOptions;
   const formattedFirstDay = firstDay.toLocaleDateString('en-US', options);
   const formattedLastDay = lastDay.toLocaleDateString('en-US', options);
   const today = new Date().toLocaleDateString('en-US', options);
@@ -23,14 +23,5 @@ export const getDate = () => {
     week.push(formattedDate);
   }
 
-  const todayFormatted = curr.toISOString().substring(0, 10);
-
-  const getWeekday = (dateString: string | number | Date) => {
-    const weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-    const date = new Date(dateString);
-    const dayOfWeek = date.getDay();
-    return weekdays[dayOfWeek];
-  }
-
-  return { formattedFirstDay, formattedLastDay, today, week, todayFormatted, getWeekday };
+  return { formattedFirstDay, formattedLastDay, today, week,};
 };

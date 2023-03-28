@@ -2,56 +2,40 @@ import React, { useEffect, useState } from 'react';
 import { Alert, FlatList, Image, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { getEvents } from "../api/event";
 import {  useQuery } from "react-query";
-import _ from 'lodash';
-import moment from 'moment';
-
-
-const getWeeklyEvents = (start: number, end: number): Promise<any> => new Promise(async (res, rej) => {
- try {
-  const eventData = await getEvents();
-  const dataByDate = _.countBy(eventData, (o) => o.dates.date);
-  
-  const startDate = moment().startOf('day').isoWeekday(start);
-  const endDate = moment().startOf('day').isoWeekday(end);
-  const finalData: {date: moment.Moment, events: number}[] = [];
-  const sortedFinalData: {date: string, events: number}[] = [];
-  Object.keys(dataByDate).forEach((key) => {
-    if (moment(key).isAfter(startDate) && moment(key).isBefore(endDate)) {
-      finalData.push({
-        date: moment(key),
-        events: dataByDate[key],
-      });
-    }
-  });
-
-
-  // sort the data by date using moment.js
-  let sortedData = finalData.sort(function (a, b) {
-    return moment(a.date).diff(moment(b.date));
-  });
-  
-
-  sortedData.forEach((val) => {
-    sortedFinalData.push({date: moment(val.date).format('MMMM DD, ddd'), events: val.events,});
-  });
-
-
-  res(sortedFinalData);
- } catch {
-  rej(new Error('Data cannot be fetched with API'));
- }
-}); 
-
-
-
-
+import { getDate } from "../utils/getDate";
 
 const WeekManagerScreen = () => {
-  const [startingDate, setStartingDate] = useState<number>(0);
-  const [endingDate, setEndingDate] = useState<number>(8);
-  const {data, isLoading, } = useQuery('weeklyEvents', async () => await getWeeklyEvents(startingDate, endingDate));
-  const renderEvent = () => {
-    return (
+  const { week, } = getDate();
+  const requestEvents = useQuery("events", () => getEvents(),
+    {
+      onError: (error: TypeError) => {
+        Alert.alert("Error", error.message);
+      },
+    }
+  );
+  const data = [
+      { day: "MON", value: 0, participant:0, },
+      { day: "TUE", value: 0, participant:0,},
+      { day: "WED", value: 0, participant:0,},
+      { day: "THU", value: 0, participant:0,},
+      { day: "FRI", value: 0, participant:0,},
+      { day: "SAT", value: 0, participant:0,},
+      { day: "SUN", value: 0, participant:0,}
+  ];
+
+  requestEvents.data?.forEach((event) => {
+    for (let i = 0; i < 7; i++) {
+      if (event.dates.date === week[i]) {
+        data[i].value += (event.participants)/15555;
+        data[i].participant += event.participants;
+      }
+    }
+  });
+  return (
+    <>
+    <View style={styles.wrapper}>
+      
+      <Text style={styles.tsize}>Weekly Event Preview</Text>
       <FlatList
         data={data}
         renderItem={({ item, }) =>
@@ -60,28 +44,20 @@ const WeekManagerScreen = () => {
       
             <View style={styles.item}>
               <Text style={styles.FSize}>Date</Text>
-              <Text style={styles.HFsize}>{item.date}</Text>
+              <Text style={styles.HFsize}>{item.day}</Text>
             </View>
             <View style={styles.item}>
             <Text style={styles.FSize}>Event Number</Text>
-            <Text style={styles.HFsize}>{item.events}</Text>
+            <Text style={styles.HFsize}>{item.value}</Text>
             </View>
             <View style={styles.item}>
               <Text style={styles.FSize}>Event Participants</Text>
-              <Text style={styles.HFsize}>{item.events * 15000}</Text>
+              <Text style={styles.HFsize}>{item.participant}</Text>
             </View>
           </View>
         </ScrollView>
         }
-      />
-    );
-  };
-  return (
-    <>
-    <View style={styles.wrapper}>
-      
-      <Text style={styles.tsize}>Weekly Event Preview</Text>
-      {isLoading ? <Text>Data is fetching</Text> : renderEvent()}  
+       />
     </View>
     
     </>

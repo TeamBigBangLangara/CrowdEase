@@ -25,5 +25,12 @@ export const getDate = () => {
 
   const todayFormatted = curr.toISOString().substring(0, 10);
 
-  return { formattedFirstDay, formattedLastDay, today, week, todayFormatted };
+  const getWeekday = (dateString: string | number | Date) => {
+    const weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+    const date = new Date(dateString);
+    const dayOfWeek = date.getDay();
+    return weekdays[dayOfWeek];
+  }
+
+  return { formattedFirstDay, formattedLastDay, today, week, todayFormatted, getWeekday };
 };

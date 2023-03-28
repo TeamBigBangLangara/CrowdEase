@@ -36,7 +36,7 @@ const RateCard = (props: { onSubmitPress: () => void; onSkipPress: () => void, o
       {renderStars()}
       <SecondaryButton onPress={props.onSubmitPress} label={'Submit'} />
       <View style={styles.skipLabel}>
-        <LinkButton onPress={props.onSkipPress} label={'Skip'} />
+        <LinkButton onPress={props.onSkipPress} label={'Skip'} style={styles.linkButton} />
       </View>
     </View>
   );
@@ -45,10 +45,10 @@ const RateCard = (props: { onSubmitPress: () => void; onSkipPress: () => void, o
 const styles = StyleSheet.create({
   container: {
     borderTopWidth: 2,
-    borderTopColor: colors.netural.surfaceWhite,
+    borderTopColor: colors.neutral.surfaceWhite,
     alignItems: 'center',
     marginTop: margin.secondary,
-    backgroundColor: colors.netural.surfaceBlack,
+    backgroundColor: colors.neutral.surfaceBlack,
   },
   starContainer: {
     flexDirection: "row",
@@ -63,9 +63,13 @@ const styles = StyleSheet.create({
   header: {
     marginTop: margin.secondary,
     marginBottom: margin.tertiary,
-    color: colors.netural.backgroundWhite,
+    color: colors.neutral.backgroundWhite,
     fontFamily: fontFamily.body,
     fontSize: fontSize.body,
+  },
+  linkButton: {
+    color: colors.neutral.surfaceWhite,
+    borderBottomColor: 'rgba(12,25,88,0)',
   },
 });
 

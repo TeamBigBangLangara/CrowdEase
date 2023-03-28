@@ -73,7 +73,7 @@ const EventCard = (props: {
     <View style={styles.container}>
       {renderDragUpButton()}
       <View style={styles.eventContainer}>
-        <Image source={require('../assets/eventImage.png')} style={styles.eventImage} />
+        <Image source={{ uri: props.event.image,}} style={styles.eventImage} />
         <View style={styles.leftContainer}>
           <View style={styles.upContainer}>
             {renderDate()}
@@ -98,7 +98,7 @@ const EventCard = (props: {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.netural.surfaceBlack,
+    backgroundColor: colors.neutral.surfaceBlack,
     paddingHorizontal: 24,
     paddingVertical: 16,
     flexDirection: 'column',
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   label: {
-    color: colors.netural.backgroundWhite,
+    color: colors.neutral.backgroundWhite,
     fontSize: fontSize.body,
     lineHeight: 18,
     fontFamily: fontFamily.body,
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
   },
   eventTitle: {
     fontSize: fontSize.subtitle2,
-    color: colors.netural.backgroundWhite,
+    color: colors.neutral.backgroundWhite,
     fontFamily: fontFamily.body,
   },
   upContainer: {

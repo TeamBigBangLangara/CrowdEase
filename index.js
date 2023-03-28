@@ -26,9 +26,9 @@ OneSignal.setNotificationWillShowInForegroundHandler(
       notificationReceivedEvent,
     );
     let notification = notificationReceivedEvent.getNotification();
-    console.log('notification: ', notification);
+    //console.log('notification: ', notification);
     const data = notification.additionalData;
-    console.log('additionalData: ', data);
+    //console.log('additionalData: ', data);
     // Complete with null means don't show a notification.
     notificationReceivedEvent.complete(notification);
   },
@@ -39,35 +39,6 @@ OneSignal.setNotificationOpenedHandler(notification => {
   console.log('OneSignal: notification opened:', notification);
 });
 
-OneSignal.getDeviceState().then(deviceState => {
-  const playerId = deviceState.userId;
-  console.log(playerId);
-  const sendAfter = new Date(Date.now() + 0.5 * 60 * 1000);
-  const options = {
-    method: 'POST',
-    url: 'https://onesignal.com/api/v1/notifications',
-    headers: {
-      accept: 'application/json',
-      Authorization: 'Basic MWRhOWE2N2EtNjljYS00NDM2LTg3M2MtMzYzYmEzOWM5NGMz',
-      'content-type': 'application/json'
-    },
-    data: {
-      app_id:ONESIGNAL_APP_ID,
-      include_player_ids: [playerId],
-      contents: {en: 'Do be do be do', es: 'He hehe'},
-      send_after: sendAfter.toISOString(),
-    }
-  };
-  
-  axios
-    .request(options)
-    .then(function (response) {
-      console.log(response.data);
-    })
-    .catch(function (error) {
-      console.error(error);
-    });
-  // Store playerId in your local database or send it to your server
-  });
+
 
 AppRegistry.registerComponent(appName, () => App)

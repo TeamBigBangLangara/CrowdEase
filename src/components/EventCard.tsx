@@ -11,6 +11,7 @@ import { colors } from "../styles/colors";
 import { fontFamily, fontSize } from "../styles/fonts";
 import { timeFormat } from "../utils/timeFormat";
 import { addBookmark, removeBookmark } from '../api/bigBangAPI/bookmark';
+import { cancelNotification, createNotification } from "../api/oneSignal";
 
 const EventCard = (props: {
   event: Event
@@ -40,6 +41,26 @@ const EventCard = (props: {
     },
   });
 
+  const saveNotification = useMutation(["createNewNotification"], () => createNotification(props.event.dates.date, props.event.name, props.event.image),
+   {
+    onSuccess: (data) => {
+      console.log(data);
+      setNotificationID(data);
+    },
+    onError: () => {
+        console.log("Something went wrong, please try again.");
+    },
+  });
+
+  const deleteNotification = useMutation(["deleteNotification"], () => cancelNotification(notificationID),
+   {
+    onSuccess: (data) => {
+    },
+    onError: () => {
+        console.log("Something went wrong, please try again.");
+    },
+  });
+
 
   useEffect(() => {
     if(props.bookmarkId !== undefined)
@@ -53,23 +74,31 @@ const EventCard = (props: {
   const [showRating, setShowRating] = useState(false);
   const [isBookmarkAdded, setIsBookmarkAdded] = useState(false);
   const [bookmarkID, setBookmarkID] =  useState("");
+  const [notificationID, setNotificationID] = useState("");
 
   const onBookmarkPress = () => {
     if(!isBookmarkAdded)
     {
-    try {
-    const saveBookmarkData =  saveBookmark.mutate();
-    setIsBookmarkAdded(!isBookmarkAdded);
+      try{
+      const saveBookmarkData =  saveBookmark.mutate();
+      saveNotification.mutate();
+      setIsBookmarkAdded(!isBookmarkAdded);
+      }
+      catch(error){
+        Alert.alert('Unable to save data' +error);
+      }
     }
-    catch(error){
-      Alert.alert('Unable to save data' +error);
-    }
-  }
     else{
       try{
          deleteBookmark.mutate();
-        setIsBookmarkAdded(!isBookmarkAdded);
-      }
+         if(notificationID !== undefined)
+          {
+            console.log("To cancel" + notificationID);
+            deleteNotification.mutate();
+          }
+          setNotificationID('');
+          setIsBookmarkAdded(!isBookmarkAdded);
+        }
       catch(error){
         Alert.alert('Unable to save data' +error);
       }

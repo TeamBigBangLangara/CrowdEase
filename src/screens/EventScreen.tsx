@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     paddingTop: 14,
   },
   eventList: {
-    marginBottom: 30
+    marginBottom: 30,
   },
   titleContainer: {
     backgroundColor: colors.neutral.backgroundBlack,

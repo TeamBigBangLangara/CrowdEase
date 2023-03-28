@@ -12,8 +12,6 @@ import IconText from "./IconText";
 
 const DataVisualization = () => {
   const { week, } = getDate();
-
-  const [dateFilter, setDateFilter] = useState(week[0]);
   const [selectedBar, setSelectedBar] = useState(0);
 
   const requestEvents = useQuery("events", () => getEvents(),
@@ -42,7 +40,6 @@ const DataVisualization = () => {
     }
   });
 
-
   const barChartSvg = {
     fill: colors.neutral.surfaceWhite,
   };
@@ -67,7 +64,7 @@ const DataVisualization = () => {
       <VictoryChart height={200}>
         <VictoryAxis
           style={axisStyles}
-          tickLabelComponent={<VictoryLabel style={styles.xaxisSvg} />}
+          tickLabelComponent={<VictoryLabel style={styles.xAxisSvg} />}
         />
         <VictoryBar
           data={data}
@@ -93,7 +90,7 @@ const DataVisualization = () => {
                     },
                     {
                       target: 'data',
-                      mutation: (props: any, clickedData: { datum: { day: string, value: number } }) => {
+                      mutation: (clickedData: { datum: { day: string, value: number } }) => {
                         setSelectedBar(data?.datum.value);
                         return {
                           style: { fill: colors.secondaryGreenDark, },
@@ -115,7 +112,7 @@ const styles = StyleSheet.create({
   container: {
     marginHorizontal: 1,
   },
-  xaxisSvg: {
+  xAxisSvg: {
     fontSize: fontSize.caption,
     fontFamily: fontFamily.body,
     fill: colors.neutral.surfaceWhite,

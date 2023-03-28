@@ -14,7 +14,7 @@ export const createNotification = async(date: string, notificationData: string, 
     }
     const playerId = deviceState.userId;
     console.log('Player ID:', playerId);
-    // const eventDate = new Date(Date.now() + 0.5 * 60 * 1000);
+    //const eventDate = new Date(Date.now() + 0.5 * 60 * 1000);
     const eventDate = new Date(date);
     const eventNotificationMessage = `Your bookmarked event: ${notificationData} is happening now`;
     const eventTitle = notificationData ;

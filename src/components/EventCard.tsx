@@ -19,22 +19,25 @@ const EventCard = (props: {
   userID: string
   rate: number
   ratingID: string
+  updateRate: (rate: number) => void
 }) => {
-
   const [showRating, setShowRating] = useState(false);
   const [starRating, setStarRating] = useState(0);
-  const [ratingID, setRatingID] = useState("");
+  const [ratingId, setRatingId] = useState("");
 
   const saveRating = useMutation(["rating"], () =>
     addRating({
       user_id: props.userID,
       event_id: props.event.id,
       category: props.event.category.name,
-      rate: props.rate,
+      rate: starRating,
     }),
     {
-      onSuccess: (data) => {
-        setRatingID(data);
+        onSuccess: (data) => {
+            setRatingId(data);
+            console.log("saveRating", data);
+            return data
+        
       },
       onError: () => {
         console.log("Something went wrong, please try again.");
@@ -42,27 +45,26 @@ const EventCard = (props: {
     }
   );
 
-  useEffect(() => {
-    if (props.ratingID !== undefined)
-     {
+  // useEffect(() => {
+  //   if (props.ratingID !== undefined)
+  //    {
+  //     setRatingId(props.ratingID);
+  //   }
+  // }, [props.ratingID]);
 
-      setRatingID(props.ratingID);
-    }
-
-  }, []);
-
-  const onStarPress = () => {
-    setStarRating(props.rate);
+  const onStarPress = (id: number) => {
+    setStarRating(id);
   };
 
-  const onSubmitPress = () => {
+  const onSubmitPress = async () => {
+    props.updateRate(starRating);
     try {
-      const saveRatingData: any = saveRating.mutate();
+      const data = await saveRating.mutate();
+      console.log("submit", data);
+    } catch (error) {
+      console.log(error);
     }
-    catch (error) {
-      Alert.alert('Unable to save data' + error);
-    }
-  }
+  };
 
   const renderDate = () => {
     if (props.eventType === 'past') {
@@ -101,11 +103,12 @@ const EventCard = (props: {
     return (
       <RateCard
         onSubmitPress={onSubmitPress}
+        starRating = {starRating}
         onSkipPress={() => { setShowRating(false) }}
         onStarPress={onStarPress}
         imageActive={require("../assets/icons/StarActive.png")}
         imageInactive={require("../assets/icons/star.png")}
-        activeStarCount={props.rate}
+        activeStarCount={starRating}
         eventId={props.event.id}
         userID={props.userID}
       />

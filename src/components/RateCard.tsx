@@ -5,21 +5,24 @@ import { colors } from "../styles/colors";
 import { fontFamily, fontSize } from "../styles/fonts";
 import { margin } from "../styles/basic";
 
-const RateCard = (props: { onSubmitPress: () => void; 
-  onSkipPress: () => void; 
-  onStarPress: (id: number) => void; 
-  imageActive: object; 
-  imageInactive: object; 
-  activeStarCount: number, 
-  eventId?:string, 
-  userID?:string }) => {
+const RateCard = (props: {
+  onSubmitPress: () => void;
+  onSkipPress: () => void;
+  onStarPress: (id: number) => void;
+  starRating: number
+  imageActive: object;
+  imageInactive: object;
+  activeStarCount: number,
+  eventId?: string,
+  userID?: string
+}) => {
 
   const renderStars = () => {
     const starIds = [1, 2, 3, 4, 5];
     return (
       <View style={styles.starContainer}>
         {starIds.map(id => (
-          <Pressable key={id} onPress={() => props.onStarPress}>
+          <Pressable key={id} onPress={() => props.onStarPress(id)}>
             <Image source={id <= props.activeStarCount ? props.imageActive : props.imageInactive} />
           </Pressable>
         ))}
@@ -29,7 +32,9 @@ const RateCard = (props: { onSubmitPress: () => void;
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Please tell how much this event affected your business?</Text>
+      <Text style={styles.header}>
+        Please tell how much this event affected your business?
+      </Text>
       {renderStars()}
       <SecondaryButton onPress={props.onSubmitPress} label={'Submit'} />
       <View style={styles.skipLabel}>

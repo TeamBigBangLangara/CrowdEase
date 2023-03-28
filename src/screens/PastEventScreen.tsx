@@ -31,6 +31,12 @@ const PastEventScreen = () => {
   }
   );
 
+  const [rate, setRate] = useState(0);
+
+  const updateRate = (rating: number) => {
+    setRate(rating);
+  };
+
   useEffect(() => {
     async function fetchUser() {
       const user = await getUser();
@@ -54,7 +60,6 @@ const PastEventScreen = () => {
         }
         return event;
       });
-
       return mergedEvents;
     }
   };
@@ -72,7 +77,8 @@ const PastEventScreen = () => {
             eventType={"past"}
             userID={userInfo?.uid}
             rate={item.rate}
-            ratingID={item.ratingID} />
+            ratingID={item.ratingID}
+            updateRate={updateRate} />
         }
         contentContainerStyle={styles.container}
       />

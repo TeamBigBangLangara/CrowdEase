@@ -34,9 +34,9 @@ const EventScreen = () => {
         return events.filter((event) => {
           return searchFilter ? event.name.toLowerCase().includes(searchFilter.toLowerCase()) : true;
         })
-          .filter((event) => {
-            return dateFilter ? event.dates.date === dateFilter : true;
-          });
+        .filter((event) => {
+          return dateFilter ? event.dates.date === dateFilter : true;
+        });
       },
       onError: (error: TypeError) => {
         Alert.alert("Error", error.message);

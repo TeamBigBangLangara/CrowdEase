@@ -22,11 +22,11 @@ const WeekManagerScreen = () => {
       { day: "SAT", value: 0, participant:0,},
       { day: "SUN", value: 0, participant:0,}
   ];
-
+  
   requestEvents.data?.forEach((event) => {
     for (let i = 0; i < 7; i++) {
       if (event.dates.date === week[i]) {
-        data[i].value += (event.participants)/15555;
+        data[i].value = data[i].value>0 ? data[i].value+1 : 1;
         data[i].participant += event.participants;
       }
     }

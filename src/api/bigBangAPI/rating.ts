@@ -1,20 +1,14 @@
-import { Category } from "types/types";
 import project from "./baseURL";
+import { Rating } from "../../types/types";
 
-  export const addRating = async(postData: {
-    user_id: string;
-    event_id: string | undefined;
-    category?: string;
-    rate: number;
-  }) : Promise<any> => { 
-    const res = await project.post('/rating', postData);
+export const addRating = (postData: Rating) => {
+  return project.post("/rating", postData).then((res) => {
     return res.data;
+  });
 };
 
-  export const getRating = async(user_id?:string) : Promise<any> => {
-    return await project.get(`/rating/user/${user_id}`).then((res) => {
-        return res.data;
-    });
-  };
-
-
+export const getEventRatedByUser = (user_id?: string) => {
+  return project.get(`/rating/user/${user_id}`).then((res) => {
+    return res.data;
+  });
+};

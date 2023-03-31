@@ -129,7 +129,8 @@ const App = () => {
       <QueryClientProvider client={queryClient}>
         <NavigationContainer>
           {!isLoggedIn && (
-            <Stack.Navigator initialRouteName={'SplashScreen'}>
+            <Stack.Navigator initialRouteName={'SplashScreen'} 
+            screenOptions={{headerShown: false,}}>
               <Stack.Screen name={'SplashScreen'} component={SplashScreen} />
               <Stack.Screen name={'LoginScreen'} component={Login} />
               <Stack.Screen name={'SignUpScreen'} component={SignUp} />

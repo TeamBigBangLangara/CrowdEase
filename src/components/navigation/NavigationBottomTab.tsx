@@ -18,7 +18,9 @@ const NavigationBottomTab = () => {
         tabBarShowLabel: false,
         tabBarStyle: { backgroundColor: colors.neutral.surfaceBlack, height: 60, borderTopWidth: 2, borderTopColor: colors.neutral.outlineGrey, },
         tabBarActiveTintColor: colors.primary.primaryPurpleDark,
+        headerShown: false
       }}>
+        
       <Tab.Screen
         name="Home"
         component={HomeStack}

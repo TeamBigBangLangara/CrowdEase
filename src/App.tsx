@@ -74,6 +74,7 @@ export const HomeStack = () => {
       <MainStack.Screen name={"ProfileScreen"} component={ProfileScreen}/>
       <MainStack.Screen name={"SuggestionScreen"} component={SuggestionScreen}/>
       <MainStack.Screen name={"EventDetailsScreen"} component={EventDetailsScreen} />
+      <MainStack.Screen name={"SuggestionScreen"} component={SuggestionScreen} />
     </MainStack.Navigator>
   );
 };

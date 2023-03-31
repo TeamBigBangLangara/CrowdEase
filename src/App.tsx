@@ -1,22 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { firebase } from '@react-native-firebase/auth';
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import React, { useEffect, useState } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { firebase } from "@react-native-firebase/auth";
+import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import { QueryClient, QueryClientProvider } from "react-query";
 
-import SignUp from './screens/SignUpScreen';
-import SplashScreen from './screens/SplashScreen';
-import Login from './screens/LoginScreen';
-import NavigationBottomTab from './components/navigation/NavigationBottomTab';
-import LocationScreen from './screens/LocationScreen';
+import SignUp from "./screens/SignUpScreen";
+import SplashScreen from "./screens/SplashScreen";
+import Login from "./screens/LoginScreen";
+import NavigationBottomTab from "./components/navigation/NavigationBottomTab";
+import LocationScreen from "./screens/LocationScreen";
 import { SafeAreaView } from "react-native";
 import WeekManagerScreen from "./screens/WeekManagerScreen";
 import SuggestionScreen from "./screens/SuggestionScreen";
 import EventScreen from "./screens/EventScreen";
 import HomeScreen from "./screens/HomeScreen";
-import EventDetailsScreen from './screens/EventDetailsScreen';
-import { Event } from 'types/types';
+import EventDetailsScreen from "./screens/EventDetailsScreen";
 
 export type AuthStackParams = {
   SplashScreen: undefined
@@ -32,7 +31,11 @@ export type MainStackParams = {
   SuggestionScreen: undefined
   EventScreen: undefined
   EventDetailsScreen: {eventId: string};
+}
 
+export type EventsStackParams = {
+  EventScreen: undefined
+  EventDetailsScreen: {eventId: string};
 }
 
 export type TabParams = {
@@ -44,7 +47,7 @@ export type TabParams = {
 
 const Stack = createNativeStackNavigator<AuthStackParams>();
 const MainStack = createNativeStackNavigator<MainStackParams>();
-
+const EventsStack = createNativeStackNavigator<EventsStackParams>();
 
 export const HomeStack = () => {
   return (
@@ -55,6 +58,15 @@ export const HomeStack = () => {
       <MainStack.Screen name={"EventScreen"} component={EventScreen} />
       <MainStack.Screen name={"EventDetailsScreen"} component={EventDetailsScreen} />
     </MainStack.Navigator>
+  );
+};
+
+export const EventStack = () => {
+  return (
+    <EventsStack.Navigator screenOptions={{headerShown: false,}}>
+      <EventsStack.Screen name={"EventScreen"} component={EventScreen}/>
+      <EventsStack.Screen name={"EventDetailsScreen"} component={EventDetailsScreen} />
+    </EventsStack.Navigator>
   );
 };
 

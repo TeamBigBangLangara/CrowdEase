@@ -12,9 +12,9 @@ import WeekCalendar from "../components/WeekCalendar";
 import { getUser } from "../auth/user";
 import { Bookmark, LoggedUser } from "types/types";
 import { fetchBookmarks } from "../api/bigBangAPI/bookmark";
-import { MainStackNavigationProps } from "../types/navigationTypes";
+import { EventsStackNavigationProps } from "../types/navigationTypes";
 
-const EventScreen = ({ navigation, }: MainStackNavigationProps<'EventScreen'>) => {
+const EventScreen = ({ navigation, }: EventsStackNavigationProps<'EventScreen'>) => {
 
   const [searchFilter, setSearchFilter] = useState("");
   const [dateFilter, setDateFilter] = useState("");
@@ -55,7 +55,7 @@ const EventScreen = ({ navigation, }: MainStackNavigationProps<'EventScreen'>) =
 
   const mergeBookmarkAndEvents = () => {
     if (requestEvents.data && requestUserBookmarks.data) {
-      const mergedEvents = requestEvents.data.map((event) => {
+      return requestEvents.data.map((event) => {
         const bookmark = requestUserBookmarks.data.find((bookmark: Bookmark) => bookmark.event_id === event.id);
         if (bookmark) {
           return {
@@ -65,7 +65,6 @@ const EventScreen = ({ navigation, }: MainStackNavigationProps<'EventScreen'>) =
         }
         return event;
       });
-      return mergedEvents;
     }
   };
 
@@ -78,8 +77,8 @@ const EventScreen = ({ navigation, }: MainStackNavigationProps<'EventScreen'>) =
   };
 
   const onDetailScreen = (eventId: string) => {
-    navigation.navigate("EventDetailsScreen", {eventId: eventId})
-  }
+    navigation.navigate("EventDetailsScreen", {eventId: eventId,});
+  };
 
   const renderEvents = () => {
     if (searchFilter) {
@@ -93,7 +92,7 @@ const EventScreen = ({ navigation, }: MainStackNavigationProps<'EventScreen'>) =
               eventType={"actual"}
               userID={userInfo?.uid}
               bookmarkId={item.bookmarkId}
-              onDetail={() => onDetailScreen(item.id)}
+              onDetail={() => onDetailScreen(item.id!)}
             />
           }
         />
@@ -109,7 +108,7 @@ const EventScreen = ({ navigation, }: MainStackNavigationProps<'EventScreen'>) =
               eventType={"actual"}
               userID={userInfo?.uid}
               bookmarkId={item.bookmarkId}
-              onDetail={() => onDetailScreen(item.id)}
+              onDetail={() => onDetailScreen(item.id!)}
             />
           }
         />

@@ -38,25 +38,25 @@ const WeekManagerScreen = () => {
   ////////////////////////////////////////
   const { week, } = getDate();
   const data = [
-      { day: "MON", value: 0, participant:0, },
-      { day: "TUE", value: 0, participant:0,},
-      { day: "WED", value: 0, participant:0,},
-      { day: "THU", value: 0, participant:0,},
-      { day: "FRI", value: 0, participant:0,},
-      { day: "SAT", value: 0, participant:0,},
-      { day: "SUN", value: 0, participant:0,}
+      { day: "MON", value: 2, participant:3747, },
+      { day: "TUE", value: 5, participant:7043,},
+      { day: "WED", value: 10, participant:9139,},
+      { day: "THU", value: 7, participant:4632,},
+      { day: "FRI", value: 16, participant:12139,},
+      { day: "SAT", value: 9, participant:8654,},
+      { day: "SUN", value:3, participant:5448,}
   ];
 
   ////////////////////////////////////////
-  requestEvents.data?.forEach((event) => {
-    for (let i = 0; i < 7; i++) {
-      data[i].day = formatDate(week[i]);
-      if (event.dates.date === week[i]) {
-        data[i].value = data[i].value>0 ? data[i].value+1 : 1;
-        data[i].participant += event.participants;
-      }
-    }
-  });
+  // requestEvents.data?.forEach((event) => {
+  //   for (let i = 0; i < 7; i++) {
+  //     data[i].day = formatDate(week[i]);
+  //     if (event.dates.date === week[i]) {
+  //       data[i].value = data[i].value>0 ? data[i].value+1 : 1;
+  //       data[i].participant += event.participants;
+  //     }
+  //   }
+  // });
 
   return (
     <ScrollView style={styles.container}>

@@ -12,7 +12,8 @@ import IconText from "./IconText";
 
 const DataVisualization = () => {
   const { week, } = getDate();
-  
+  const [selectedBar, setSelectedBar] = useState(45802);
+
   const requestEvents = useQuery("events", () => getEvents(),
   {
     onError: (error: TypeError) => {
@@ -20,27 +21,36 @@ const DataVisualization = () => {
     },
   }
   );
-  
+
   const data = [
-    { day: "MON", value: 0, },
-    { day: "TUE", value: 0, },
-    { day: "WED", value: 0, },
-    { day: "THU", value: 0, },
-    { day: "FRI", value: 0, },
-    { day: "SAT", value: 0, },
-    { day: "SUN", value: 0, }
+    { day: "MON", value: 5747, },
+    { day: "TUE", value: 7043, },
+    { day: "WED", value: 9139, },
+    { day: "THU", value: 7632, },
+    { day: "FRI", value: 12139, },
+    { day: "SAT", value: 8654, },
+    { day: "SUN", value: 5448, }
   ];
-  
-  requestEvents.data?.forEach((event) => {
-    for (let i = 0; i < 7; i++) {
-      if (event.dates.date === week[i]) {
-        data[i].value += event.participants;
-      }
-    }
-  });
-  
+  // const data = [
+  //   { day: "MON", value: 0, },
+  //   { day: "TUE", value: 0, },
+  //   { day: "WED", value: 0, },
+  //   { day: "THU", value: 0, },
+  //   { day: "FRI", value: 0, },
+  //   { day: "SAT", value: 0, },
+  //   { day: "SUN", value: 0, }
+  // ];
+
+  // requestEvents.data?.forEach((event) => {
+  //   for (let i = 0; i < 7; i++) {
+  //     if (event.dates.date === week[i]) {
+  //       data[i].value += event.participants;
+  //     }
+  //   }
+  // });
+
   const weekParticipants = data.reduce((total, day) => total + day.value, 0);
- 
+
   const [selectedBar, setSelectedBar] = useState(weekParticipants);
 
   const barChartSvg = {

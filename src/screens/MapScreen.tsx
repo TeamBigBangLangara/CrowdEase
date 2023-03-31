@@ -3,7 +3,6 @@ import MapView, { Heatmap, Marker } from "react-native-maps";
 import { useQuery } from "react-query";
 import React, { useEffect, useRef, useState } from "react";
 import Carousel from "react-native-snap-carousel";
-import { useNavigation } from "@react-navigation/native";
 
 import EventCard from "../components/EventCard";
 import { getEvents } from "../api/event";
@@ -14,7 +13,6 @@ import { heatMap } from "../model/mapData";
 import { MapStackNavigationProps } from "../types/navigationTypes";
 
 const MapScreen = ({navigation,} : MapStackNavigationProps<'MapScreen'>) => {
-  const navigation = useNavigation();
 
   const mapRef = React.useRef<any>(null);
   const carouselRef = useRef<Carousel<{ uri: string }>>(null);

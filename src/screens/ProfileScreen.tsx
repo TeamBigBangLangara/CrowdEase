@@ -194,7 +194,8 @@ const styles = StyleSheet.create({
     fontFamily: fontFamily.body,
     fontWeight: fontWeightBody,
     fontSize: fontSize.body,
-    marginTop: 70,
+    marginTop: 120,
+    marginBottom: 40
   },
 });
 

@@ -47,6 +47,7 @@ const MapScreen = ({navigation,} : MapStackNavigationProps<'MapScreen'>) => {
         ref={carouselRef as any}
         data={requestEvents.data || []}
         renderItem={_renderItem}
+        style={{paddingHorizontal: 10}}
         sliderWidth={Dimensions.get('screen').width}
         itemWidth={ITEM_WIDTH}
         onSnapToItem={(index) => {

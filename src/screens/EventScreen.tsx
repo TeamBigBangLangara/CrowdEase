@@ -1,14 +1,16 @@
 import React, { useState } from "react";
+import { useQuery } from "react-query";
 import { Alert, FlatList, Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { getEvents } from "../api/event";
-import { useQuery } from "react-query";
 
 import SearchForm from "../components/SearchForm";
+import WeekCalendar from "../components/WeekCalendar";
 import EventCard from "../components/EventCard";
 import FilterCategory from "../components/FilterCategory";
+
 import { fontFamily, fontSize, fontWeightSubtitle } from "../styles/fonts";
 import { colors } from "../styles/colors";
-import WeekCalendar from "../components/WeekCalendar";
+
 import { getUser } from "../auth/user";
 import { Bookmark, LoggedUser } from "types/types";
 import { fetchBookmarks } from "../api/bigBangAPI/bookmark";

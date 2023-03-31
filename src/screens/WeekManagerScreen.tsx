@@ -6,7 +6,7 @@ import { getDate } from "../utils/getDate";
 import ReportCard from "../components/ReportCard";
 import { colors } from "../styles/colors";
 
-const daysOfWeek:string[] = ["MON","TUE","WED","THU","FRI","SAT","SUN"];
+const daysOfWeek:string[] = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
 
 const formatDate = (dateStr:string)=> {
   let date = new Date(dateStr);

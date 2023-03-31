@@ -1,13 +1,13 @@
-import { Image, StyleSheet, Text, View } from 'react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Image, StyleSheet, Text, View } from "react-native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import MapScreen from '../../screens/MapScreen';
-import EventScreen from '../../screens/EventScreen';
-import WeekManager from '../../screens/WeekManagerScreen';
+import MapScreen from "../../screens/MapScreen";
+import EventScreen from "../../screens/EventScreen";
+import WeekManager from "../../screens/WeekManagerScreen";
 import { HomeStack } from "../../App";
-import { colors } from '../../styles/colors';
-import { fontFamily, fontWeightSubtitle2, fontSize } from '../../styles/fonts';
-import GradientText from '../GradientText';
+import { colors } from "../../styles/colors";
+import { fontFamily, fontSize, fontWeightSubtitle2 } from "../../styles/fonts";
+import GradientText from "../GradientText";
 
 const Tab = createBottomTabNavigator();
 
@@ -18,6 +18,7 @@ const NavigationBottomTab = () => {
         tabBarShowLabel: false,
         tabBarStyle: { backgroundColor: colors.neutral.surfaceBlack, height: 60, borderTopWidth: 2, borderTopColor: colors.neutral.outlineGrey, },
         tabBarActiveTintColor: colors.primary.primaryPurpleDark,
+        headerShown: false,
       }}>
       <Tab.Screen
         name="Home"
@@ -101,8 +102,7 @@ const styles = StyleSheet.create({
     fontFamily: fontFamily.body,
     fontSize: fontSize.body,
     fontWeight: fontWeightSubtitle2,
-    marginBottom: 5
-    
+    marginBottom: 5,
   },
   inactiveLabel: {
     color: colors.neutral.surfaceWhite,

@@ -1,60 +1,112 @@
-import { Modal, Pressable, StyleSheet, Text, View } from "react-native";
-import PrimaryButton from "./PrimaryButton";
+import { useState, useRef, forwardRef, useImperativeHandle } from 'react';
+import { Modal, Pressable, StyleSheet, Text, View, Image } from "react-native";
+
 import { fontFamily, fontSize, fontWeightSubtitle } from "../styles/fonts";
 import { colors } from "../styles/colors";
-import SecondaryButton from "./SecondaryButton";
+
+import PrimaryButton from "./PrimaryButton";
 import LinkButton from "./LinkButton";
 
-const FilterCategory = (props: {visible: boolean, onRequestClose?: () => void, onTouchStart?: () => void, onClosePress: () => void} ) => {
+
+//////////////////////// FILTER PRESSABLE ////////////////////////
+
+const EventCategoryPressable = forwardRef((props: {text: string, icon?: any}, ref) => {
+
+  const [isSelected, setIsSelected] = useState(false);
+
+  const selectionHandle = () => {
+    if(!isSelected){
+      setIsSelected(true);
+    } else {
+      setIsSelected(false);
+    }
+  };
+
   return (
-    <View>
+    <Pressable onPress={selectionHandle} style={[styles.eventsFilterPressable, isSelected && styles.eventsFilterPressableActive]}>
+      <Text style={[styles.eventsFilterPressableText, isSelected && styles.eventsFilterPressableActive]}>{props.text}</Text>
+      {props.icon &&
+      <Image source={props.icon}/>}
+    </Pressable>
+  );
+});
+
+//////////////////////// MAIN COMPONENT ////////////////////////
+
+const FilterCategory = (props: {visible: boolean, onRequestClose?: () => void, onTouchStart?: () => void, onClosePress: () => void}) => {
+
+  return (
       <Modal
         animationType="slide"
         transparent={true}
         visible={props.visible}
-        //onRequestClose={props.onRequestClose}
-        style={styles.modalContainer}
+        style={styles.container}
       >
         <View onTouchStart={props.onTouchStart} style={styles.centeredView}>
+
           <View style={styles.modalView}>
-              <LinkButton onPress={props.onClosePress} label={"Close"} style={styles.linkButton}/>
-              <Text style={styles.title}>Event Category</Text>
-              <View style={styles.buttonContainer}>
-              <SecondaryButton onPress={() => console.log('apply filter sports')} label={"Sports"} />
-              <SecondaryButton onPress={() => console.log('apply filter shows')} label={"Shows"} />
-              <SecondaryButton onPress={() => console.log('apply filter music')} label={"Music"} />
+            <View style={styles.eventsFilterHeaderContainer}>
+              <LinkButton onPress={props.onClosePress} label={"Close"} style={styles.eventsFilterHeaderContainerButtons}/>
+              
+              <View style={{flexDirection: 'row', columnGap: 5,}}>
+                <Text style={styles.eventsFilterHeaderContainerTitle}>Filters</Text>
+                <Image source={require('../assets/icons/filter.png')}/>
               </View>
-              <View style={styles.buttonContainer}>
-              <SecondaryButton onPress={() => console.log('apply filter press')} label={"Festivals"} />
-              <SecondaryButton onPress={() => console.log('apply filter press')} label={"Business"} />
-              <SecondaryButton onPress={() => console.log('apply filter press')} label={"Others"} />
+              <LinkButton onPress={() => console.log("under development")} label={"Clear All"} style={styles.eventsFilterHeaderContainerButtons}/>
+            </View>
+
+            <View style={styles.eventsFilterContainer}>
+              <Text style={styles.eventsFilterContainerTitle}>Event Category</Text>
+              <View style={styles.eventsFilterPressableContainer}>
+                <View style={styles.eventsFilterPressableContainerRow}>
+                  <EventCategoryPressable text={"Sports"} icon={require('../assets/category/sport.png')} />
+                  <EventCategoryPressable text={"Shows"} icon={require('../assets/category/show.png')} />
+                  <EventCategoryPressable text={"Music"} icon={require('../assets/category/music.png')} />
+                </View>
+                <View style={styles.eventsFilterPressableContainerRow}>
+                  <EventCategoryPressable text={"Festivals"} icon={require('../assets/category/festival.png')}/>
+                  <EventCategoryPressable text={"Business"} icon={require('../assets/category/business.png')}/>
+                  <EventCategoryPressable text={"Other"} icon={require('../assets/category/other.png')}/>
+                </View>
               </View>
-              <PrimaryButton onPress={() => console.log('apply filter press')} label={"Apply Filter"}/>
+            </View>
+
+            <View style={styles.eventsFilterContainer}>
+              <Text style={styles.eventsFilterContainerTitle}>Distance</Text>
+              <View style={styles.eventsFilterPressableContainer}>
+                <View style={styles.eventsFilterPressableContainerRow}>
+                  <EventCategoryPressable text={'500m'}/>
+                  <EventCategoryPressable text={'1km'}/>
+                  <EventCategoryPressable text={'3km'}/>
+                </View>
+              </View>
+            </View>
+
+            <PrimaryButton onPress={() => console.log('apply filter press')} label={"Apply Filter"}/>
           </View>
         </View>
       </Modal>
-    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    backgroundColor: colors.neutral.backgroundBlack,
+  },
+
   centeredView: {
     flex: 1,
     justifyContent: 'flex-end',
-    alignItems: 'center',
-    marginTop: 40,
-    backgroundColor: 'rgba(33,33,33,0.5)',
+    backgroundColor: 'rgba(33,33,33,0.7)',
   },
-  modalContainer: {
-    //flex: 1,
-  },
+
   modalView: {
-    width: '100%',
-    height: '50%',
-    backgroundColor: 'black',
-    borderRadius: 20,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    backgroundColor: colors.neutral.backgroundBlack,
     padding: 35,
-    // alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -63,24 +115,78 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+
+    rowGap: 40,
   },
-  icon: {
-    alignItems: "center",
+
+  eventsFilterHeaderContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderBottomWidth: 2,
+    borderBottomColor: colors.neutral.outlineGrey,
+    paddingVertical: 15,
   },
-  title: {
+
+  eventsFilterHeaderContainerTitle: {
+    fontSize: fontSize.subtitle2,
+    fontFamily: fontFamily.subtitle,
+    fontWeight: fontWeightSubtitle,
+    color: colors.neutral.surfaceWhite,
+  },
+
+  eventsFilterHeaderContainerButtons: {
+    fontSize: fontSize.subtitle2,
+    fontFamily: fontFamily.subtitle,
+    fontWeight: fontWeightSubtitle,
+    color: colors.neutral.surfaceWhite,
+    borderBottomColor: 'rgba(12,25,88,0)',
+  },
+
+  eventsFilterContainer: {
+    flexDirection: 'column',
+    rowGap: 10,
+  },
+
+  eventsFilterContainerTitle: {
     fontSize: fontSize.subtitle1,
     fontFamily: fontFamily.subtitle,
     fontWeight: fontWeightSubtitle,
     color: colors.neutral.surfaceWhite,
   },
-  buttonContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginVertical: 20,
+
+  eventsFilterPressableContainer: {
+    flexDirection: "column",
+    rowGap: 20,
+  },  
+
+  eventsFilterPressableContainerRow: {
+    flexDirection: 'row',
+    columnGap: 10,
   },
-  linkButton: {
-    color: colors.neutral.surfaceWhite,
-    borderBottomColor: 'rgba(12,25,88,0)',
+
+  eventsFilterPressable: {
+    flex: 1,
+    flexDirection: 'row',
+    columnGap: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderColor: colors.secondaryGreenLight,
+    borderRadius: 22,
+    borderWidth: 2,
+    height: 42,
+  },
+
+  eventsFilterPressableText: {
+    color: colors.secondaryGreenLight,
+    fontFamily: fontFamily.subtitle,
+    fontSize: fontSize.subtitle2,
+    fontWeight: fontWeightSubtitle,
+    lineHeight: 18,
+  },
+
+  eventsFilterPressableActive: {
+    borderColor: colors.secondaryGreenDark,
+    color: colors.secondaryGreenDark,
   },
 });
 

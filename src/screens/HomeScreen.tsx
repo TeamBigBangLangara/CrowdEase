@@ -1,26 +1,23 @@
-import { StyleSheet, Text, View, ScrollView, SafeAreaView, Pressable, Alert } from "react-native";
+import { Alert, Image, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 import { useQuery } from "react-query";
 
-import { signOut } from '../auth/user';
-import { MainStackNavigationProps } from '../types/navigationTypes';
-import { colors } from '../styles/colors';
-import { fontFamily } from '../styles/fonts';
-import { fontSize } from '../styles/fonts';
-import { fontWeightSubtitle, fontWeightBody, fontWeightSubtitle2 } from '../styles/fonts';
-import IconText from '../components/IconText';
-import PrimaryButton from '../components/PrimaryButton';
-import SecondaryButton from '../components/SecondaryButton';
-import ParticipantsByMealCard from '../components/ParticipantsByMealCard';
-import LinkButton from '../components/LinkButton';
-import DataVisualization from '../components/DataVisualization';
-import { getDate } from '../utils/getDate';
+import { MainStackNavigationProps } from "../types/navigationTypes";
+import { colors } from "../styles/colors";
+import { fontFamily, fontSize, fontWeightBody, fontWeightSubtitle, fontWeightSubtitle2 } from "../styles/fonts";
+import IconText from "../components/IconText";
+import PrimaryButton from "../components/PrimaryButton";
+import SecondaryButton from "../components/SecondaryButton";
+import ParticipantsByMealCard from "../components/ParticipantsByMealCard";
+import LinkButton from "../components/LinkButton";
+import DataVisualization from "../components/DataVisualization";
+import { getDate } from "../utils/getDate";
 import { borderRadius } from "../styles/basic";
 import EventCarousel from "../components/EventCarousel";
 import { getEvents } from "../api/event";
 import { useState } from "react";
 
 // Get the dates
-const { formattedFirstDay, formattedLastDay, today, todayFormatted, week, getWeekday } = getDate();
+const { formattedFirstDay, formattedLastDay, today, todayFormatted, week, getWeekday, } = getDate();
 
 const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => {
 
@@ -44,12 +41,14 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
   const onSeeMorePress = () => {
     navigation.navigate('EventScreen');
   };
+  const onProfileScreen = () => {
+    navigation.navigate('ProfileScreen');
+  };
 
   const onEventCardPress = () => {
     navigation.navigate('EventDetailsScreen', {eventId});
-    setEventId(eventId)
-    
-  }
+    setEventId(eventId);
+  };
   const renderTodayParticipants = () => {
     let participants = 0;
     requestEvents.data?.forEach((event) => {
@@ -60,7 +59,7 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
     return (
       <Text style={styles.todayParticipantsNumber}>{participants}</Text>
     );
-  }
+  };
   const renderBusyDay = () => {
     const weekParticipants = [];
     //get each day with  participants
@@ -93,8 +92,8 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
     //format the busiest day
     const dateObj = new Date(dateWithHighestParticipants);
     dateObj.setDate(dateObj.getDate() + 1);
-    const formattedDate = dateObj.toLocaleString('en-US', { month: 'long', day: 'numeric' });
-    const day = getWeekday(dateWithHighestParticipants)
+    const formattedDate = dateObj.toLocaleString('en-US', { month: 'long', day: 'numeric', });
+    const day = getWeekday(dateWithHighestParticipants);
 
     return <Text style={styles.busyDay}>{formattedDate} {day}</Text>;
   };
@@ -103,9 +102,12 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
     <SafeAreaView style={{ flex: 1, }}>
       <ScrollView>
         <View style={styles.container}>
-          <Pressable onPress={signOut}>
-            <Text style={{ color: colors.neutral.surfaceWhite, }}>Sign out</Text>
-          </Pressable>
+          <View style={styles.header}>
+            <Text style={styles.headerTitle}>Crowd Ease</Text>
+            <Pressable onPress={onProfileScreen}>
+            <Image style={styles.profileIcon} source={require('../assets/icons/profile.png')} />
+            </Pressable>
+          </View>
           <Text style={styles.title}>Preview of this week's events</Text>
           <View style={styles.dataVisualizationContainer}>
             <DataVisualization />
@@ -153,6 +155,25 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 24,
   },
+  header: {
+    height: 40,
+    backgroundColor: colors.neutral.backgroundBlack,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 24,
+  },
+  headerTitle:{
+    fontFamily: fontFamily.heading,
+    fontSize: fontSize.heading2,
+    fontWeight: fontWeightSubtitle2,
+    color: colors.neutral.surfaceWhite,
+  },
+  profileIcon: {
+    width: 28,
+    height: 28,
+  },
   title: {
     color: colors.primary.primaryPurpleDark,
     fontFamily: fontFamily.subtitle,
@@ -177,7 +198,7 @@ const styles = StyleSheet.create({
     fontSize: fontSize.subtitle2,
     fontWeight: fontWeightBody,
     marginBottom: 15,
-    marginTop: 30
+    marginTop: 30,
   },
   suggestionContainer: {
     alignSelf: 'center',

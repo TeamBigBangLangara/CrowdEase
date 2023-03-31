@@ -1,66 +1,42 @@
-const Images = [
-  { image: require("../assets/images/background of lauch screen.jpg") },
-  { image: require("../assets/images/background of lauch screen.jpg") },
-];
-export const markers = [
+export const heatMap =[
   {
-    coordinate: {
-      latitude: 49.2797959,
-      longitude: -123.0974419,
-    },
-    title: "Go Home: DJ Pistachio & Downtown Solutions",
-    description: "DJ PISTACHIO & DOWNTOWN SOLUTIONS present: GO HOME! ",
-    image: Images[0].image,
-    timing: "11:00 AM",
-    location: "Addah",
-    participants: 312,
+  latitude: 49.2805197,
+  longitude: -123.1007382,
+  weight: 650,
+  },
+{
+  latitude: 49.030235,
+  longitude: -122.287062,
+  weight: 550,
+  },
+{
+  latitude: 49.2776612,
+  longitude: -123.1081074 ,
+  weight: 750,
+  },
+{
+  latitude: 49.2776612,
+  longitude: -123.1081074,
+  weight: 500,
   },
   {
-    coordinate: {
-      latitude: 49.2803897,
-      longitude: -123.1126552,
-    },
-    title: "Raffi",
-    description: "Stylish theatre that's home to Ballet BC & the Vancouver Opera, plus touring productions.",
-    image: Images[1].image,
-    timing: "11:00 AM - 2:00 PM",
-    location: "Queen Elizabeth Theatre",
-    participants: 1200,
+    latitude: 49.2806462,
+    longitude: -123.1208652,
+    weight: 450,
   },
   {
-    coordinate: {
-      latitude: 49.2756562,
-      longitude: -123.1096782,
-    },
-    title: "KAP SLAP - THE RETURN",
-    description: "This is the third best food place",
-    image: Images[0].image,
-    timing: "11:00 PM - 3:00 AM",
-    location: "ENSO EVENT CENTRE",
-    participants: 800,
+    latitude: 49.279672,
+    longitude: -123.130293,
+    weight: 450,
   },
   {
-    coordinate: {
-      latitude: 49.2805556,
-      longitude: -123.1208333,
-    },
-    title: "Otoboke Beaver",
-    description: "Check out the past concert and event calendar for Otoboke Beaver in Vancouver along with detailed ticket",
-    image: Images[1].image,
-    timing: "07:00 PM - 09:00 PM",
-    location: "Commodore Ballroom",
-    participants: 850,
+    latitude: 49.2777469,
+    longitude: -123.1174817,
+    weight: 200,
   },
   {
-    coordinate: {
-      latitude: 49.2799513,
-      longitude: -123.0992712,
-    },
-    title: "Treat Show Comedy (LATE SHOW)",
-    description: "Treat Show is very good improvised comedy that happens Saturdays at 7:30 and 9:30 at China Cloud Studios",
-    image: Images[0].image,
-    timing: "07:30 PM - 09:00 PM",
-    location: "The China Cloud",
-    participants: 500,
-  },
-];
+    latitude: 49.2760688,
+    longitude: -123.1127117,
+    weight: 500,
+  }
+]

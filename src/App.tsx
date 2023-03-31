@@ -15,6 +15,8 @@ import WeekManagerScreen from "./screens/WeekManagerScreen";
 import SuggestionScreen from "./screens/SuggestionScreen";
 import EventScreen from "./screens/EventScreen";
 import HomeScreen from "./screens/HomeScreen";
+import PastEventScreen from './screens/PastEventScreen';
+import ProfileScreen from './screens/ProfileScreen';
 import EventDetailsScreen from "./screens/EventDetailsScreen";
 
 export type AuthStackParams = {
@@ -31,6 +33,8 @@ export type MainStackParams = {
   SuggestionScreen: undefined
   EventScreen: undefined
   EventDetailsScreen: {eventId: string};
+  PastEventScreen: undefined
+  ProfileScreen: undefined
 }
 
 export type EventsStackParams = {
@@ -51,11 +55,13 @@ const EventsStack = createNativeStackNavigator<EventsStackParams>();
 
 export const HomeStack = () => {
   return (
-    <MainStack.Navigator screenOptions={{ headerShown: false, }}>
-      <MainStack.Screen name={"HomeScreen"} component={HomeScreen} />
-      <MainStack.Screen name={"WeekManagerScreen"} component={WeekManagerScreen} />
-      <MainStack.Screen name={"SuggestionScreen"} component={SuggestionScreen} />
-      <MainStack.Screen name={"EventScreen"} component={EventScreen} />
+    <MainStack.Navigator screenOptions={{ headerShown: false,}}>
+      <MainStack.Screen name={"HomeScreen"} component={HomeScreen}/>
+      <MainStack.Screen name={"WeekManagerScreen"} component={WeekManagerScreen}/>
+      <MainStack.Screen name={"SuggestionScreen"} component={SuggestionScreen}/>
+      <MainStack.Screen name={"PastEventScreen"} component={PastEventScreen}/>
+      <MainStack.Screen name={"EventScreen"} component={EventScreen}/>
+      <MainStack.Screen name={"ProfileScreen"} component={ProfileScreen}/>
       <MainStack.Screen name={"EventDetailsScreen"} component={EventDetailsScreen} />
     </MainStack.Navigator>
   );

@@ -1,14 +1,16 @@
 import React, { useState } from "react";
+import { useQuery } from "react-query";
 import { Alert, FlatList, Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { getEvents } from "../api/event";
-import { useQuery } from "react-query";
 
 import SearchForm from "../components/SearchForm";
+import WeekCalendar from "../components/WeekCalendar";
 import EventCard from "../components/EventCard";
 import FilterCategory from "../components/FilterCategory";
+
 import { fontFamily, fontSize, fontWeightSubtitle } from "../styles/fonts";
 import { colors } from "../styles/colors";
-import WeekCalendar from "../components/WeekCalendar";
+
 import { getUser } from "../auth/user";
 import { Bookmark, LoggedUser } from "types/types";
 import { fetchBookmarks } from "../api/bigBangAPI/bookmark";
@@ -18,6 +20,9 @@ const EventScreen = ({ navigation, }: EventsStackNavigationProps<'EventScreen'>)
 
   const [searchFilter, setSearchFilter] = useState("");
   const [dateFilter, setDateFilter] = useState("");
+  //For simplification, only 1 category is passed for filtering.
+  const [categoryFilter, setCategoryFilter] = useState("");
+
   const [modalVisible, setModalVisible] = useState(false);
   const [userInfo, setUserInfo] = useState<LoggedUser>({ uid: "", email: "", });
 
@@ -35,9 +40,13 @@ const EventScreen = ({ navigation, }: EventsStackNavigationProps<'EventScreen'>)
         return events.filter((event) => {
           return searchFilter ? event.name.toLowerCase().includes(searchFilter.toLowerCase()) : true;
         })
-          .filter((event) => {
-            return dateFilter ? event.dates.date === dateFilter : true;
-          });
+        .filter((event) => {
+          return dateFilter ? event.dates.date === dateFilter : true;
+        })
+        //Category Filter (under development)
+        .filter((event) => {
+          return categoryFilter ? event.category.name === categoryFilter : true;
+        });
       },
       onError: (error: TypeError) => {
         Alert.alert("Error", error.message);
@@ -51,7 +60,6 @@ const EventScreen = ({ navigation, }: EventsStackNavigationProps<'EventScreen'>)
       enabled: !!userInfo.uid && requestEvents.isSuccess,
     }
   );
-
 
   const mergeBookmarkAndEvents = () => {
     if (requestEvents.data && requestUserBookmarks.data) {
@@ -90,7 +98,7 @@ const EventScreen = ({ navigation, }: EventsStackNavigationProps<'EventScreen'>)
               key={item.id}
               event={item}
               eventType={"actual"}
-              userID={userInfo?.uid}
+              userId={userInfo?.uid}
               bookmarkId={item.bookmarkId}
               onDetail={() => onDetailScreen(item.id!)}
             />
@@ -106,7 +114,7 @@ const EventScreen = ({ navigation, }: EventsStackNavigationProps<'EventScreen'>)
               key={item.id}
               event={item}
               eventType={"actual"}
-              userID={userInfo?.uid}
+              userId={userInfo?.uid}
               bookmarkId={item.bookmarkId}
               onDetail={() => onDetailScreen(item.id!)}
             />

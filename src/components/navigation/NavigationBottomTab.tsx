@@ -17,6 +17,7 @@ const NavigationBottomTab = () => {
         tabBarShowLabel: false,
         tabBarStyle: { backgroundColor: colors.neutral.surfaceBlack, height: 60, borderTopWidth: 2, borderTopColor: colors.neutral.outlineGrey, },
         tabBarActiveTintColor: colors.primary.primaryPurpleDark,
+        headerShown: false,
       }}>
       <Tab.Screen
         name="Home"
@@ -102,7 +103,6 @@ const styles = StyleSheet.create({
     fontSize: fontSize.body,
     fontWeight: fontWeightSubtitle2,
     marginBottom: 5,
-
   },
   inactiveLabel: {
     color: colors.neutral.surfaceWhite,

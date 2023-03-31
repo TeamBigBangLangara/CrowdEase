@@ -27,7 +27,7 @@ const EventScreen = ({ navigation, }: EventsStackNavigationProps<'EventScreen'>)
   const [userInfo, setUserInfo] = useState<LoggedUser>({ uid: "", email: "", });
 
   useQuery("getUserData", getUser, {
-      onSuccess: (data) => {
+      onSuccess: (data:LoggedUser) => {
         setUserInfo(data);
       },
     }

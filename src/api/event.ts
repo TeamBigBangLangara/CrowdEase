@@ -69,8 +69,6 @@ export const getEventById = (id: string) => {
             address: response._embedded.venues[0].address.line1,
             participants: Math.floor(Math.random() * (12200 - 2200 + 1)) + 2200,
           };
-          console.log('event', event);
-          
         return event;
       }
     );

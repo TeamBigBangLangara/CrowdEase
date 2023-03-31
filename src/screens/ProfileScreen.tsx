@@ -1,5 +1,5 @@
-import { View, Text, Image, StyleSheet, Pressable, Alert } from "react-native"
-import LinearGradient from 'react-native-linear-gradient';
+import { Alert, Image, Pressable, StyleSheet, Text, View } from "react-native";
+import LinearGradient from "react-native-linear-gradient";
 
 import { MainStackNavigationProps } from "../types/navigationTypes";
 import { signOut } from "../auth/user";
@@ -9,25 +9,27 @@ import { colors } from "../styles/colors";
 import { fontFamily, fontSize, fontWeightBody, fontWeightSubtitle, fontWeightSubtitle2 } from "../styles/fonts";
 
 const ProfileScreen = ({ navigation, }: MainStackNavigationProps<'ProfileScreen'>) => {
-
   const onEditPress = () => {
-    Alert.alert('edit clicked')
-  }
+    Alert.alert('edit clicked');
+  };
 
   const onArrow = () => {
-    Alert.alert('icon clicked')
-  }
+    Alert.alert('icon clicked');
+  };
 
   const onPastEvent = () => {
     navigation.navigate('PastEventScreen');
-  }
+  };
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerTitle}>Profile</Text>
-        <Image source={require('../assets/icons/profile.png')} />
-      </View>
+        <View style={styles.header}>
+          <Pressable onPress={() => navigation.goBack()}>
+            <Image source={require('../assets/icons/backButton.png')}/>
+          </Pressable>
+          <Text style={styles.headerTitle}>Profile</Text>
+          <Image source={require('../assets/icons/profile.png')} />
+        </View>
       <LinearGradient
         colors={colors.primary.gradientDark.colors}
         start={colors.primary.gradientDark.start}
@@ -99,9 +101,9 @@ const ProfileScreen = ({ navigation, }: MainStackNavigationProps<'ProfileScreen'
         style={styles.logout} />
       </Pressable>
     </View>
-  )
+  );
 
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -112,7 +114,6 @@ const styles = StyleSheet.create({
   header: {
     height: 40,
     backgroundColor: colors.neutral.backgroundBlack,
-    display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -121,7 +122,7 @@ const styles = StyleSheet.create({
     fontFamily: fontFamily.heading,
     fontSize: fontSize.heading2,
     fontWeight: fontWeightSubtitle2,
-    color: colors.neutral.surfaceWhite
+    color: colors.neutral.surfaceWhite,
   },
   imageContainer: {
     height: 80,
@@ -131,21 +132,22 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 20,
-    width: 400
+    width: 400,
   },
   picture: {
-    height: 100,
-    width: 100
+    height: 60,
+    width: 60,
+    marginLeft: 30,
   },
   editProfile: {
     color: colors.neutral.surfaceWhite,
-    borderBottomColor: colors.neutral.surfaceWhite
+    borderBottomColor: colors.neutral.surfaceWhite,
   },
   profileName: {
     color: colors.neutral.surfaceWhite,
     fontFamily: fontFamily.subtitle,
     fontSize: fontSize.subtitle1,
-    fontWeight: fontWeightSubtitle
+    fontWeight: fontWeightSubtitle,
   },
   editContainer: {
     marginTop: 4,
@@ -160,11 +162,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   nameContainer: {
-    marginRight: 20
+    marginRight: 20,
   },
   listContainer: {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   item: {
     backgroundColor: colors.neutral.surfaceBlack,
@@ -192,8 +194,8 @@ const styles = StyleSheet.create({
     fontFamily: fontFamily.body,
     fontWeight: fontWeightBody,
     fontSize: fontSize.body,
-    marginTop: 70
-  }
-})
+    marginTop: 70,
+  },
+});
 
-export default ProfileScreen
+export default ProfileScreen;

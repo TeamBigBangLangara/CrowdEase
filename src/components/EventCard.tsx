@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useMutation } from "react-query";
-import { Alert, Image, StyleSheet, Text, View } from "react-native";
+import { Alert, Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import BookmarkButton from "./BookmarkButton";
 import IconText from "./IconText";
@@ -18,6 +19,7 @@ const EventCard = (props: {
   userID: string
   bookmarkId: string
 }) => {
+
   const saveBookmark = useMutation(["bookmark"], () => addBookmark({
     "user_id": props.userID,
     "event_id": props.event.id,

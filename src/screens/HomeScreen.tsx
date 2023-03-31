@@ -17,11 +17,14 @@ import { getDate } from '../utils/getDate';
 import { borderRadius } from "../styles/basic";
 import EventCarousel from "../components/EventCarousel";
 import { getEvents } from "../api/event";
+import { useState } from "react";
 
 // Get the dates
 const { formattedFirstDay, formattedLastDay, today, todayFormatted, week, getWeekday } = getDate();
 
 const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => {
+
+  const [eventId, setEventId] = useState('')
 
   const requestEvents = useQuery("events", () => getEvents(),
     {
@@ -33,12 +36,20 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
   const onFullReportPress = () => {
     navigation.navigate('WeekManagerScreen');
   };
+
   const onSeeSuggestionPress = () => {
     navigation.navigate('SuggestionScreen');
   };
+
   const onSeeMorePress = () => {
     navigation.navigate('EventScreen');
   };
+
+  const onEventCardPress = () => {
+    navigation.navigate('EventDetailsScreen', {eventId});
+    setEventId(eventId)
+    
+  }
   const renderTodayParticipants = () => {
     let participants = 0;
     requestEvents.data?.forEach((event) => {
@@ -128,7 +139,7 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
             <LinkButton onPress={onSeeMorePress} label={'See All'} style={styles.linkButton} />
           </View>
           <View style={styles.carouselContainer}>
-            <EventCarousel />
+            <EventCarousel screenName="EventDetailsScreen" />
           </View>
         </View>
       </ScrollView>

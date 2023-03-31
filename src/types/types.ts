@@ -1,5 +1,5 @@
 export interface Event {
-  bookmarkId: any
+  bookmarkId?: any
   id?: string
   name: string
   image: string

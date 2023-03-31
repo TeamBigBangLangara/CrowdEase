@@ -15,6 +15,8 @@ import WeekManagerScreen from "./screens/WeekManagerScreen";
 import SuggestionScreen from "./screens/SuggestionScreen";
 import EventScreen from "./screens/EventScreen";
 import HomeScreen from "./screens/HomeScreen";
+import EventDetailsScreen from './screens/EventDetailsScreen';
+import { Event } from 'types/types';
 
 export type AuthStackParams = {
   SplashScreen: undefined
@@ -29,6 +31,8 @@ export type MainStackParams = {
   WeekManagerScreen: undefined
   SuggestionScreen: undefined
   EventScreen: undefined
+  EventDetailsScreen: {eventId: string};
+
 }
 
 export type TabParams = {
@@ -44,11 +48,12 @@ const MainStack = createNativeStackNavigator<MainStackParams>();
 
 export const HomeStack = () => {
   return (
-    <MainStack.Navigator screenOptions={{ headerShown: false,}}>
-      <MainStack.Screen name={"HomeScreen"} component={HomeScreen}/>
-      <MainStack.Screen name={"WeekManagerScreen"} component={WeekManagerScreen}/>
-      <MainStack.Screen name={"SuggestionScreen"} component={SuggestionScreen}/>
-      <MainStack.Screen name={"EventScreen"} component={EventScreen}/>
+    <MainStack.Navigator screenOptions={{ headerShown: false, }}>
+      <MainStack.Screen name={"HomeScreen"} component={HomeScreen} />
+      <MainStack.Screen name={"WeekManagerScreen"} component={WeekManagerScreen} />
+      <MainStack.Screen name={"SuggestionScreen"} component={SuggestionScreen} />
+      <MainStack.Screen name={"EventScreen"} component={EventScreen} />
+      <MainStack.Screen name={"EventDetailsScreen"} component={EventDetailsScreen} />
     </MainStack.Navigator>
   );
 };
@@ -76,20 +81,20 @@ const App = () => {
     <SafeAreaView style={{ flex: 1, }}>
       <QueryClientProvider client={queryClient}>
         <NavigationContainer>
-        {!isLoggedIn && (
-          <Stack.Navigator initialRouteName={'SplashScreen'}>
-            <Stack.Screen name={'SplashScreen'} component={SplashScreen} />
-            <Stack.Screen name={'LoginScreen'} component={Login} />
-            <Stack.Screen name={'SignUpScreen'} component={SignUp} />
-            <Stack.Screen name={'LocationScreen'} component={LocationScreen} />
-          </Stack.Navigator>
-        )}
-        {isLoggedIn && (
-          <Stack.Navigator screenOptions={{ headerShown: false,}}>
-            <Stack.Screen name={'BottomTabs'} component={NavigationBottomTab} />
-          </Stack.Navigator>
-        )}
-          </NavigationContainer>
+          {!isLoggedIn && (
+            <Stack.Navigator initialRouteName={'SplashScreen'}>
+              <Stack.Screen name={'SplashScreen'} component={SplashScreen} />
+              <Stack.Screen name={'LoginScreen'} component={Login} />
+              <Stack.Screen name={'SignUpScreen'} component={SignUp} />
+              <Stack.Screen name={'LocationScreen'} component={LocationScreen} />
+            </Stack.Navigator>
+          )}
+          {isLoggedIn && (
+            <Stack.Navigator screenOptions={{ headerShown: false, }}>
+              <Stack.Screen name={'BottomTabs'} component={NavigationBottomTab} />
+            </Stack.Navigator>
+          )}
+        </NavigationContainer>
       </QueryClientProvider>
     </SafeAreaView>
   );

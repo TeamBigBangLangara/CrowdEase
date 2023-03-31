@@ -18,6 +18,7 @@ const EventCard = (props: {
   eventType: string
   userID: string
   bookmarkId: string
+  onDetail: () => void
 }) => {
 
   const saveBookmark = useMutation(["bookmark"], () => addBookmark({
@@ -135,30 +136,32 @@ const EventCard = (props: {
   };
 
   return (
-    <View style={styles.container}>
-      {renderDragUpButton()}
-      <View style={styles.eventContainer}>
-        <Image source={{ uri: props.event.image, }} style={styles.eventImage} />
-        <View style={styles.leftContainer}>
-          <View style={styles.upContainer}>
-            {renderDate()}
-            <Text style={styles.eventTitle} numberOfLines={1}>{props.event.name}</Text>
-            <IconText icon={require("../assets/icons/pin.png")} numberOfLines={1} text={props.event.address}
-                      style={styles.icon} />
-          </View>
-          <View style={styles.participantsContainer}>
-            <IconText
-              icon={require("../assets/icons/participants.png")}
-              text={`${props.event.participants} participants`}
-              style={styles.icon}
-            />
-            {renderBookmarkButton()}
+    <Pressable onPress={props.onDetail}>
+      <View style={styles.container}>
+        {renderDragUpButton()}
+        <View style={styles.eventContainer}>
+          <Image source={{ uri: props.event.image, }} style={styles.eventImage} />
+          <View style={styles.leftContainer}>
+            <View style={styles.upContainer}>
+              {renderDate()}
+              <Text style={styles.eventTitle} numberOfLines={1}>{props.event.name}</Text>
+              <IconText icon={require("../assets/icons/pin.png")} numberOfLines={1} text={props.event.address}
+                        style={styles.icon} />
+            </View>
+            <View style={styles.participantsContainer}>
+              <IconText
+                icon={require("../assets/icons/participants.png")}
+                text={`${props.event.participants} participants`}
+                style={styles.icon}
+              />
+              {renderBookmarkButton()}
+            </View>
           </View>
         </View>
+        <View>{!showRating ? renderRatingButton() : ""}</View>
+        {showRating ? renderRatingCard() : ""}
       </View>
-      <View>{!showRating ? renderRatingButton() : ""}</View>
-      {showRating ? renderRatingCard() : ""}
-    </View>
+    </Pressable>
   );
 };
 

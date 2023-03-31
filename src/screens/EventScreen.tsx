@@ -12,8 +12,9 @@ import WeekCalendar from "../components/WeekCalendar";
 import { getUser } from "../auth/user";
 import { Bookmark, LoggedUser } from "types/types";
 import { fetchBookmarks } from "../api/bigBangAPI/bookmark";
+import { MainStackNavigationProps } from "../types/navigationTypes";
 
-const EventScreen = () => {
+const EventScreen = ({ navigation, }: MainStackNavigationProps<'EventScreen'>) => {
 
   const [searchFilter, setSearchFilter] = useState("");
   const [dateFilter, setDateFilter] = useState("");
@@ -76,6 +77,10 @@ const EventScreen = () => {
     setDateFilter(date);
   };
 
+  const onDetailScreen = (eventId: string) => {
+    navigation.navigate("EventDetailsScreen", {eventId: eventId})
+  }
+
   const renderEvents = () => {
     if (searchFilter) {
       return (
@@ -88,6 +93,7 @@ const EventScreen = () => {
               eventType={"actual"}
               userID={userInfo?.uid}
               bookmarkId={item.bookmarkId}
+              onDetail={() => onDetailScreen(item.id)}
             />
           }
         />
@@ -103,6 +109,7 @@ const EventScreen = () => {
               eventType={"actual"}
               userID={userInfo?.uid}
               bookmarkId={item.bookmarkId}
+              onDetail={() => onDetailScreen(item.id)}
             />
           }
         />

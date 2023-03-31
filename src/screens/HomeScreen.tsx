@@ -6,7 +6,7 @@ import { MainStackNavigationProps } from '../types/navigationTypes';
 import { colors } from '../styles/colors';
 import { fontFamily } from '../styles/fonts';
 import { fontSize } from '../styles/fonts';
-import { fontWeightTitle, fontWeightSubtitle, fontWeightBody, fontWeightSubtitle2 } from '../styles/fonts';
+import { fontWeightSubtitle, fontWeightBody, fontWeightSubtitle2 } from '../styles/fonts';
 import IconText from '../components/IconText';
 import PrimaryButton from '../components/PrimaryButton';
 import SecondaryButton from '../components/SecondaryButton';
@@ -139,7 +139,7 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
             <LinkButton onPress={onSeeMorePress} label={'See All'} style={styles.linkButton} />
           </View>
           <View style={styles.carouselContainer}>
-            <EventCarousel screenName="EventDetailsScreen" />
+            <EventCarousel/>
           </View>
         </View>
       </ScrollView>

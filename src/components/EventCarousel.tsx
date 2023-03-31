@@ -6,7 +6,7 @@ import EventCard from './EventCard';
 import { colors } from "../styles/colors";
 import { useNavigation } from '@react-navigation/native';
 
-const EventCarousel = (props:{screenName: string}) => {
+const EventCarousel = () => {
 const navigation = useNavigation()
 
   const  {data: events = [],} = useQuery("events", () => getEvents(),
@@ -19,8 +19,8 @@ const navigation = useNavigation()
 
 
 
-const something = (eventId: string) => {
-  navigation.navigate(props.screenName, {eventId: eventId})
+const onDetailScreen = (eventId: string) => {
+  navigation.navigate("EventDetailsScreen", {eventId: eventId})
 }
 
 const today = new Date().toISOString().slice(0, 10);
@@ -45,14 +45,14 @@ const onBookMarkPress = () => {
       <Carousel
       data={filteredEvents()}
         renderItem={({ item,}) => {
-          return (<TouchableOpacity onPress={() => something(item.id)}>
-             <EventCard
+          return<EventCard
             key={item.id}
             event={item}
             eventType={"actual"}
             onBookmarkPress={onBookMarkPress}
+            onDetail={() => onDetailScreen(item.id)}
           />;
-          </TouchableOpacity>)
+          
         }
         }
           sliderWidth={390}

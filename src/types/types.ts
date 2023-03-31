@@ -1,5 +1,5 @@
 export interface Event {
-  id?: string
+  id: string
   ratingID: string
   rate: number
   name: string

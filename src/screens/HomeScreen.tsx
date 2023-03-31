@@ -36,7 +36,7 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
   };
 
   const onSeeSuggestionPress = () => {
-    navigation.navigate('WeekManagerScreen');
+    navigation.navigate('SuggestionScreen');
   };
 
   const onSeeMorePress = () => {

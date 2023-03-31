@@ -47,7 +47,7 @@ const MapScreen = ({navigation,} : MapStackNavigationProps<'MapScreen'>) => {
         ref={carouselRef as any}
         data={requestEvents.data || []}
         renderItem={_renderItem}
-        style={{paddingHorizontal: 10}}
+        style={styles.eventCard}
         sliderWidth={Dimensions.get('screen').width}
         itemWidth={ITEM_WIDTH}
         onSnapToItem={(index) => {
@@ -138,6 +138,9 @@ const styles = StyleSheet.create({
   map: {
     width: '100%',
     height: '100%',
+  },
+  eventCard:{
+    paddingHorizontal: 5,
   },
   carousel: {
     position: 'absolute',

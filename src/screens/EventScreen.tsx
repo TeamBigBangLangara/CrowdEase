@@ -14,8 +14,9 @@ import { colors } from "../styles/colors";
 import { getUser } from "../auth/user";
 import { Bookmark, LoggedUser } from "types/types";
 import { fetchBookmarks } from "../api/bigBangAPI/bookmark";
+import { EventsStackNavigationProps } from "../types/navigationTypes";
 
-const EventScreen = () => {
+const EventScreen = ({ navigation, }: EventsStackNavigationProps<'EventScreen'>) => {
 
   const [searchFilter, setSearchFilter] = useState("");
   const [dateFilter, setDateFilter] = useState("");
@@ -62,7 +63,7 @@ const EventScreen = () => {
 
   const mergeBookmarkAndEvents = () => {
     if (requestEvents.data && requestUserBookmarks.data) {
-      const mergedEvents = requestEvents.data.map((event) => {
+      return requestEvents.data.map((event) => {
         const bookmark = requestUserBookmarks.data.find((bookmark: Bookmark) => bookmark.event_id === event.id);
         if (bookmark) {
           return {
@@ -72,7 +73,6 @@ const EventScreen = () => {
         }
         return event;
       });
-      return mergedEvents;
     }
   };
 
@@ -82,6 +82,10 @@ const EventScreen = () => {
 
   const daySelectionHandler = (date: string) => {
     setDateFilter(date);
+  };
+
+  const onDetailScreen = (eventId: string) => {
+    navigation.navigate("EventDetailsScreen", {eventId: eventId,});
   };
 
   const renderEvents = () => {
@@ -96,6 +100,7 @@ const EventScreen = () => {
               eventType={"actual"}
               userId={userInfo?.uid}
               bookmarkId={item.bookmarkId}
+              onDetail={() => onDetailScreen(item.id!)}
             />
           }
         />
@@ -111,6 +116,7 @@ const EventScreen = () => {
               eventType={"actual"}
               userId={userInfo?.uid}
               bookmarkId={item.bookmarkId}
+              onDetail={() => onDetailScreen(item.id!)}
             />
           }
         />

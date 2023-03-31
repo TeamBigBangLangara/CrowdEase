@@ -17,6 +17,9 @@ const EventScreen = () => {
 
   const [searchFilter, setSearchFilter] = useState("");
   const [dateFilter, setDateFilter] = useState("");
+  //For simplification, only 1 category is passed for filtering.
+  const [categoryFilter, setCategoryFilter] = useState("");
+
   const [modalVisible, setModalVisible] = useState(false);
   const [userInfo, setUserInfo] = useState<LoggedUser>({ uid: "", email: "", });
 
@@ -34,9 +37,13 @@ const EventScreen = () => {
         return events.filter((event) => {
           return searchFilter ? event.name.toLowerCase().includes(searchFilter.toLowerCase()) : true;
         })
-          .filter((event) => {
-            return dateFilter ? event.dates.date === dateFilter : true;
-          });
+        .filter((event) => {
+          return dateFilter ? event.dates.date === dateFilter : true;
+        })
+        //Category Filter (under development)
+        .filter((event) => {
+          return categoryFilter ? event.category.name === categoryFilter : true;
+        });
       },
       onError: (error: TypeError) => {
         Alert.alert("Error", error.message);
@@ -50,7 +57,6 @@ const EventScreen = () => {
       enabled: !!userInfo.uid && requestEvents.isSuccess,
     }
   );
-
 
   const mergeBookmarkAndEvents = () => {
     if (requestEvents.data && requestUserBookmarks.data) {

@@ -1,7 +1,6 @@
-import { Alert, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Alert, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View, Image } from "react-native";
 import { useQuery } from "react-query";
 
-import { signOut } from "../auth/user";
 import { MainStackNavigationProps } from "../types/navigationTypes";
 import { colors } from "../styles/colors";
 import { fontFamily, fontSize, fontWeightBody, fontWeightSubtitle, fontWeightSubtitle2 } from "../styles/fonts";
@@ -37,6 +36,9 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
   const onSeeMorePress = () => {
     navigation.navigate('EventScreen');
   };
+  const onProfileScreen = () => {
+    navigation.navigate('ProfileScreen');
+  }
   const renderTodayParticipants = () => {
     let participants = 0;
     requestEvents.data?.forEach((event) => {
@@ -90,9 +92,12 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
     <SafeAreaView style={{ flex: 1, }}>
       <ScrollView>
         <View style={styles.container}>
-          <Pressable onPress={signOut}>
-            <Text style={{ color: colors.neutral.surfaceWhite, }}>Sign out</Text>
-          </Pressable>
+          <View style={styles.header}>
+            <Text style={styles.headerTitle}>Crowd Ease</Text>
+            <Pressable onPress={onProfileScreen}>
+            <Image style={styles.profileIcon} source={require('../assets/icons/profile.png')} />
+            </Pressable>
+          </View>
           <Text style={styles.title}>Preview of this week's events</Text>
           <View style={styles.dataVisualizationContainer}>
             <DataVisualization />
@@ -139,6 +144,25 @@ const styles = StyleSheet.create({
     backgroundColor: colors.neutral.backgroundBlack,
     paddingHorizontal: 20,
     paddingVertical: 24,
+  },
+  header: {
+    height: 40,
+    backgroundColor: colors.neutral.backgroundBlack,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 24,
+  },
+  headerTitle:{
+    fontFamily: fontFamily.heading,
+    fontSize: fontSize.heading2,
+    fontWeight: fontWeightSubtitle2,
+    color: colors.neutral.surfaceWhite
+  },
+  profileIcon: {
+    width: 28,
+    height: 28
   },
   title: {
     color: colors.primary.primaryPurpleDark,

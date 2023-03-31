@@ -4,13 +4,13 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { firebase } from "@react-native-firebase/auth";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { LogBox, SafeAreaView } from "react-native";
 
 import SignUp from "./screens/SignUpScreen";
 import SplashScreen from "./screens/SplashScreen";
 import Login from "./screens/LoginScreen";
 import NavigationBottomTab from "./components/navigation/NavigationBottomTab";
 import LocationScreen from "./screens/LocationScreen";
-import { SafeAreaView } from "react-native";
 import WeekManagerScreen from "./screens/WeekManagerScreen";
 import SuggestionScreen from "./screens/SuggestionScreen";
 import EventScreen from "./screens/EventScreen";
@@ -110,7 +110,7 @@ const queryClient = new QueryClient();
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+  LogBox.ignoreAllLogs();
   useEffect(() => {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
@@ -130,7 +130,7 @@ const App = () => {
       <QueryClientProvider client={queryClient}>
         <NavigationContainer>
           {!isLoggedIn && (
-            <Stack.Navigator initialRouteName={'SplashScreen'} 
+            <Stack.Navigator initialRouteName={'SplashScreen'}
             screenOptions={{headerShown: false,}}>
               <Stack.Screen name={'SplashScreen'} component={SplashScreen} />
               <Stack.Screen name={'LoginScreen'} component={Login} />

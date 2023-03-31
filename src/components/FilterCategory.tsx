@@ -5,25 +5,14 @@ import { fontFamily, fontSize, fontWeightSubtitle } from "../styles/fonts";
 import { colors } from "../styles/colors";
 
 import PrimaryButton from "./PrimaryButton";
-import SecondaryButton from "./SecondaryButton";
 import LinkButton from "./LinkButton";
-import IconText from "./IconText";
 
 
 //////////////////////// FILTER PRESSABLE ////////////////////////
 
-const EventCategoryPressable = forwardRef((props: {onPressEvent: () => void, text: string, icon?: any}, ref) => {
-  useImperativeHandle(ref, () => {
-    return{
-      selection: deactivateHandle,
-    };
-  });
+const EventCategoryPressable = forwardRef((props: {text: string, icon?: any}, ref) => {
 
   const [isSelected, setIsSelected] = useState(false);
-
-  const deactivateHandle = () => {
-    setIsSelected(false);
-  };
 
   const selectionHandle = () => {
     if(!isSelected){
@@ -33,13 +22,8 @@ const EventCategoryPressable = forwardRef((props: {onPressEvent: () => void, tex
     }
   };
 
-  const pressHandle = () => {
-    selectionHandle();
-    props.onPressEvent(category);
-  };
-
   return (
-    <Pressable onPress={pressHandle} style={[styles.eventsFilterPressable, isSelected && styles.eventsFilterPressableActive]}>
+    <Pressable onPress={selectionHandle} style={[styles.eventsFilterPressable, isSelected && styles.eventsFilterPressableActive]}>
       <Text style={[styles.eventsFilterPressableText, isSelected && styles.eventsFilterPressableActive]}>{props.text}</Text>
       {props.icon &&
       <Image source={props.icon}/>}
@@ -49,26 +33,13 @@ const EventCategoryPressable = forwardRef((props: {onPressEvent: () => void, tex
 
 //////////////////////// MAIN COMPONENT ////////////////////////
 
-const FilterCategory = (props: {visible: boolean, onRequestClose?: () => void, onTouchStart?: () => void, onClosePress: () => void, onPressCategory: (category: string) => void} ) => {
-
-
-
-  const filterPressableRef = useRef([]);
-
-  const applyFilterEventHandler= (category: string) => {
-    props.onPressCategory(category)
-  };
-
-  const clearAllEventHandler = () => {
-
-  };
+const FilterCategory = (props: {visible: boolean, onRequestClose?: () => void, onTouchStart?: () => void, onClosePress: () => void}) => {
 
   return (
       <Modal
         animationType="slide"
         transparent={true}
         visible={props.visible}
-        //onRequestClose={props.onRequestClose}
         style={styles.container}
       >
         <View onTouchStart={props.onTouchStart} style={styles.centeredView}>
@@ -81,21 +52,21 @@ const FilterCategory = (props: {visible: boolean, onRequestClose?: () => void, o
                 <Text style={styles.eventsFilterHeaderContainerTitle}>Filters</Text>
                 <Image source={require('../assets/icons/filter.png')}/>
               </View>
-              <LinkButton onPress={() => filterPressableRef.current.selection()} label={"Clear All"} style={styles.eventsFilterHeaderContainerButtons}/>
+              <LinkButton onPress={() => console.log("under development")} label={"Clear All"} style={styles.eventsFilterHeaderContainerButtons}/>
             </View>
 
             <View style={styles.eventsFilterContainer}>
               <Text style={styles.eventsFilterContainerTitle}>Event Category</Text>
               <View style={styles.eventsFilterPressableContainer}>
                 <View style={styles.eventsFilterPressableContainerRow}>
-                  <EventCategoryPressable onPressEvent={() => applyFilterEventHandler("Sports")} text={"Sports"} icon={require('../assets/category/sport.png')} ref={filterPressableRef}/>
-                  <EventCategoryPressable onPressEvent={() => applyFilterEventHandler("Shows")} text={"Shows"} icon={require('../assets/category/show.png')} ref={filterPressableRef}/>
-                  <EventCategoryPressable onPressEvent={() => applyFilterEventHandler("Music")} text={"Music"} icon={require('../assets/category/music.png')} ref={filterPressableRef}/>
+                  <EventCategoryPressable text={"Sports"} icon={require('../assets/category/sport.png')} />
+                  <EventCategoryPressable text={"Shows"} icon={require('../assets/category/show.png')} />
+                  <EventCategoryPressable text={"Music"} icon={require('../assets/category/music.png')} />
                 </View>
                 <View style={styles.eventsFilterPressableContainerRow}>
-                  <EventCategoryPressable onPressEvent={() => applyFilterEventHandler("Festivals")} text={"Festivals"} icon={require('../assets/category/festival.png')}/>
-                  <EventCategoryPressable onPressEvent={() => applyFilterEventHandler("Business")} text={"Business"} icon={require('../assets/category/business.png')}/>
-                  <EventCategoryPressable onPressEvent={() => applyFilterEventHandler("Other")} text={"Other"} icon={require('../assets/category/other.png')}/>
+                  <EventCategoryPressable text={"Festivals"} icon={require('../assets/category/festival.png')}/>
+                  <EventCategoryPressable text={"Business"} icon={require('../assets/category/business.png')}/>
+                  <EventCategoryPressable text={"Other"} icon={require('../assets/category/other.png')}/>
                 </View>
               </View>
             </View>
@@ -104,13 +75,12 @@ const FilterCategory = (props: {visible: boolean, onRequestClose?: () => void, o
               <Text style={styles.eventsFilterContainerTitle}>Distance</Text>
               <View style={styles.eventsFilterPressableContainer}>
                 <View style={styles.eventsFilterPressableContainerRow}>
-                  <EventCategoryPressable onPressEvent={() => console.log("sports")} text={'500m'}/>
-                  <EventCategoryPressable onPressEvent={() => console.log("sports")} text={'1km'}/>
-                  <EventCategoryPressable onPressEvent={() => console.log("sports")} text={'3km'}/>
+                  <EventCategoryPressable text={'500m'}/>
+                  <EventCategoryPressable text={'1km'}/>
+                  <EventCategoryPressable text={'3km'}/>
                 </View>
               </View>
             </View>
-
 
             <PrimaryButton onPress={() => console.log('apply filter press')} label={"Apply Filter"}/>
           </View>
@@ -129,12 +99,13 @@ const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
     justifyContent: 'flex-end',
-    backgroundColor: 'rgba(33,33,33,0.9)',
+    backgroundColor: 'rgba(33,33,33,0.7)',
   },
 
   modalView: {
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
+    backgroundColor: colors.neutral.backgroundBlack,
     padding: 35,
     shadowColor: '#000',
     shadowOffset: {

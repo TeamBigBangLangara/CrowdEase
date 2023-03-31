@@ -16,6 +16,7 @@ import SuggestionScreen from "./screens/SuggestionScreen";
 import EventScreen from "./screens/EventScreen";
 import HomeScreen from "./screens/HomeScreen";
 import PastEventScreen from './screens/PastEventScreen';
+import ProfileScreen from './screens/ProfileScreen';
 
 export type AuthStackParams = {
   SplashScreen: undefined
@@ -31,6 +32,7 @@ export type MainStackParams = {
   SuggestionScreen: undefined
   EventScreen: undefined
   PastEventScreen: undefined
+  ProfileScreen: undefined
 }
 
 export type TabParams = {
@@ -52,6 +54,7 @@ export const HomeStack = () => {
       <MainStack.Screen name={"SuggestionScreen"} component={SuggestionScreen}/>
       <MainStack.Screen name={"PastEventScreen"} component={PastEventScreen}/>
       <MainStack.Screen name={"EventScreen"} component={EventScreen}/>
+      <MainStack.Screen name={"ProfileScreen"} component={ProfileScreen}/>
     </MainStack.Navigator>
   );
 };

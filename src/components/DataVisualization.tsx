@@ -12,16 +12,15 @@ import IconText from "./IconText";
 
 const DataVisualization = () => {
   const { week, } = getDate();
-  const [selectedBar, setSelectedBar] = useState(0);
-
+  
   const requestEvents = useQuery("events", () => getEvents(),
-    {
-      onError: (error: TypeError) => {
-        Alert.alert("Error", error.message);
-      },
-    }
+  {
+    onError: (error: TypeError) => {
+      Alert.alert("Error", error.message);
+    },
+  }
   );
-
+  
   const data = [
     { day: "MON", value: 0, },
     { day: "TUE", value: 0, },
@@ -31,7 +30,7 @@ const DataVisualization = () => {
     { day: "SAT", value: 0, },
     { day: "SUN", value: 0, }
   ];
-
+  
   requestEvents.data?.forEach((event) => {
     for (let i = 0; i < 7; i++) {
       if (event.dates.date === week[i]) {
@@ -39,6 +38,10 @@ const DataVisualization = () => {
       }
     }
   });
+  
+  const weekParticipants = data.reduce((total, day) => total + day.value, 0);
+ 
+  const [selectedBar, setSelectedBar] = useState(weekParticipants);
 
   const barChartSvg = {
     fill: colors.neutral.surfaceWhite,

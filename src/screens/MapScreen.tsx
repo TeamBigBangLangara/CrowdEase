@@ -10,8 +10,9 @@ import { mapDarkStyle } from "../styles/maps";
 import { Event, Location } from "../types/types";
 import { getCrowd } from "../api/footTrackAPI";
 import { heatMap } from "../model/mapData";
+import { MapStackNavigationProps } from "../types/navigationTypes";
 
-const MapScreen = () => {
+const MapScreen = ({navigation,} : MapStackNavigationProps<'MapScreen'>) => {
 
   const mapRef = React.useRef<any>(null);
   const carouselRef = useRef<Carousel<{uri: string}>>(null);

@@ -1,6 +1,8 @@
 export interface Event {
-  bookmarkId: any
-  id?: string
+  bookmarkId: string
+  id: string
+  ratingID: string
+  rate: number
   name: string
   image: string
   dates: Dates
@@ -28,6 +30,11 @@ export interface Venue {
   type: string
 }
 
+export interface LoggedUser {
+  uid: string;
+  email: string;
+}
+
 export interface Location {
   longitude: string
   latitude: string
@@ -49,9 +56,4 @@ export interface Rating {
 export interface Bookmark {
   user_id: string
   event_id?: string
-}
-
-export interface LoggedUser {
-  uid: string;
-  email: string;
 }

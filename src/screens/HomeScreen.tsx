@@ -1,25 +1,23 @@
-import { StyleSheet, Text, View, ScrollView, SafeAreaView, Pressable, Alert } from "react-native";
+import { Alert, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 import { useQuery } from "react-query";
 
-import { signOut } from '../auth/user';
-import { MainStackNavigationProps } from '../types/navigationTypes';
-import { colors } from '../styles/colors';
-import { fontFamily } from '../styles/fonts';
-import { fontSize } from '../styles/fonts';
-import { fontWeightTitle, fontWeightSubtitle, fontWeightBody, fontWeightSubtitle2 } from '../styles/fonts';
-import IconText from '../components/IconText';
-import PrimaryButton from '../components/PrimaryButton';
-import SecondaryButton from '../components/SecondaryButton';
-import ParticipantsByMealCard from '../components/ParticipantsByMealCard';
-import LinkButton from '../components/LinkButton';
-import DataVisualization from '../components/DataVisualization';
-import { getDate } from '../utils/getDate';
+import { signOut } from "../auth/user";
+import { MainStackNavigationProps } from "../types/navigationTypes";
+import { colors } from "../styles/colors";
+import { fontFamily, fontSize, fontWeightBody, fontWeightSubtitle, fontWeightSubtitle2 } from "../styles/fonts";
+import IconText from "../components/IconText";
+import PrimaryButton from "../components/PrimaryButton";
+import SecondaryButton from "../components/SecondaryButton";
+import ParticipantsByMealCard from "../components/ParticipantsByMealCard";
+import LinkButton from "../components/LinkButton";
+import DataVisualization from "../components/DataVisualization";
+import { getDate } from "../utils/getDate";
 import { borderRadius } from "../styles/basic";
 import EventCarousel from "../components/EventCarousel";
 import { getEvents } from "../api/event";
 
 // Get the dates
-const { formattedFirstDay, formattedLastDay, today, todayFormatted, week, getWeekday } = getDate();
+const { formattedFirstDay, formattedLastDay, today, todayFormatted, week, getWeekday, } = getDate();
 
 const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => {
 
@@ -49,7 +47,7 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
     return (
       <Text style={styles.todayParticipantsNumber}>{participants}</Text>
     );
-  }
+  };
   const renderBusyDay = () => {
     const weekParticipants = [];
     //get each day with  participants
@@ -82,8 +80,8 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
     //format the busiest day
     const dateObj = new Date(dateWithHighestParticipants);
     dateObj.setDate(dateObj.getDate() + 1);
-    const formattedDate = dateObj.toLocaleString('en-US', { month: 'long', day: 'numeric' });
-    const day = getWeekday(dateWithHighestParticipants)
+    const formattedDate = dateObj.toLocaleString('en-US', { month: 'long', day: 'numeric', });
+    const day = getWeekday(dateWithHighestParticipants);
 
     return <Text style={styles.busyDay}>{formattedDate} {day}</Text>;
   };
@@ -166,7 +164,7 @@ const styles = StyleSheet.create({
     fontSize: fontSize.subtitle2,
     fontWeight: fontWeightBody,
     marginBottom: 15,
-    marginTop: 30
+    marginTop: 30,
   },
   suggestionContainer: {
     alignSelf: 'center',

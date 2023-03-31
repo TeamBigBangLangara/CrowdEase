@@ -1,9 +1,9 @@
-import React from 'react';
-import { StyleSheet, Text, ScrollView, View } from 'react-native';
+import React from "react";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 
-import DayEventCard from '../components/DayEventCard';
-import ParticipantsByCategory from '../components/ParticipantsByCategory';
-import PrimaryButton from '../components/PrimaryButton';
+import DayEventCard from "../components/DayEventCard";
+import ParticipantsByCategory from "../components/ParticipantsByCategory";
+import PrimaryButton from "../components/PrimaryButton";
 
 import { colors } from "../styles/colors";
 import { fontFamily, fontSize } from "../styles/fonts";
@@ -18,7 +18,7 @@ const testEvent: Event = {
   dates: new Date,
   category: "Music",
   location: {
-    longitud: "0",
+    longitude: "0",
     latitude: "0",
   },
   venue: {
@@ -47,7 +47,7 @@ const SuggestionScreen = () => {
           </Text>
           <DayEventCard event={testEvent} percentage={5}/>
         </View>
-        <View style={{alignItems: 'center'}}>
+        <View style={{alignItems: 'center',}}>
           <PrimaryButton onPress={() => console.log("under development")} label={"Test Buttton"}/>
         </View>
 

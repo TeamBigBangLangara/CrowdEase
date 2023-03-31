@@ -15,7 +15,8 @@ import { borderRadius } from "../styles/basic";
 import EventCarousel from "../components/EventCarousel";
 import { getEvents } from "../api/event";
 
-import OneSignal from 'react-native-onesignal';
+import OneSignal from "react-native-onesignal";
+
 const ONESIGNAL_APP_ID = 'ee944c2a-c447-402c-9f22-48dbdddb9caa';
 
 
@@ -36,7 +37,7 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
   };
 
   const onSeeSuggestionPress = () => {
-    navigation.navigate('WeekManagerScreen');
+    navigation.navigate('SuggestionScreen');
   };
 
   const onSeeMorePress = () => {

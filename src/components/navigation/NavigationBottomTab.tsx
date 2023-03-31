@@ -1,9 +1,6 @@
 import { Image, StyleSheet, Text, View } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-
-import MapScreen from "../../screens/MapScreen";
-import WeekManager from "../../screens/WeekManagerScreen";
-import { EventStack, HomeStack } from "../../App";
+import { EventStack, HomeStack, MapsStack, ReportsStack } from "../../App";
 import { colors } from "../../styles/colors";
 import { fontFamily, fontSize, fontWeightSubtitle2 } from "../../styles/fonts";
 import GradientText from "../GradientText";
@@ -37,7 +34,7 @@ const NavigationBottomTab = () => {
       />
       <Tab.Screen
         name="Map"
-        component={MapScreen}
+        component={MapsStack}
         options={{
           tabBarIcon: ({ focused, }) => (
             <View style={styles.iconContainer}>
@@ -52,7 +49,7 @@ const NavigationBottomTab = () => {
       />
       <Tab.Screen
         name="Report"
-        component={WeekManager}
+        component={ReportsStack}
         options={{
           tabBarIcon: ({ focused, }) => (
             <View style={styles.iconContainer}>

@@ -15,9 +15,10 @@ import WeekManagerScreen from "./screens/WeekManagerScreen";
 import SuggestionScreen from "./screens/SuggestionScreen";
 import EventScreen from "./screens/EventScreen";
 import HomeScreen from "./screens/HomeScreen";
-import PastEventScreen from './screens/PastEventScreen';
-import ProfileScreen from './screens/ProfileScreen';
+import PastEventScreen from "./screens/PastEventScreen";
+import ProfileScreen from "./screens/ProfileScreen";
 import EventDetailsScreen from "./screens/EventDetailsScreen";
+import MapScreen from "./screens/MapScreen";
 
 export type AuthStackParams = {
   SplashScreen: undefined
@@ -31,7 +32,6 @@ export type MainStackParams = {
   HomeScreen: undefined
   WeekManagerScreen: undefined
   SuggestionScreen: undefined
-  EventScreen: undefined
   EventDetailsScreen: {eventId: string};
   PastEventScreen: undefined
   ProfileScreen: undefined
@@ -39,6 +39,16 @@ export type MainStackParams = {
 
 export type EventsStackParams = {
   EventScreen: undefined
+  EventDetailsScreen: {eventId: string};
+}
+
+export type ReportStackParams =  {
+  WeekManagerScreen: undefined
+  SuggestionScreen: undefined
+}
+
+export type MapStackParams = {
+  MapScreen: undefined;
   EventDetailsScreen: {eventId: string};
 }
 
@@ -52,15 +62,15 @@ export type TabParams = {
 const Stack = createNativeStackNavigator<AuthStackParams>();
 const MainStack = createNativeStackNavigator<MainStackParams>();
 const EventsStack = createNativeStackNavigator<EventsStackParams>();
+const ReportStack = createNativeStackNavigator<ReportStackParams>();
+const MapStack = createNativeStackNavigator<MapStackParams>();
 
 export const HomeStack = () => {
   return (
     <MainStack.Navigator screenOptions={{ headerShown: false,}}>
       <MainStack.Screen name={"HomeScreen"} component={HomeScreen}/>
       <MainStack.Screen name={"WeekManagerScreen"} component={WeekManagerScreen}/>
-      <MainStack.Screen name={"SuggestionScreen"} component={SuggestionScreen}/>
       <MainStack.Screen name={"PastEventScreen"} component={PastEventScreen}/>
-      <MainStack.Screen name={"EventScreen"} component={EventScreen}/>
       <MainStack.Screen name={"ProfileScreen"} component={ProfileScreen}/>
       <MainStack.Screen name={"EventDetailsScreen"} component={EventDetailsScreen} />
     </MainStack.Navigator>
@@ -73,6 +83,25 @@ export const EventStack = () => {
       <EventsStack.Screen name={"EventScreen"} component={EventScreen}/>
       <EventsStack.Screen name={"EventDetailsScreen"} component={EventDetailsScreen} />
     </EventsStack.Navigator>
+  );
+};
+
+
+export const ReportsStack = () => {
+  return (
+    <ReportStack.Navigator screenOptions={{headerShown: false,}}>
+      <ReportStack.Screen name={"WeekManagerScreen"} component={WeekManagerScreen}/>
+      <ReportStack.Screen name={"SuggestionScreen"} component={SuggestionScreen}/>
+    </ReportStack.Navigator>
+  );
+};
+
+export const MapsStack = () => {
+  return (
+    <MapStack.Navigator screenOptions={{headerShown: false,}}>
+      <MapStack.Screen name={"MapScreen"} component={MapScreen}/>
+      <MapStack.Screen name={"EventDetailsScreen"} component={EventDetailsScreen} />
+    </MapStack.Navigator>
   );
 };
 

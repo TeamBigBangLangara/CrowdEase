@@ -1,4 +1,4 @@
-import { Alert, Dimensions, Image, StyleSheet, View } from "react-native";
+import { Alert, Dimensions, Image, Platform, StyleSheet, View } from "react-native";
 import MapView, { Heatmap, Marker } from "react-native-maps";
 import { useQuery } from "react-query";
 import React, { useEffect, useRef, useState } from "react";
@@ -19,6 +19,7 @@ const MapScreen = () => {
 
   const [isCarouselVisible, setIsCarouselVisible] = useState(false);
   const ITEM_WIDTH = Dimensions.get('screen').width * 0.8;
+  const radius = Platform.OS === 'ios' ? 150 : 40;
 
   const requestEvents = useQuery('events', () => getEvents());
 
@@ -111,7 +112,7 @@ const MapScreen = () => {
         {renderEventMarkers()}
         <Heatmap
           points={heatMap}
-          radius={150}
+          radius={radius}
           opacity={0.7}
         />
       </MapView>

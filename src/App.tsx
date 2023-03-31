@@ -69,10 +69,9 @@ export const HomeStack = () => {
   return (
     <MainStack.Navigator screenOptions={{ headerShown: false,}}>
       <MainStack.Screen name={"HomeScreen"} component={HomeScreen}/>
-      <MainStack.Screen name={"WeekManagerScreen"} component={WeekManagerScreen}/>
       <MainStack.Screen name={"PastEventScreen"} component={PastEventScreen}/>
+      <MainStack.Screen name={"WeekManagerScreen"} component={WeekManagerScreen}/>
       <MainStack.Screen name={"ProfileScreen"} component={ProfileScreen}/>
-      <MainStack.Screen name={"SuggestionScreen"} component={SuggestionScreen}/>
       <MainStack.Screen name={"EventDetailsScreen"} component={EventDetailsScreen} />
       <MainStack.Screen name={"SuggestionScreen"} component={SuggestionScreen} />
     </MainStack.Navigator>

@@ -10,23 +10,23 @@ import { fontFamily, fontSize } from "../styles/fonts";
 
 const testEvent: Event = {
   bookmarkId: "001",
-  id: "eve001",
+  id: "091298123",
   ratingID: "good",
   rate: 1000,
-  name: "testName",
+  name: "Coldplay Concert",
   image: "no image",
   dates: new Date,
   category: "Music",
   location: {
-    longitude: "0",
+    longitud: "0",
     latitude: "0",
   },
   venue: {
-    name: "VenueName",
+    name: "Science World",
     id: "0001",
     type: "stadium",
   },
-  address: "Langara College",
+  address: "1455 Quebec St, Vancouver, BC V6A 3Z7",
   participants: 1000000,
 };
 
@@ -39,16 +39,16 @@ const SuggestionScreen = () => {
           <Text style={styles.sectionTitle}>
             February 07, 2023
           </Text>
-          <ParticipantsByCategory participants={3} percentage={50} musicQty={5} sportQty={5} showsQty={5} festivalsQty={5} businessQty={5} otherQty={5}/>
+          <ParticipantsByCategory participants={3} percentage={50} musicQty={50} sportQty={50} showsQty={50} festivalsQty={45} businessQty={5} otherQty={5}/>
         </View>
         <View style={{flex: 1,}}>
           <Text style={styles.sectionTitle}>
             Major Event of the day
           </Text>
-          <DayEventCard event={testEvent} percentage={5}/>
+          <DayEventCard event={testEvent} percentage={50}/>
         </View>
         <View style={{alignItems: 'center',}}>
-          <PrimaryButton onPress={() => console.log("under development")} label={"Test Buttton"}/>
+          <PrimaryButton onPress={() => console.log("under development")} label={"Return to the week preview"}/>
         </View>
 
       </View>

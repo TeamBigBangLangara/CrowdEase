@@ -3,6 +3,7 @@ import MapView, { Heatmap, Marker } from "react-native-maps";
 import { useQuery } from "react-query";
 import React, { useEffect, useRef, useState } from "react";
 import Carousel from "react-native-snap-carousel";
+import { useNavigation } from "@react-navigation/native";
 
 import EventCard from "../components/EventCard";
 import { getEvents } from "../api/event";
@@ -13,9 +14,10 @@ import { heatMap } from "../model/mapData";
 import { MapStackNavigationProps } from "../types/navigationTypes";
 
 const MapScreen = ({navigation,} : MapStackNavigationProps<'MapScreen'>) => {
+  const navigation = useNavigation();
 
   const mapRef = React.useRef<any>(null);
-  const carouselRef = useRef<Carousel<{uri: string}>>(null);
+  const carouselRef = useRef<Carousel<{ uri: string }>>(null);
   const [selectedMarker, setSelectedMarker] = useState<Location | null>(null);
 
   const [isCarouselVisible, setIsCarouselVisible] = useState(false);
@@ -24,17 +26,22 @@ const MapScreen = ({navigation,} : MapStackNavigationProps<'MapScreen'>) => {
 
   const requestEvents = useQuery('events', () => getEvents());
 
-  const _renderItem = ({ item, }: {item: Event}) => {
+  const onDetailScreen = (eventId: string) => {
+    navigation.navigate("EventDetailsScreen", { eventId: eventId, });
+  };
+
+  const _renderItem = ({ item, }: { item: Event }) => {
     return (
       <EventCard
         event={item}
         eventType='actual'
+        onDetail={() => onDetailScreen(item.id)}
       />
     );
   };
 
 
-  useEffect(() => {getCrowd();}, []);
+  useEffect(() => { getCrowd(); }, []);
 
   const renderCarousel = () => {
     return (
@@ -48,7 +55,7 @@ const MapScreen = ({navigation,} : MapStackNavigationProps<'MapScreen'>) => {
           const event = requestEvents.data![index];
           setSelectedMarker(event.location);
         }}
-  />
+      />
     );
   };
 
@@ -57,7 +64,7 @@ const MapScreen = ({navigation,} : MapStackNavigationProps<'MapScreen'>) => {
       let isSelected = false;
       if (selectedMarker) {
         isSelected = event.location.latitude === selectedMarker.latitude &&
-        event.location.longitude === selectedMarker.longitude;
+          event.location.longitude === selectedMarker.longitude;
       }
       return (
         <Marker
@@ -66,18 +73,18 @@ const MapScreen = ({navigation,} : MapStackNavigationProps<'MapScreen'>) => {
           coordinate={{
             latitude: Number(event.location.latitude),
             longitude: Number(event.location.longitude),
-             }}
+          }}
           pinColor={isSelected ? "green" : "#B687FF"}
           onPress={() => {
             onMarkerPress(index, event.location);
           }}
-         >
+        >
         </Marker>
       );
     });
   };
 
-  const onMarkerPress = (index: number, coordinate: Location) =>  {
+  const onMarkerPress = (index: number, coordinate: Location) => {
     setIsCarouselVisible(true);
     setTimeout(() => {
       carouselRef.current?.snapToItem(index);
@@ -102,13 +109,13 @@ const MapScreen = ({navigation,} : MapStackNavigationProps<'MapScreen'>) => {
         <Marker
           key={1}
           coordinate={{
-            latitude:  49.27699862052147,
+            latitude: 49.27699862052147,
             longitude: -123.11528432004984,
           }}
           onPress={() => Alert.alert("Home", "My location")}
           pinColor={"#90EE90"}
         >
-          <Image style={styles.myLocationIcon} source={require('../assets/icons/mylocation.png')}/>
+          <Image style={styles.myLocationIcon} source={require('../assets/icons/mylocation.png')} />
         </Marker>
         {renderEventMarkers()}
         <Heatmap
@@ -118,7 +125,7 @@ const MapScreen = ({navigation,} : MapStackNavigationProps<'MapScreen'>) => {
         />
       </MapView>
 
-      { isCarouselVisible ?
+      {isCarouselVisible ?
         <View style={styles.carousel}>
           {renderCarousel()}
         </View>

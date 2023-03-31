@@ -1,70 +1,22 @@
-import React, { useState, useEffect } from "react";
-import { View, Image, Text, StyleSheet, Alert } from "react-native";
-import { useMutation } from "react-query";
+import React, { useState } from "react";
+import { Image, StyleSheet, Text, View } from "react-native";
 
-import BookmarkButton from './BookmarkButton';
-import IconText from './IconText';
+import BookmarkButton from "./BookmarkButton";
+import IconText from "./IconText";
 import RateCard from "./RateCard";
 import DropdownButton from "./DropdownButton";
 import { Event } from "../types/types";
 import { colors } from "../styles/colors";
 import { fontFamily, fontSize } from "../styles/fonts";
 import { timeFormat } from "../utils/timeFormat";
-import { addRating } from "../api/bigBangAPI/rating";
 
 const EventCard = (props: {
   event: Event
   onBookmarkPress?: () => void
   eventType: string
-  userID: string
-  rate: number
-  ratingID: string
-  updateRate: (rate: number) => void
+  userId: string,
 }) => {
   const [showRating, setShowRating] = useState(false);
-  const [starRating, setStarRating] = useState(0);
-  const [ratingId, setRatingId] = useState("");
-
-  const saveRating = useMutation(["rating"], () =>
-    addRating({
-      user_id: props.userID,
-      event_id: props.event.id,
-      category: props.event.category.name,
-      rate: starRating,
-    }),
-    {
-        onSuccess: (data) => {
-            setRatingId(data);
-            console.log("saveRating", data);
-            return data
-        
-      },
-      onError: () => {
-        console.log("Something went wrong, please try again.");
-      },
-    }
-  );
-
-  // useEffect(() => {
-  //   if (props.ratingID !== undefined)
-  //    {
-  //     setRatingId(props.ratingID);
-  //   }
-  // }, [props.ratingID]);
-
-  const onStarPress = (id: number) => {
-    setStarRating(id);
-  };
-
-  const onSubmitPress = async () => {
-    props.updateRate(starRating);
-    try {
-      const data = await saveRating.mutate();
-      console.log("submit", data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const renderDate = () => {
     if (props.eventType === 'past') {
@@ -102,15 +54,9 @@ const EventCard = (props: {
   const renderRatingCard = () => {
     return (
       <RateCard
-        onSubmitPress={onSubmitPress}
-        starRating = {starRating}
-        onSkipPress={() => { setShowRating(false) }}
-        onStarPress={onStarPress}
-        imageActive={require("../assets/icons/StarActive.png")}
-        imageInactive={require("../assets/icons/star.png")}
-        activeStarCount={starRating}
-        eventId={props.event.id}
-        userID={props.userID}
+        event={props.event}
+        onSkipPress={() => { setShowRating(false); }}
+        userId={props.userId}
       />
     );
   };

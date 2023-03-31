@@ -1,56 +1,38 @@
-import { Alert, FlatList, StyleSheet, SafeAreaView } from "react-native";
+import { Alert, FlatList, SafeAreaView, StyleSheet } from "react-native";
 import { useQuery } from "react-query";
 import { getEvents } from "../api/event";
 
-
 import EventCard from "../components/EventCard";
-import { getUser } from '../auth/user';
-import { LoggedUser } from "types/types";
-import { useEffect, useState } from "react";
-import { getRating } from "../api/bigBangAPI/rating";
+import { getUser } from "../auth/user";
+import { Rating } from "types/types";
+import { getEventRatedByUser } from "../api/bigBangAPI/rating";
 import { colors } from "../styles/colors";
 
 const PastEventScreen = () => {
-  const [userInfo, setUserInfo] = useState<LoggedUser>({ uid: '', email: '', });
+  const requestUser = useQuery("user", () => getUser());
 
   const requestEvents = useQuery("events", () => getEvents(),
-
     {
       onError: (error: TypeError) => {
         Alert.alert("Error", error.message);
       },
     });
 
-  const requestUserRating = useQuery('getUserRating', () => {
-    return getRating(userInfo.uid);
-  }, {
-    onSuccess: (data) => {
-      mergeRatingAndEvents();
+  const requestEventRatedByUser = useQuery("userRating", () => {
+    return getEventRatedByUser(requestUser.data!.uid);
     },
-    enabled: !!userInfo.uid && requestEvents.isSuccess,
-  }
-  );
+    {
+      onSuccess: () => {
+        mergeRatingAndEvents();
+      },
+      enabled: !!requestUser.data?.uid && requestEvents.isSuccess,
+    });
 
-  const [rate, setRate] = useState(0);
-
-  const updateRate = (rating: number) => {
-    setRate(rating);
-  };
-
-  useEffect(() => {
-    async function fetchUser() {
-      const user = await getUser();
-      setUserInfo(user);
-
-      const rating = await getRating(user.uid);
-    }
-    fetchUser();
-  }, []);
 
   const mergeRatingAndEvents = () => {
-    if (requestEvents.data && requestUserRating.data) {
-      const mergedEvents = requestEvents.data.map((event) => {
-        const rating = requestUserRating.data.find((rating: any) => rating.event_id === event.id);
+    if (requestEvents.data && requestEventRatedByUser.data) {
+      return requestEvents.data.map((event) => {
+        const rating = requestEventRatedByUser.data.find((rating: Rating) => rating.event_id === event.id);
         if (rating) {
           return {
             ...event,
@@ -60,25 +42,20 @@ const PastEventScreen = () => {
         }
         return event;
       });
-      return mergedEvents;
     }
   };
 
-  const mergedEvents = mergeRatingAndEvents();
-
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, }}>
       <FlatList
-        data={mergedEvents}
+        data={mergeRatingAndEvents()}
         renderItem={({ item, }) =>
           <EventCard
             key={item.id}
             event={item}
             eventType={"past"}
-            userID={userInfo?.uid}
-            rate={item.rate}
-            ratingID={item.ratingID}
-            updateRate={updateRate} />
+            userId={requestUser.data!.uid}
+          />
         }
         contentContainerStyle={styles.container}
       />

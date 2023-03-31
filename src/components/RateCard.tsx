@@ -1,29 +1,52 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
-import SecondaryButton from './SecondaryButton';
-import LinkButton from './LinkButton';
+import SecondaryButton from "./SecondaryButton";
+import LinkButton from "./LinkButton";
 import { colors } from "../styles/colors";
 import { fontFamily, fontSize } from "../styles/fonts";
 import { margin } from "../styles/basic";
+import { useState } from "react";
+import { useMutation } from "react-query";
+import { addRating } from "../api/bigBangAPI/rating";
+import { Event } from "../types/types";
 
 const RateCard = (props: {
-  onSubmitPress: () => void;
   onSkipPress: () => void;
-  onStarPress: (id: number) => void;
-  starRating: number
-  imageActive: object;
-  imageInactive: object;
-  activeStarCount: number,
-  eventId?: string,
-  userID?: string
+  event: Event
+  userId: string,
 }) => {
+  const [rate, setRate] = useState(props.event.rate);
+
+  const saveRating = useMutation('rating',  () => addRating({
+    user_id: props.userId,
+    category: props.event.category.name,
+    rate: rate,
+    event_id: props.event.id,
+  }), {
+    onSuccess: () => {
+    },
+    onError: (error) => {
+      console.log(error);
+  },
+
+  });
+
+  const onSubmitPress = () => {
+    saveRating.mutate();
+  };
 
   const renderStars = () => {
     const starIds = [1, 2, 3, 4, 5];
     return (
       <View style={styles.starContainer}>
         {starIds.map(id => (
-          <Pressable key={id} onPress={() => props.onStarPress(id)}>
-            <Image source={id <= props.activeStarCount ? props.imageActive : props.imageInactive} />
+          <Pressable key={id} onPress={() => {setRate(id);
+          }}>
+            {
+              id <= rate ?
+                <Image source={require("../assets/icons/StarActive.png")}/>
+                :
+                <Image source={require("../assets/icons/star.png")}/>
+            }
           </Pressable>
         ))}
       </View>
@@ -36,7 +59,7 @@ const RateCard = (props: {
         Please tell how much this event affected your business?
       </Text>
       {renderStars()}
-      <SecondaryButton onPress={props.onSubmitPress} label={'Submit'} />
+      <SecondaryButton onPress={onSubmitPress} label={'Submit'} />
       <View style={styles.skipLabel}>
         <LinkButton onPress={props.onSkipPress} label={'Skip'} style={styles.linkBtn} />
       </View>

@@ -1,10 +1,10 @@
-import React, {useState, useRef} from 'react';
-import { TextInput, StyleSheet, Image, View, Pressable, Text, Alert } from "react-native";
+import React, { useRef, useState } from "react";
+import { Image, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 
-import IconButton from './IconButton';
+import IconButton from "./IconButton";
 
 import { colors } from "../styles/colors";
-import { fontSize, fontFamily } from "../styles/fonts";
+import { fontFamily, fontSize } from "../styles/fonts";
 
 const SearchForm = (props: {
   onChangeText: (searchKeyword: string) => void
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
   },
 
   searchContainerFocus: {
-    borderColor: colors.primaryPurpleLight,
+    borderColor: '#B687FF',
   },
 
   input: {

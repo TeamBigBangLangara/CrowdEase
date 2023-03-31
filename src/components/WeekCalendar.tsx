@@ -65,11 +65,11 @@ const WeekCalendar = ({onDaySelection, isExpanded = true,}: Props) => {
     <View style={styles.container}>
       <View style={styles.weekSelectorContainer}>
         <Pressable onPress={() => setSelectedWeekStartDay(subDays(selectedWeekStartDay,7))}>
-          <Image source={require('../assets/icons/arrowLeft2x.png')} />
+          <Image source={require('../assets/icons/arrowLeft.png')} />
         </Pressable>
         <Text style={styles.weekRangeText}>{weekRangeText}</Text>
         <Pressable onPress={() => setSelectedWeekStartDay(addDays(selectedWeekStartDay,7))}>
-          <Image source={require('../assets/icons/arrowRight2x.png')} />
+          <Image source={require('../assets/icons/arrowRight.png')} />
         </Pressable>
       </View>
       {isExpanded &&
@@ -102,6 +102,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     paddingVertical: 20,
+    rowGap: 10,
   },
 
   weekSelectorContainer: {

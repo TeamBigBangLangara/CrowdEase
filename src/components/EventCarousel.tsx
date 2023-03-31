@@ -1,11 +1,14 @@
-import { getEvents } from '../api/event';
+import { getEvents } from "../api/event";
 import { Alert, Text, View } from "react-native";
-import Carousel from 'react-native-snap-carousel';
-import { useQuery } from 'react-query';
-import EventCard from './EventCard';
+import Carousel from "react-native-snap-carousel";
+import { useQuery } from "react-query";
+import EventCard from "./EventCard";
 import { colors } from "../styles/colors";
+import { useNavigation } from "@react-navigation/native";
 
 const EventCarousel = () => {
+const navigation = useNavigation();
+
   const  {data: events = [],} = useQuery("events", () => getEvents(),
   {
     onError: (error: TypeError) => {
@@ -13,6 +16,10 @@ const EventCarousel = () => {
     },
   }
 );
+
+const onDetailScreen = (eventId: string) => {
+  navigation.navigate("EventDetailsScreen", {eventId: eventId,});
+};
 
 const today = new Date().toISOString().slice(0, 10);
 
@@ -36,12 +43,14 @@ const onBookMarkPress = () => {
       <Carousel
       data={filteredEvents()}
         renderItem={({ item,}) => {
-          return <EventCard
+          return<EventCard
             key={item.id}
             event={item}
             eventType={"actual"}
             onBookmarkPress={onBookMarkPress}
+            onDetail={() => onDetailScreen(item.id)}
           />;
+
         }
         }
           sliderWidth={390}

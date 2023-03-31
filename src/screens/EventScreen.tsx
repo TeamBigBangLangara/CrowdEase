@@ -1,19 +1,22 @@
 import React, { useState } from "react";
+import { useQuery } from "react-query";
 import { Alert, FlatList, Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { getEvents } from "../api/event";
-import { useQuery } from "react-query";
 
 import SearchForm from "../components/SearchForm";
+import WeekCalendar from "../components/WeekCalendar";
 import EventCard from "../components/EventCard";
 import FilterCategory from "../components/FilterCategory";
+
 import { fontFamily, fontSize, fontWeightSubtitle } from "../styles/fonts";
 import { colors } from "../styles/colors";
-import WeekCalendar from "../components/WeekCalendar";
+
 import { getUser } from "../auth/user";
 import { Bookmark, LoggedUser } from "types/types";
 import { fetchBookmarks } from "../api/bigBangAPI/bookmark";
+import { EventsStackNavigationProps } from "../types/navigationTypes";
 
-const EventScreen = () => {
+const EventScreen = ({ navigation, }: EventsStackNavigationProps<'EventScreen'>) => {
 
   const [searchFilter, setSearchFilter] = useState("");
   const [dateFilter, setDateFilter] = useState("");
@@ -60,7 +63,7 @@ const EventScreen = () => {
 
   const mergeBookmarkAndEvents = () => {
     if (requestEvents.data && requestUserBookmarks.data) {
-      const mergedEvents = requestEvents.data.map((event) => {
+      return requestEvents.data.map((event) => {
         const bookmark = requestUserBookmarks.data.find((bookmark: Bookmark) => bookmark.event_id === event.id);
         if (bookmark) {
           return {
@@ -70,7 +73,6 @@ const EventScreen = () => {
         }
         return event;
       });
-      return mergedEvents;
     }
   };
 
@@ -80,6 +82,10 @@ const EventScreen = () => {
 
   const daySelectionHandler = (date: string) => {
     setDateFilter(date);
+  };
+
+  const onDetailScreen = (eventId: string) => {
+    navigation.navigate("EventDetailsScreen", {eventId: eventId,});
   };
 
   const renderEvents = () => {
@@ -94,6 +100,7 @@ const EventScreen = () => {
               eventType={"actual"}
               userId={userInfo?.uid}
               bookmarkId={item.bookmarkId}
+              onDetail={() => onDetailScreen(item.id!)}
             />
           }
         />
@@ -109,6 +116,7 @@ const EventScreen = () => {
               eventType={"actual"}
               userId={userInfo?.uid}
               bookmarkId={item.bookmarkId}
+              onDetail={() => onDetailScreen(item.id!)}
             />
           }
         />

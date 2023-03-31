@@ -1,13 +1,11 @@
-
 import { getEvents } from "../api/event";
 import { useState } from "react";
-import { Alert, StyleSheet, View, Text } from "react-native";
+import { Alert, StyleSheet, Text, View } from "react-native";
 import { useQuery } from "react-query";
-import { VictoryBar, VictoryChart, VictoryAxis, VictoryLabel } from "victory-native";
+import { VictoryAxis, VictoryBar, VictoryChart, VictoryLabel } from "victory-native";
 import { colors } from "../styles/colors";
-import { fontFamily, fontSize } from "../styles/fonts";
+import { fontFamily, fontSize, fontWeightTitle } from "../styles/fonts";
 import { getDate } from "../utils/getDate";
-import { fontWeightTitle } from '../styles/fonts';
 import IconText from "./IconText";
 
 const DataVisualization = () => {
@@ -49,9 +47,9 @@ const DataVisualization = () => {
   //   }
   // });
 
-  const weekParticipants = data.reduce((total, day) => total + day.value, 0);
-
-  const [selectedBar, setSelectedBar] = useState(weekParticipants);
+  // const weekParticipants = data.reduce((total, day) => total + day.value, 0);
+  //
+  // const [selectedBar, setSelectedBar] = useState(weekParticipants);
 
   const barChartSvg = {
     fill: colors.neutral.surfaceWhite,

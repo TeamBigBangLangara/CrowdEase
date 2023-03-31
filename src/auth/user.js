@@ -1,4 +1,4 @@
-import auth from '@react-native-firebase/auth';
+import auth from "@react-native-firebase/auth";
 
 export const signUp = async (email, password) => {
   await auth()
@@ -37,8 +37,11 @@ export const signOut = async () => {
     .then(() => console.log('User signed out!'));
 };
 
-export const getUser = async () => 
-{ 
+export const getUser = async () =>
+{
   const user = await auth().currentUser;
-  return {uid:user.uid,email:user.email ? user.email:' '};
+  return {
+    uid:user.uid,
+    email:user.email ? user.email:''
+  };
 }

@@ -7,7 +7,6 @@ import App from './src/App'
 import { name as appName } from './app.json'
 
 import OneSignal from 'react-native-onesignal';
-import axios from 'axios';
 
 const ONESIGNAL_APP_ID = 'ee944c2a-c447-402c-9f22-48dbdddb9caa';
 

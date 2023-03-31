@@ -1,40 +1,38 @@
-import React from 'react';
+import React from "react";
 import MapView from "react-native-maps";
-import { Text, View, StyleSheet, Image, Alert, SafeAreaView, ScrollView, Pressable } from 'react-native';
-import { useMutation, useQuery } from 'react-query';
+import { Alert, Image, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+import { useQuery } from "react-query";
 
 
-import { getEventById } from '../api/event';
-import { colors } from '../styles/colors';
-import { fontFamily } from '../styles/fonts';
-import { fontSize } from '../styles/fonts';
-import { fontWeightSubtitle, fontWeightBody, fontWeightSubtitle2 } from '../styles/fonts';
+import { getEventById } from "../api/event";
+import { colors } from "../styles/colors";
+import { fontFamily, fontSize, fontWeightBody, fontWeightSubtitle, fontWeightSubtitle2 } from "../styles/fonts";
 import { mapDarkStyle } from "../styles/maps";
-import { MainStackNavigationProps } from '../types/navigationTypes';
-import IconText from '../components/IconText';
-import PrimaryButton from '../components/PrimaryButton';
-import { useNavigation } from '@react-navigation/native';
+import { MainStackNavigationProps } from "../types/navigationTypes";
+import IconText from "../components/IconText";
+import PrimaryButton from "../components/PrimaryButton";
+import { useNavigation } from "@react-navigation/native";
 
 
-const EventDetailsScreen = ({ route }: MainStackNavigationProps<'EventDetailsScreen'>) => {
-  const { eventId } = route.params
-  const navigation = useNavigation()
+const EventDetailsScreen = ({ route, }: MainStackNavigationProps<'EventDetailsScreen'> | MainStackNavigationProps<'EventDetailsScreen'>) => {
+  const { eventId, } = route.params;
+  const navigation = useNavigation();
   const requestEventById = useQuery('eventDetail', () => getEventById(eventId),
     {
       onError: (error: TypeError) => {
         Alert.alert("Error", error.message);
       },
-    })
+    });
 
   const mapRef = React.useRef<any>(null);
 
   const onBookMark = () => {
-    Alert.alert('bookmark clicked')
-  }
+    Alert.alert('bookmark clicked');
+  };
 
   const dateObj = new Date(requestEventById.data?.dates.date);
   dateObj.setDate(dateObj.getDate() + 1);
-  const formattedDate = dateObj.toLocaleString('en-US', { month: 'long', day: 'numeric' });
+  const formattedDate = dateObj.toLocaleString('en-US', { month: 'long', day: 'numeric', });
 
 
   return (
@@ -120,7 +118,7 @@ const styles = StyleSheet.create({
     paddingBottom: 16,
     borderBottomColor: colors.neutral.outlineGrey,
     borderBottomWidth: 2,
-    maxWidth: 340
+    maxWidth: 340,
   },
   participantsContainer: {
     display: 'flex',
@@ -130,57 +128,57 @@ const styles = StyleSheet.create({
   },
   image: {
     height: 200,
-    marginHorizontal: -20
+    marginHorizontal: -20,
   },
   number: {
     fontFamily: fontFamily.subtitle,
     fontSize: fontSize.subtitle2,
     fontWeight: fontWeightSubtitle2,
-    color: colors.neutral.surfaceWhite
+    color: colors.neutral.surfaceWhite,
   },
   name: {
     fontFamily: fontFamily.heading,
     fontSize: fontSize.heading2,
     fontWeight: fontWeightSubtitle2,
-    color: colors.neutral.surfaceWhite
+    color: colors.neutral.surfaceWhite,
   },
   iconTextContainer: {
     marginTop: 32,
-    marginBottom: 16
+    marginBottom: 16,
   },
   iconText: {
     fontFamily: fontFamily.subtitle,
     fontSize: 30,
     fontWeight: fontWeightSubtitle,
     color: colors.neutral.surfaceWhite,
-    marginBottom: 16
+    marginBottom: 16,
   },
   title: {
     fontFamily: fontFamily.heading,
     fontSize: fontSize.heading2,
     fontWeight: fontWeightSubtitle2,
     color: colors.neutral.surfaceWhite,
-    marginBottom: 8
+    marginBottom: 8,
   },
   address: {
     fontFamily: fontFamily.body,
     fontSize: fontSize.subtitle2,
     fontWeight: fontWeightSubtitle2,
-    color: colors.neutral.surfaceWhite
+    color: colors.neutral.surfaceWhite,
   },
   details: {
     fontFamily: fontFamily.body,
     fontSize: fontSize.subtitle2,
     fontWeight: fontWeightBody,
     color: colors.neutral.surfaceWhite,
-    marginBottom: 32
+    marginBottom: 32,
   },
   map: {
     height: 220,
     width: 330,
     borderRadius: 22,
     marginTop: -26,
-    marginBottom: 32
+    marginBottom: 32,
   },
   buttonContainer: {
     backgroundColor: colors.neutral.surfaceBlack,
@@ -190,7 +188,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    height: 97
-  }
-})
+    height: 97,
+  },
+});
 export default EventDetailsScreen;

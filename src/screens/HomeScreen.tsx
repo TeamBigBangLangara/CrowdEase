@@ -14,14 +14,15 @@ import { getDate } from "../utils/getDate";
 import { borderRadius } from "../styles/basic";
 import EventCarousel from "../components/EventCarousel";
 import { getEvents } from "../api/event";
-import { useState } from "react";
+
+import OneSignal from 'react-native-onesignal';
+const ONESIGNAL_APP_ID = 'ee944c2a-c447-402c-9f22-48dbdddb9caa';
+
 
 // Get the dates
 const { formattedFirstDay, formattedLastDay, today, todayFormatted, week, getWeekday, } = getDate();
 
 const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => {
-
-  const [eventId, setEventId] = useState('')
 
   const requestEvents = useQuery("events", () => getEvents(),
     {
@@ -31,24 +32,20 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
     }
   );
   const onFullReportPress = () => {
-    navigation.navigate('WeekManagerScreen');
+    navigation.navigate('Report');
   };
 
   const onSeeSuggestionPress = () => {
-    navigation.navigate('SuggestionScreen');
+    navigation.navigate('WeekManagerScreen');
   };
 
   const onSeeMorePress = () => {
-    navigation.navigate('EventScreen');
+    navigation.navigate('Events');
   };
   const onProfileScreen = () => {
     navigation.navigate('ProfileScreen');
   };
 
-  const onEventCardPress = () => {
-    navigation.navigate('EventDetailsScreen', {eventId});
-    setEventId(eventId);
-  };
   const renderTodayParticipants = () => {
     let participants = 0;
     requestEvents.data?.forEach((event) => {
@@ -97,6 +94,29 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
 
     return <Text style={styles.busyDay}>{formattedDate} {day}</Text>;
   };
+
+// OneSignal Initialization
+OneSignal.setAppId(ONESIGNAL_APP_ID);
+
+// promptForPushNotificationsWithUserResponse will show the native iOS or Android notification permission prompt.
+// We recommend removing the following code and instead using an In-App Message to prompt for notification permission (See step 8)
+OneSignal.promptForPushNotificationsWithUserResponse();
+
+//Method for handling notifications received while app in foreground
+OneSignal.setNotificationWillShowInForegroundHandler(
+  notificationReceivedEvent => {
+    let notification = notificationReceivedEvent.getNotification();
+    const data = notification.additionalData;
+    // Complete with null means don't show a notification.
+    notificationReceivedEvent.complete(notification);
+  }
+);
+
+//Method for handling notifications opened
+OneSignal.setNotificationOpenedHandler(notification => {
+  const eventID = notification?.notification.additionalData.eventID;
+  navigation.navigate("EventDetailsScreen", {eventId: eventID,});
+});
 
   return (
     <SafeAreaView style={{ flex: 1, }}>

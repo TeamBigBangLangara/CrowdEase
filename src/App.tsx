@@ -16,6 +16,7 @@ import SuggestionScreen from "./screens/SuggestionScreen";
 import EventScreen from "./screens/EventScreen";
 import HomeScreen from "./screens/HomeScreen";
 import PastEventScreen from './screens/PastEventScreen';
+import EventDetailsScreen from './screens/EventDetailsScreen';
 
 export type AuthStackParams = {
   SplashScreen: undefined

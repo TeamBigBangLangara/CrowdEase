@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, View } from "react-native";
 
 import { colors } from "../styles/colors";
 import { fontFamily, fontSize, fontWeightSubtitle } from "../styles/fonts";
@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     borderRadius: borderRadius.primary,
     paddingVertical: 16,
+    marginVertical: 16,
     paddingHorizontal: 18,
   },
   infoContainer: {

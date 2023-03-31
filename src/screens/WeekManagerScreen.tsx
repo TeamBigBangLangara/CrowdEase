@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { Alert, FlatList, Image, ScrollView, StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { Alert, FlatList, StyleSheet, View } from "react-native";
 import { getEvents } from "../api/event";
-import {  useQuery } from "react-query";
+import { useQuery } from "react-query";
 import { getDate } from "../utils/getDate";
+import ReportCard from "../components/ReportCard";
+import { colors } from "../styles/colors";
 
 const WeekManagerScreen = () => {
   const { week, } = getDate();
@@ -22,7 +24,7 @@ const WeekManagerScreen = () => {
       { day: "SAT", value: 0, participant:0,},
       { day: "SUN", value: 0, participant:0,}
   ];
-  
+
   requestEvents.data?.forEach((event) => {
     for (let i = 0; i < 7; i++) {
       if (event.dates.date === week[i]) {
@@ -33,71 +35,29 @@ const WeekManagerScreen = () => {
   });
   return (
     <>
-    <View style={styles.wrapper}>
-      
-      <Text style={styles.tsize}>Weekly Event Preview</Text>
+    <View style={styles.container}>
       <FlatList
         data={data}
         renderItem={({ item, }) =>
-        <ScrollView>
-          <View style={styles.WeeklyEventContainer} key={Math.random()}>
-      
-            <View style={styles.item}>
-              <Text style={styles.FSize}>Date</Text>
-              <Text style={styles.HFsize}>{item.day}</Text>
-            </View>
-            <View style={styles.item}>
-            <Text style={styles.FSize}>Event Number</Text>
-            <Text style={styles.HFsize}>{item.value}</Text>
-            </View>
-            <View style={styles.item}>
-              <Text style={styles.FSize}>Event Participants</Text>
-              <Text style={styles.HFsize}>{item.participant}</Text>
-            </View>
-          </View>
-        </ScrollView>
+          <ReportCard
+            date={item.day}
+            eventNumber={item.value}
+            participantsQty={item.participant}
+          />
         }
        />
     </View>
-    
+
     </>
   );
 };
 
 const styles = StyleSheet.create({
-  wrapper: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    
-    
-  },
-  tsize:{
-    fontSize:24,
-  },
-  WeeklyEventContainer:{
-    display:'flex',
-    flexDirection:'row',
-    justifyContent:'space-around',
-    width: 353,
-    height: 76,
-    borderRadius:22,
-    backgroundColor:'#121214',
-    alignItems: 'center',
-    margin:5,
-
-
-  },
-  item:{
-    alignItems: 'center',
-    color:'white',
-  },
-  FSize:{
-    fontSize:12,
-    color:'white',
-  },
-  HFsize:{
-    fontSize:16,
-    color:'white',
+  container: {
+    flex: 1,
+    backgroundColor: colors.neutral.backgroundBlack,
+    paddingHorizontal: 20,
+    paddingVertical: 24,
   },
 });
 

@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     flexDirection: 'row',
-    backgroundColor: colors.netural.surfaceBlack,
+    backgroundColor: colors.neutral.surfaceBlack,
     justifyContent: 'space-between',
     borderRadius: borderRadius.primary,
     paddingVertical: 16,
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   header: {
     fontWeight: fontWeightSubtitle,
     fontSize: fontSize.caption,
-    color: colors.netural.surfaceWhite,
+    color: colors.neutral.surfaceWhite,
     textAlign: 'center',
     marginBottom: margin.tertiary,
     fontFamily: fontFamily.body,
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   info: {
     fontWeight: fontWeightSubtitle,
     fontSize: fontSize.subtitle2,
-    color: colors.netural.surfaceWhite,
+    color: colors.neutral.surfaceWhite,
     fontFamily: fontFamily.subtitle,
   },
 });

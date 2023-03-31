@@ -1,65 +1,137 @@
-import { BarChart, XAxis } from "react-native-svg-charts";
-import { StyleSheet, View } from "react-native";
+
+import { getEvents } from "../api/event";
+import { useState } from "react";
+import { Alert, StyleSheet, View, Text } from "react-native";
+import { useQuery } from "react-query";
+import { VictoryBar, VictoryChart, VictoryAxis, VictoryLabel } from "victory-native";
 import { colors } from "../styles/colors";
 import { fontFamily, fontSize } from "../styles/fonts";
+import { getDate } from "../utils/getDate";
+import { fontWeightTitle } from '../styles/fonts';
+import IconText from "./IconText";
 
 const DataVisualization = () => {
-  const days = [
-    { label: "MON", },
-    { label: "TUE", },
-    { label: "WED", },
-    { label: "THU", },
-    { label: "FRI", },
-    { label: "SAT", },
-    { label: "SUN", }
+  const { week, } = getDate();
+  const [selectedBar, setSelectedBar] = useState(0);
+
+  const requestEvents = useQuery("events", () => getEvents(),
+    {
+      onError: (error: TypeError) => {
+        Alert.alert("Error", error.message);
+      },
+    }
+  );
+
+  const data = [
+    { day: "MON", value: 0, },
+    { day: "TUE", value: 0, },
+    { day: "WED", value: 0, },
+    { day: "THU", value: 0, },
+    { day: "FRI", value: 0, },
+    { day: "SAT", value: 0, },
+    { day: "SUN", value: 0, }
   ];
 
-  const textColor = {
-    fill: colors.netural.surfaceWhite,
-  };
-
+  requestEvents.data?.forEach((event) => {
+    for (let i = 0; i < 7; i++) {
+      if (event.dates.date === week[i]) {
+        data[i].value += event.participants;
+      }
+    }
+  });
 
   const barChartSvg = {
-    fill: colors.secondaryGreenDark,
+    fill: colors.neutral.surfaceWhite,
   };
 
-  const data = [5, 6, 4, 10, 8, 7, 10];
+  const axisStyles = {
+    axis: {
+      stroke: colors.neutral.surfaceWhite,
+    },
+    tickLabels: {
+      fontSize: fontSize.caption,
+      fontFamily: fontFamily.body,
+      fill: colors.neutral.surfaceWhite,
+    },
+  };
 
   return (
-    <View style={{ marginHorizontal: 1,}}>
-      <BarChart
-        spacingInner={0.6}
-        style={styles.barChart}
-        data={data}
-        svg={{...barChartSvg,}}
-        contentInset={{ top: 20, }}
-      >
-      </BarChart>
-      <XAxis
-        data={days}
-        formatLabel={(value: string, index:  number) => days[index].label}
-        contentInset={{ left: 15, right: 15, }}
-        style={styles.xaxis}
-        svg={{...styles.xaxisSvg, ...textColor,}}
-      />
+    <View style={styles.container}>
+      <View style={styles.participantsNumberContainer}>
+        <IconText icon={require('../assets/icons/participants.png')} text={'Total participants:'} style={styles.participantIcon} />
+        <Text style={styles.participantsNumber}>{selectedBar}</Text>
+      </View>
+      <VictoryChart height={200}>
+        <VictoryAxis
+          style={axisStyles}
+          tickLabelComponent={<VictoryLabel style={styles.xAxisSvg} />}
+        />
+        <VictoryBar
+          data={data}
+          x="day"
+          y="value"
+          style={{ data: barChartSvg, }}
+          barWidth={20} cornerRadius={{ bottomLeft: (0), bottomRight: (0), topLeft: (10), topRight: (10), }}
+          events={[
+            {
+              target: 'data',
+              eventHandlers: {
+                onPressIn: (event, data) => {
+                  return [
+                    {
+                      target: 'data',
+                      eventKey: 'all',
+                      mutation: (props: any, clickedData: { datum: { day: string, value: number } }) => {
+                        const fill = props.style?.fill;
+                        return fill === colors.neutral.surfaceWhite
+                          ? colors.neutral.surfaceWhite
+                          : { fill: colors.secondaryGreenDark, };
+                      },
+                    },
+                    {
+                      target: 'data',
+                      mutation: (clickedData: { datum: { day: string, value: number } }) => {
+                        setSelectedBar(data?.datum.value);
+                        return {
+                          style: { fill: colors.secondaryGreenDark, },
+                        };
+                      },
+                    }
+                  ];
+                },
+              },
+            }
+          ]}
+        />
+      </VictoryChart>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  barChart: {
-    height: 166,
-    width: 357,
-    borderBottomWidth: 2,
-    borderBottomColor: colors.netural.surfaceWhite,
+  container: {
+    marginHorizontal: 1,
   },
-  xaxis: {
-    marginTop: 2,
-  },
-  xaxisSvg: {
+  xAxisSvg: {
     fontSize: fontSize.caption,
     fontFamily: fontFamily.body,
-    fill: colors.netural.surfaceWhite,
+    fill: colors.neutral.surfaceWhite,
+  },
+  participantsNumberContainer: {
+    flexDirection: 'row',
+    gap: 5,
+    alignItems: 'flex-end',
+    marginTop: 4,
+    marginLeft: 20,
+  },
+  participantsNumber: {
+    color: colors.secondaryGreenDark,
+    fontFamily: fontFamily.heading,
+    fontSize: fontSize.heading2,
+    fontWeight: fontWeightTitle,
+  },
+  participantIcon: {
+    alignItems: "center",
   },
 });
 

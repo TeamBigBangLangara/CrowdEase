@@ -1,4 +1,5 @@
 export interface Event {
+  bookmarkId: any
   id: string
   ratingID: string
   rate: number
@@ -54,5 +55,5 @@ export interface Rating {
 
 export interface Bookmark {
   user_id: string
-  event_id: string
+  event_id?: string
 }

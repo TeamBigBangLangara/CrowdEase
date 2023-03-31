@@ -1,11 +1,12 @@
-import { StyleSheet, Text, View, ScrollView, SafeAreaView, Pressable } from "react-native";
+import { StyleSheet, Text, View, ScrollView, SafeAreaView, Pressable, Alert } from "react-native";
+import { useQuery } from "react-query";
 
 import { signOut } from '../auth/user';
 import { MainStackNavigationProps } from '../types/navigationTypes';
 import { colors } from '../styles/colors';
 import { fontFamily } from '../styles/fonts';
 import { fontSize } from '../styles/fonts';
-import { fontWeightTitle, fontWeightSubtitle, fontWeightBody, fontWeightLabel, fontWeightSubtitle2 } from '../styles/fonts';
+import { fontWeightTitle, fontWeightSubtitle, fontWeightBody, fontWeightSubtitle2 } from '../styles/fonts';
 import IconText from '../components/IconText';
 import PrimaryButton from '../components/PrimaryButton';
 import SecondaryButton from '../components/SecondaryButton';
@@ -15,12 +16,20 @@ import DataVisualization from '../components/DataVisualization';
 import { getDate } from '../utils/getDate';
 import { borderRadius } from "../styles/basic";
 import EventCarousel from "../components/EventCarousel";
+import { getEvents } from "../api/event";
 
 // Get the dates
-const { formattedFirstDay, formattedLastDay, today, } = getDate();
+const { formattedFirstDay, formattedLastDay, today, todayFormatted, week, getWeekday } = getDate();
 
 const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => {
 
+  const requestEvents = useQuery("events", () => getEvents(),
+    {
+      onError: (error: TypeError) => {
+        Alert.alert("Error", error.message);
+      },
+    }
+  );
   const onFullReportPress = () => {
     navigation.navigate('WeekManagerScreen');
   };
@@ -28,7 +37,55 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
     navigation.navigate('SuggestionScreen');
   };
   const onSeeMorePress = () => {
-    navigation.navigate('PastEventScreen');
+    navigation.navigate('EventScreen');
+  };
+  const renderTodayParticipants = () => {
+    let participants = 0;
+    requestEvents.data?.forEach((event) => {
+      if (event.dates.date === todayFormatted) {
+        participants += event.participants;
+      }
+    });
+    return (
+      <Text style={styles.todayParticipantsNumber}>{participants}</Text>
+    );
+  }
+  const renderBusyDay = () => {
+    const weekParticipants = [];
+    //get each day with  participants
+    for (let i = 0; i < 7; i++) {
+      const dayParticipants = {
+        day: week[i],
+        participants: 0,
+      };
+      requestEvents.data?.forEach((event) => {
+        if (event.dates.date === week[i]) {
+          dayParticipants.participants += event.participants;
+        }
+      });
+      weekParticipants.push(dayParticipants);
+    }
+
+    //find the busiest day
+    let highestIndex = 0;
+    for (let i = 1; i < weekParticipants.length; i++) {
+      if (
+        weekParticipants[i].participants >
+        weekParticipants[highestIndex].participants
+      ) {
+        highestIndex = i;
+      }
+    }
+    const dateWithHighestParticipants =
+      weekParticipants[highestIndex].day;
+
+    //format the busiest day
+    const dateObj = new Date(dateWithHighestParticipants);
+    dateObj.setDate(dateObj.getDate() + 1);
+    const formattedDate = dateObj.toLocaleString('en-US', { month: 'long', day: 'numeric' });
+    const day = getWeekday(dateWithHighestParticipants)
+
+    return <Text style={styles.busyDay}>{formattedDate} {day}</Text>;
   };
 
   return (
@@ -36,13 +93,9 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
       <ScrollView>
         <View style={styles.container}>
           <Pressable onPress={signOut}>
-            <Text style={{ color: colors.netural.surfaceWhite, }}>Sign out</Text>
+            <Text style={{ color: colors.neutral.surfaceWhite, }}>Sign out</Text>
           </Pressable>
           <Text style={styles.title}>Preview of this week's events</Text>
-          <View style={styles.participantsNumberContainer}>
-            <IconText icon={require('../assets/icons/participants.png')} text={'Total participants:'} style={styles.participantIcon} />
-            <Text style={styles.participantsNumber}>8,425</Text>
-          </View>
           <View style={styles.dataVisualizationContainer}>
             <DataVisualization />
           </View>
@@ -51,7 +104,7 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
             <PrimaryButton onPress={onFullReportPress} label={'View Full Report'} />
           </View>
           <View style={styles.suggestionContainer}>
-            <Text style={styles.subtitle}>It seems that {<Text style={styles.busyDay}>March 12</Text>} Sunday is the busiest day of this week, would you like to see some promotional opportunities?</Text>
+            <Text style={styles.subtitle}>It seems that {renderBusyDay()} is the busiest day of this week, would you like to see some promotional opportunities?</Text>
             <SecondaryButton onPress={onSeeSuggestionPress} label={'See Suggestions'} />
           </View>
           <View style={styles.todayParticipantsContainer}>
@@ -61,7 +114,7 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
             </View>
             <View style={styles.numberContainer}>
               <IconText icon={require('../assets/icons/participants.png')} text={'Total Participants'} style={styles.participantIcon} />
-              <Text style={styles.todayParticipantsNumber}>8,963</Text>
+              <View>{renderTodayParticipants()}</View>
             </View>
             <Text style={styles.subtitleBreakdown}>Participants Breakdown</Text>
             <View style={styles.breakdownContainer}>
@@ -85,7 +138,7 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.netural.backgroundBlack,
+    backgroundColor: colors.neutral.backgroundBlack,
     paddingHorizontal: 20,
     paddingVertical: 24,
   },
@@ -95,20 +148,8 @@ const styles = StyleSheet.create({
     fontSize: fontSize.subtitle1,
     fontWeight: fontWeightBody,
   },
-  participantsNumber: {
-    color: colors.secondaryGreenDark,
-    fontFamily: fontFamily.heading,
-    fontSize: fontSize.heading2,
-    fontWeight: fontWeightTitle,
-  },
   participantIcon: {
     alignItems: "center",
-  },
-  participantsNumberContainer: {
-    flexDirection: 'row',
-    gap: 5,
-    alignItems: 'flex-end',
-    marginTop: 4,
   },
   dataVisualizationContainer: {
     height: 200,
@@ -120,15 +161,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   date: {
-    color: colors.netural.surfaceWhite,
+    color: colors.neutral.surfaceWhite,
     fontFamily: fontFamily.body,
     fontSize: fontSize.subtitle2,
     fontWeight: fontWeightBody,
     marginBottom: 15,
+    marginTop: 30
   },
   suggestionContainer: {
     alignSelf: 'center',
-    backgroundColor: colors.netural.surfaceBlack,
+    backgroundColor: colors.neutral.surfaceBlack,
     borderRadius: borderRadius.primary,
     elevation: 5,
     shadowColor: '#000',
@@ -148,7 +190,7 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
   },
   subtitle: {
-    color: colors.netural.surfaceWhite,
+    color: colors.neutral.surfaceWhite,
     fontFamily: fontFamily.subtitle,
     fontSize: fontSize.subtitle2,
     fontWeight: fontWeightSubtitle,
@@ -176,7 +218,7 @@ const styles = StyleSheet.create({
     fontWeight: fontWeightSubtitle,
   },
   numberContainer: {
-    backgroundColor: colors.netural.surfaceBlack,
+    backgroundColor: colors.neutral.surfaceBlack,
     borderRadius: borderRadius.primary,
     elevation: 5,
     shadowColor: '#000',
@@ -197,14 +239,14 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
   },
   todayParticipantsNumber: {
-    color: colors.netural.surfaceWhite,
+    color: colors.neutral.surfaceWhite,
     marginTop: 10,
     fontFamily: fontFamily.heading,
     fontSize: fontSize.heading2,
     fontWeight: fontWeightSubtitle2,
   },
   subtitleBreakdown: {
-    color: colors.netural.surfaceWhite,
+    color: colors.neutral.surfaceWhite,
     fontFamily: fontFamily.subtitle,
     fontSize: fontSize.subtitle2,
     fontWeight: fontWeightSubtitle,
@@ -228,7 +270,6 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.accent.accentBlueDark,
   },
   carouselContainer: {
-    display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
   },

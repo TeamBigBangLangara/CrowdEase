@@ -16,7 +16,7 @@ const NavigationBottomTab = () => {
     <Tab.Navigator initialRouteName="Home"
       screenOptions={{
         tabBarShowLabel: false,
-        tabBarStyle: { backgroundColor: colors.netural.surfaceBlack, height: 60, borderTopWidth: 2, borderTopColor: colors.netural.outlineGrey, },
+        tabBarStyle: { backgroundColor: colors.neutral.surfaceBlack, height: 60, borderTopWidth: 2, borderTopColor: colors.neutral.outlineGrey, },
         tabBarActiveTintColor: colors.primary.primaryPurpleDark,
       }}>
       <Tab.Screen
@@ -89,7 +89,7 @@ const NavigationBottomTab = () => {
 
 const styles = StyleSheet.create({
   tabbar: {
-    backgroundColor: colors.netural.surfaceBlack,
+    backgroundColor: colors.neutral.surfaceBlack,
   },
   iconContainer: {
     display: 'flex',
@@ -101,9 +101,11 @@ const styles = StyleSheet.create({
     fontFamily: fontFamily.body,
     fontSize: fontSize.body,
     fontWeight: fontWeightSubtitle2,
+    marginBottom: 5
+    
   },
   inactiveLabel: {
-    color: colors.netural.surfaceWhite,
+    color: colors.neutral.surfaceWhite,
   },
 });
 

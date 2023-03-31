@@ -15,14 +15,13 @@ import { addBookmark, removeBookmark } from "../api/bigBangAPI/bookmark";
 const EventCard = (props: {
   event: Event
   eventType: string
-  userId: string,
-  bookmarkId: string
+  userId?: string,
+  bookmarkId?: string
 }) => {
   const saveBookmark = useMutation(["bookmark"], () => addBookmark({
-    "user_id": props.userId,
+    "user_id": props.userId!,
     "event_id": props.event.id,
   }), {
-
     onSuccess: (data) => {
       setBookmarkID(data);
     },
@@ -39,7 +38,6 @@ const EventCard = (props: {
       console.log("Something went wrong, please try again.");
     },
   });
-
 
   useEffect(() => {
     if (props.bookmarkId !== undefined) {
@@ -92,7 +90,7 @@ const EventCard = (props: {
     if (props.eventType !== "past") {
       return <BookmarkButton
         eventId={props.event.id}
-        userID={props.userID}
+        userID={props.userId}
         isBookmarkAdded={isBookmarkAdded}
         onBookmarkPress={onBookmarkPress}
       />;
@@ -114,7 +112,7 @@ const EventCard = (props: {
       <RateCard
         event={props.event}
         onSkipPress={() => { setShowRating(false); }}
-        userId={props.userId}
+        userId={props.userId!}
       />
     );
   };

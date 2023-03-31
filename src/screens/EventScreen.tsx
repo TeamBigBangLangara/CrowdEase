@@ -86,7 +86,7 @@ const EventScreen = () => {
               key={item.id}
               event={item}
               eventType={"actual"}
-              userID={userInfo?.uid}
+              userId={userInfo?.uid}
               bookmarkId={item.bookmarkId}
             />
           }
@@ -101,7 +101,7 @@ const EventScreen = () => {
               key={item.id}
               event={item}
               eventType={"actual"}
-              userID={userInfo?.uid}
+              userId={userInfo?.uid}
               bookmarkId={item.bookmarkId}
             />
           }

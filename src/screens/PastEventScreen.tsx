@@ -65,7 +65,7 @@ const PastEventScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.netural.backgroundBlack,
+    backgroundColor: colors.neutral.backgroundBlack,
     paddingHorizontal: 20,
     paddingVertical: 24,
   },

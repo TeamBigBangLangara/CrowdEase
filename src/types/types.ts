@@ -1,5 +1,5 @@
 export interface Event {
-  bookmarkId: any
+  bookmarkId: string
   id: string
   ratingID: string
   rate: number

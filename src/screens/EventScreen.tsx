@@ -17,6 +17,8 @@ const EventScreen = () => {
 
   const [searchFilter, setSearchFilter] = useState("");
   const [dateFilter, setDateFilter] = useState("");
+  //For simplification, only 1 category is passed for filtering.
+  const [categoryFilter, setCategoryFilter] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
   const [userInfo, setUserInfo] = useState<LoggedUser>({ uid: "", email: "", });
 
@@ -36,6 +38,9 @@ const EventScreen = () => {
         })
         .filter((event) => {
           return dateFilter ? event.dates.date === dateFilter : true;
+        })
+        .filter((event) => {
+          return categoryFilter ? event.category.name === categoryFilter : true;
         });
       },
       onError: (error: TypeError) => {
@@ -43,6 +48,11 @@ const EventScreen = () => {
       },
     }
   );
+
+  const onCategoryPress = (category: string) => {
+    console.log(category);
+    setCategoryFilter(category);
+  }
 
   const requestUserBookmarks = useQuery("getUserBookmarks", () => {
       return fetchBookmarks(userInfo.uid);
@@ -131,6 +141,7 @@ const EventScreen = () => {
       <FilterCategory
         visible={modalVisible}
         onClosePress={() => setModalVisible(false)}
+        onPressCategory={onCategoryPress}
       />
     </ScrollView>
   );

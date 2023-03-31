@@ -35,7 +35,7 @@ const EventCategoryPressable = forwardRef((props: {onPressEvent: () => void, tex
 
   const pressHandle = () => {
     selectionHandle();
-    props.onPressEvent;
+    props.onPressEvent(category);
   };
 
   return (
@@ -49,12 +49,14 @@ const EventCategoryPressable = forwardRef((props: {onPressEvent: () => void, tex
 
 //////////////////////// MAIN COMPONENT ////////////////////////
 
-const FilterCategory = (props: {visible: boolean, onRequestClose?: () => void, onTouchStart?: () => void, onClosePress: () => void} ) => {
+const FilterCategory = (props: {visible: boolean, onRequestClose?: () => void, onTouchStart?: () => void, onClosePress: () => void, onPressCategory: (category: string) => void} ) => {
+
+
 
   const filterPressableRef = useRef([]);
 
-  const applyFilterEventHandler= () => {
-
+  const applyFilterEventHandler= (category: string) => {
+    props.onPressCategory(category)
   };
 
   const clearAllEventHandler = () => {
@@ -86,14 +88,14 @@ const FilterCategory = (props: {visible: boolean, onRequestClose?: () => void, o
               <Text style={styles.eventsFilterContainerTitle}>Event Category</Text>
               <View style={styles.eventsFilterPressableContainer}>
                 <View style={styles.eventsFilterPressableContainerRow}>
-                  <EventCategoryPressable onPressEvent={() => console.log("sports")} text={"Sports"} icon={require('../assets/category/sport.png')} ref={filterPressableRef}/>
-                  <EventCategoryPressable onPressEvent={() => console.log("sports")} text={"Shows"} icon={require('../assets/category/show.png')} ref={filterPressableRef}/>
-                  <EventCategoryPressable onPressEvent={() => console.log("sports")} text={"Music"} icon={require('../assets/category/music.png')} ref={filterPressableRef}/>
+                  <EventCategoryPressable onPressEvent={() => applyFilterEventHandler("Sports")} text={"Sports"} icon={require('../assets/category/sport.png')} ref={filterPressableRef}/>
+                  <EventCategoryPressable onPressEvent={() => applyFilterEventHandler("Shows")} text={"Shows"} icon={require('../assets/category/show.png')} ref={filterPressableRef}/>
+                  <EventCategoryPressable onPressEvent={() => applyFilterEventHandler("Music")} text={"Music"} icon={require('../assets/category/music.png')} ref={filterPressableRef}/>
                 </View>
                 <View style={styles.eventsFilterPressableContainerRow}>
-                  <EventCategoryPressable onPressEvent={() => console.log("sports")} text={"Festivals"} icon={require('../assets/category/festival.png')}/>
-                  <EventCategoryPressable onPressEvent={() => console.log("sports")} text={"Business"} icon={require('../assets/category/business.png')}/>
-                  <EventCategoryPressable onPressEvent={() => console.log("sports")} text={"Other"} icon={require('../assets/category/other.png')}/>
+                  <EventCategoryPressable onPressEvent={() => applyFilterEventHandler("Festivals")} text={"Festivals"} icon={require('../assets/category/festival.png')}/>
+                  <EventCategoryPressable onPressEvent={() => applyFilterEventHandler("Business")} text={"Business"} icon={require('../assets/category/business.png')}/>
+                  <EventCategoryPressable onPressEvent={() => applyFilterEventHandler("Other")} text={"Other"} icon={require('../assets/category/other.png')}/>
                 </View>
               </View>
             </View>

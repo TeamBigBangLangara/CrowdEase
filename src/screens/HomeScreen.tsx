@@ -1,4 +1,4 @@
-import { Alert, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View, Image } from "react-native";
+import { Alert, Image, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 import { useQuery } from "react-query";
 
 import { MainStackNavigationProps } from "../types/navigationTypes";
@@ -38,7 +38,7 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
   };
   const onProfileScreen = () => {
     navigation.navigate('ProfileScreen');
-  }
+  };
   const renderTodayParticipants = () => {
     let participants = 0;
     requestEvents.data?.forEach((event) => {
@@ -158,11 +158,11 @@ const styles = StyleSheet.create({
     fontFamily: fontFamily.heading,
     fontSize: fontSize.heading2,
     fontWeight: fontWeightSubtitle2,
-    color: colors.neutral.surfaceWhite
+    color: colors.neutral.surfaceWhite,
   },
   profileIcon: {
     width: 28,
-    height: 28
+    height: 28,
   },
   title: {
     color: colors.primary.primaryPurpleDark,

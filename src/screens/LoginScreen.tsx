@@ -8,8 +8,8 @@ import { AuthStackNavigationProps } from '../types/navigationTypes';
 import PrimaryButton from '../components/PrimaryButton';
 
 const LoginScreen = ({ navigation, }: AuthStackNavigationProps<'LoginScreen'>) => {
-  const [email, setEmail] = useState('jane.doe@example.com');
-  const [password, setPassword] = useState('SuperSecretPassword!');
+  const [email, setEmail] = useState('business@gmail.com');
+  const [password, setPassword] = useState('test123');
 
   const onLoginPress = () => {
     if (loginValidation()) {

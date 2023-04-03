@@ -2,13 +2,12 @@ import React, { useEffect } from 'react';
 import { StyleSheet, Pressable, Text, View,Image, ImageBackground } from 'react-native';
 import { AuthStackNavigationProps } from '../types/navigationTypes';
 import PrimaryButton from '../components/PrimaryButton';
-import { fontFamily, fontSize, } from "../styles/fonts";
-import LinearGradient from 'react-native-linear-gradient';
+import { fontFamily, fontSize } from "../styles/fonts";
 import { LinearTextGradient } from 'react-native-text-gradient';
 
 const SplashScreen = ({ navigation, }: AuthStackNavigationProps<'SplashScreen'>) => {
 
-  const backgroundUri = require('../assets/images/splashScreenBackground.png');
+  const backgroundUri = require('../assets/images/splashScreen.png');
   const logoUri = require('../assets/crowdeaseLogo/crowdease.png');
   
   useEffect(() => {
@@ -20,8 +19,6 @@ const SplashScreen = ({ navigation, }: AuthStackNavigationProps<'SplashScreen'>)
   return (
     <View style={styles.containerTop}>
       <ImageBackground source={backgroundUri} resizeMode="cover" style={styles.image}>
-      <LinearGradient colors={['rgba(0,0,0,1)', 'rgba(255,255,255,0.1)']} 
-      style={styles.linearGradient}  />
         <View style={styles.container}>        
           <View style={styles.brandingView}>
             <Image source={logoUri} style={styles.logo} />
@@ -36,26 +33,30 @@ const SplashScreen = ({ navigation, }: AuthStackNavigationProps<'SplashScreen'>)
               </Text>
             </LinearTextGradient>
           </View>
-          <PrimaryButton 
-          onPress={() => navigation.navigate('SignUpScreen')}
-          label = {"Sign Up"}
-          />
-          <Pressable onPress={() => navigation.navigate('LoginScreen')}>
-            <Text  style={styles.text}>I already have an account</Text>
-          </Pressable>        
+          <View style={styles.ctaContainer}>
+            <PrimaryButton
+              onPress={() => navigation.navigate('SignUpScreen')}
+              label = {"Sign Up"}
+            />
+            <Pressable onPress={() => navigation.navigate('LoginScreen')}>
+              <Text  style={styles.text}>I already have an account</Text>
+            </Pressable>
+          </View>    
         </View>
-        
     </ImageBackground>
     </View>
   );
 };
-
 
 const styles = StyleSheet.create({
   image: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  ctaContainer:{
+    paddingTop: 40,
+    marginBottom: 60,
   },
   text: {
     fontWeight: "500",
@@ -81,12 +82,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 74,
   },
   brandingView:{
     flex:1,
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop:150,
   },
   linearGradient: {
     backgroundColor: "transparent",

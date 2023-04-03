@@ -20,7 +20,7 @@ const SplashScreen = ({ navigation, }: AuthStackNavigationProps<'SplashScreen'>)
   return (
     <View style={styles.containerTop}>
       <ImageBackground source={backgroundUri} resizeMode="cover" style={styles.image}>
-      <LinearGradient colors={["rgba(0, 0, 0, 1)","rgba(0, 0, 0, 0)"]} 
+      <LinearGradient colors={['rgba(0,0,0,1)', 'rgba(255,255,255,0.1)']} 
       style={styles.linearGradient}  />
         <View style={styles.container}>        
           <View style={styles.brandingView}>
@@ -56,8 +56,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    
-    backgroundColor: "B687FF",
   },
   text: {
     fontWeight: "500",

@@ -6,6 +6,7 @@ import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 import SignUp from "./screens/SignUpScreen";
+import LaunchScreen from "./screens/LaunchScreen";
 import SplashScreen from "./screens/SplashScreen";
 import Login from "./screens/LoginScreen";
 import NavigationBottomTab from "./components/navigation/NavigationBottomTab";
@@ -22,6 +23,7 @@ import MapScreen from "./screens/MapScreen";
 
 export type AuthStackParams = {
   SplashScreen: undefined
+  LaunchScreen: undefined
   LoginScreen: undefined
   SignUpScreen: undefined
   LocationScreen: { emailParam: string, passwordParam: string, userName: string }
@@ -129,7 +131,9 @@ const App = () => {
       <QueryClientProvider client={queryClient}>
         <NavigationContainer>
           {!isLoggedIn && (
-            <Stack.Navigator initialRouteName={'SplashScreen'}>
+            <Stack.Navigator initialRouteName={'LaunchScreen'}>
+              <Stack.Screen name={'LaunchScreen'} component={LaunchScreen} />
+              
               <Stack.Screen name={'SplashScreen'} component={SplashScreen} />
               <Stack.Screen name={'LoginScreen'} component={Login} />
               <Stack.Screen name={'SignUpScreen'} component={SignUp} />

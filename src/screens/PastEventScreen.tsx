@@ -45,10 +45,13 @@ const PastEventScreen = () => {
     }
   };
 
+  const currentDate = new Date().toISOString().slice(0, 10);
+  const pastEvents = mergeRatingAndEvents()?.filter((event) => event.dates.date < currentDate);
+
   return (
     <SafeAreaView style={{ flex: 1, }}>
       <FlatList
-        data={mergeRatingAndEvents()}
+        data={pastEvents}
         renderItem={({ item, }) =>
           <EventCard
             key={item.id}

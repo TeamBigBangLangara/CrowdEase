@@ -94,7 +94,7 @@ const ProfileScreen = ({ navigation, }: MainStackNavigationProps<'ProfileScreen'
             </Pressable>
         </View>
       </View>
-      <Pressable onPress={signOut}>
+      <Pressable onPress={signOut} style={styles.logoutContainer}>
         <IconText
         icon={require('../assets/icons/profileIcons/logout.png')}
         text={'Log Out'}
@@ -110,6 +110,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.neutral.backgroundBlack,
     paddingHorizontal: 20,
     paddingVertical: 24,
+    flex: 1,
   },
   header: {
     height: 40,
@@ -189,13 +190,14 @@ const styles = StyleSheet.create({
     fontWeight: fontWeightBody,
     fontSize: fontSize.subtitle2,
   },
+  logoutContainer: {
+    marginTop: 80,
+  },
   logout: {
     color: colors.neutral.surfaceWhite,
     fontFamily: fontFamily.body,
     fontWeight: fontWeightBody,
     fontSize: fontSize.body,
-    marginTop: 120,
-    marginBottom: 40
   },
 });
 

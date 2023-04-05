@@ -13,7 +13,7 @@ import DataVisualization from "../components/DataVisualization";
 import { getDate } from "../utils/getDate";
 import { borderRadius } from "../styles/basic";
 import EventCarousel from "../components/EventCarousel";
-import { getEvents } from "../api/event";
+import { getEvents } from "../api/bigBangAPI/JsonEvents";
 
 import OneSignal from 'react-native-onesignal';
 const ONESIGNAL_APP_ID = 'ee944c2a-c447-402c-9f22-48dbdddb9caa';

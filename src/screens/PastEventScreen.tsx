@@ -1,6 +1,6 @@
 import { Alert, FlatList, SafeAreaView, StyleSheet } from "react-native";
 import { useQuery } from "react-query";
-import { getEvents } from "../api/event";
+import { getEvents } from "../api/bigBangAPI/JsonEvents";
 
 import EventCard from "../components/EventCard";
 import { getUser } from "../auth/user";

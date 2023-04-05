@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { Alert, FlatList, Image, ScrollView, StyleSheet, Text, View } from "react-native";
-import { getEvents } from "../api/event";
+import { getEvents } from "../api/bigBangAPI/JsonEvents";
 
 import SearchForm from "../components/SearchForm";
 import WeekCalendar from "../components/WeekCalendar";

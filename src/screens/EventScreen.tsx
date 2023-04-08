@@ -132,7 +132,10 @@ const EventScreen = ({ navigation, }: EventsStackNavigationProps<'EventScreen'>)
           setModalVisible(true);
         }}
       />
-      <WeekCalendar onDaySelection={daySelectionHandler} isExpanded={true}/>
+      <WeekCalendar 
+      onDaySelection={daySelectionHandler}
+      onWeekSelection={()=> console.log('under development')}
+      isExpanded={true}/>
       <View style={styles.titleContainer}>
         <Text style={styles.title}>{requestEvents.data?.length} event(s)</Text>
         <View style={styles.imageContainer}>

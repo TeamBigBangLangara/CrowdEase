@@ -10,6 +10,7 @@ import LinearGradient from 'react-native-linear-gradient';
 //////////////////// TYPES ////////////////////
 
 type Props = {
+  onWeekSelection: (value: Date) => void;
   onDaySelection: (value: string) => void;
   isExpanded: boolean,
 };
@@ -40,7 +41,7 @@ const getWeekDays = (selectedWeekStartDay: Date): WeekDay[] => {
 
 //////////////////// MAIN COMPONENT ////////////////////
 
-const WeekCalendar = ({onDaySelection, isExpanded = true,}: Props) => {
+const WeekCalendar = ({onDaySelection, onWeekSelection, isExpanded = true,}: Props) => {
 
   const [selectedDay, setSelectedDay] = useState<Date>(new Date());
   const [selectedWeekStartDay, setSelectedWeekStartDay] = useState<Date>(startOfWeek(new Date(), { weekStartsOn: 1, }));
@@ -61,14 +62,25 @@ const WeekCalendar = ({onDaySelection, isExpanded = true,}: Props) => {
     setSelectedDay(pressedDateOfWeek);
   };
 
+  //Week Selection Handler
+  const weekSelectionHandler = (direction: string) => {
+    if (direction === 'left') {
+      onWeekSelection(subDays(selectedWeekStartDay,7));
+      setSelectedWeekStartDay(subDays(selectedWeekStartDay,7));
+    } else {
+      onWeekSelection(addDays(selectedWeekStartDay,7));
+      setSelectedWeekStartDay(addDays(selectedWeekStartDay,7));
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.weekSelectorContainer}>
-        <Pressable onPress={() => setSelectedWeekStartDay(subDays(selectedWeekStartDay,7))}>
+        <Pressable onPress={() => weekSelectionHandler('left')}>
           <Image source={require('../assets/icons/arrowLeft.png')} />
         </Pressable>
         <Text style={styles.weekRangeText}>{weekRangeText}</Text>
-        <Pressable onPress={() => setSelectedWeekStartDay(addDays(selectedWeekStartDay,7))}>
+        <Pressable onPress={() => weekSelectionHandler('right')}>
           <Image source={require('../assets/icons/arrowRight.png')} />
         </Pressable>
       </View>

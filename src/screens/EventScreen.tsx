@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useQuery } from "react-query";
 import { Alert, FlatList, Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { getEvents } from "../api/event";
@@ -15,6 +15,7 @@ import { getUser } from "../auth/user";
 import { Bookmark, LoggedUser } from "types/types";
 import { fetchBookmarks } from "../api/bigBangAPI/bookmark";
 import { EventsStackNavigationProps } from "../types/navigationTypes";
+import { useFocusEffect } from "@react-navigation/native";
 
 const EventScreen = ({ navigation, }: EventsStackNavigationProps<'EventScreen'>) => {
 
@@ -22,7 +23,7 @@ const EventScreen = ({ navigation, }: EventsStackNavigationProps<'EventScreen'>)
   const [dateFilter, setDateFilter] = useState("");
   //For simplification, only 1 category is passed for filtering.
   const [categoryFilter, setCategoryFilter] = useState("");
-
+  const [isLoading, setIsLoading] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [userInfo, setUserInfo] = useState<LoggedUser>({ uid: "", email: "", });
 
@@ -57,8 +58,21 @@ const EventScreen = ({ navigation, }: EventsStackNavigationProps<'EventScreen'>)
   const requestUserBookmarks = useQuery("bookmarks", () => {
       return fetchBookmarks(userInfo.uid);
     }, {
+      onSuccess : (data) => {
+        console.log(data);
+        Alert.alert("Hey Fetched data");
+        mergeBookmarkAndEvents();
+      },
       enabled: !!userInfo.uid && requestEvents.isSuccess,
     }
+  );
+
+  useFocusEffect(
+    useCallback(() => {
+        requestUserBookmarks.refetch();
+        console.log('gegegeggegegege');
+        setIsLoading(true);
+    }, [])
   );
 
   const mergeBookmarkAndEvents = () => {

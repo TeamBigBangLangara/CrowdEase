@@ -10,7 +10,7 @@ import { getEventById } from "../api/event";
 import { colors } from "../styles/colors";
 import { fontFamily, fontSize, fontWeightBody, fontWeightSubtitle, fontWeightSubtitle2 } from "../styles/fonts";
 import { mapDarkStyle } from "../styles/maps";
-import { MainStackNavigationProps } from "../types/navigationTypes";
+import { EventsStackNavigationProps, MainStackNavigationProps } from "../types/navigationTypes";
 import IconText from "../components/IconText";
 import PrimaryButton from "../components/PrimaryButton";
 import { useNavigation } from "@react-navigation/native";
@@ -20,7 +20,7 @@ import { Bookmark, LoggedUser } from "types/types";
 import SecondaryButton from "../components/SecondaryButton";
 
 
-const EventDetailsScreen = ({ route, }: MainStackNavigationProps<'EventDetailsScreen'> | MainStackNavigationProps<'EventDetailsScreen'>) => {
+const EventDetailsScreen = ({ route, }: MainStackNavigationProps<'EventDetailsScreen'> | EventsStackNavigationProps<'EventDetailsScreen'>) => {
   const { eventId, } = route.params;
   const navigation = useNavigation();
   const [userInfo, setUserInfo] = useState<LoggedUser>({ uid: "", email: "", });
@@ -46,7 +46,6 @@ const EventDetailsScreen = ({ route, }: MainStackNavigationProps<'EventDetailsSc
     return fetchBookmarks(userInfo.uid);
     },{
     onSuccess: (data) => {
-      setIsBookmarkAdded(false);
       const bookmark = data.find((bookmark: Bookmark) => bookmark.event_id === eventId);
       if (bookmark) {
             setBookmarkID(bookmark._id);
@@ -63,6 +62,7 @@ const EventDetailsScreen = ({ route, }: MainStackNavigationProps<'EventDetailsSc
   }), {
     onSuccess: (data) => {
       setBookmarkID(data);
+      requestUserBookmarks.refetch();
       console.log("Bookmark Saved");
     },
     onError: () => {
@@ -137,7 +137,6 @@ const EventDetailsScreen = ({ route, }: MainStackNavigationProps<'EventDetailsSc
         Alert.alert('Unable to save data' +error);
       }
     }
-   
   };
 
   const renderBookmarkButton = () =>{

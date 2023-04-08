@@ -27,9 +27,6 @@ const filteredEvents = () => {
   return events.filter((event) => event.dates.date === today);
 };
 
-const onBookMarkPress = () => {
-  Alert.alert("here", "Book Mark pressed");
-};
 
   if (filteredEvents().length === 0 ) {
     return (
@@ -47,7 +44,6 @@ const onBookMarkPress = () => {
             key={item.id}
             event={item}
             eventType={"actual"}
-            onBookmarkPress={onBookMarkPress}
             onDetail={() => onDetailScreen(item.id)}
           />;
 

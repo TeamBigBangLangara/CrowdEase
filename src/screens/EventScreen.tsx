@@ -54,7 +54,7 @@ const EventScreen = ({ navigation, }: EventsStackNavigationProps<'EventScreen'>)
     }
   );
 
-  const requestUserBookmarks = useQuery("getUserBookmarks", () => {
+  const requestUserBookmarks = useQuery("bookmarks", () => {
       return fetchBookmarks(userInfo.uid);
     }, {
       enabled: !!userInfo.uid && requestEvents.isSuccess,

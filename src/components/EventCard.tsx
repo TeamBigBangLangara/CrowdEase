@@ -21,7 +21,7 @@ const EventCard = (props: {
   onDetail: () => void
 }) => {
 
-  const saveBookmark = useMutation(["bookmark"], () => addBookmark({
+  const saveBookmark = useMutation(["bookmarks"], () => addBookmark({
     "user_id": props.userId!,
     "event_id": props.event.id,
   }), {
@@ -33,7 +33,7 @@ const EventCard = (props: {
     },
   });
 
-  const deleteBookmark = useMutation(["bookmark"], () => removeBookmark(bookmarkID), {
+  const deleteBookmark = useMutation(["bookmarks"], () => removeBookmark(bookmarkID), {
     onSuccess: () => {
       setBookmarkID("");
     },

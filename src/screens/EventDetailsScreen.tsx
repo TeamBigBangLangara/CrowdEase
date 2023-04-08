@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useMutation } from "react-query";
 import MapView from "react-native-maps";
 import { Alert, Image, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 import { useQuery } from "react-query";
 
-
+import { addBookmark, removeBookmark } from "../api/bigBangAPI/bookmark";
+import { cancelNotification, createNotification } from "../api/oneSignal";
 import { getEventById } from "../api/event";
 import { colors } from "../styles/colors";
 import { fontFamily, fontSize, fontWeightBody, fontWeightSubtitle, fontWeightSubtitle2 } from "../styles/fonts";
@@ -12,28 +14,148 @@ import { MainStackNavigationProps } from "../types/navigationTypes";
 import IconText from "../components/IconText";
 import PrimaryButton from "../components/PrimaryButton";
 import { useNavigation } from "@react-navigation/native";
+import { getUser } from "../auth/user";
+import { fetchBookmarks } from "../api/bigBangAPI/bookmark";
+import { Bookmark, LoggedUser } from "types/types";
+import SecondaryButton from "../components/SecondaryButton";
 
 
 const EventDetailsScreen = ({ route, }: MainStackNavigationProps<'EventDetailsScreen'> | MainStackNavigationProps<'EventDetailsScreen'>) => {
   const { eventId, } = route.params;
   const navigation = useNavigation();
+  const [userInfo, setUserInfo] = useState<LoggedUser>({ uid: "", email: "", });
+  const [isBookmarkAdded, setIsBookmarkAdded] = useState(false);
+  const [bookmarkID, setBookmarkID] = useState("");
+  const [notificationID, setNotificationID] = useState("");
+
+  useQuery("getUserData", getUser, {
+      onSuccess: (data:LoggedUser) => {
+        setUserInfo(data);
+      },
+    }
+  );
   const requestEventById = useQuery('eventDetail', () => getEventById(eventId),
     {
       onError: (error: TypeError) => {
         Alert.alert("Error", error.message);
       },
     });
+  
+  const requestUserBookmarks = useQuery("bookmarks",  () => 
+  {
+    return fetchBookmarks(userInfo.uid);
+    },{
+    onSuccess: (data) => {
+      setIsBookmarkAdded(false);
+      const bookmark = data.find((bookmark: Bookmark) => bookmark.event_id === eventId);
+      if (bookmark) {
+            setBookmarkID(bookmark._id);
+            setIsBookmarkAdded(true);
+      }
+    },
+        enabled: !!userInfo.uid,
+      }
+  );
 
+  const saveBookmark = useMutation(["bookmarks"], () => addBookmark({
+    "user_id": userInfo?.uid,
+    "event_id": eventId,
+  }), {
+    onSuccess: (data) => {
+      setBookmarkID(data);
+      console.log("Bookmark Saved");
+    },
+    onError: () => {
+      console.log("Something went wrong, please try again.");
+    },
+  });
+
+  const deleteBookmark = useMutation(["bookmarks"], () => removeBookmark(bookmarkID), {
+    onSuccess: () => {
+      setBookmarkID("");
+      console.log("Bookmark Removed");
+    },
+    onError: () => {
+      console.log("Something went wrong, please try again.");
+    },
+  });
+
+  const saveNotification = useMutation(["createNewNotification"], () => createNotification(
+    requestEventById.data.dates.date,
+    eventId, 
+    requestEventById.data.name, 
+    requestEventById.data.image),
+    {
+    onSuccess: (data) => {
+      console.log(data);
+      setNotificationID(data);
+    },
+    onError: () => {
+        console.log("Something went wrong, please try again.");
+    },
+  });
+
+  const deleteNotification = useMutation(["deleteNotification"], () => cancelNotification(notificationID),
+    {
+    onSuccess: (data) => {
+    },
+    onError: () => {
+      console.log("Something went wrong, please try again.");
+    },
+  });
+
+  // useEffect(() => {
+  //   getBookmarkID();
+  // }, []);  
+    
   const mapRef = React.useRef<any>(null);
 
-  const onBookMark = () => {
-    Alert.alert('bookmark clicked');
+  const onBookMarkButtonPress = () => {
+    if(!isBookmarkAdded){
+      try{
+      saveBookmark.mutate();
+      saveNotification.mutate();
+      console.log(bookmarkID);
+      setIsBookmarkAdded(!isBookmarkAdded);
+      }
+      catch(error){
+        Alert.alert('Unable to save data' +error);
+      }
+    }
+    else{
+      try{
+        deleteBookmark.mutate();
+        if(notificationID !== undefined)
+          {
+            console.log("To cancel" + notificationID);
+            deleteNotification.mutate();
+          }
+          setNotificationID('');
+          setIsBookmarkAdded(!isBookmarkAdded);
+      }
+      catch(error){
+        Alert.alert('Unable to save data' +error);
+      }
+    }
+   
+  };
+
+  const renderBookmarkButton = () =>{
+    if(isBookmarkAdded){
+      return <SecondaryButton
+      onPress={onBookMarkButtonPress}
+      label={'Remove Bookmark'} />;
+    }
+    else{
+      return <PrimaryButton
+      onPress={onBookMarkButtonPress}
+      label={'Add to Bookmark'} />;
+    }
   };
 
   const dateObj = new Date(requestEventById.data?.dates.date);
   dateObj.setDate(dateObj.getDate() + 1);
   const formattedDate = dateObj.toLocaleString('en-US', { month: 'long', day: 'numeric', });
-
 
   return (
     <SafeAreaView>
@@ -87,9 +209,7 @@ const EventDetailsScreen = ({ route, }: MainStackNavigationProps<'EventDetailsSc
           >
           </MapView>
           <View style={styles.buttonContainer}>
-            <PrimaryButton
-              onPress={onBookMark}
-              label={'Add to Bookmark'} />
+            {renderBookmarkButton()}
           </View>
         </View>
       </ScrollView>

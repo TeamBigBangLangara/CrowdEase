@@ -1,51 +1,103 @@
-import React from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { useState } from "react";
+import { useQuery } from "react-query";
+import { Alert, ScrollView, StyleSheet, Text, View } from "react-native";
+
+import {addDays, subDays, format, isSameDay, startOfWeek} from 'date-fns';
 
 import DayEventCard from "../components/DayEventCard";
 import ParticipantsByCategory from "../components/ParticipantsByCategory";
 import PrimaryButton from "../components/PrimaryButton";
 
+import { getEvents } from "../api/event";
 import { colors } from "../styles/colors";
 import { fontFamily, fontSize } from "../styles/fonts";
 
-const testEvent: Event = {
-  bookmarkId: "001",
-  id: "eve001",
-  ratingID: "good",
-  rate: 1000,
-  name: "testName",
-  image: "no image",
-  dates: new Date,
-  category: "Music",
-  location: {
-    longitud: "0",
-    latitude: "0",
-  },
-  venue: {
-    name: "VenueName",
-    id: "0001",
-    type: "stadium",
-  },
-  address: "Langara College",
-  participants: 1000000,
-};
-
 const SuggestionScreen = () => {
+  /////========= States
+  const requestEvents = useQuery("events", () => getEvents(),
+    {
+      onError: (error: TypeError) => {
+        Alert.alert("Error", error.message);
+      },
+    }
+  );
+
+  //Current Day
+  const currentDay = new Date();
+
+  //Array of Events of the Day
+  const eventsOfCurrentDay: Event[] = [];
+
+  //Array of eventsCategories
+  const eventsCategories = [
+    {name: 'Music', participants: 0,},
+    {name: 'Sports', participants: 0,},
+    {name: 'Shows', participants: 0,},
+    {name: 'Festivals', participants: 0,},
+    {name: 'Business', participants: 0,},
+    {name: 'Other', participants: 0,}
+  ];
+
+  // //(Week)For each event, we find the corresponding category and increase participants.
+  // requestEvents.data?.forEach((event) => {
+  //   const eventCategory = eventsCategories.find(categoryObject => categoryObject.name === event.category.name);
+  //   if(eventCategory != undefined){
+  //     eventCategory.participants += event.participants;
+  //   } 
+  //   } 
+  // );
+
+    //(Day)For each event, we find the corresponding category and increase participants.
+    requestEvents.data?.forEach((event) => {
+      if(event.dates.date === format(currentDay, "yyyy-MM-dd")){
+        eventsOfCurrentDay.push(event);
+        const eventCategory = eventsCategories.find(categoryObject => categoryObject.name === event.category.name);
+        if(eventCategory != undefined){
+          eventCategory.participants += event.participants;
+        }
+      }
+      } 
+    );
+
+  //Sorting Events from most participants to lower. This sort logic returns a sorted array using participants property.
+  eventsOfCurrentDay.sort((a,b) => b.participants - a.participants);
+
+  //Calculating percentage of most-participants-event over its category total.
+  const moreParticipantsEventCategoryTotal = eventsCategories.find(categoryObject => categoryObject.name === eventsOfCurrentDay[0].category.name)?.participants;
+  const moreParticipantsEventOverCategoryTotal = Math.round(eventsOfCurrentDay[0].participants *100 / moreParticipantsEventCategoryTotal);
+
+  //Getting the category with most participants (This means all events need to be added)
+  const participantsArray = eventsCategories.map((categoryObject) => categoryObject.participants);
+  const participantsArrayaMaxValue = Math.max(...participantsArray);
+  const moreParticipantsCategory = eventsCategories.find(categoryObject => categoryObject.participants === participantsArrayaMaxValue);
+
+  //Calculating total participants. Reduce passes the partialSum Value (starts with 0 in this example), the incremental a (each value of the array), and the initial value 0; 
+  const totalParticipants = participantsArray.reduce((partialSum, a) => partialSum + a, 0);
+
   return (
     <ScrollView >
       <View style={styles.container}>
-        <Text style={styles.screenTitle}>Let's break Feb07 down, get ready to serve music lovers</Text>
+        <Text style={styles.screenTitle}>Let's break {format(currentDay, 'MMM dd')} down, get ready to serve {moreParticipantsCategory?.name} lovers</Text>
         <View style={{flex: 1,}}>
           <Text style={styles.sectionTitle}>
-            February 07, 2023
+          {format(currentDay, 'MMM dd, yyyy')}
           </Text>
-          <ParticipantsByCategory participants={3} percentage={50} musicQty={5} sportQty={5} showsQty={5} festivalsQty={5} businessQty={5} otherQty={5}/>
+          <ParticipantsByCategory 
+            participants={totalParticipants} 
+            percentage={50} 
+            musicQty={eventsCategories.find(categoryObject => categoryObject.name === 'Music').participants} 
+            sportQty={eventsCategories.find(categoryObject => categoryObject.name === 'Sports').participants} 
+            showsQty={eventsCategories.find(categoryObject => categoryObject.name === 'Shows').participants} 
+            festivalsQty={eventsCategories.find(categoryObject => categoryObject.name === 'Festivals').participants} 
+            businessQty={eventsCategories.find(categoryObject => categoryObject.name === 'Business').participants} 
+            otherQty={eventsCategories.find(categoryObject => categoryObject.name === 'Other').participants}
+          />
         </View>
         <View style={{flex: 1,}}>
           <Text style={styles.sectionTitle}>
             Major Event of the day
           </Text>
-          <DayEventCard event={testEvent} percentage={5}/>
+          <DayEventCard event={eventsOfCurrentDay[0]} percentage={moreParticipantsEventOverCategoryTotal}/>
         </View>
         <View style={{alignItems: 'center',}}>
           <PrimaryButton onPress={() => console.log("under development")} label={"Return to the week preview"}/>

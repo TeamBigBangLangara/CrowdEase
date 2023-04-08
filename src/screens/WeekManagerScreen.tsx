@@ -1,31 +1,34 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
-import { Alert, ScrollView, FlatList, StyleSheet, Text } from "react-native";
+import { Alert, ScrollView, FlatList, StyleSheet, Text, View } from "react-native";
 
 import { getEvents } from "../api/event";
 
 import ReportCard from "../components/ReportCard";
 import WeekCalendar from "../components/WeekCalendar";
 
-import { getDate } from "../utils/getDate";
 import { colors } from "../styles/colors";
 import { fontFamily, fontSize } from "../styles/fonts";
+import {addDays, format, startOfWeek} from 'date-fns';
 
+//////////////////// FUNCTIONS ////////////////////
+//getWeekDays
+const getWeekDays = (selectedWeekStartDay: Date): Date[] => {
+  const firstDayOfWeek = startOfWeek(selectedWeekStartDay, {weekStartsOn: 1,});
+  const daysOfWeek = [];
 
-//////////////////////////////
-const daysOfWeek:string[] = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
-
-
-/////////////////////////////
-const formatDate = (dateStr:string)=> {
-  let date = new Date(dateStr);
-  return date.toLocaleString('default', { month: 'short',}) + " " + date.getDate() +", "+ daysOfWeek[date.getDay()];
+  for (let i = 0; i < 7; i++) {
+    const dayOfWeek = addDays(firstDayOfWeek, i);
+    daysOfWeek.push(dayOfWeek);
+  }
+  return daysOfWeek;
 };
-
 
 
 //////////////////// MAIN COMPONENT ////////////////////
 const WeekManagerScreen = () => {
+  /////========= States
+  const [selectedWeekStartDay, setSelectedWeekStartDay] = useState<Date>(new Date());
 
   const requestEvents = useQuery("events", () => getEvents(),
     {
@@ -35,43 +38,52 @@ const WeekManagerScreen = () => {
     }
   );
 
-  ////////////////////////////////////////
-  const { week, } = getDate();
-  const data = [
-      { day: "MON", value: 0, participant:0, },
-      { day: "TUE", value: 0, participant:0,},
-      { day: "WED", value: 0, participant:0,},
-      { day: "THU", value: 0, participant:0,},
-      { day: "FRI", value: 0, participant:0,},
-      { day: "SAT", value: 0, participant:0,},
-      { day: "SUN", value: 0, participant:0,}
-  ];
+  /////========= Handlers
+  const weekCalendarArrowHandler = (newSelectedWeekStartDay: Date) => {
+    setSelectedWeekStartDay(newSelectedWeekStartDay);
+  };
 
-  ////////////////////////////////////////
-  requestEvents.data?.forEach((event) => {
-    for (let i = 0; i < 7; i++) {
-      data[i].day = formatDate(week[i]);
-      if (event.dates.date === week[i]) {
-        data[i].value = data[i].value>0 ? data[i].value+1 : 1;
-        data[i].participant += event.participants;
+  //Getting a list of objects with all info required for the ReportCard, for each day of the week
+  const weekdays = getWeekDays(selectedWeekStartDay);
+  const weekDayList = weekdays.map( weekday => {
+    return (
+      { day: weekday,
+        dayWithFormat: format(weekday, "MMM dd, ccc"),
+        eventsNumber: 0,
+        eventsParticipants: 0,
       }
-    }
+    );
+  });
+
+  //For each event, we find the corresponding weekDayObject. Add +1 to eventNumber for that day, and increase participants.
+  requestEvents.data?.forEach((event) => {
+    //Note: Comparison is made with dates formatted in YYYY-MM-DD
+    const dateOfEvent = weekDayList.find(weekDayObject => format(weekDayObject.day, "yyyy-MM-dd") === event.dates.date);
+    if(dateOfEvent != undefined){
+      dateOfEvent.eventsNumber++;
+      dateOfEvent.eventsParticipants += event.participants;
+    } 
   });
 
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.screenTitle}>Weekly Event Preview</Text>
-      <WeekCalendar onDaySelection={() => console.log("under development")} isExpanded={false}/>
+      <WeekCalendar 
+      onDaySelection={() => console.log("under development")} 
+      onWeekSelection={weekCalendarArrowHandler}
+      isExpanded={false}      
+      />
       <FlatList
-        data={data}
+        data={weekDayList}
         renderItem={({ item, }) =>
           <ReportCard
-            date={item.day}
-            eventNumber={item.value}
-            participantsQty={item.participant}
+            date={item.dayWithFormat}
+            eventNumber={item.eventsNumber}
+            participantsQty={item.eventsParticipants}
           />
         }
-       />
+        ItemSeparatorComponent={() => <View style={{height: 18}} />}
+      />  
     </ScrollView>
   );
 };
@@ -88,7 +100,6 @@ const styles = StyleSheet.create({
 
   screenTitle: {
     fontFamily: fontFamily.heading,
-    // fontWeight: 700,
     fontSize: fontSize.heading1,
     lineHeight: 36,
     textAlign: 'center',

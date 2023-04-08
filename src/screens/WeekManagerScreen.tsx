@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
-import { Alert, ScrollView, FlatList, StyleSheet, Text, View } from "react-native";
+import { Alert, FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
 
 import { getEvents } from "../api/event";
 
@@ -9,7 +9,7 @@ import WeekCalendar from "../components/WeekCalendar";
 
 import { colors } from "../styles/colors";
 import { fontFamily, fontSize } from "../styles/fonts";
-import {addDays, format, startOfWeek} from 'date-fns';
+import { addDays, format, startOfWeek } from "date-fns";
 
 //////////////////// FUNCTIONS ////////////////////
 //getWeekDays
@@ -62,16 +62,16 @@ const WeekManagerScreen = () => {
     if(dateOfEvent != undefined){
       dateOfEvent.eventsNumber++;
       dateOfEvent.eventsParticipants += event.participants;
-    } 
+    }
   });
 
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.screenTitle}>Weekly Event Preview</Text>
-      <WeekCalendar 
-      onDaySelection={() => console.log("under development")} 
+      <WeekCalendar
+      onDaySelection={() => console.log("under development")}
       onWeekSelection={weekCalendarArrowHandler}
-      isExpanded={false}      
+      daysVisible={false}
       />
       <FlatList
         data={weekDayList}
@@ -82,8 +82,8 @@ const WeekManagerScreen = () => {
             participantsQty={item.eventsParticipants}
           />
         }
-        ItemSeparatorComponent={() => <View style={{height: 18}} />}
-      />  
+        ItemSeparatorComponent={() => <View style={{height: 18,}} />}
+      />
     </ScrollView>
   );
 };

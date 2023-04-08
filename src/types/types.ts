@@ -57,3 +57,9 @@ export interface Bookmark {
   user_id: string
   event_id?: string
 }
+
+export interface WeekDay {
+  date: Date,
+  dayName: string,
+  dayNumber: string
+}

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
 import { Alert, ScrollView, StyleSheet, Text, View } from "react-native";
+import { MainStackNavigationProps } from '../types/navigationTypes';
 
 import {addDays, subDays, format, isSameDay, startOfWeek} from 'date-fns';
 
@@ -12,7 +13,7 @@ import { getEvents } from "../api/event";
 import { colors } from "../styles/colors";
 import { fontFamily, fontSize } from "../styles/fonts";
 
-const SuggestionScreen = () => {
+const SuggestionScreen = ({ navigation, }: MainStackNavigationProps<'SuggestionScreen'>) => {
   /////========= States
   const requestEvents = useQuery("events", () => getEvents(),
     {
@@ -21,6 +22,11 @@ const SuggestionScreen = () => {
       },
     }
   );
+
+  /////========= Handlers
+  const onSeeSuggestionPress = () => {
+    navigation.navigate('HomeScreen');
+  };
 
   //Current Day
   const currentDay = new Date();
@@ -37,15 +43,6 @@ const SuggestionScreen = () => {
     {name: 'Business', participants: 0,},
     {name: 'Other', participants: 0,}
   ];
-
-  // //(Week)For each event, we find the corresponding category and increase participants.
-  // requestEvents.data?.forEach((event) => {
-  //   const eventCategory = eventsCategories.find(categoryObject => categoryObject.name === event.category.name);
-  //   if(eventCategory != undefined){
-  //     eventCategory.participants += event.participants;
-  //   } 
-  //   } 
-  // );
 
     //(Day)For each event, we find the corresponding category and increase participants.
     requestEvents.data?.forEach((event) => {
@@ -100,7 +97,7 @@ const SuggestionScreen = () => {
           <DayEventCard event={eventsOfCurrentDay[0]} percentage={moreParticipantsEventOverCategoryTotal}/>
         </View>
         <View style={{alignItems: 'center',}}>
-          <PrimaryButton onPress={() => console.log("under development")} label={"Return to the week preview"}/>
+          <PrimaryButton onPress={onSeeSuggestionPress} label={"Return to the week preview"}/>
         </View>
 
       </View>

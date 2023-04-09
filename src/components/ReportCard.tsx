@@ -31,7 +31,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     borderRadius: borderRadius.primary,
     paddingVertical: 16,
-    marginVertical: 16,
     paddingHorizontal: 18,
   },
   infoContainer: {

@@ -75,6 +75,7 @@ export const HomeStack = () => {
       <MainStack.Screen name={"PastEventScreen"} component={PastEventScreen}/>
       <MainStack.Screen name={"ProfileScreen"} component={ProfileScreen}/>
       <MainStack.Screen name={"EventDetailsScreen"} component={EventDetailsScreen} />
+      <MainStack.Screen name={"SuggestionScreen"} component={SuggestionScreen} />
     </MainStack.Navigator>
   );
 };
@@ -131,7 +132,8 @@ const App = () => {
       <QueryClientProvider client={queryClient}>
         <NavigationContainer>
           {!isLoggedIn && (
-            <Stack.Navigator initialRouteName={'SplashScreen'}>
+            <Stack.Navigator initialRouteName={'SplashScreen'} 
+            screenOptions={{headerShown: false,}}>
               <Stack.Screen name={'SplashScreen'} component={SplashScreen} />
               <Stack.Screen name={'LaunchScreen'} component={LaunchScreen} />
               <Stack.Screen name={'LoginScreen'} component={Login} />

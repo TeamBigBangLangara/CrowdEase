@@ -31,12 +31,13 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
       },
     }
   );
+
   const onFullReportPress = () => {
     navigation.navigate('Report');
   };
 
   const onSeeSuggestionPress = () => {
-    navigation.navigate('WeekManagerScreen');
+    navigation.navigate('SuggestionScreen');
   };
 
   const onSeeMorePress = () => {
@@ -57,6 +58,52 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
       <Text style={styles.todayParticipantsNumber}>{participants}</Text>
     );
   };
+
+
+  const renderMorningParticipants = () => {
+    let participants = 0;
+    requestEvents.data?.forEach(event => {
+      if (event.dates.date === todayFormatted) {
+        const eventHour = parseInt(event.dates.time.split(':')[0]);
+        if (eventHour >= 6 && eventHour < 12) {
+          participants += event.participants;
+        }
+      }
+    });
+    return (
+      participants
+    );
+  }
+  const renderLunchParticipants = () => {
+    let participants = 0;
+    requestEvents.data?.forEach(event => {
+      if (event.dates.date === todayFormatted) {
+        const eventHour = parseInt(event.dates.time.split(':')[0]);
+        if (eventHour >= 13 && eventHour < 17) {
+          participants += event.participants;
+        }
+      }
+    });
+    return (
+      participants
+    );
+  }
+  const renderDinnerParticipants = () => {
+    let participants = 0;
+    requestEvents.data?.forEach(event => {
+      if (event.dates.date === todayFormatted) {
+        const eventHour = parseInt(event.dates.time.split(':')[0]);
+        if (eventHour >= 18 && eventHour < 22) {
+          participants += event.participants;
+        }
+      }
+    });
+    return (
+      participants
+    );
+  }
+    
+  
   const renderBusyDay = () => {
     const weekParticipants = [];
     //get each day with  participants
@@ -95,28 +142,28 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
     return <Text style={styles.busyDay}>{formattedDate} {day}</Text>;
   };
 
-// OneSignal Initialization
-OneSignal.setAppId(ONESIGNAL_APP_ID);
+  // OneSignal Initialization
+  OneSignal.setAppId(ONESIGNAL_APP_ID);
 
-// promptForPushNotificationsWithUserResponse will show the native iOS or Android notification permission prompt.
-// We recommend removing the following code and instead using an In-App Message to prompt for notification permission (See step 8)
-OneSignal.promptForPushNotificationsWithUserResponse();
+  // promptForPushNotificationsWithUserResponse will show the native iOS or Android notification permission prompt.
+  // We recommend removing the following code and instead using an In-App Message to prompt for notification permission (See step 8)
+  OneSignal.promptForPushNotificationsWithUserResponse();
 
-//Method for handling notifications received while app in foreground
-OneSignal.setNotificationWillShowInForegroundHandler(
-  notificationReceivedEvent => {
-    let notification = notificationReceivedEvent.getNotification();
-    const data = notification.additionalData;
-    // Complete with null means don't show a notification.
-    notificationReceivedEvent.complete(notification);
-  }
-);
+  //Method for handling notifications received while app in foreground
+  OneSignal.setNotificationWillShowInForegroundHandler(
+    notificationReceivedEvent => {
+      let notification = notificationReceivedEvent.getNotification();
+      const data = notification.additionalData;
+      // Complete with null means don't show a notification.
+      notificationReceivedEvent.complete(notification);
+    }
+  );
 
-//Method for handling notifications opened
-OneSignal.setNotificationOpenedHandler(notification => {
-  const eventID = notification?.notification.additionalData.eventID;
-  navigation.navigate("EventDetailsScreen", {eventId: eventID,});
-});
+  //Method for handling notifications opened
+  OneSignal.setNotificationOpenedHandler(notification => {
+    const eventID = notification?.notification.additionalData.eventID;
+    navigation.navigate("EventDetailsScreen", { eventId: eventID, });
+  });
 
   return (
     <SafeAreaView style={{ flex: 1, }}>
@@ -125,7 +172,7 @@ OneSignal.setNotificationOpenedHandler(notification => {
           <View style={styles.header}>
             <Text style={styles.headerTitle}>Crowd Ease</Text>
             <Pressable onPress={onProfileScreen}>
-            <Image style={styles.profileIcon} source={require('../assets/icons/profile.png')} />
+              <Image style={styles.profileIcon} source={require('../assets/icons/profile.png')} />
             </Pressable>
           </View>
           <Text style={styles.title}>Preview of this week's events</Text>
@@ -151,9 +198,9 @@ OneSignal.setNotificationOpenedHandler(notification => {
             </View>
             <Text style={styles.subtitleBreakdown}>Participants Breakdown</Text>
             <View style={styles.breakdownContainer}>
-              <ParticipantsByMealCard mealTime={'morning'} crowdNumber={2453} />
-              <ParticipantsByMealCard mealTime={'lunch'} crowdNumber={1320} />
-              <ParticipantsByMealCard mealTime={'dinner'} crowdNumber={2653} />
+              <ParticipantsByMealCard mealTime={'morning'} crowdNumber={renderMorningParticipants()} />
+              <ParticipantsByMealCard mealTime={'lunch'} crowdNumber={renderLunchParticipants()} />
+              <ParticipantsByMealCard mealTime={'dinner'} crowdNumber={renderDinnerParticipants()} />
             </View>
           </View>
           <View style={styles.todayEventTitleContainer}>
@@ -161,7 +208,7 @@ OneSignal.setNotificationOpenedHandler(notification => {
             <LinkButton onPress={onSeeMorePress} label={'See All'} style={styles.linkButton} />
           </View>
           <View style={styles.carouselContainer}>
-            <EventCarousel/>
+            <EventCarousel />
           </View>
         </View>
       </ScrollView>
@@ -184,7 +231,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 24,
   },
-  headerTitle:{
+  headerTitle: {
     fontFamily: fontFamily.heading,
     fontSize: fontSize.heading2,
     fontWeight: fontWeightSubtitle2,

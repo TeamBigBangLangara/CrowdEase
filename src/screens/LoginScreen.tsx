@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
   passwordIcon: {
     position: 'absolute',
     top: 205,
-    right: 45,
+    right: 55,
   },
   iconContainer: {
     gap: 40,

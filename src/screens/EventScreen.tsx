@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { Alert, FlatList, Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { getEvents } from "../api/event";
@@ -15,20 +15,18 @@ import { getUser } from "../auth/user";
 import { Bookmark, LoggedUser } from "types/types";
 import { fetchBookmarks } from "../api/bigBangAPI/bookmark";
 import { EventsStackNavigationProps } from "../types/navigationTypes";
-import { useFocusEffect } from "@react-navigation/native";
 
-const EventScreen = ({ navigation, }: EventsStackNavigationProps<'EventScreen'>) => {
+const EventScreen = ({ navigation, }: EventsStackNavigationProps<"EventScreen">) => {
 
   const [searchFilter, setSearchFilter] = useState("");
   const [dateFilter, setDateFilter] = useState("");
   //For simplification, only 1 category is passed for filtering.
   const [categoryFilter, setCategoryFilter] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [userInfo, setUserInfo] = useState<LoggedUser>({ uid: "", email: "", });
 
   useQuery("getUserData", getUser, {
-      onSuccess: (data:LoggedUser) => {
+      onSuccess: (data: LoggedUser) => {
         setUserInfo(data);
       },
     }
@@ -41,13 +39,13 @@ const EventScreen = ({ navigation, }: EventsStackNavigationProps<'EventScreen'>)
         return events.filter((event) => {
           return searchFilter ? event.name.toLowerCase().includes(searchFilter.toLowerCase()) : true;
         })
-        .filter((event) => {
-          return dateFilter ? event.dates.date === dateFilter : true;
-        })
-        //Category Filter (under development)
-        .filter((event) => {
-          return categoryFilter ? event.category.name === categoryFilter : true;
-        });
+          .filter((event) => {
+            return dateFilter ? event.dates.date === dateFilter : true;
+          })
+          //Category Filter (under development)
+          .filter((event) => {
+            return categoryFilter ? event.category.name === categoryFilter : true;
+          });
       },
       onError: (error: TypeError) => {
         Alert.alert("Error", error.message);
@@ -58,22 +56,19 @@ const EventScreen = ({ navigation, }: EventsStackNavigationProps<'EventScreen'>)
   const requestUserBookmarks = useQuery("bookmarks", () => {
       return fetchBookmarks(userInfo.uid);
     }, {
-      onSuccess : (data) => {
-        console.log(data);
-        Alert.alert("Hey Fetched data");
+      onSuccess: () => {
         mergeBookmarkAndEvents();
       },
       enabled: !!userInfo.uid && requestEvents.isSuccess,
     }
   );
-
-  useFocusEffect(
-    useCallback(() => {
-        requestUserBookmarks.refetch();
-        console.log('gegegeggegegege');
-        setIsLoading(true);
-    }, [])
-  );
+  //
+  // useFocusEffect(
+  //   useCallback(() => {
+  //       requestUserBookmarks.refetch();
+  //       setIsLoading(true);
+  //   }, [])
+  // );
 
   const mergeBookmarkAndEvents = () => {
     if (requestEvents.data && requestUserBookmarks.data) {
@@ -99,7 +94,7 @@ const EventScreen = ({ navigation, }: EventsStackNavigationProps<'EventScreen'>)
   };
 
   const onDetailScreen = (eventId: string) => {
-    navigation.navigate("EventDetailsScreen", {eventId: eventId,});
+    navigation.navigate("EventDetailsScreen", { eventId: eventId, });
   };
 
   const renderEvents = () => {
@@ -139,28 +134,30 @@ const EventScreen = ({ navigation, }: EventsStackNavigationProps<'EventScreen'>)
   };
 
   return (
-    <ScrollView style={styles.container}>
-      <SearchForm
-        onChangeText={(keyword: string) => onSearchTextChanged(keyword)}
-        onFilterPress={() => {
-          setModalVisible(true);
-        }}
-      />
-      <WeekCalendar onDaySelection={daySelectionHandler} isExpanded={true}/>
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>{requestEvents.data?.length} event(s)</Text>
-        <View style={styles.imageContainer}>
-          <Image source={require("../assets/icons/layout1.png")} />
-          <View style={styles.separator}></View>
-          <Image source={require("../assets/icons/layout2.png")} />
+    <View style={styles.container}>
+      <ScrollView>
+        <SearchForm
+          onChangeText={(keyword: string) => onSearchTextChanged(keyword)}
+          onFilterPress={() => {
+            setModalVisible(true);
+          }}
+        />
+        <WeekCalendar onDaySelection={daySelectionHandler} isExpanded={true} />
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>{requestEvents.data?.length} event(s)</Text>
+          <View style={styles.imageContainer}>
+            <Image source={require("../assets/icons/layout1.png")} />
+            <View style={styles.separator}></View>
+            <Image source={require("../assets/icons/layout2.png")} />
+          </View>
         </View>
-      </View>
+      </ScrollView>
       {renderEvents()}
       <FilterCategory
         visible={modalVisible}
         onClosePress={() => setModalVisible(false)}
       />
-    </ScrollView>
+    </View>
   );
 };
 

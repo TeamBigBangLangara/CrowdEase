@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { useMutation } from "react-query";
+import React, { useState } from "react";
+import { useMutation, useQuery } from "react-query";
 import MapView from "react-native-maps";
 import { Alert, Image, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
-import { useQuery } from "react-query";
 
-import { addBookmark, removeBookmark } from "../api/bigBangAPI/bookmark";
+import { addBookmark, fetchBookmarks, removeBookmark } from "../api/bigBangAPI/bookmark";
 import { cancelNotification, createNotification } from "../api/oneSignal";
 import { getEventById } from "../api/event";
 import { colors } from "../styles/colors";
@@ -15,7 +14,6 @@ import IconText from "../components/IconText";
 import PrimaryButton from "../components/PrimaryButton";
 import { useNavigation } from "@react-navigation/native";
 import { getUser } from "../auth/user";
-import { fetchBookmarks } from "../api/bigBangAPI/bookmark";
 import { Bookmark, LoggedUser } from "types/types";
 import SecondaryButton from "../components/SecondaryButton";
 
@@ -40,8 +38,8 @@ const EventDetailsScreen = ({ route, }: MainStackNavigationProps<'EventDetailsSc
         Alert.alert("Error", error.message);
       },
     });
-  
-  const requestUserBookmarks = useQuery("bookmarks",  () => 
+
+  const requestUserBookmarks = useQuery("bookmarks",  () =>
   {
     return fetchBookmarks(userInfo.uid);
     },{
@@ -62,7 +60,6 @@ const EventDetailsScreen = ({ route, }: MainStackNavigationProps<'EventDetailsSc
   }), {
     onSuccess: (data) => {
       setBookmarkID(data);
-      requestUserBookmarks.refetch();
       console.log("Bookmark Saved");
     },
     onError: () => {
@@ -80,11 +77,11 @@ const EventDetailsScreen = ({ route, }: MainStackNavigationProps<'EventDetailsSc
     },
   });
 
-  const saveNotification = useMutation(["createNewNotification"], () => createNotification(
-    requestEventById.data.dates.date,
-    eventId, 
-    requestEventById.data.name, 
-    requestEventById.data.image),
+  const saveNotification = useMutation(["notifications"], () => createNotification(
+    requestEventById.data!.dates.date,
+    eventId,
+    requestEventById.data!.name,
+    requestEventById.data!.image),
     {
     onSuccess: (data) => {
       console.log(data);
@@ -95,20 +92,13 @@ const EventDetailsScreen = ({ route, }: MainStackNavigationProps<'EventDetailsSc
     },
   });
 
-  const deleteNotification = useMutation(["deleteNotification"], () => cancelNotification(notificationID),
+  const deleteNotification = useMutation(["notifications"], () => cancelNotification(notificationID),
     {
-    onSuccess: (data) => {
-    },
     onError: () => {
       console.log("Something went wrong, please try again.");
     },
   });
 
-  // useEffect(() => {
-  //   getBookmarkID();
-  // }, []);  
-    
-  const mapRef = React.useRef<any>(null);
 
   const onBookMarkButtonPress = () => {
     if(!isBookmarkAdded){
@@ -195,7 +185,6 @@ const EventDetailsScreen = ({ route, }: MainStackNavigationProps<'EventDetailsSc
             <Text style={styles.details}>{requestEventById.data?.address}</Text>
           </View>
           <MapView
-            ref={mapRef}
             provider={"google"}
             customMapStyle={mapDarkStyle}
             style={styles.map}

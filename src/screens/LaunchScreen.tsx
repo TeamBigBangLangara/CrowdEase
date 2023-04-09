@@ -41,9 +41,6 @@ const LaunchScreen = ({ navigation, }: AuthStackNavigationProps<'LaunchScreen'>)
             <Pressable onPress={() => navigation.navigate('LoginScreen')}>
               <Text  style={styles.text}>I already have an account</Text>
             </Pressable>
-            <Pressable onPress={() => navigation.navigate('SplashScreen')}>
-              <Text  style={styles.text}>I already have an account</Text>
-            </Pressable>
           </View>    
         </View>
     </ImageBackground>

@@ -21,12 +21,21 @@ const DayEventCard = (props: {
   const renderSuggestions = () => {
     return (
       <View style={styles.suggestionContainer}>
-        <View>
+        <View style={styles.suggestionTextContainer}>
           <Text style={styles.suggestionHeader}>We got your back! Let’s try use this chance to:</Text>
-          <Text style={styles.suggestionText}> • Customise your restaurant theme, music, and vibe according to this
-            event.</Text>
-          <Text style={styles.suggestionText}>• Hand out leaflets or coupons regarding your promotions.</Text>
-          <Text style={styles.suggestionText}>• Prepare your inventory, staff, and manage your online orders.</Text>
+          <View style={{flexDirection: 'row'}}>
+            <Text style={styles.suggestionText}> • </Text>
+            <Text style={styles.suggestionText}>Customise your restaurant theme, music, and vibe according to this
+              event.</Text>
+          </View>
+          <View style={{flexDirection: 'row'}}>
+            <Text style={styles.suggestionText}> • </Text>
+            <Text style={styles.suggestionText}>Hand out leaflets or coupons regarding your promotions.</Text>
+          </View>
+          <View style={{flexDirection: 'row'}}>
+            <Text style={styles.suggestionText}> • </Text>
+            <Text style={styles.suggestionText}>Prepare your inventory, staff, and manage your online orders.</Text>
+          </View>          
         </View>
         <Pressable style={styles.upIcon} onPress={() => setShowSuggestion(false)}>
           <Image source={require("../assets/icons/upIcon.png")} />
@@ -37,17 +46,17 @@ const DayEventCard = (props: {
 
   const renderIcon = () => {
     switch (props.event.category.name) {
-      case "sport":
+      case "Sports":
         return <Image source={require("../assets/category/sport.png")} />;
-      case "music":
+      case "Music":
         return <Image source={require("../assets/category/music.png")} />;
-      case "festival":
+      case "Festivals":
         return <Image source={require("../assets/category/festival.png")} />;
-      case "business":
+      case "Business":
         return <Image source={require("../assets/category/business.png")} />;
-      case "show":
+      case "Shows":
         return <Image source={require("../assets/category/show.png")} />;
-      case "other":
+      case "Other":
         return <Text> </Text>;
       default:
         return <Text>No Icon</Text>;
@@ -58,8 +67,8 @@ const DayEventCard = (props: {
     <View style={styles.container}>
       <View style={styles.headerContainer}>
         <View style={styles.eventNameContainer}>
-          <Text style={styles.eventName}>{props.event.name}</Text>
           {renderIcon()}
+          <Text style={styles.eventName}>{props.event.name}</Text>          
         </View>
         <Text style={styles.participants}>{props.event.participants} participants</Text>
       </View>
@@ -81,11 +90,11 @@ const styles = StyleSheet.create({
     borderRadius: borderRadius.primary,
     display: "flex",
     justifyContent: "center",
-    padding: 8,
+    padding: 10,
   },
   headerContainer: {
     marginTop: margin.secondary,
-    gap: 4,
+    gap: 10,
   },
   eventName: {
     fontWeight: fontWeightSubtitle,
@@ -94,7 +103,9 @@ const styles = StyleSheet.create({
   },
   eventNameContainer: {
     flexDirection: "row",
-    gap: 4,
+    flexWrap: 'wrap',
+    gap: 10,
+    alignItems: 'center',
   },
   participants: {
     fontWeight: fontWeightSubtitle,
@@ -123,7 +134,10 @@ const styles = StyleSheet.create({
 
   //Suggestion Styling
   suggestionContainer: {
-    alignItems: "center",
+    paddingTop: 20,
+  },
+  suggestionTextContainer: {
+    gap: 10,
   },
   suggestionText: {
     color: colors.neutral.surfaceWhite,
@@ -140,6 +154,7 @@ const styles = StyleSheet.create({
   },
   upIcon: {
     marginTop: margin.secondary,
+    alignSelf: 'center'
   },
 });
 

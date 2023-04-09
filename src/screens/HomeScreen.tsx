@@ -15,9 +15,9 @@ import { borderRadius } from "../styles/basic";
 import EventCarousel from "../components/EventCarousel";
 import { getEvents } from "../api/event";
 
-import OneSignal from 'react-native-onesignal';
-const ONESIGNAL_APP_ID = 'ee944c2a-c447-402c-9f22-48dbdddb9caa';
+import OneSignal from "react-native-onesignal";
 
+const ONESIGNAL_APP_ID = 'ee944c2a-c447-402c-9f22-48dbdddb9caa';
 
 // Get the dates
 const { formattedFirstDay, formattedLastDay, today, todayFormatted, week, getWeekday, } = getDate();
@@ -37,7 +37,7 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
   };
 
   const onSeeSuggestionPress = () => {
-    navigation.navigate('SuggestionScreen');
+    navigation.navigate('Report', { screen: 'SuggestionScreen', });
   };
 
   const onSeeMorePress = () => {
@@ -73,7 +73,7 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
     return (
       participants
     );
-  }
+  };
   const renderLunchParticipants = () => {
     let participants = 0;
     requestEvents.data?.forEach(event => {
@@ -87,7 +87,7 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
     return (
       participants
     );
-  }
+  };
   const renderDinnerParticipants = () => {
     let participants = 0;
     requestEvents.data?.forEach(event => {
@@ -101,9 +101,9 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
     return (
       participants
     );
-  }
-    
-  
+  };
+
+
   const renderBusyDay = () => {
     const weekParticipants = [];
     //get each day with  participants

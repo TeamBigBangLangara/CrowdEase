@@ -85,9 +85,10 @@ const WeekCalendar = ({onDaySelection, onWeekSelection, daysVisible = true,}: Pr
       </View>
       {daysVisible &&
       <View style={styles.daySelectorContainer}>
-      {weekdays.map((weekDay) => {
+      {weekdays.map((weekDay, index) => {
         return (
           <LinearGradient
+            key={index}
             colors={colors.primary.gradientDark.colors}
             start={colors.primary.gradientDark.start}
             end={colors.primary.gradientDark.end}

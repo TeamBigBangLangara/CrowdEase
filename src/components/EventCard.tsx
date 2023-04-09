@@ -18,7 +18,7 @@ const EventCard = (props: {
   eventType: string
   userId?: string,
   bookmarkId?: string
-  onDetail: () => void
+  onEventCardPress?: () => void
 }) => {
 
   const saveBookmark = useMutation(["bookmarks"], () => addBookmark({
@@ -163,7 +163,7 @@ const EventCard = (props: {
   };
 
   return (
-    <Pressable onPress={props.onDetail}>
+    <Pressable onPress={props.onEventCardPress}>
       <View style={styles.container}>
         {renderDragUpButton()}
         <View style={styles.eventContainer}>

@@ -17,7 +17,7 @@ const navigation = useNavigation();
   }
 );
 
-const onDetailScreen = (eventId: string) => {
+const onEventCardPress = (eventId: string) => {
   navigation.navigate("EventDetailsScreen", {eventId: eventId,});
 };
 
@@ -44,7 +44,7 @@ const filteredEvents = () => {
             key={item.id}
             event={item}
             eventType={"actual"}
-            onDetail={() => onDetailScreen(item.id)}
+            onEventCardPress={() => onEventCardPress(item.id)}
           />;
 
         }

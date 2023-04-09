@@ -93,7 +93,7 @@ const EventScreen = ({ navigation, }: EventsStackNavigationProps<"EventScreen">)
     setDateFilter(date);
   };
 
-  const onDetailScreen = (eventId: string) => {
+  const onEventCardPress = (eventId: string) => {
     navigation.navigate("EventDetailsScreen", { eventId: eventId, });
   };
 
@@ -109,7 +109,7 @@ const EventScreen = ({ navigation, }: EventsStackNavigationProps<"EventScreen">)
               eventType={"actual"}
               userId={userInfo?.uid}
               bookmarkId={item.bookmarkId}
-              onDetail={() => onDetailScreen(item.id!)}
+              onEventCardPress={() => onEventCardPress(item.id!)}
             />
           }
         />
@@ -125,7 +125,7 @@ const EventScreen = ({ navigation, }: EventsStackNavigationProps<"EventScreen">)
               eventType={"actual"}
               userId={userInfo?.uid}
               bookmarkId={item.bookmarkId}
-              onDetail={() => onDetailScreen(item.id!)}
+              onEventCardPress={() => onEventCardPress(item.id!)}
             />
           }
         />

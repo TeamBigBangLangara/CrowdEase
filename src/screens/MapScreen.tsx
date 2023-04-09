@@ -24,7 +24,7 @@ const MapScreen = ({navigation,} : MapStackNavigationProps<'MapScreen'>) => {
 
   const requestEvents = useQuery('events', () => getEvents());
 
-  const onDetailScreen = (eventId: string) => {
+  const onEventCardPress = (eventId: string) => {
     navigation.navigate("EventDetailsScreen", { eventId: eventId, });
   };
 
@@ -33,7 +33,7 @@ const MapScreen = ({navigation,} : MapStackNavigationProps<'MapScreen'>) => {
       <EventCard
         event={item}
         eventType='actual'
-        onDetail={() => onDetailScreen(item.id)}
+        onEventCardPress={() => onEventCardPress(item.id)}
       />
     );
   };

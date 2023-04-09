@@ -131,10 +131,9 @@ const App = () => {
       <QueryClientProvider client={queryClient}>
         <NavigationContainer>
           {!isLoggedIn && (
-            <Stack.Navigator initialRouteName={'LaunchScreen'}>
-              <Stack.Screen name={'LaunchScreen'} component={LaunchScreen} />
-              
+            <Stack.Navigator initialRouteName={'SplashScreen'}>
               <Stack.Screen name={'SplashScreen'} component={SplashScreen} />
+              <Stack.Screen name={'LaunchScreen'} component={LaunchScreen} />
               <Stack.Screen name={'LoginScreen'} component={Login} />
               <Stack.Screen name={'SignUpScreen'} component={SignUp} />
               <Stack.Screen name={'LocationScreen'} component={LocationScreen} />
@@ -148,7 +147,7 @@ const App = () => {
         </NavigationContainer>
       </QueryClientProvider>
     </SafeAreaView>
-  );
+    );
 };
 
 export default App;

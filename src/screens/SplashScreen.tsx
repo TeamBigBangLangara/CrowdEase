@@ -1,18 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Pressable, Text, View, Image } from 'react-native';
 import { AuthStackNavigationProps } from '../types/navigationTypes';
+import { firebase } from "@react-native-firebase/auth";
 
 import FastImage from 'react-native-fast-image';
 
 const SplashScreen = ({ navigation, }: AuthStackNavigationProps<'SplashScreen'> ) =>
-{      
-  useEffect(() => {
-    navigation.setOptions({
-      headerShown: false,
-    });
+{ 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect( () => {
+ 
+    if (navigation) {
+      navigation.setOptions({
+        headerShown: false,
+      });
+        
     setTimeout(() => {
-        navigation.navigate('LaunchScreen');
-      }, 5000); // Ch
+      navigation.navigate('LaunchScreen');
+      }, 5000);     
+    }
   }, []);
 
   

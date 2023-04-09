@@ -1,9 +1,8 @@
-import { useState } from "react";
 import { useQuery } from "react-query";
 import { Alert, ScrollView, StyleSheet, Text, View } from "react-native";
-import { MainStackNavigationProps } from '../types/navigationTypes';
+import { ReportStackNavigationProps } from "../types/navigationTypes";
 
-import {addDays, subDays, format, isSameDay, startOfWeek} from 'date-fns';
+import { format } from "date-fns";
 
 import DayEventCard from "../components/DayEventCard";
 import ParticipantsByCategory from "../components/ParticipantsByCategory";
@@ -13,7 +12,7 @@ import { getEvents } from "../api/event";
 import { colors } from "../styles/colors";
 import { fontFamily, fontSize } from "../styles/fonts";
 
-const SuggestionScreen = ({ navigation, }: MainStackNavigationProps<'SuggestionScreen'>) => {
+const SuggestionScreen = ({ navigation, }: ReportStackNavigationProps<'SuggestionScreen'>) => {
   /////========= States
   const requestEvents = useQuery("events", () => getEvents(),
     {
@@ -24,8 +23,8 @@ const SuggestionScreen = ({ navigation, }: MainStackNavigationProps<'SuggestionS
   );
 
   /////========= Handlers
-  const onSeeSuggestionPress = () => {
-    navigation.navigate('HomeScreen');
+  const onReturnButtonPress = () => {
+    navigation.navigate('WeekManagerScreen');
   };
 
   //Current Day
@@ -53,7 +52,7 @@ const SuggestionScreen = ({ navigation, }: MainStackNavigationProps<'SuggestionS
           eventCategory.participants += event.participants;
         }
       }
-      } 
+      }
     );
 
   //Sorting Events from most participants to lower. This sort logic returns a sorted array using participants property.
@@ -68,7 +67,7 @@ const SuggestionScreen = ({ navigation, }: MainStackNavigationProps<'SuggestionS
   const participantsArrayaMaxValue = Math.max(...participantsArray);
   const moreParticipantsCategory = eventsCategories.find(categoryObject => categoryObject.participants === participantsArrayaMaxValue);
 
-  //Calculating total participants. Reduce passes the partialSum Value (starts with 0 in this example), the incremental a (each value of the array), and the initial value 0; 
+  //Calculating total participants. Reduce passes the partialSum Value (starts with 0 in this example), the incremental a (each value of the array), and the initial value 0;
   const totalParticipants = participantsArray.reduce((partialSum, a) => partialSum + a, 0);
 
   return (
@@ -79,14 +78,14 @@ const SuggestionScreen = ({ navigation, }: MainStackNavigationProps<'SuggestionS
           <Text style={styles.sectionTitle}>
           {format(currentDay, 'MMM dd, yyyy')}
           </Text>
-          <ParticipantsByCategory 
-            participants={totalParticipants} 
-            percentage={50} 
-            musicQty={eventsCategories.find(categoryObject => categoryObject.name === 'Music').participants} 
-            sportQty={eventsCategories.find(categoryObject => categoryObject.name === 'Sports').participants} 
-            showsQty={eventsCategories.find(categoryObject => categoryObject.name === 'Shows').participants} 
-            festivalsQty={eventsCategories.find(categoryObject => categoryObject.name === 'Festivals').participants} 
-            businessQty={eventsCategories.find(categoryObject => categoryObject.name === 'Business').participants} 
+          <ParticipantsByCategory
+            participants={totalParticipants}
+            percentage={50}
+            musicQty={eventsCategories.find(categoryObject => categoryObject.name === 'Music').participants}
+            sportQty={eventsCategories.find(categoryObject => categoryObject.name === 'Sports').participants}
+            showsQty={eventsCategories.find(categoryObject => categoryObject.name === 'Shows').participants}
+            festivalsQty={eventsCategories.find(categoryObject => categoryObject.name === 'Festivals').participants}
+            businessQty={eventsCategories.find(categoryObject => categoryObject.name === 'Business').participants}
             otherQty={eventsCategories.find(categoryObject => categoryObject.name === 'Other').participants}
           />
         </View>
@@ -97,7 +96,7 @@ const SuggestionScreen = ({ navigation, }: MainStackNavigationProps<'SuggestionS
           <DayEventCard event={eventsOfCurrentDay[0]} percentage={moreParticipantsEventOverCategoryTotal}/>
         </View>
         <View style={{alignItems: 'center',}}>
-          <PrimaryButton onPress={onSeeSuggestionPress} label={"Return to the week preview"}/>
+          <PrimaryButton onPress={onReturnButtonPress} label={"Go to the week preview"}/>
         </View>
 
       </View>

@@ -7,7 +7,7 @@ import { colors } from "../styles/colors";
 import { useNavigation } from "@react-navigation/native";
 
 const EventCarousel = () => {
-const navigation = useNavigation();
+const navigation: any = useNavigation();
 
   const  {data: events = [],} = useQuery("events", () => getEvents(),
   {
@@ -26,7 +26,6 @@ const today = new Date().toISOString().slice(0, 10);
 const filteredEvents = () => {
   return events.filter((event) => event.dates.date === today);
 };
-
 
   if (filteredEvents().length === 0 ) {
     return (

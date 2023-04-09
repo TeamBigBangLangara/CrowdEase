@@ -144,7 +144,6 @@ const EventScreen = ({ navigation, }: EventsStackNavigationProps<"EventScreen">)
         />
         <WeekCalendar
           onDaySelection={daySelectionHandler}
-          onWeekSelection={()=> console.log('under development')}
           daysVisible={true}/>
         <View style={styles.titleContainer}>
           <Text style={styles.title}>{requestEvents.data?.length} event(s)</Text>

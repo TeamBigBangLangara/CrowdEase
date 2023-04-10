@@ -18,7 +18,7 @@ const SplashScreen = ({ navigation, }: AuthStackNavigationProps<'SplashScreen'> 
         
     setTimeout(() => {
       navigation.navigate('LaunchScreen');
-      }, 5000);     
+      }, 6000);     
     }
   }, []);
 
@@ -27,7 +27,7 @@ const SplashScreen = ({ navigation, }: AuthStackNavigationProps<'SplashScreen'> 
     <View style={styles.container}>
         <Text>SplashScreen</Text>
         <FastImage
-          source={require ('../assets/animations/loading.gif')}
+          source={require ('../assets/animations/splashScreen.gif')}
           style={styles.gif} 
           priority={FastImage.priority.high} 
           resizeMode={FastImage.resizeMode.contain}

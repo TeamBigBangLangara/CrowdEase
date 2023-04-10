@@ -25,7 +25,6 @@ const MapScreen = ({navigation,} : MapStackNavigationProps<'MapScreen'>) => {
   const requestEvents = useQuery('events', () => getEvents(), {
     select: events => {
       return events.filter((event) => {
-        console.log(new Date().toISOString().split('T')[0]);
         return event.dates.date === new Date().toISOString().split('T')[0];
       });
     },
@@ -106,8 +105,8 @@ const MapScreen = ({navigation,} : MapStackNavigationProps<'MapScreen'>) => {
         customMapStyle={mapDarkStyle}
         style={styles.map}
         initialRegion={{
-          latitude: 49.2820,
-          longitude: -123.1171,
+          latitude:  selectedMarker != null ? Number(selectedMarker!.latitude) : 49.2820,
+          longitude: selectedMarker != null ? Number(selectedMarker!.latitude) : -123.1171,
           latitudeDelta: 0.0003,
           longitudeDelta: 0.04,
         }}

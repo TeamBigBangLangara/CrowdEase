@@ -1,4 +1,5 @@
-import { Alert, Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { useState } from "react";
+import { Alert, Image, Pressable, StyleSheet, Text, View, useColorScheme, Switch } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 
 import { MainStackNavigationProps } from "../types/navigationTypes";
@@ -9,6 +10,9 @@ import { colors } from "../styles/colors";
 import { fontFamily, fontSize, fontWeightBody, fontWeightSubtitle, fontWeightSubtitle2 } from "../styles/fonts";
 
 const ProfileScreen = ({ navigation, }: MainStackNavigationProps<'ProfileScreen'>) => {
+
+  const [showSetting, setShowSetting] = useState(false)
+
   const onEditPress = () => {
     Alert.alert('edit clicked');
   };
@@ -19,6 +23,27 @@ const ProfileScreen = ({ navigation, }: MainStackNavigationProps<'ProfileScreen'
 
   const onPastEvent = () => {
     navigation.navigate('PastEventScreen');
+  };
+
+  const onShowSetting = () => {
+    setShowSetting(!showSetting)
+  };
+
+  const renderSetting = () => {
+    return (
+      <View style={styles.showSetting}>
+        <Text style={styles.textSetting}>Light Mode</Text>
+        <Switch
+            value={toggleDarkMode}
+            onValueChange={toggleDarkMode}
+            thumbTintColor={colors.neutral.surfaceWhite}
+            trackColor={{
+              false: colors.neutral.surfaceWhite, 
+              true: colors.primary.primaryPurpleDark
+            }}
+        />
+      </View>
+    );
   };
 
   return (
@@ -66,14 +91,17 @@ const ProfileScreen = ({ navigation, }: MainStackNavigationProps<'ProfileScreen'
               <Image source={require('../assets/icons/downIcon.png')}/>
             </Pressable>
         </View>
-        <View style={styles.item}>
-          <IconText
-            icon={require('../assets/icons/profileIcons/setting.png')}
-            text={'Application Settings'}
-            style={styles.iconText} />
-            <Pressable onPress={onArrow}>
-              <Image source={require('../assets/icons/downIcon.png')}/>
+        <View style={styles.settingContainer}>
+          <View style={styles.itemSetting}>
+            <IconText
+              icon={require('../assets/icons/profileIcons/setting.png')}
+              text={'Application Settings'}
+              style={styles.iconText} />
+            <Pressable onPress={onShowSetting}>
+              <Image source={showSetting ? require('../assets/icons/downIcon.png') : require('../assets/icons/rightIcon.png')} />
             </Pressable>
+          </View>
+          {showSetting ? renderSetting() : ""}
         </View>
         <View style={styles.item}>
           <IconText
@@ -105,7 +133,8 @@ const ProfileScreen = ({ navigation, }: MainStackNavigationProps<'ProfileScreen'
 
 };
 
-const styles = StyleSheet.create({
+
+ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.neutral.backgroundBlack,
     paddingHorizontal: 20,
@@ -198,6 +227,43 @@ const styles = StyleSheet.create({
     fontFamily: fontFamily.body,
     fontWeight: fontWeightBody,
     fontSize: fontSize.body,
+  },
+  showSetting: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    backgroundColor: colors.neutral.surfaceBlack,
+    borderRadius: 22,
+    marginBottom: 30,
+    marginTop: 20,
+  },
+  settingContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    backgroundColor: colors.neutral.surfaceBlack,
+    marginBottom: 16,
+    shadowOffset: { width: -2, height: 6, },
+    shadowColor: 'rgba(131, 53, 253, 1)',
+    shadowOpacity: 0.9,
+    shadowRadius: 3,
+    borderRadius: 22,
+  },
+  textSetting: {
+    fontFamily: fontFamily.subtitle,
+    fontWeight: fontWeightSubtitle,
+    fontSize: fontSize.subtitle2,
+    color: colors.neutral.surfaceWhite,
+  },
+  itemSetting: {
+    backgroundColor: colors.neutral.surfaceBlack,
+    width: 358,
+    height: 54,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    borderRadius: 22,
   },
 });
 

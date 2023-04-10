@@ -1,5 +1,6 @@
 import project from "./baseURL";
 import { Rating } from "../../types/types";
+import { storage } from "../../store/mmkv";
 
 export const addRating = (postData: Rating) => {
   return project.post("/rating", postData).then((res) => {

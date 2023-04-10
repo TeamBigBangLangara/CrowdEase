@@ -1,5 +1,6 @@
 import { Bookmark } from "types/types";
 import project from "./baseURL";
+import { storage } from "../../store/mmkv";
 
 export const addBookmark = async(postData: Bookmark) : Promise<any> => {
     const res = await project.post('/bookmark', postData);

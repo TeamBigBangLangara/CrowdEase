@@ -4,10 +4,18 @@ import { EventStack, HomeStack, MapsStack, ReportsStack } from "../../App";
 import { colors } from "../../styles/colors";
 import { fontFamily, fontSize, fontWeightSubtitle2 } from "../../styles/fonts";
 import GradientText from "../GradientText";
+import { useEffect } from "react";
+import { getToken } from "../../auth/user";
 
 const Tab = createBottomTabNavigator();
 
 const NavigationBottomTab = () => {
+
+  useEffect (()=>{
+    console.log("Get Storage");
+    getToken();
+  }, []);
+
   return (
     <Tab.Navigator initialRouteName="Home"
       screenOptions={{

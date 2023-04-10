@@ -22,7 +22,14 @@ const MapScreen = ({navigation,} : MapStackNavigationProps<'MapScreen'>) => {
   const ITEM_WIDTH = Dimensions.get('screen').width * 0.8;
   const radius = Platform.OS === 'ios' ? 150 : 40;
 
-  const requestEvents = useQuery('events', () => getEvents());
+  const requestEvents = useQuery('events', () => getEvents(), {
+    select: events => {
+      return events.filter((event) => {
+        console.log(new Date().toISOString().split('T')[0]);
+        return event.dates.date === new Date().toISOString().split('T')[0];
+      });
+    },
+  });
 
   const onDetailScreen = (eventId: string) => {
     navigation.navigate("EventDetailsScreen", { eventId: eventId, });

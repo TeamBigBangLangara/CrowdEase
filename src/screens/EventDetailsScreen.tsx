@@ -12,20 +12,18 @@ import { mapDarkStyle } from "../styles/maps";
 import { EventsStackNavigationProps, MainStackNavigationProps } from "../types/navigationTypes";
 import IconText from "../components/IconText";
 import PrimaryButton from "../components/PrimaryButton";
-import { useNavigation } from "@react-navigation/native";
 import { getUser } from "../auth/user";
 import { Bookmark, LoggedUser } from "types/types";
 import SecondaryButton from "../components/SecondaryButton";
 
-const EventDetailsScreen = ({ route, }: MainStackNavigationProps<"EventDetailsScreen"> | EventsStackNavigationProps<"EventDetailsScreen">) => {
+const EventDetailsScreen = ({ route, navigation, }: MainStackNavigationProps<"EventDetailsScreen"> | EventsStackNavigationProps<"EventDetailsScreen">) => {
   const mapRef = React.useRef<any>(null);
 
   const { eventId, } = route.params;
-  const navigation = useNavigation();
   const [userInfo, setUserInfo] = useState<LoggedUser>({ uid: "", email: "", });
   const [isBookmarkAdded, setIsBookmarkAdded] = useState(false);
-  const [bookmarkID, setBookmarkID] = useState("");
-  const [notificationID, setNotificationID] = useState("");
+  const [bookmarkId, setBookmarkId] = useState("");
+  const [notificationId, setNotificationId] = useState("");
 
   useQuery("getUserData", getUser, {
       onSuccess: (data: LoggedUser) => {
@@ -46,7 +44,7 @@ const EventDetailsScreen = ({ route, }: MainStackNavigationProps<"EventDetailsSc
       onSuccess: (data) => {
         const bookmark = data.find((bookmark: Bookmark) => bookmark.event_id === eventId);
         if (bookmark) {
-          setBookmarkID(bookmark._id);
+          setBookmarkId(bookmark._id);
           setIsBookmarkAdded(true);
         }
       },
@@ -59,7 +57,7 @@ const EventDetailsScreen = ({ route, }: MainStackNavigationProps<"EventDetailsSc
     "event_id": eventId,
   }), {
     onSuccess: (data) => {
-      setBookmarkID(data);
+      setBookmarkId(data);
       console.log("Bookmark Saved");
     },
     onError: () => {
@@ -67,9 +65,9 @@ const EventDetailsScreen = ({ route, }: MainStackNavigationProps<"EventDetailsSc
     },
   });
 
-  const deleteBookmark = useMutation(["bookmarks"], () => removeBookmark(bookmarkID), {
+  const deleteBookmark = useMutation(["bookmarks"], () => removeBookmark(bookmarkId), {
     onSuccess: () => {
-      setBookmarkID("");
+      setBookmarkId("");
       console.log("Bookmark Removed");
     },
     onError: () => {
@@ -84,28 +82,30 @@ const EventDetailsScreen = ({ route, }: MainStackNavigationProps<"EventDetailsSc
       requestEventById.data!.image),
     {
       onSuccess: (data) => {
-        console.log(data);
-        setNotificationID(data);
+        setNotificationId(data);
       },
       onError: () => {
         console.log("Something went wrong, please try again.");
       },
     });
 
-  const deleteNotification = useMutation(["notifications"], () => cancelNotification(notificationID),
+  const deleteNotification = useMutation(["notifications"], () => cancelNotification(notificationId),
     {
       onError: () => {
         console.log("Something went wrong, please try again.");
       },
     });
 
+  const dateObj = new Date(requestEventById.data?.dates.date);
+  dateObj.setDate(dateObj.getDate() + 1);
+  const formattedDate = dateObj.toLocaleString("en-US", { month: "long", day: "numeric", });
 
   const onBookMarkButtonPress = () => {
     if (!isBookmarkAdded) {
       try {
         saveBookmark.mutate();
         saveNotification.mutate();
-        console.log(bookmarkID);
+        console.log(bookmarkId);
         setIsBookmarkAdded(!isBookmarkAdded);
       } catch (error) {
         Alert.alert("Unable to save data" + error);
@@ -113,11 +113,10 @@ const EventDetailsScreen = ({ route, }: MainStackNavigationProps<"EventDetailsSc
     } else {
       try {
         deleteBookmark.mutate();
-        if (notificationID !== undefined) {
-          console.log("To cancel" + notificationID);
+        if (notificationId !== undefined) {
           deleteNotification.mutate();
         }
-        setNotificationID("");
+        setNotificationId("");
         setIsBookmarkAdded(!isBookmarkAdded);
       } catch (error) {
         Alert.alert("Unable to save data" + error);
@@ -136,10 +135,6 @@ const EventDetailsScreen = ({ route, }: MainStackNavigationProps<"EventDetailsSc
         label={"Add to Bookmark"} />;
     }
   };
-
-  const dateObj = new Date(requestEventById.data?.dates.date);
-  dateObj.setDate(dateObj.getDate() + 1);
-  const formattedDate = dateObj.toLocaleString("en-US", { month: "long", day: "numeric", });
 
   const renderMap = () => {
     if (!requestEventById.data?.location.latitude) {

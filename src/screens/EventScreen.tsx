@@ -15,6 +15,7 @@ import { getUser } from "../auth/user";
 import { Bookmark, LoggedUser } from "types/types";
 import { fetchBookmarks } from "../api/bigBangAPI/bookmark";
 import { EventsStackNavigationProps } from "../types/navigationTypes";
+import { useFocusEffect } from "@react-navigation/native";
 
 const EventScreen = ({ navigation, }: EventsStackNavigationProps<"EventScreen">) => {
 
@@ -24,6 +25,12 @@ const EventScreen = ({ navigation, }: EventsStackNavigationProps<"EventScreen">)
   const [categoryFilter, setCategoryFilter] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
   const [userInfo, setUserInfo] = useState<LoggedUser>({ uid: "", email: "", });
+
+  useFocusEffect(
+    React.useCallback(() => {
+      console.log("here in focus ");
+    }, [])
+  );
 
   useQuery("getUserData", getUser, {
       onSuccess: (data: LoggedUser) => {
@@ -53,8 +60,7 @@ const EventScreen = ({ navigation, }: EventsStackNavigationProps<"EventScreen">)
     }
   );
 
-  const requestUserBookmarks = useQuery("bookmarks", () => {
-      return fetchBookmarks(userInfo.uid);
+  const requestUserBookmarks = useQuery("bookmarks", () => { return fetchBookmarks(userInfo.uid);
     }, {
       onSuccess: () => {
         mergeBookmarkAndEvents();
@@ -62,13 +68,6 @@ const EventScreen = ({ navigation, }: EventsStackNavigationProps<"EventScreen">)
       enabled: !!userInfo.uid && requestEvents.isSuccess,
     }
   );
-  //
-  // useFocusEffect(
-  //   useCallback(() => {
-  //       requestUserBookmarks.refetch();
-  //       setIsLoading(true);
-  //   }, [])
-  // );
 
   const mergeBookmarkAndEvents = () => {
     if (requestEvents.data && requestUserBookmarks.data) {

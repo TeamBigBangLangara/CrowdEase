@@ -21,21 +21,33 @@ const EventCard = (props: {
   onEventCardPress?: () => void
 }) => {
 
+  const [showRating, setShowRating] = useState(false);
+  const [isBookmarkAdded, setIsBookmarkAdded] = useState(false);
+  const [bookmarkId, setBookmarkId] = useState("");
+  const [notificationId, setNotificationId] = useState("");
+
+  useEffect(() => {
+    if (props.bookmarkId !== undefined) {
+      setBookmarkId(props.bookmarkId);
+      setIsBookmarkAdded(true);
+    }
+  }, []);
+
   const saveBookmark = useMutation(["bookmarks"], () => addBookmark({
     "user_id": props.userId!,
     "event_id": props.event.id,
   }), {
     onSuccess: (data) => {
-      setBookmarkID(data);
+      setBookmarkId(data);
     },
     onError: () => {
       console.log("Something went wrong, please try again.");
     },
   });
 
-  const deleteBookmark = useMutation(["bookmarks"], () => removeBookmark(bookmarkID), {
+  const deleteBookmark = useMutation(["bookmarks"], () => removeBookmark(bookmarkId), {
     onSuccess: () => {
-      setBookmarkID("");
+      setBookmarkId("");
     },
     onError: () => {
       console.log("Something went wrong, please try again.");
@@ -45,41 +57,25 @@ const EventCard = (props: {
    {
     onSuccess: (data) => {
       console.log(data);
-      setNotificationID(data);
+      setNotificationId(data);
     },
     onError: () => {
         console.log("Something went wrong, please try again.");
     },
   });
 
-  const deleteNotification = useMutation(["deleteNotification"], () => cancelNotification(notificationID),
+  const deleteNotification = useMutation(["deleteNotification"], () => cancelNotification(notificationId),
    {
-    onSuccess: (data) => {
-    },
     onError: () => {
       console.log("Something went wrong, please try again.");
     },
   });
 
-
-  useEffect(() => {
-    if (props.bookmarkId !== undefined) {
-      setBookmarkID(props.bookmarkId);
-      setIsBookmarkAdded(true);
-    }
-
-  }, []);
-
-  const [showRating, setShowRating] = useState(false);
-  const [isBookmarkAdded, setIsBookmarkAdded] = useState(false);
-  const [bookmarkID, setBookmarkID] = useState("");
-  const [notificationID, setNotificationID] = useState("");
-
   const onBookmarkPress = () => {
     if(!isBookmarkAdded)
     {
       try{
-      const saveBookmarkData =  saveBookmark.mutate();
+      saveBookmark.mutate();
       saveNotification.mutate();
       setIsBookmarkAdded(!isBookmarkAdded);
       }
@@ -90,12 +86,11 @@ const EventCard = (props: {
     else{
       try{
          deleteBookmark.mutate();
-         if(notificationID !== undefined)
+         if(notificationId !== undefined)
           {
-            console.log("To cancel" + notificationID);
             deleteNotification.mutate();
           }
-          setNotificationID('');
+          setNotificationId('');
           setIsBookmarkAdded(!isBookmarkAdded);
         }
       catch(error){

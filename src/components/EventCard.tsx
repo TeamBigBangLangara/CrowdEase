@@ -30,8 +30,10 @@ const EventCard = (props: {
     if (props.bookmarkId !== undefined) {
       setBookmarkId(props.bookmarkId);
       setIsBookmarkAdded(true);
+    } else {
+      setIsBookmarkAdded(false);
     }
-  }, []);
+  }, [props.bookmarkId]);
 
   const saveBookmark = useMutation(["bookmarks"], () => addBookmark({
     "user_id": props.userId!,
@@ -53,6 +55,7 @@ const EventCard = (props: {
       console.log("Something went wrong, please try again.");
     },
   });
+
   const saveNotification = useMutation(["createNewNotification"], () => createNotification(props.event.dates.date,props.event.id, props.event.name, props.event.image),
    {
     onSuccess: (data) => {

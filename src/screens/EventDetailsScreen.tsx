@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import MapView, { Marker } from "react-native-maps";
 import { Alert, Image, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 
@@ -18,7 +18,7 @@ import SecondaryButton from "../components/SecondaryButton";
 
 const EventDetailsScreen = ({ route, navigation, }: MainStackNavigationProps<"EventDetailsScreen"> | EventsStackNavigationProps<"EventDetailsScreen">) => {
   const mapRef = React.useRef<any>(null);
-
+  const queryClient = useQueryClient();
   const { eventId, } = route.params;
   const [userInfo, setUserInfo] = useState<LoggedUser>({ uid: "", email: "", });
   const [isBookmarkAdded, setIsBookmarkAdded] = useState(false);
@@ -31,6 +31,7 @@ const EventDetailsScreen = ({ route, navigation, }: MainStackNavigationProps<"Ev
       },
     }
   );
+
   const requestEventById = useQuery("eventDetail", () => getEventById(eventId),
     {
       onError: (error: TypeError) => {
@@ -38,7 +39,7 @@ const EventDetailsScreen = ({ route, navigation, }: MainStackNavigationProps<"Ev
       },
     });
 
-  useQuery("bookmarks", () => {
+  useQuery("bookmarks1", () => {
       return fetchBookmarks(userInfo.uid);
     }, {
       onSuccess: (data) => {
@@ -58,7 +59,7 @@ const EventDetailsScreen = ({ route, navigation, }: MainStackNavigationProps<"Ev
   }), {
     onSuccess: (data) => {
       setBookmarkId(data);
-      console.log("Bookmark Saved");
+      queryClient.invalidateQueries('bookmarks');
     },
     onError: () => {
       console.log("Something went wrong, please try again.");
@@ -67,8 +68,9 @@ const EventDetailsScreen = ({ route, navigation, }: MainStackNavigationProps<"Ev
 
   const deleteBookmark = useMutation(["bookmarks"], () => removeBookmark(bookmarkId), {
     onSuccess: () => {
+      console.log("id: " + bookmarkId);
       setBookmarkId("");
-      console.log("Bookmark Removed");
+      queryClient.invalidateQueries('bookmarks');
     },
     onError: () => {
       console.log("Something went wrong, please try again.");

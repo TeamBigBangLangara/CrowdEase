@@ -660,6 +660,7 @@
 					"$(SRCROOT)/../node_modules/react-native-maps/ios/AirMaps",
 				);
 				INFOPLIST_FILE = CrowdEease/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Crowd Ease";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -752,6 +753,7 @@
 					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/AirMaps",
 				);
 				INFOPLIST_FILE = CrowdEease/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Crowd Ease";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

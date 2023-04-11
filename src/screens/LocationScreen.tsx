@@ -3,7 +3,7 @@ import {
   StyleSheet,
   Text,
   View,
-  Button,
+  Image,
   Switch,
   Platform,
   PermissionsAndroid,
@@ -18,6 +18,7 @@ import { onGoogleButtonPress } from '../auth/googleSignIn';
 import { signUp, signIn, getUser } from '../auth/user';
 import { Location } from 'types/types';
 import { addUser } from '../api/bigBangAPI/users';
+import PrimaryButton from '../components/PrimaryButton';
 
 const LocationScreen = ({ route, navigation, }: AuthStackNavigationProps<'LocationScreen'>) => {
   const [isEnabled, setIsEnabled] = useState(false);
@@ -142,53 +143,130 @@ const LocationScreen = ({ route, navigation, }: AuthStackNavigationProps<'Locati
 
   return (
     <View style={styles.wrapper}>
-      <Text>CrowdEase works best with location permission </Text>
-      <Text>
-        Location is used to improve your experience by detecting events and crowds around you.
-      </Text>
       <View style={styles.outerTopContainer}>
-        <Text style={styles.container}>Turn on GPS</Text>
-        <View style={styles.container}>
-          <Switch
-            hitSlop={{ top: 20, left: 1, right: 1, bottom: 20, }}
-            trackColor={{ false: '#767577', true: '#81b0ff', }}
-            thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
-            ios_backgroundColor="#3e3e3e"
-            onValueChange={toggleSwitchPress}
-            value={isEnabled}
-          />
+        <View style={styles.headerTop}>
+          <Text style={styles.header}>CrowdEase works the best with location permission </Text>
+        </View>
+        <View style={styles.innerTopContainer}>
+          <Image style={styles.locationIcon} source={require('../assets/icons/locationIcon.png')} />
+          <Text style={styles.text}>
+            Location is used to improve your experience by detecting events and crowds around you.
+          </Text>
+        </View>
+        <View style={styles.GPSContainer}>
+          <Text style={styles.header}>Turn on GPS</Text>
+          <View style={styles.switchContainer}>
+            <Switch
+              hitSlop={{ top: 20, left: 1, right: 1, bottom: 20, }}
+              trackColor={{ false: '#767577', true: '#B687FF', }}
+              thumbColor={isEnabled ? '#FFFFFF' : '#B687FF'}
+              ios_backgroundColor="#3e3e3e"
+              onValueChange={toggleSwitchPress}
+              value={isEnabled}
+            />
+          </View>
         </View>
       </View>
       <View style={styles.outerBottomContainer}>
-        <View style={styles.dottedLine}>
-          <View style={{ flex: 1, height: 1, backgroundColor: 'black', margin: 20, }} />
+        <View style={styles.textContainer}>
+          <View style={styles.line}></View>
           <View>
-            <Text style={{ width: 50, textAlign: 'center', }}>Or</Text>
+            <Text style={styles.text}>or</Text>
           </View>
-          <View style={{ flex: 1, height: 1, backgroundColor: 'black', margin: 20, }} />
+          <View style={styles.line}></View>
         </View>
-        <View>
+        <View style={styles.innerBottomContainer}>
           <TextInput
             style={styles.textInputStyle}
             onChangeText={setPostalCodeText}
             value={postalCode}
             placeholder="Enter Postal Code Manually"
+            placeholderTextColor= {'#938F99'}
           />
+          <View style={styles.buttonContainer}>
+            <PrimaryButton label="Sign Up" onPress={getLocation} />
+          </View>
         </View>
       </View>
-      <View style={styles.buttonStyle}>
-        <Button onPress={getLocation} title="Sign Up" accessibilityLabel="Sing Up" />
-      </View>
+     
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   wrapper: {
-    flex: 1,
-    backgroundColor: 'lightblue',
     alignItems: 'center',
+    padding: 16,
+    backgroundColor: 'rgba(33, 33, 33, 0.9)',
+    height: '100%',
+    width: '100%',
+  },
+  outerTopContainer:{
+    flex:1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin:10,
+  },
+  headerTop:{ 
+    paddingTop: 40,
+  },
+  header:{
+    fontWeight: '700',
+    fontSize: 28,
+    textAlign: 'center',
+    color: '#E6E1E5',
+    margin: 10,
+  },
+  innerTopContainer:{
+    flex:1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  locationIcon: {
+    width: 28,
+    height: 28,
+  },
+  switchContainer: {
+    flex:1,
+    padding: 5,
+    margin: 5,
+  },
+  GPSContainer: {
+    flex: 1,
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 10,
+    width: '100%',
+    marginHorizontal: 5,
+  },
+  outerBottomContainer: {
+    flex: 1,
+    paddingtop: 2,
+    width: '100%',
+    margintop: 2,
+  },
+  innerBottomContainer:{
     margin: 20,
+    flex: 1,
+    justifyContent: 'space-between',
+  },
+  textContainer:{
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    margin: 10,
+  },
+  line:{
+    backgroundColor: '#E6E1E5',
+    height: 2,
+    width: 120,
+  },
+  buttonContainer: {
+    flex:1,
+    paddingTop: 50,
+    paddingBottom: 30,
   },
   buttonStyle: {
     height: 40,
@@ -197,54 +275,23 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 2,
   },
-  container: {
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: 5,
-    margin: 5,
-  },
-  outerTopContainer: {
-    flex: 1,
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    padding: 2,
-    width: '100%',
-    height: '30%',
-    margin: 5,
-  },
-  outerBottomContainer: {
-    flex: 1,
-    alignItems: 'center',
-    paddingtop: 2,
-    width: '100%',
-    height: '30%',
-    margintop: 20,
-  },
-  dottedLine: {
-    flex: 1,
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    padding: 2,
-    width: '100%',
-    height: '50%',
-    margin: 5,
+  text: {
+    fontWeight: "500",
+    fontSize: 16,
+    color: '#E6E1E5',
+    margin: 10,
   },
   textInputStyle: {
-    height: 40,
-    width: 333,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-    backgroundColor: 'lightgrey',
+    width: 330,
+    height: 42,
+    borderWidth: 2,
+    borderColor: '#938F99',
+    borderRadius: 100,
+    color: '#938F99',
+    paddingLeft: 20,
+    
   },
-  iconStyle: {
-    gap: 5,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+  
 });
 
 export default LocationScreen;

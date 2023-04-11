@@ -6,8 +6,8 @@ import EventCard from "./EventCard";
 import { colors } from "../styles/colors";
 import { useNavigation } from "@react-navigation/native";
 
-const EventCarousel = () => {
-const navigation: any = useNavigation();
+const EventCarousel = (props:{isDark?: boolean}) => {
+const navigation = useNavigation();
 
   const  {data: events = [],} = useQuery("events", () => getEvents(),
   {
@@ -43,7 +43,9 @@ const filteredEvents = () => {
             key={item.id}
             event={item}
             eventType={"actual"}
-            onEventCardPress={() => onEventCardPress(item.id)}
+            onBookmarkPress={onBookMarkPress}
+            onDetail={() => onDetailScreen(item.id)}
+            isDark={props.isDark}
           />;
 
         }

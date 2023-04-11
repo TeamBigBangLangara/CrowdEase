@@ -7,6 +7,7 @@ import { margin } from "../styles/basic";
 const ParticipantsByMeal = (props: {
   mealTime: string
   crowdNumber: number
+  isDark?: boolean
 }) => {
   const renderLabelWithIcon = () => {
     switch (props.mealTime) {
@@ -34,9 +35,9 @@ const ParticipantsByMeal = (props: {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={props.isDark ? styles.container : styles.containerLight}>
       {renderLabelWithIcon()}
-      <Text style={styles.number}>{props.crowdNumber}</Text>
+      <Text style={props.isDark ? styles.number: styles.numberLight}>{props.crowdNumber}</Text>
     </View>
   );
 };
@@ -52,8 +53,25 @@ const styles = StyleSheet.create({
     display: 'flex',
     
    },
+  containerLight: {
+    alignItems: "center",
+    justifyContent: 'space-evenly',
+    width: 115,
+    height: 89,
+    backgroundColor: colors.neutral.surfaceWhite,
+    borderRadius: 12,
+    display: 'flex',
+    
+   },
   number: {
     color: colors.neutral.backgroundWhite,
+    fontWeight: fontWeightSubtitle,
+    fontSize: 22,
+    textAlign: 'center',
+    
+  },
+  numberLight: {
+    color: colors.neutral.surfaceBlack,
     fontWeight: fontWeightSubtitle,
     fontSize: 22,
     textAlign: 'center',

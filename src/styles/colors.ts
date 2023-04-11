@@ -15,10 +15,12 @@ export const colors = {
   accent: {
     darkModeRed: "#FFB9A1",
     accentBlueDark: "#68B5DE",
+    accentBlueLight: "#367596",
     accentYellowDark: "#FFFA6E",
   },
   primary: {
     primaryPurpleDark: "#B687FF",
+    primaryPurpleLight: "#8335FD",
     gradientDark: {
       colors: ["rgba(182, 135, 255, 1)", "rgba(104, 181, 222, 1)"],
       start: { x: 0.5, y: 0, },

@@ -18,7 +18,8 @@ const EventCard = (props: {
   eventType: string
   userId?: string,
   bookmarkId?: string
-  onEventCardPress?: () => void
+  onDetail: () => void
+  isDark?: boolean
 }) => {
 
   const [showRating, setShowRating] = useState(false);
@@ -106,14 +107,14 @@ const EventCard = (props: {
     if (props.eventType === "past") {
       return (
         <View style={styles.dateContainer}>
-          <Text style={styles.label}>{props.event.dates.date}</Text>
-          <Text style={styles.label}>{timeFormat(props.event.dates.time)}</Text>
+          <Text style={props.isDark ? styles.label : lightModeStyles.label}>{props.event.dates.date}</Text>
+          <Text style={props.isDark ? styles.label : lightModeStyles.label}>{timeFormat(props.event.dates.time)}</Text>
         </View>
       );
     } else {
       return (
         <View>
-          <Text style={styles.label}>{timeFormat(props.event.dates.time)}</Text>
+          <Text style={props.isDark ? styles.label : lightModeStyles.label}>{timeFormat(props.event.dates.time)}</Text>
         </View>
       );
     }
@@ -126,6 +127,7 @@ const EventCard = (props: {
         userID={props.userId}
         isBookmarkAdded={isBookmarkAdded}
         onBookmarkPress={onBookmarkPress}
+        isDark={props.isDark}
       />;
     }
   };
@@ -161,21 +163,21 @@ const EventCard = (props: {
   };
 
   return (
-    <Pressable onPress={props.onEventCardPress}>
-      <View style={styles.container}>
+    <Pressable onPress={props.onDetail}>
+      <View style={props.isDark ? styles.container : lightModeStyles.container}>
         {renderDragUpButton()}
         <View style={styles.eventContainer}>
           <Image source={{ uri: props.event.image, }} style={styles.eventImage} />
           <View style={styles.leftContainer}>
             <View style={styles.upContainer}>
               {renderDate()}
-              <Text style={styles.eventTitle} numberOfLines={1}>{props.event.name}</Text>
-              <IconText icon={require("../assets/icons/pin.png")} numberOfLines={1} text={props.event.address}
+              <Text style={props.isDark ? styles.eventTitle : lightModeStyles.eventTitle} numberOfLines={1}>{props.event.name}</Text>
+              <IconText icon={props.isDark ? require("../assets/icons/pin.png") : require("../assets/icons/lightMode/location.png")} numberOfLines={1} text={props.event.address}
                         style={styles.icon} />
             </View>
             <View style={styles.participantsContainer}>
               <IconText
-                icon={require("../assets/icons/participants.png")}
+                icon={props.isDark ? require("../assets/icons/participants.png") : require("../assets/icons/lightMode/Participants.png")}
                 text={`${props.event.participants} participants`}
                 style={styles.icon}
               />
@@ -199,6 +201,19 @@ const styles = StyleSheet.create({
     display: "flex",
     borderRadius: 22,
     marginVertical: 8,
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1, },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+    //add an inset shadow using negative elevation
+    insetShadow: {
+      elevation: -4,
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 4, },
+      shadowOpacity: 0.1,
+      shadowRadius: 6,
+    },
   },
   eventContainer: {
     display: "flex",
@@ -250,6 +265,42 @@ const styles = StyleSheet.create({
   },
   icon: {
     alignItems: "flex-end",
+  },
+});
+
+const lightModeStyles = StyleSheet.create({
+  container: {
+    backgroundColor: colors.neutral.backgroundWhite,
+    paddingHorizontal: 24,
+    paddingVertical: 16,
+    flexDirection: "column",
+    display: "flex",
+    borderRadius: 22,
+    marginVertical: 8,
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1, },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+    //add an inset shadow using negative elevation
+    insetShadow: {
+      elevation: -4,
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 4, },
+      shadowOpacity: 0.1,
+      shadowRadius: 6,
+    },
+  },
+  label: {
+    color: colors.neutral.surfaceBlack,
+    fontSize: fontSize.body,
+    lineHeight: 18,
+    fontFamily: fontFamily.body,
+  },
+  eventTitle: {
+    fontSize: fontSize.subtitle2,
+    color: colors.neutral.surfaceBlack,
+    fontFamily: fontFamily.body,
   },
 });
 

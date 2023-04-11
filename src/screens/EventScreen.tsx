@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { Alert, FlatList, Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { getEvents } from "../api/event";
-import { addDays, format, startOfWeek } from "date-fns";
+import { format } from "date-fns";
 
 import SearchForm from "../components/SearchForm";
 import WeekCalendar from "../components/WeekCalendar";
@@ -17,13 +17,11 @@ import { Bookmark, LoggedUser } from "types/types";
 import { fetchBookmarks } from "../api/bigBangAPI/bookmark";
 import { EventsStackNavigationProps } from "../types/navigationTypes";
 
-//////////////////////// TYPE ////////////////////////
 export type TypeCategoryFilter = {
   category: string,
   isActive: boolean,
 };
 
-//////////////////// MAIN COMPONENT ////////////////////
 const EventScreen = ({ navigation,}: EventsStackNavigationProps<"EventScreen">) => {
 
   const [searchFilter, setSearchFilter] = useState("");
@@ -49,7 +47,6 @@ const EventScreen = ({ navigation,}: EventsStackNavigationProps<"EventScreen">) 
     if (filterObject.isActive) {
       return false;
     }
-
     return true;
   });
 
@@ -80,7 +77,6 @@ const EventScreen = ({ navigation,}: EventsStackNavigationProps<"EventScreen">) 
           if(allFilterAreOff){
             return event;
           }
-          
           return categoryFilterArray.find(filterObject => filterObject.category === event.category.name)?.isActive && event;
         });
       },
@@ -112,7 +108,6 @@ const EventScreen = ({ navigation,}: EventsStackNavigationProps<"EventScreen">) 
     }
   };
 
-  /////========= Handlers
   const daySelectionHandler = (date: string) => {
     setDateFilter(date);
   };
@@ -129,7 +124,6 @@ const EventScreen = ({ navigation,}: EventsStackNavigationProps<"EventScreen">) 
     navigation.navigate("EventDetailsScreen", { eventId: eventId, });
   };
 
-  //Render function  
   const renderEvents = () => {
     if (searchFilter) {
       return (

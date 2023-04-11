@@ -140,16 +140,16 @@ const ProfileScreen = ({ navigation, route }: ProfileScreenProps) => {
             <Image source={isDark ? require('../assets/icons/rightIcon.png') : require('../assets/icons/lightMode/rightArrow.png')} />
           </Pressable>
         </View>
+          <Pressable onPress={onPastEvent}>
         <View style={isDark ? styles.item : lightModeStyles.item}>
           <IconText
             icon={isDark ? require('../assets/icons/star.png') : require('../assets/icons/lightMode/star.png')}
-            text={'Rate PastEvents'}
+            text={'Rate Past Events'}
             style={isDark ? styles.iconText : lightModeStyles.iconText}
             isDark={isDark} />
-          <Pressable onPress={onPastEvent}>
             <Image source={isDark ? require('../assets/icons/rightIcon.png') : require('../assets/icons/lightMode/rightArrow.png')} />
-          </Pressable>
         </View>
+          </Pressable>
       </View>
       <Pressable onPress={signOut} style={styles.logoutContainer}>
         <IconText

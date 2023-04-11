@@ -68,7 +68,6 @@ const EventDetailsScreen = ({ route, navigation, }: MainStackNavigationProps<"Ev
 
   const deleteBookmark = useMutation(["bookmarks"], () => removeBookmark(bookmarkId), {
     onSuccess: () => {
-      console.log("id: " + bookmarkId);
       setBookmarkId("");
       queryClient.invalidateQueries('bookmarks');
     },

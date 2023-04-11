@@ -28,8 +28,6 @@ type HomeScreenProps = MainStackNavigationProps<'HomeScreen'>;
 const HomeScreen = ({ navigation, route }: HomeScreenProps) => {
   const isDark = route.params?.isDarkMode || false;
 
-  console.log("from home", isDark);
-
   const requestEvents = useQuery("events", () => getEvents(),
     {
       onError: (error: TypeError) => {
@@ -199,7 +197,7 @@ const HomeScreen = ({ navigation, route }: HomeScreenProps) => {
               <Text style={isDark ? styles.todayDate : lightModeStyles.todayDate}>{today}</Text>
             </View>
             <View style={isDark ? styles.numberContainer : lightModeStyles.numberContainer}>
-              <IconText icon={isDark ? require('../assets/icons/participants.png') : require('../assets/icons/lightMode/Participants.png')} text={'Total Participants'} style={isDark ? styles.participantIcon : lightModeStyles.participantIcon} />
+              <IconText icon={isDark ? require('../assets/icons/participants.png') : require('../assets/icons/lightMode/Participants.png')} text={'Total Participants'} style={isDark ? styles.participantIcon : lightModeStyles.participantIcon} isDark={isDark}/>
               <View>{renderTodayParticipants()}</View>
             </View>
             <Text style={isDark ? styles.subtitleBreakdown : lightModeStyles.subtitleBreakdown}>Participants Breakdown</Text>

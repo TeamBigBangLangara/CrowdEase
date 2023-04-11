@@ -173,13 +173,14 @@ const EventCard = (props: {
               {renderDate()}
               <Text style={props.isDark ? styles.eventTitle : lightModeStyles.eventTitle} numberOfLines={1}>{props.event.name}</Text>
               <IconText icon={props.isDark ? require("../assets/icons/pin.png") : require("../assets/icons/lightMode/location.png")} numberOfLines={1} text={props.event.address}
-                        style={styles.icon} />
+                        style={props.isDark ? styles.icon : lightModeStyles.icon} isDark={props.isDark} />
             </View>
             <View style={styles.participantsContainer}>
               <IconText
                 icon={props.isDark ? require("../assets/icons/participants.png") : require("../assets/icons/lightMode/Participants.png")}
                 text={`${props.event.participants} participants`}
-                style={styles.icon}
+                style={props.isDark ? styles.icon : lightModeStyles.icon}
+                isDark={props.isDark}
               />
               {renderBookmarkButton()}
             </View>
@@ -265,6 +266,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     alignItems: "flex-end",
+    color: colors.neutral.surfaceWhite
   },
 });
 
@@ -301,6 +303,10 @@ const lightModeStyles = StyleSheet.create({
     fontSize: fontSize.subtitle2,
     color: colors.neutral.surfaceBlack,
     fontFamily: fontFamily.body,
+  },
+  icon: {
+    alignItems: "flex-end",
+    color: colors.neutral.surfaceBlack
   },
 });
 

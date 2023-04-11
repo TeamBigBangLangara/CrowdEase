@@ -43,12 +43,9 @@ export const getToken = async () =>
 {
   auth().currentUser.getIdToken(true)
       .then((idToken)=>{
-        // console.log(idToken);
         storage.set("FirebaseJWT",idToken);
   });
-  console.log(storage.getString("FirebaseJWT"));  
 }
-
 
 export const getUser = async () =>
 {

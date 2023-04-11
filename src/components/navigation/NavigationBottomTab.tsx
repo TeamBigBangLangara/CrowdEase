@@ -12,7 +12,6 @@ const Tab = createBottomTabNavigator();
 const NavigationBottomTab = () => {
 
   useEffect (()=>{
-    console.log("Get Storage");
     getToken();
   }, []);
 

@@ -1,53 +1,48 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, Pressable, Text, View, Image } from 'react-native';
-import { AuthStackNavigationProps } from '../types/navigationTypes';
-import { firebase } from "@react-native-firebase/auth";
+import React, { useEffect } from "react";
+import { StyleSheet, Text, View } from "react-native";
+import { AuthStackNavigationProps } from "../types/navigationTypes";
 
-import FastImage from 'react-native-fast-image';
+import FastImage from "react-native-fast-image";
 
-const SplashScreen = ({ navigation, }: AuthStackNavigationProps<'SplashScreen'> ) =>
-{ 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+const SplashScreen = ({ navigation, }: AuthStackNavigationProps<"SplashScreen">) => {
 
-  useEffect( () => {
- 
+  useEffect(() => {
+
     if (navigation) {
       navigation.setOptions({
         headerShown: false,
       });
-        
-    setTimeout(() => {
-      navigation.navigate('LaunchScreen');
-      }, 6000);     
+
+      setTimeout(() => {
+        navigation.navigate("LaunchScreen");
+      }, 6000);
     }
   }, []);
 
-  
+
   return (
     <View style={styles.container}>
-        <Text>SplashScreen</Text>
-        <FastImage
-          source={require ('../assets/animations/splashScreen.gif')}
-          style={styles.gif} 
-          priority={FastImage.priority.high} 
-          resizeMode={FastImage.resizeMode.contain}
-        />
+      <Text>SplashScreen</Text>
+      <FastImage
+        source={require("../assets/animations/splashScreen.gif")}
+        style={styles.gif}
+        resizeMode={FastImage.resizeMode.contain}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor:'#000000',
-    //   color: '#FFFFFF',
-    },
-    gif:{
-        width: '200%',
-        height: '200%',
-    },
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#000000",
+  },
+  gif: {
+    width: "100%",
+    height: "100%",
+  },
 });
 
 

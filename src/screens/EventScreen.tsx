@@ -161,8 +161,7 @@ const EventScreen = ({ navigation,}: EventsStackNavigationProps<"EventScreen">) 
   };
 
   return (
-    <View style={styles.container}>
-      <ScrollView>
+    <ScrollView style={styles.container}>
         <SearchForm
           onChangeText={(keyword: string) => onSearchTextChanged(keyword)}
           onFilterPress={() => {
@@ -180,7 +179,6 @@ const EventScreen = ({ navigation,}: EventsStackNavigationProps<"EventScreen">) 
             <Image source={require("../assets/icons/layout2.png")} />
           </View>
         </View>
-      </ScrollView>
       {renderEvents()}
       <FilterCategory
         visible={modalVisible}
@@ -188,7 +186,7 @@ const EventScreen = ({ navigation,}: EventsStackNavigationProps<"EventScreen">) 
         categoryFilterArray={categoryFilterArray}
         onApplyFilterPress={onApplyFilterHandler}
       />
-    </View>
+    </ScrollView>
   );
 };
 

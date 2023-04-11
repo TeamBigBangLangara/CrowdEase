@@ -6,34 +6,62 @@ import { colors } from "../styles/colors";
 
 import PrimaryButton from "./PrimaryButton";
 import LinkButton from "./LinkButton";
+import { TypeCategoryFilter } from "../screens/EventScreen";
 
+//////////////////////// FILTER PRESSABLE COMPONENT ////////////////////////
+const EventCategoryPressable = (props: {name: string, icon?: any, categoryFilterArray: TypeCategoryFilter[]}) => {
+  //Get the corresponding object in the categoryFilterArray in order to check if the button is already check or not (boolean)
+  const categoryFilterObject = props.categoryFilterArray.find(item => item.category === props.name);
+  //Get if the corresponding object is active or not
+  const [isSelected, setIsSelected] = useState(categoryFilterObject?.isActive);
 
-//////////////////////// FILTER PRESSABLE ////////////////////////
-
-const EventCategoryPressable = forwardRef((props: {text: string, icon?: any}, ref) => {
-
-  const [isSelected, setIsSelected] = useState(false);
 
   const selectionHandle = () => {
+
+    //If is selected, deselect and viceversa
     if(!isSelected){
+      //Update isActive status
+      categoryFilterObject.isActive = true;
       setIsSelected(true);
     } else {
+      //Update isActive status
+      categoryFilterObject.isActive = false;
       setIsSelected(false);
     }
+
   };
 
   return (
     <Pressable onPress={selectionHandle} style={[styles.eventsFilterPressable, isSelected && styles.eventsFilterPressableActive]}>
-      <Text style={[styles.eventsFilterPressableText, isSelected && styles.eventsFilterPressableActive]}>{props.text}</Text>
+      <Text style={[styles.eventsFilterPressableText, isSelected && styles.eventsFilterPressableActive]}>{props.name}</Text>
       {props.icon &&
       <Image source={props.icon}/>}
     </Pressable>
   );
-});
+};
 
 //////////////////////// MAIN COMPONENT ////////////////////////
 
-const FilterCategory = (props: {visible: boolean, onRequestClose?: () => void, onTouchStart?: () => void, onClosePress: () => void}) => {
+const FilterCategory = (props: {
+  visible: boolean, 
+  onRequestClose?: () => void, 
+  onTouchStart?: () => void, 
+  onClosePress: () => void,
+  onApplyFilterPress: (newCategoryFilterArray: TypeCategoryFilter[]) => void, 
+  categoryFilterArray: TypeCategoryFilter[], 
+  }
+  ) => {
+
+  //Category Filter Array
+  const updatedCategoryFilter = props.categoryFilterArray;
+
+  /////========= Handlers
+  //Handler when ApplyFilter Button is pressed
+  const applyFilterHandler = () => {
+    props.onApplyFilterPress(updatedCategoryFilter);
+    props.onClosePress();
+  };
+
 
   return (
       <Modal
@@ -59,14 +87,14 @@ const FilterCategory = (props: {visible: boolean, onRequestClose?: () => void, o
               <Text style={styles.eventsFilterContainerTitle}>Event Category</Text>
               <View style={styles.eventsFilterPressableContainer}>
                 <View style={styles.eventsFilterPressableContainerRow}>
-                  <EventCategoryPressable text={"Sports"} icon={require('../assets/category/sport.png')} />
-                  <EventCategoryPressable text={"Shows"} icon={require('../assets/category/show.png')} />
-                  <EventCategoryPressable text={"Music"} icon={require('../assets/category/music.png')} />
+                  <EventCategoryPressable name={"Sports"} icon={require('../assets/category/sport.png')} categoryFilterArray={updatedCategoryFilter}/>
+                  <EventCategoryPressable name={"Shows"} icon={require('../assets/category/show.png')} categoryFilterArray={updatedCategoryFilter}/>
+                  <EventCategoryPressable name={"Music"} icon={require('../assets/category/music.png')} categoryFilterArray={updatedCategoryFilter}/>
                 </View>
                 <View style={styles.eventsFilterPressableContainerRow}>
-                  <EventCategoryPressable text={"Festivals"} icon={require('../assets/category/festival.png')}/>
-                  <EventCategoryPressable text={"Business"} icon={require('../assets/category/business.png')}/>
-                  <EventCategoryPressable text={"Other"} icon={require('../assets/category/other.png')}/>
+                  <EventCategoryPressable name={"Festivals"} icon={require('../assets/category/festival.png')} categoryFilterArray={updatedCategoryFilter}/>
+                  <EventCategoryPressable name={"Business"} icon={require('../assets/category/business.png')} categoryFilterArray={updatedCategoryFilter}/>
+                  <EventCategoryPressable name={"Other"} icon={require('../assets/category/other.png')} categoryFilterArray={updatedCategoryFilter}/>
                 </View>
               </View>
             </View>
@@ -75,14 +103,14 @@ const FilterCategory = (props: {visible: boolean, onRequestClose?: () => void, o
               <Text style={styles.eventsFilterContainerTitle}>Distance</Text>
               <View style={styles.eventsFilterPressableContainer}>
                 <View style={styles.eventsFilterPressableContainerRow}>
-                  <EventCategoryPressable text={'500m'}/>
-                  <EventCategoryPressable text={'1km'}/>
-                  <EventCategoryPressable text={'3km'}/>
+                  <EventCategoryPressable name={'500m'} categoryFilterArray={updatedCategoryFilter}/>
+                  <EventCategoryPressable name={'1km'} categoryFilterArray={updatedCategoryFilter}/>
+                  <EventCategoryPressable name={'3km'} categoryFilterArray={updatedCategoryFilter}/>
                 </View>
               </View>
             </View>
 
-            <PrimaryButton onPress={() => console.log('apply filter press')} label={"Apply Filter"}/>
+            <PrimaryButton onPress={applyFilterHandler} label={"Apply Filter"}/>
           </View>
         </View>
       </Modal>

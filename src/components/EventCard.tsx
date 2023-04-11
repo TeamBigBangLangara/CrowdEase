@@ -12,6 +12,7 @@ import { fontFamily, fontSize } from "../styles/fonts";
 import { timeFormat } from "../utils/timeFormat";
 import { addBookmark, removeBookmark } from "../api/bigBangAPI/bookmark";
 import { cancelNotification, createNotification } from "../api/oneSignal";
+import { storage } from "../store/mmkv";
 
 const EventCard = (props: {
   event: Event
@@ -22,21 +23,9 @@ const EventCard = (props: {
   isDark?: boolean
 }) => {
 
-  const [showRating, setShowRating] = useState(false);
-  const [isBookmarkAdded, setIsBookmarkAdded] = useState(false);
-  const [bookmarkId, setBookmarkId] = useState("");
-  const [notificationId, setNotificationId] = useState("");
+  const isDark = storage.getBoolean("isDark");
 
-  useEffect(() => {
-    if (props.bookmarkId !== undefined) {
-      setBookmarkId(props.bookmarkId);
-      setIsBookmarkAdded(true);
-    } else {
-      setIsBookmarkAdded(false);
-    }
-  }, [props.bookmarkId]);
-
-  const saveBookmark = useMutation(["bookmarks"], () => addBookmark({
+  const saveBookmark = useMutation(["bookmark"], () => addBookmark({
     "user_id": props.userId!,
     "event_id": props.event.id,
   }), {
@@ -102,19 +91,19 @@ const EventCard = (props: {
       }
     }
   };
-
+  console.log("EventCard", isDark);
   const renderDate = () => {
     if (props.eventType === "past") {
       return (
         <View style={styles.dateContainer}>
-          <Text style={props.isDark ? styles.label : lightModeStyles.label}>{props.event.dates.date}</Text>
-          <Text style={props.isDark ? styles.label : lightModeStyles.label}>{timeFormat(props.event.dates.time)}</Text>
+          <Text style={styles.label}>{props.event.dates.date}</Text>
+          <Text style={styles.label}>{timeFormat(props.event.dates.time)}</Text>
         </View>
       );
     } else {
       return (
         <View>
-          <Text style={props.isDark ? styles.label : lightModeStyles.label}>{timeFormat(props.event.dates.time)}</Text>
+          <Text style={isDark ? styles.label : lightModeStyles.label}>{timeFormat(props.event.dates.time)}</Text>
         </View>
       );
     }
@@ -127,7 +116,7 @@ const EventCard = (props: {
         userID={props.userId}
         isBookmarkAdded={isBookmarkAdded}
         onBookmarkPress={onBookmarkPress}
-        isDark={props.isDark}
+        isDark={isDark}
       />;
     }
   };
@@ -164,23 +153,23 @@ const EventCard = (props: {
 
   return (
     <Pressable onPress={props.onDetail}>
-      <View style={props.isDark ? styles.container : lightModeStyles.container}>
+      <View style={isDark ? styles.container : lightModeStyles.container}>
         {renderDragUpButton()}
         <View style={styles.eventContainer}>
           <Image source={{ uri: props.event.image, }} style={styles.eventImage} />
           <View style={styles.leftContainer}>
             <View style={styles.upContainer}>
               {renderDate()}
-              <Text style={props.isDark ? styles.eventTitle : lightModeStyles.eventTitle} numberOfLines={1}>{props.event.name}</Text>
-              <IconText icon={props.isDark ? require("../assets/icons/pin.png") : require("../assets/icons/lightMode/location.png")} numberOfLines={1} text={props.event.address}
-                        style={props.isDark ? styles.icon : lightModeStyles.icon} isDark={props.isDark} />
+              <Text style={isDark ? styles.eventTitle : lightModeStyles.eventTitle} numberOfLines={1}>{props.event.name}</Text>
+              <IconText icon={isDark ? require("../assets/icons/pin.png") : require("../assets/icons/lightMode/location.png")} numberOfLines={1} text={props.event.address}
+                        style={isDark ? styles.icon : lightModeStyles.icon} isDark={isDark} />
             </View>
             <View style={styles.participantsContainer}>
               <IconText
-                icon={props.isDark ? require("../assets/icons/participants.png") : require("../assets/icons/lightMode/Participants.png")}
+                icon={isDark ? require("../assets/icons/participants.png") : require("../assets/icons/lightMode/Participants.png")}
                 text={`${props.event.participants} participants`}
-                style={props.isDark ? styles.icon : lightModeStyles.icon}
-                isDark={props.isDark}
+                style={isDark ? styles.icon : lightModeStyles.icon}
+                isDark={isDark}
               />
               {renderBookmarkButton()}
             </View>

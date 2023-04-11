@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Alert, Image, Pressable, StyleSheet, Text, View, useColorScheme, Switch } from "react-native";
+import { Alert, Image, Pressable, StyleSheet, Text, View, Switch } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 
 import { MainStackNavigationProps } from "../types/navigationTypes";
@@ -16,6 +16,7 @@ const ProfileScreen = ({ navigation, route }: ProfileScreenProps) => {
   const [isDark, setIsDark] = useState(storage.getBoolean("isDark") || false);
   const { isDarkMode, toggleDarkMode } = route.params
   const [showSetting, setShowSetting] = useState(false)
+console.log("ProfileScreen", isDark);
 
 
 
@@ -42,12 +43,6 @@ const ProfileScreen = ({ navigation, route }: ProfileScreenProps) => {
       storage.set("isDark", newIsDark);
     };
 
-  const goBack = () => {
-    navigation.navigate('HomeScreen', {
-      isDarkMode: isDark,
-    });
-  }
-
   const renderSetting = () => {
     return (
       <View style={isDark ? styles.showSetting : lightModeStyles.showSetting}>
@@ -69,7 +64,7 @@ const ProfileScreen = ({ navigation, route }: ProfileScreenProps) => {
     <View style={isDark ? styles.container : lightModeStyles.container}>
       <View style={isDark ? styles.header : lightModeStyles.header}>
         <View style={styles.backButtonContainer}>
-          <Pressable onPress={goBack}>
+          <Pressable onPress={() => navigation.goBack()}>
             <Image source={isDark ? require('../assets/icons/backButton.png') : require('../assets/icons/lightMode/backButton.png')} />
           </Pressable>
           <Text style={isDark ? styles.headerTitle : lightModeStyles.headerTitle}>Profile</Text>

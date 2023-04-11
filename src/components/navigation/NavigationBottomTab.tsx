@@ -1,11 +1,12 @@
+import { useEffect } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { EventStack, HomeStack, MapsStack, ReportsStack } from "../../App";
 import { colors } from "../../styles/colors";
 import { fontFamily, fontSize, fontWeightSubtitle2 } from "../../styles/fonts";
 import GradientText from "../GradientText";
-import { useEffect } from "react";
 import { getToken } from "../../auth/user";
+import { storage } from "../../store/mmkv";
 
 const Tab = createBottomTabNavigator();
 
@@ -14,13 +15,21 @@ const NavigationBottomTab = () => {
   useEffect (()=>{
     getToken();
   }, []);
+  const isDark = storage.getBoolean("isDark");
+
+  useEffect(() => {
+    return () => {
+      isDark
+    }
+  }, [])
+  
 
   return (
     <Tab.Navigator initialRouteName="Home"
       screenOptions={{
         tabBarShowLabel: false,
-        tabBarStyle: { backgroundColor: colors.neutral.surfaceBlack, height: 60, borderTopWidth: 2, borderTopColor: colors.neutral.outlineGrey, },
-        tabBarActiveTintColor: colors.primary.primaryPurpleDark,
+        tabBarStyle: { backgroundColor: isDark ? colors.neutral.surfaceBlack : colors.neutral.surfaceWhite, height: 60, borderTopWidth: 2, borderTopColor: colors.neutral.outlineGrey, },
+        tabBarActiveTintColor:colors.primary.primaryPurpleDark,
         headerShown: false,
       }}>
       <Tab.Screen
@@ -29,12 +38,13 @@ const NavigationBottomTab = () => {
         options={{
           tabBarIcon: ({ focused, }) => (
             <View style={styles.iconContainer}>
-              <Image source={focused ? require('../../assets/icons/navIcons/HomeActive.png') : require('../../assets/icons/navIcons/Home.png')} />
+              <Image source={focused ? require('../../assets/icons/navIcons/HomeActive.png') : 
+              isDark ? require('../../assets/icons/navIcons/Home.png') : require('../../assets/icons/lightMode/home.png')} />
               {focused ?
                 <GradientText
                   text={'Home'}
                 /> :
-                <Text style={[styles.label, styles.inactiveLabel]}>Home</Text>}
+                <Text style={[styles.label, isDark ? styles.inactiveLabel : styles.inactiveLabelLight]}>Home</Text>}
             </View>
           ),
         }}
@@ -45,12 +55,13 @@ const NavigationBottomTab = () => {
         options={{
           tabBarIcon: ({ focused, }) => (
             <View style={styles.iconContainer}>
-            <Image source={focused ? require('../../assets/icons/navIcons/MapActive.png') : require('../../assets/icons/navIcons/Map.png')} />
+            <Image source={focused ? require('../../assets/icons/navIcons/MapActive.png') :
+            isDark ? require('../../assets/icons/navIcons/Map.png') : require('../../assets/icons/lightMode/map.png')} />
             {focused ?
               <GradientText
                 text={'Map'}
               /> :
-              <Text style={[styles.label, styles.inactiveLabel]}>Map</Text>}
+              <Text style={[styles.label, isDark ? styles.inactiveLabel : styles.inactiveLabelLight]}>Map</Text>}
           </View>          ),
         }}
       />
@@ -60,12 +71,13 @@ const NavigationBottomTab = () => {
         options={{
           tabBarIcon: ({ focused, }) => (
             <View style={styles.iconContainer}>
-            <Image source={focused ? require('../../assets/icons/navIcons/ReportActive.png') : require('../../assets/icons/navIcons/Report.png')} />
+            <Image source={focused ? require('../../assets/icons/navIcons/ReportActive.png') :
+            isDark ? require('../../assets/icons/navIcons/Report.png') : require('../../assets/icons/lightMode/report.png')} />
             {focused ?
               <GradientText
                 text={'Report'}
               /> :
-              <Text style={[styles.label, styles.inactiveLabel]}>Report</Text>}
+              <Text style={[styles.label, isDark ? styles.inactiveLabel : styles.inactiveLabelLight]}>Report</Text>}
           </View>
           ),
         }}
@@ -77,12 +89,13 @@ const NavigationBottomTab = () => {
           headerShown: false,
           tabBarIcon: ({ focused, }) => (
             <View style={styles.iconContainer}>
-            <Image source={focused ? require('../../assets/icons/navIcons/EventActive.png') : require('../../assets/icons/navIcons/Event.png')} />
+            <Image source={focused ? require('../../assets/icons/navIcons/EventActive.png') :
+            isDark? require('../../assets/icons/navIcons/Event.png') : require('../../assets/icons/lightMode/event.png')} />
             {focused ?
               <GradientText
                 text={'Events'}
                /> :
-              <Text style={[styles.label, styles.inactiveLabel]}>Events</Text>}
+              <Text style={[styles.label , isDark ? styles.inactiveLabel : styles.inactiveLabelLight]}>Events</Text>}
           </View>
           ),
         }}
@@ -93,9 +106,6 @@ const NavigationBottomTab = () => {
 
 
 const styles = StyleSheet.create({
-  tabbar: {
-    backgroundColor: colors.neutral.surfaceBlack,
-  },
   iconContainer: {
     display: 'flex',
     alignItems: 'center',
@@ -110,6 +120,9 @@ const styles = StyleSheet.create({
   },
   inactiveLabel: {
     color: colors.neutral.surfaceWhite,
+  },
+  inactiveLabelLight: {
+    color: colors.neutral.surfaceBlack,
   },
 });
 

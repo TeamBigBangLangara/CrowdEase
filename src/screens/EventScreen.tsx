@@ -44,10 +44,7 @@ const EventScreen = ({ navigation,}: EventsStackNavigationProps<"EventScreen">) 
 
   //Check if all filters are off (false). Returns true if all false, and false if any of the categories is active.
   const allFilterAreOff = categoryFilterArray.every(filterObject => {
-    if (filterObject.isActive) {
-      return false;
-    }
-    return true;
+    return !filterObject.isActive;
   });
 
   //Get user Data

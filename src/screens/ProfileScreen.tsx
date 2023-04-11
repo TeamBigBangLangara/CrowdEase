@@ -8,11 +8,12 @@ import IconText from "../components/IconText";
 import LinkButton from "../components/LinkButton";
 import { colors } from "../styles/colors";
 import { fontFamily, fontSize, fontWeightBody, fontWeightSubtitle, fontWeightSubtitle2 } from "../styles/fonts";
+import { storage } from "../store/mmkv";
 
 type ProfileScreenProps = MainStackNavigationProps<'ProfileScreen'>
 
 const ProfileScreen = ({ navigation, route }: ProfileScreenProps) => {
-  const [isDark, setIsDark] = useState(false)
+  const [isDark, setIsDark] = useState(storage.getBoolean("isDark") || false);
   const { isDarkMode, toggleDarkMode } = route.params
   const [showSetting, setShowSetting] = useState(false)
 
@@ -34,10 +35,12 @@ const ProfileScreen = ({ navigation, route }: ProfileScreenProps) => {
     setShowSetting(!showSetting)
   };
 
-  const changeDarkMode = () => {
-    setIsDark(!isDark)
-    toggleDarkMode(isDark)
-  };
+    const changeDarkMode = () => {
+      const newIsDark = !isDark;
+      setIsDark(newIsDark);
+      toggleDarkMode(newIsDark);
+      storage.set("isDark", newIsDark);
+    };
 
   const goBack = () => {
     navigation.navigate('HomeScreen', {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { firebase } from "@react-native-firebase/auth";
@@ -74,7 +74,6 @@ export const HomeStack = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const toggleDarkMode = (isDarkMode: boolean) => {
     setIsDarkMode(!isDarkMode);
-    console.log('update', isDarkMode);
   }
 
   return (

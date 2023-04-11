@@ -39,7 +39,7 @@ const EventDetailsScreen = ({ route, navigation, }: MainStackNavigationProps<"Ev
       },
     });
 
-  useQuery("bookmarks1", () => {
+  useQuery("bookmarks", () => {
       return fetchBookmarks(userInfo.uid);
     }, {
       onSuccess: (data) => {

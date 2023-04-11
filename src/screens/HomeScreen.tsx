@@ -59,7 +59,6 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
     );
   };
 
-
   const renderMorningParticipants = () => {
     let participants = 0;
     requestEvents.data?.forEach(event => {
@@ -74,6 +73,7 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
       participants
     );
   };
+
   const renderLunchParticipants = () => {
     let participants = 0;
     requestEvents.data?.forEach(event => {
@@ -88,6 +88,7 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
       participants
     );
   };
+
   const renderDinnerParticipants = () => {
     let participants = 0;
     requestEvents.data?.forEach(event => {
@@ -102,7 +103,6 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
       participants
     );
   };
-
 
   const renderBusyDay = () => {
     const weekParticipants = [];

@@ -11,7 +11,7 @@ import SplashScreen from "./screens/SplashScreen";
 import Login from "./screens/LoginScreen";
 import NavigationBottomTab from "./components/navigation/NavigationBottomTab";
 import LocationScreen from "./screens/LocationScreen";
-import { SafeAreaView } from "react-native";
+import { SafeAreaView, StatusBar } from "react-native";
 import WeekManagerScreen from "./screens/WeekManagerScreen";
 import SuggestionScreen from "./screens/SuggestionScreen";
 import EventScreen from "./screens/EventScreen";
@@ -128,11 +128,12 @@ const App = () => {
   }, []);
 
   return (
-    <SafeAreaView style={{ flex: 1, }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: 'black', }}>
+      <StatusBar barStyle="light-content"/>
       <QueryClientProvider client={queryClient}>
         <NavigationContainer>
           {!isLoggedIn && (
-            <Stack.Navigator initialRouteName={'SplashScreen'} 
+            <Stack.Navigator initialRouteName={'SplashScreen'}
             screenOptions={{headerShown: false,}}>
               <Stack.Screen name={'SplashScreen'} component={SplashScreen} />
               <Stack.Screen name={'LaunchScreen'} component={LaunchScreen} />

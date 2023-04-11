@@ -1,8 +1,8 @@
 export interface Event {
   bookmarkId?: string
   id: string
-  ratingID: string
-  rate: number
+  ratingID?: string
+  rate?: number
   name: string
   image: string
   dates: Dates

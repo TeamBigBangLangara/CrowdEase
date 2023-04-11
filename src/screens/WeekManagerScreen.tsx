@@ -6,7 +6,6 @@ import { getEvents } from "../api/event";
 
 import ReportCard from "../components/ReportCard";
 import WeekCalendar from "../components/WeekCalendar";
-
 import { colors } from "../styles/colors";
 import { fontFamily, fontSize } from "../styles/fonts";
 import { addDays, format, startOfWeek } from "date-fns";
@@ -24,10 +23,8 @@ const getWeekDays = (selectedWeekStartDay: Date): Date[] => {
   return daysOfWeek;
 };
 
-
 //////////////////// MAIN COMPONENT ////////////////////
 const WeekManagerScreen = () => {
-  /////========= States
   const [selectedWeekStartDay, setSelectedWeekStartDay] = useState<Date>(new Date());
 
   const requestEvents = useQuery("events", () => getEvents(),
@@ -38,7 +35,7 @@ const WeekManagerScreen = () => {
     }
   );
 
-  /////========= Handlers
+  //========= Handlers
   const weekCalendarArrowHandler = (newSelectedWeekStartDay: Date) => {
     setSelectedWeekStartDay(newSelectedWeekStartDay);
   };
@@ -66,13 +63,15 @@ const WeekManagerScreen = () => {
   });
 
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
+    <ScrollView >
       <Text style={styles.screenTitle}>Weekly Event Preview</Text>
       <WeekCalendar
       onDaySelection={() => console.log("under development")}
       onWeekSelection={weekCalendarArrowHandler}
       daysVisible={false}
       />
+    </ScrollView>
       <FlatList
         data={weekDayList}
         renderItem={({ item, }) =>
@@ -84,7 +83,7 @@ const WeekManagerScreen = () => {
         }
         ItemSeparatorComponent={() => <View style={{height: 18,}} />}
       />
-    </ScrollView>
+    </View>
   );
 };
 

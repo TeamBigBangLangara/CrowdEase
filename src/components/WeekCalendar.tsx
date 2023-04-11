@@ -11,7 +11,7 @@ import { WeekDay } from "../types/types";
 //////////////////// TYPES ////////////////////
 
 type Props = {
-  onWeekSelection: (value: Date) => void;
+  onWeekSelection?: (value: Date) => void;
   onDaySelection: (value: string) => void;
   daysVisible: boolean,
 };
@@ -60,10 +60,14 @@ const WeekCalendar = ({onDaySelection, onWeekSelection, daysVisible = true,}: Pr
   //Week Selection Handler
   const weekSelectionHandler = (direction: string) => {
     if (direction === 'left') {
-      onWeekSelection(subDays(selectedWeekStartDay,7));
+      if (onWeekSelection) {
+        onWeekSelection(subDays(selectedWeekStartDay, 7));
+      }
       setSelectedWeekStartDay(subDays(selectedWeekStartDay,7));
     } else {
-      onWeekSelection(addDays(selectedWeekStartDay,7));
+      if (onWeekSelection) {
+        onWeekSelection(addDays(selectedWeekStartDay, 7));
+      }
       setSelectedWeekStartDay(addDays(selectedWeekStartDay,7));
     }
   };
@@ -81,9 +85,10 @@ const WeekCalendar = ({onDaySelection, onWeekSelection, daysVisible = true,}: Pr
       </View>
       {daysVisible &&
       <View style={styles.daySelectorContainer}>
-      {weekdays.map((weekDay) => {
+      {weekdays.map((weekDay, index) => {
         return (
           <LinearGradient
+            key={index}
             colors={colors.primary.gradientDark.colors}
             start={colors.primary.gradientDark.start}
             end={colors.primary.gradientDark.end}

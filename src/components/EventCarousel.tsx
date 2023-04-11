@@ -7,7 +7,7 @@ import { colors } from "../styles/colors";
 import { useNavigation } from "@react-navigation/native";
 
 const EventCarousel = () => {
-const navigation = useNavigation();
+const navigation: any = useNavigation();
 
   const  {data: events = [],} = useQuery("events", () => getEvents(),
   {
@@ -17,7 +17,7 @@ const navigation = useNavigation();
   }
 );
 
-const onDetailScreen = (eventId: string) => {
+const onEventCardPress = (eventId: string) => {
   navigation.navigate("EventDetailsScreen", {eventId: eventId,});
 };
 
@@ -25,10 +25,6 @@ const today = new Date().toISOString().slice(0, 10);
 
 const filteredEvents = () => {
   return events.filter((event) => event.dates.date === today);
-};
-
-const onBookMarkPress = () => {
-  Alert.alert("here", "Book Mark pressed");
 };
 
   if (filteredEvents().length === 0 ) {
@@ -47,8 +43,7 @@ const onBookMarkPress = () => {
             key={item.id}
             event={item}
             eventType={"actual"}
-            onBookmarkPress={onBookMarkPress}
-            onDetail={() => onDetailScreen(item.id)}
+            onEventCardPress={() => onEventCardPress(item.id)}
           />;
 
         }

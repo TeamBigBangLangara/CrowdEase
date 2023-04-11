@@ -44,6 +44,15 @@ const EventScreen = ({ navigation,}: EventsStackNavigationProps<"EventScreen">) 
   const [modalVisible, setModalVisible] = useState(false);
   const [userInfo, setUserInfo] = useState<LoggedUser>({ uid: "", email: "", });
 
+  //Check if all filters are off (false). Returns true if all false, and false if any of the categories is active.
+  const allFilterAreOff = categoryFilterArray.every(filterObject => {
+    if (filterObject.isActive) {
+      return false;
+    }
+
+    return true;
+  });
+
   //Get user Data
   useQuery("getUserData", getUser, {
       onSuccess: (data: LoggedUser) => {
@@ -56,17 +65,24 @@ const EventScreen = ({ navigation,}: EventsStackNavigationProps<"EventScreen">) 
   const requestEvents = useQuery("events", () => getEvents(),
     {
       select: (events) => {
-        return events.filter((event) => {
+        return events
+        //Search filter
+        .filter((event) => {
           return searchFilter ? event.name.toLowerCase().includes(searchFilter.toLowerCase()) : true;
         })
-          //Note: Comparison is made with dates formatted in YYYY-MM-DD
-          .filter((event) => {
-            return dateFilter ? event.dates.date === dateFilter : true;
-          });
-          // //Category Filter (under development)
-          // .filter((event) => {
-          //   return categoryFilter ? event.category.name === categoryFilter : true;
-          // });
+        //Date filter. Note: Comparison is made with dates formatted in YYYY-MM-DD
+        .filter((event) => {
+          return dateFilter ? event.dates.date === dateFilter : true;
+        })
+        //Category filter
+        .filter((event) => {
+          //If all filters are off, should return all events.
+          if(allFilterAreOff){
+            return event;
+          }
+          
+          return categoryFilterArray.find(filterObject => filterObject.category === event.category.name)?.isActive && event;
+        });
       },
       onError: (error: TypeError) => {
         Alert.alert("Error", error.message);

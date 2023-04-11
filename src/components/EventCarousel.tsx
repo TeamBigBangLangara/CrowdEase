@@ -51,7 +51,7 @@ const filteredEvents = () => {
         }
         }
           sliderWidth={390}
-          itemWidth={353}
+          itemWidth={318}
       />
   );
   }

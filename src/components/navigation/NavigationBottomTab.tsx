@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { EventStack, HomeStack, MapsStack, ReportsStack } from "../../App";
@@ -7,6 +7,7 @@ import { fontFamily, fontSize, fontWeightSubtitle2 } from "../../styles/fonts";
 import GradientText from "../GradientText";
 import { getToken } from "../../auth/user";
 import { storage } from "../../store/mmkv";
+import { useFocusEffect } from "@react-navigation/native";
 
 const Tab = createBottomTabNavigator();
 
@@ -15,14 +16,11 @@ const NavigationBottomTab = () => {
   useEffect (()=>{
     getToken();
   }, []);
-  const isDark = storage.getBoolean("isDark");
+  const [isDark, setIsDark] = useState(storage.getBoolean("isDark")); // use state to store isDark value
 
-  useEffect(() => {
-    return () => {
-      isDark
-    }
-  }, [])
-  
+  useFocusEffect(() => { // update isDark value when the screen is focused
+    setIsDark(storage.getBoolean("isDark"));
+  });
 
   return (
     <Tab.Navigator initialRouteName="Home"

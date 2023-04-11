@@ -13,12 +13,13 @@ import { storage } from "../store/mmkv";
 type ProfileScreenProps = MainStackNavigationProps<'ProfileScreen'>
 
 const ProfileScreen = ({ navigation, route }: ProfileScreenProps) => {
-  const [isDark, setIsDark] = useState(storage.getBoolean("isDark") || false);
+  const [isDark, setIsDark] = useState(storage.getBoolean("isDark")||false);
   const { isDarkMode, toggleDarkMode } = route.params
   const [showSetting, setShowSetting] = useState(false)
-console.log("ProfileScreen", isDark);
-
-
+  
+  useEffect(() => {
+  console.log("ProfileScreen", isDark);
+}, [isDark]);
 
   const onEditPress = () => {
     Alert.alert('edit clicked');

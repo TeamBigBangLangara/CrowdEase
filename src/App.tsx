@@ -31,7 +31,7 @@ export type AuthStackParams = {
 }
 
 export type MainStackParams = {
-  HomeScreen: {isDarkMode: boolean;}
+  HomeScreen: undefined
   WeekManagerScreen: undefined
   SuggestionScreen: undefined
   EventDetailsScreen: {eventId: string;}
@@ -78,7 +78,7 @@ export const HomeStack = () => {
   }
   return (
     <MainStack.Navigator screenOptions={{ headerShown: false,}}>
-      <MainStack.Screen name={"HomeScreen"} component={HomeScreen} initialParams={{isDarkMode}}/>
+      <MainStack.Screen name={"HomeScreen"} component={HomeScreen}/>
       <MainStack.Screen name={"WeekManagerScreen"} component={WeekManagerScreen} />
       <MainStack.Screen name={"PastEventScreen"} component={PastEventScreen}/>
       <MainStack.Screen name={"ProfileScreen"} component={ProfileScreen} initialParams={{isDarkMode, toggleDarkMode}}/>

@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Alert, Image, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 import { useQuery } from "react-query";
 
@@ -22,7 +23,12 @@ const ONESIGNAL_APP_ID = 'ee944c2a-c447-402c-9f22-48dbdddb9caa';
 // Get the dates
 const { formattedFirstDay, formattedLastDay, today, todayFormatted, week, getWeekday, } = getDate();
 
-const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => {
+type HomeScreenProps = MainStackNavigationProps<'HomeScreen'>;
+
+const HomeScreen = ({ navigation, route }: HomeScreenProps) => {
+  const isDark = route.params?.isDarkMode || false;
+
+  console.log("from home", isDark);
 
   const requestEvents = useQuery("events", () => getEvents(),
     {
@@ -168,7 +174,7 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
   return (
     <SafeAreaView style={{ flex: 1, }}>
       <ScrollView>
-        <View style={styles.container}>
+        <View style={isDark ? styles.container : styles.containerLight}>
           <View style={styles.header}>
             <Text style={styles.headerTitle}>Crowd Ease</Text>
             <Pressable onPress={onProfileScreen}>
@@ -217,6 +223,11 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
 };
 
 const styles = StyleSheet.create({
+  containerLight: {
+    backgroundColor: colors.neutral.backgroundWhite,
+    paddingHorizontal: 20,
+    paddingVertical: 24,
+  },
   container: {
     backgroundColor: colors.neutral.backgroundBlack,
     paddingHorizontal: 20,

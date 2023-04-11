@@ -31,12 +31,15 @@ export type AuthStackParams = {
 }
 
 export type MainStackParams = {
-  HomeScreen: undefined
+  HomeScreen: {isDarkMode: boolean;}
   WeekManagerScreen: undefined
   SuggestionScreen: undefined
   EventDetailsScreen: {eventId: string};
   PastEventScreen: undefined
-  ProfileScreen: undefined
+  ProfileScreen: {
+    isDarkMode: boolean;
+    toggleDarkMode: (value: boolean) => void;
+  }
 }
 
 export type EventsStackParams = {
@@ -68,12 +71,18 @@ const ReportStack = createNativeStackNavigator<ReportStackParams>();
 const MapStack = createNativeStackNavigator<MapStackParams>();
 
 export const HomeStack = () => {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const toggleDarkMode = (isDarkMode: boolean) => {
+    setIsDarkMode(!isDarkMode);
+    console.log('update', isDarkMode);
+  }
+
   return (
     <MainStack.Navigator screenOptions={{ headerShown: false,}}>
-      <MainStack.Screen name={"HomeScreen"} component={HomeScreen}/>
+      <MainStack.Screen name={"HomeScreen"} component={HomeScreen} initialParams={{isDarkMode}}/>
       <MainStack.Screen name={"WeekManagerScreen"} component={WeekManagerScreen}/>
       <MainStack.Screen name={"PastEventScreen"} component={PastEventScreen}/>
-      <MainStack.Screen name={"ProfileScreen"} component={ProfileScreen}/>
+      <MainStack.Screen name={"ProfileScreen"} component={ProfileScreen} initialParams={{isDarkMode, toggleDarkMode}}/>
       <MainStack.Screen name={"EventDetailsScreen"} component={EventDetailsScreen} />
       <MainStack.Screen name={"SuggestionScreen"} component={SuggestionScreen} />
     </MainStack.Navigator>

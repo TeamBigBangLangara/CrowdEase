@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Alert, Image, Pressable, StyleSheet, Text, View, useColorScheme, Switch } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 
@@ -9,9 +9,14 @@ import LinkButton from "../components/LinkButton";
 import { colors } from "../styles/colors";
 import { fontFamily, fontSize, fontWeightBody, fontWeightSubtitle, fontWeightSubtitle2 } from "../styles/fonts";
 
-const ProfileScreen = ({ navigation, }: MainStackNavigationProps<'ProfileScreen'>) => {
+type ProfileScreenProps = MainStackNavigationProps<'ProfileScreen'>
 
+const ProfileScreen = ({ navigation, route }: ProfileScreenProps) => {
+  const [isDark, setIsDark] = useState(false)
+  const { isDarkMode, toggleDarkMode } = route.params
   const [showSetting, setShowSetting] = useState(false)
+
+
 
   const onEditPress = () => {
     Alert.alert('edit clicked');
@@ -29,32 +34,44 @@ const ProfileScreen = ({ navigation, }: MainStackNavigationProps<'ProfileScreen'
     setShowSetting(!showSetting)
   };
 
+  const changeDarkMode = () => {
+    setIsDark(!isDark)
+    toggleDarkMode(isDark)
+  };
+
+  const goBack = () => {
+    navigation.navigate('HomeScreen', {
+      isDarkMode: isDark,
+    });
+  }
+
   const renderSetting = () => {
     return (
       <View style={styles.showSetting}>
         <Text style={styles.textSetting}>Light Mode</Text>
         <Switch
-            value={toggleDarkMode}
-            onValueChange={toggleDarkMode}
-            thumbTintColor={colors.neutral.surfaceWhite}
-            trackColor={{
-              false: colors.neutral.surfaceWhite, 
-              true: colors.primary.primaryPurpleDark
-            }}
+          value={isDark}
+          onValueChange={changeDarkMode}
+          thumbTintColor={colors.neutral.surfaceWhite}
+          trackColor={{
+            false: colors.neutral.surfaceWhite,
+            true: colors.primary.primaryPurpleDark
+          }}
         />
       </View>
     );
   };
 
   return (
-    <View style={styles.container}>
-        <View style={styles.header}>
-          <Pressable onPress={() => navigation.goBack()}>
-            <Image source={require('../assets/icons/backButton.png')}/>
-          </Pressable>
-          <Text style={styles.headerTitle}>Profile</Text>
-          <Image source={require('../assets/icons/profile.png')} />
-        </View>
+    <View style={!isDark ? styles.containerLight : styles.container}>
+      <View style={styles.header}>
+        <Pressable onPress={goBack}>
+
+          <Image source={require('../assets/icons/backButton.png')} />
+        </Pressable>
+        <Text style={styles.headerTitle}>Profile</Text>
+        <Image source={require('../assets/icons/profile.png')} />
+      </View>
       <LinearGradient
         colors={colors.primary.gradientDark.colors}
         start={colors.primary.gradientDark.start}
@@ -78,18 +95,18 @@ const ProfileScreen = ({ navigation, }: MainStackNavigationProps<'ProfileScreen'
             icon={require('../assets/icons/profileIcons/customization.png')}
             text={'Event Customization'}
             style={styles.iconText} />
-            <Pressable onPress={onArrow}>
-              <Image source={require('../assets/icons/downIcon.png')}/>
-            </Pressable>
+          <Pressable onPress={onArrow}>
+            <Image source={require('../assets/icons/downIcon.png')} />
+          </Pressable>
         </View>
         <View style={styles.item}>
           <IconText
             icon={require('../assets/icons/profileIcons/notification.png')}
             text={'Manage Notifications'}
             style={styles.iconText} />
-            <Pressable onPress={onArrow}>
-              <Image source={require('../assets/icons/downIcon.png')}/>
-            </Pressable>
+          <Pressable onPress={onArrow}>
+            <Image source={require('../assets/icons/downIcon.png')} />
+          </Pressable>
         </View>
         <View style={styles.settingContainer}>
           <View style={styles.itemSetting}>
@@ -108,25 +125,25 @@ const ProfileScreen = ({ navigation, }: MainStackNavigationProps<'ProfileScreen'
             icon={require('../assets/icons/bookmark.png')}
             text={'Manage Bookmarks'}
             style={styles.iconText} />
-            <Pressable onPress={onArrow}>
-              <Image source={require('../assets/icons/rightIcon.png')}/>
-            </Pressable>
+          <Pressable onPress={onArrow}>
+            <Image source={require('../assets/icons/rightIcon.png')} />
+          </Pressable>
         </View>
         <View style={styles.item}>
           <IconText
             icon={require('../assets/icons/star.png')}
             text={'Rate PastEvents'}
             style={styles.iconText} />
-            <Pressable onPress={onPastEvent}>
-              <Image source={require('../assets/icons/rightIcon.png')}/>
-            </Pressable>
+          <Pressable onPress={onPastEvent}>
+            <Image source={require('../assets/icons/rightIcon.png')} />
+          </Pressable>
         </View>
       </View>
       <Pressable onPress={signOut} style={styles.logoutContainer}>
         <IconText
-        icon={require('../assets/icons/profileIcons/logout.png')}
-        text={'Log Out'}
-        style={styles.logout} />
+          icon={require('../assets/icons/profileIcons/logout.png')}
+          text={'Log Out'}
+          style={styles.logout} />
       </Pressable>
     </View>
   );
@@ -134,7 +151,12 @@ const ProfileScreen = ({ navigation, }: MainStackNavigationProps<'ProfileScreen'
 };
 
 
- const styles = StyleSheet.create({
+const styles = StyleSheet.create({
+  containerLight: {
+    backgroundColor: colors.neutral.backgroundWhite,
+    paddingHorizontal: 20,
+    paddingVertical: 24,
+  },
   container: {
     backgroundColor: colors.neutral.backgroundBlack,
     paddingHorizontal: 20,

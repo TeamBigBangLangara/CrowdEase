@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { Alert, FlatList, Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { getEvents } from "../api/event";
+import { format } from "date-fns";
 
 import SearchForm from "../components/SearchForm";
 import WeekCalendar from "../components/WeekCalendar";
@@ -16,15 +17,37 @@ import { Bookmark, LoggedUser } from "types/types";
 import { fetchBookmarks } from "../api/bigBangAPI/bookmark";
 import { EventsStackNavigationProps } from "../types/navigationTypes";
 
+export type TypeCategoryFilter = {
+  category: string,
+  isActive: boolean,
+};
+
 const EventScreen = ({ navigation,}: EventsStackNavigationProps<"EventScreen">) => {
 
   const [searchFilter, setSearchFilter] = useState("");
-  const [dateFilter, setDateFilter] = useState("");
-  //For simplification, only 1 category is passed for filtering.
-  const [categoryFilter, setCategoryFilter] = useState("");
+  const [dateFilter, setDateFilter] = useState(format(new Date, "yyyy-MM-dd"));
+  const [categoryFilterArray, setCategoryFilterArray] = useState<TypeCategoryFilter[]>(
+    [
+      {category: "Sports", isActive: false,},
+      {category: "Shows", isActive: false,},
+      {category: "Music", isActive: false,},
+      {category: "Festivals", isActive: false,},
+      {category: "Business", isActive: false,},
+      {category: "Other", isActive: false,},
+      {category: "500m", isActive: false,},
+      {category: "1km", isActive: false,},
+      {category: "3km", isActive: false,}
+    ]
+  );
   const [modalVisible, setModalVisible] = useState(false);
   const [userInfo, setUserInfo] = useState<LoggedUser>({ uid: "", email: "", });
 
+  //Check if all filters are off (false). Returns true if all false, and false if any of the categories is active.
+  const allFilterAreOff = categoryFilterArray.every(filterObject => {
+    return !filterObject.isActive;
+  });
+
+  //Get user Data
   useQuery("getUserData", getUser, {
       onSuccess: (data: LoggedUser) => {
         setUserInfo(data);
@@ -32,19 +55,27 @@ const EventScreen = ({ navigation,}: EventsStackNavigationProps<"EventScreen">) 
     }
   );
 
+  //Get events
   const requestEvents = useQuery("events", () => getEvents(),
     {
       select: (events) => {
-        return events.filter((event) => {
+        return events
+        //Search filter
+        .filter((event) => {
           return searchFilter ? event.name.toLowerCase().includes(searchFilter.toLowerCase()) : true;
         })
-          .filter((event) => {
-            return dateFilter ? event.dates.date === dateFilter : true;
-          })
-          //Category Filter (under development)
-          .filter((event) => {
-            return categoryFilter ? event.category.name === categoryFilter : true;
-          });
+        //Date filter. Note: Comparison is made with dates formatted in YYYY-MM-DD
+        .filter((event) => {
+          return dateFilter ? event.dates.date === dateFilter : true;
+        })
+        //Category filter
+        .filter((event) => {
+          //If all filters are off, should return all events.
+          if(allFilterAreOff){
+            return event;
+          }
+          return categoryFilterArray.find(filterObject => filterObject.category === event.category.name)?.isActive && event;
+        });
       },
       onError: (error: TypeError) => {
         Alert.alert("Error", error.message);
@@ -52,6 +83,7 @@ const EventScreen = ({ navigation,}: EventsStackNavigationProps<"EventScreen">) 
     }
   );
 
+  //Bookmark logic
   const requestUserBookmarks = useQuery("bookmarks", () => { return fetchBookmarks(userInfo.uid);
     }, {
       enabled: !!userInfo.uid && requestEvents.isSuccess,
@@ -73,12 +105,16 @@ const EventScreen = ({ navigation,}: EventsStackNavigationProps<"EventScreen">) 
     }
   };
 
-  const onSearchTextChanged = (searchText: string) => {
-    setSearchFilter(searchText);
-  };
-
   const daySelectionHandler = (date: string) => {
     setDateFilter(date);
+  };
+
+  const onApplyFilterHandler = (newCategoryFilterArray: TypeCategoryFilter[]) => {
+    setCategoryFilterArray(newCategoryFilterArray);
+  };
+
+  const onSearchTextChanged = (searchText: string) => {
+    setSearchFilter(searchText);
   };
 
   const onEventCardPress = (eventId: string) => {
@@ -122,8 +158,7 @@ const EventScreen = ({ navigation,}: EventsStackNavigationProps<"EventScreen">) 
   };
 
   return (
-    <View style={styles.container}>
-      <ScrollView>
+    <ScrollView style={styles.container}>
         <SearchForm
           onChangeText={(keyword: string) => onSearchTextChanged(keyword)}
           onFilterPress={() => {
@@ -141,13 +176,14 @@ const EventScreen = ({ navigation,}: EventsStackNavigationProps<"EventScreen">) 
             <Image source={require("../assets/icons/layout2.png")} />
           </View>
         </View>
-      </ScrollView>
       {renderEvents()}
       <FilterCategory
         visible={modalVisible}
         onClosePress={() => setModalVisible(false)}
+        categoryFilterArray={categoryFilterArray}
+        onApplyFilterPress={onApplyFilterHandler}
       />
-    </View>
+    </ScrollView>
   );
 };
 

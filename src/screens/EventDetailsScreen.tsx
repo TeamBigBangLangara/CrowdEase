@@ -15,8 +15,11 @@ import PrimaryButton from "../components/PrimaryButton";
 import { getUser } from "../auth/user";
 import { Bookmark, LoggedUser } from "types/types";
 import SecondaryButton from "../components/SecondaryButton";
+import { storage } from "../store/mmkv";
 
 const EventDetailsScreen = ({ route, navigation, }: MainStackNavigationProps<"EventDetailsScreen"> | EventsStackNavigationProps<"EventDetailsScreen">) => {
+  const isDark = storage.getBoolean("darkMode");
+
   const mapRef = React.useRef<any>(null);
   const queryClient = useQueryClient();
   const { eventId, } = route.params;
@@ -186,15 +189,21 @@ const EventDetailsScreen = ({ route, navigation, }: MainStackNavigationProps<"Ev
           <IconText
             icon={require("../assets/icons/calendar.png")}
             text={formattedDate}
-            style={styles.iconText} />
+            style={styles.iconText}
+            isDark={isDark}
+          />
           <IconText
             icon={require("../assets/icons/pin.png")}
             text={requestEventById.data?.address}
-            style={styles.iconText} />
+            style={styles.iconText}
+            isDark={isDark}
+          />
           <IconText
             icon={require("../assets/icons/category.png")}
             text={requestEventById.data?.category.name}
-            style={styles.iconText} />
+            style={styles.iconText}
+            isDark={isDark}
+          />
         </View>
         <View>
           <Text style={styles.title}>About</Text>

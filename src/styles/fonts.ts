@@ -13,6 +13,7 @@ export const fontWeightSubtitle2 = '700';
 export const fontSize = {
   heading1: 28,
   heading2: 24,
+  appName:36,
   subtitle1: 20,
   subtitle2: 16,
   body: 14,

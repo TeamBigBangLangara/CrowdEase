@@ -6,11 +6,12 @@ import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 import SignUp from "./screens/SignUpScreen";
+import LaunchScreen from "./screens/LaunchScreen";
 import SplashScreen from "./screens/SplashScreen";
 import Login from "./screens/LoginScreen";
 import NavigationBottomTab from "./components/navigation/NavigationBottomTab";
 import LocationScreen from "./screens/LocationScreen";
-import { SafeAreaView } from "react-native";
+import { SafeAreaView, StatusBar } from "react-native";
 import WeekManagerScreen from "./screens/WeekManagerScreen";
 import SuggestionScreen from "./screens/SuggestionScreen";
 import EventScreen from "./screens/EventScreen";
@@ -22,6 +23,7 @@ import MapScreen from "./screens/MapScreen";
 
 export type AuthStackParams = {
   SplashScreen: undefined
+  LaunchScreen: undefined
   LoginScreen: undefined
   SignUpScreen: undefined
   LocationScreen: { emailParam: string, passwordParam: string, userName: string }
@@ -73,6 +75,7 @@ export const HomeStack = () => {
       <MainStack.Screen name={"PastEventScreen"} component={PastEventScreen}/>
       <MainStack.Screen name={"ProfileScreen"} component={ProfileScreen}/>
       <MainStack.Screen name={"EventDetailsScreen"} component={EventDetailsScreen} />
+      <MainStack.Screen name={"SuggestionScreen"} component={SuggestionScreen} />
     </MainStack.Navigator>
   );
 };
@@ -125,12 +128,15 @@ const App = () => {
   }, []);
 
   return (
-    <SafeAreaView style={{ flex: 1, }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: 'black', }}>
+      <StatusBar barStyle="light-content"/>
       <QueryClientProvider client={queryClient}>
         <NavigationContainer>
           {!isLoggedIn && (
-            <Stack.Navigator initialRouteName={'SplashScreen'}>
+            <Stack.Navigator initialRouteName={'SplashScreen'}
+            screenOptions={{headerShown: false,}}>
               <Stack.Screen name={'SplashScreen'} component={SplashScreen} />
+              <Stack.Screen name={'LaunchScreen'} component={LaunchScreen} />
               <Stack.Screen name={'LoginScreen'} component={Login} />
               <Stack.Screen name={'SignUpScreen'} component={SignUp} />
               <Stack.Screen name={'LocationScreen'} component={LocationScreen} />
@@ -144,7 +150,7 @@ const App = () => {
         </NavigationContainer>
       </QueryClientProvider>
     </SafeAreaView>
-  );
+    );
 };
 
 export default App;

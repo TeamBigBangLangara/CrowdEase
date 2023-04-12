@@ -1,4 +1,6 @@
 import auth from "@react-native-firebase/auth";
+import { storage } from "../store/mmkv";
+
 
 export const signUp = async (email, password) => {
   await auth()
@@ -36,6 +38,14 @@ export const signOut = async () => {
     .signOut()
     .then(() => console.log('User signed out!'));
 };
+
+export const getToken = async () =>
+{
+  auth().currentUser.getIdToken(true)
+      .then((idToken)=>{
+        storage.set("FirebaseJWT",idToken);
+  });
+}
 
 export const getUser = async () =>
 {

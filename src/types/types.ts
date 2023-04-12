@@ -1,8 +1,8 @@
 export interface Event {
   bookmarkId?: string
   id: string
-  ratingID: string
-  rate: number
+  ratingID?: string
+  rate?: number
   name: string
   image: string
   dates: Dates
@@ -56,4 +56,10 @@ export interface Rating {
 export interface Bookmark {
   user_id: string
   event_id?: string
+}
+
+export interface WeekDay {
+  date: Date,
+  dayName: string,
+  dayNumber: string
 }

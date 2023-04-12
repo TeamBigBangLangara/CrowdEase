@@ -22,9 +22,15 @@ const MapScreen = ({navigation,} : MapStackNavigationProps<'MapScreen'>) => {
   const ITEM_WIDTH = Dimensions.get('screen').width * 0.8;
   const radius = Platform.OS === 'ios' ? 150 : 40;
 
-  const requestEvents = useQuery('events', () => getEvents());
+  const requestEvents = useQuery('events', () => getEvents(), {
+    select: events => {
+      return events.filter((event) => {
+        return event.dates.date === new Date().toISOString().split('T')[0];
+      });
+    },
+  });
 
-  const onDetailScreen = (eventId: string) => {
+  const onEventCardPress = (eventId: string) => {
     navigation.navigate("EventDetailsScreen", { eventId: eventId, });
   };
 
@@ -33,7 +39,7 @@ const MapScreen = ({navigation,} : MapStackNavigationProps<'MapScreen'>) => {
       <EventCard
         event={item}
         eventType='actual'
-        onDetail={() => onDetailScreen(item.id)}
+        onEventCardPress={() => onEventCardPress(item.id)}
       />
     );
   };
@@ -47,6 +53,7 @@ const MapScreen = ({navigation,} : MapStackNavigationProps<'MapScreen'>) => {
         ref={carouselRef as any}
         data={requestEvents.data || []}
         renderItem={_renderItem}
+        style={styles.eventCard}
         sliderWidth={Dimensions.get('screen').width}
         itemWidth={ITEM_WIDTH}
         onSnapToItem={(index) => {
@@ -137,6 +144,9 @@ const styles = StyleSheet.create({
   map: {
     width: '100%',
     height: '100%',
+  },
+  eventCard:{
+    paddingHorizontal: 5,
   },
   carousel: {
     position: 'absolute',

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { Alert, FlatList, Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { getEvents } from "../api/bigBangAPI/JsonEvents";
+import { format } from "date-fns";
 
 import SearchForm from "../components/SearchForm";
 import WeekCalendar from "../components/WeekCalendar";
@@ -16,36 +17,64 @@ import { Bookmark, LoggedUser } from "types/types";
 import { fetchBookmarks } from "../api/bigBangAPI/bookmark";
 import { EventsStackNavigationProps } from "../types/navigationTypes";
 
-const EventScreen = ({ navigation, }: EventsStackNavigationProps<'EventScreen'>) => {
+export type TypeCategoryFilter = {
+  category: string,
+  isActive: boolean,
+};
+
+const EventScreen = ({ navigation,}: EventsStackNavigationProps<"EventScreen">) => {
 
   const [searchFilter, setSearchFilter] = useState("");
-  const [dateFilter, setDateFilter] = useState("");
-  //For simplification, only 1 category is passed for filtering.
-  const [categoryFilter, setCategoryFilter] = useState("");
-
+  const [dateFilter, setDateFilter] = useState(format(new Date, "yyyy-MM-dd"));
+  const [categoryFilterArray, setCategoryFilterArray] = useState<TypeCategoryFilter[]>(
+    [
+      {category: "Sports", isActive: false,},
+      {category: "Shows", isActive: false,},
+      {category: "Music", isActive: false,},
+      {category: "Festivals", isActive: false,},
+      {category: "Business", isActive: false,},
+      {category: "Other", isActive: false,},
+      {category: "500m", isActive: false,},
+      {category: "1km", isActive: false,},
+      {category: "3km", isActive: false,}
+    ]
+  );
   const [modalVisible, setModalVisible] = useState(false);
   const [userInfo, setUserInfo] = useState<LoggedUser>({ uid: "", email: "", });
 
+  //Check if all filters are off (false). Returns true if all false, and false if any of the categories is active.
+  const allFilterAreOff = categoryFilterArray.every(filterObject => {
+    return !filterObject.isActive;
+  });
+
+  //Get user Data
   useQuery("getUserData", getUser, {
-      onSuccess: (data:LoggedUser) => {
+      onSuccess: (data: LoggedUser) => {
         setUserInfo(data);
       },
     }
   );
 
-
+  //Get events
   const requestEvents = useQuery("events", () => getEvents(),
     {
       select: (events) => {
-        return events.filter((event) => {
+        return events
+        //Search filter
+        .filter((event) => {
           return searchFilter ? event.name.toLowerCase().includes(searchFilter.toLowerCase()) : true;
         })
+        //Date filter. Note: Comparison is made with dates formatted in YYYY-MM-DD
         .filter((event) => {
           return dateFilter ? event.dates.date === dateFilter : true;
         })
-        //Category Filter (under development)
+        //Category filter
         .filter((event) => {
-          return categoryFilter ? event.category.name === categoryFilter : true;
+          //If all filters are off, should return all events.
+          if(allFilterAreOff){
+            return event;
+          }
+          return categoryFilterArray.find(filterObject => filterObject.category === event.category.name)?.isActive && event;
         });
       },
       onError: (error: TypeError) => {
@@ -54,8 +83,8 @@ const EventScreen = ({ navigation, }: EventsStackNavigationProps<'EventScreen'>)
     }
   );
 
-  const requestUserBookmarks = useQuery("getUserBookmarks", () => {
-      return fetchBookmarks(userInfo.uid);
+  //Bookmark logic
+  const requestUserBookmarks = useQuery("bookmarks", () => { return fetchBookmarks(userInfo.uid);
     }, {
       enabled: !!userInfo.uid && requestEvents.isSuccess,
     }
@@ -63,7 +92,7 @@ const EventScreen = ({ navigation, }: EventsStackNavigationProps<'EventScreen'>)
 
   const mergeBookmarkAndEvents = () => {
     if (requestEvents.data && requestUserBookmarks.data) {
-      return requestEvents.data.map((event) => {
+       return requestEvents.data.map((event) => {
         const bookmark = requestUserBookmarks.data.find((bookmark: Bookmark) => bookmark.event_id === event.id);
         if (bookmark) {
           return {
@@ -76,16 +105,20 @@ const EventScreen = ({ navigation, }: EventsStackNavigationProps<'EventScreen'>)
     }
   };
 
-  const onSearchTextChanged = (searchText: string) => {
-    setSearchFilter(searchText);
-  };
-
   const daySelectionHandler = (date: string) => {
     setDateFilter(date);
   };
 
-  const onDetailScreen = (eventId: string) => {
-    navigation.navigate("EventDetailsScreen", {eventId: eventId,});
+  const onApplyFilterHandler = (newCategoryFilterArray: TypeCategoryFilter[]) => {
+    setCategoryFilterArray(newCategoryFilterArray);
+  };
+
+  const onSearchTextChanged = (searchText: string) => {
+    setSearchFilter(searchText);
+  };
+
+  const onEventCardPress = (eventId: string) => {
+    navigation.navigate("EventDetailsScreen", { eventId: eventId, });
   };
 
   const renderEvents = () => {
@@ -100,7 +133,7 @@ const EventScreen = ({ navigation, }: EventsStackNavigationProps<'EventScreen'>)
               eventType={"actual"}
               userId={userInfo?.uid}
               bookmarkId={item.bookmarkId}
-              onDetail={() => onDetailScreen(item.id!)}
+              onEventCardPress={() => onEventCardPress(item.id!)}
             />
           }
         />
@@ -116,7 +149,7 @@ const EventScreen = ({ navigation, }: EventsStackNavigationProps<'EventScreen'>)
               eventType={"actual"}
               userId={userInfo?.uid}
               bookmarkId={item.bookmarkId}
-              onDetail={() => onDetailScreen(item.id!)}
+              onEventCardPress={() => onEventCardPress(item.id!)}
             />
           }
         />
@@ -126,25 +159,29 @@ const EventScreen = ({ navigation, }: EventsStackNavigationProps<'EventScreen'>)
 
   return (
     <ScrollView style={styles.container}>
-      <SearchForm
-        onChangeText={(keyword: string) => onSearchTextChanged(keyword)}
-        onFilterPress={() => {
-          setModalVisible(true);
-        }}
-      />
-      <WeekCalendar onDaySelection={daySelectionHandler} isExpanded={true}/>
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>{requestEvents.data?.length} event(s)</Text>
-        <View style={styles.imageContainer}>
-          <Image source={require("../assets/icons/layout1.png")} />
-          <View style={styles.separator}></View>
-          <Image source={require("../assets/icons/layout2.png")} />
+        <SearchForm
+          onChangeText={(keyword: string) => onSearchTextChanged(keyword)}
+          onFilterPress={() => {
+            setModalVisible(true);
+          }}
+        />
+        <WeekCalendar
+          onDaySelection={daySelectionHandler}
+          daysVisible={true}/>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>{requestEvents.data?.length} event(s)</Text>
+          <View style={styles.imageContainer}>
+            <Image source={require("../assets/icons/layout1.png")} />
+            <View style={styles.separator}></View>
+            <Image source={require("../assets/icons/layout2.png")} />
+          </View>
         </View>
-      </View>
       {renderEvents()}
       <FilterCategory
         visible={modalVisible}
         onClosePress={() => setModalVisible(false)}
+        categoryFilterArray={categoryFilterArray}
+        onApplyFilterPress={onApplyFilterHandler}
       />
     </ScrollView>
   );

@@ -1,23 +1,19 @@
-import {addDays, subDays, format, isSameDay, startOfWeek} from 'date-fns';
-import React, { useState} from 'react';
-import {Pressable, StyleSheet, Text,  View, Image} from 'react-native';
+import { addDays, format, isSameDay, startOfWeek, subDays } from "date-fns";
+import React, { useState } from "react";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 
 import { colors } from "../styles/colors";
 import { fontFamily, fontWeightSubtitle2 } from "../styles/fonts";
 
-import LinearGradient from 'react-native-linear-gradient';
+import LinearGradient from "react-native-linear-gradient";
+import { WeekDay } from "../types/types";
 
 //////////////////// TYPES ////////////////////
 
 type Props = {
+  onWeekSelection?: (value: Date) => void;
   onDaySelection: (value: string) => void;
-  isExpanded: boolean,
-};
-
-type WeekDay = {
-  date: Date;
-  dayName: string;
-  dayNumber: string;
+  daysVisible: boolean,
 };
 
 //////////////////// FUNCTIONS ////////////////////
@@ -40,7 +36,7 @@ const getWeekDays = (selectedWeekStartDay: Date): WeekDay[] => {
 
 //////////////////// MAIN COMPONENT ////////////////////
 
-const WeekCalendar = ({onDaySelection, isExpanded = true,}: Props) => {
+const WeekCalendar = ({onDaySelection, onWeekSelection, daysVisible = true,}: Props) => {
 
   const [selectedDay, setSelectedDay] = useState<Date>(new Date());
   const [selectedWeekStartDay, setSelectedWeekStartDay] = useState<Date>(startOfWeek(new Date(), { weekStartsOn: 1, }));
@@ -61,22 +57,38 @@ const WeekCalendar = ({onDaySelection, isExpanded = true,}: Props) => {
     setSelectedDay(pressedDateOfWeek);
   };
 
+  //Week Selection Handler
+  const weekSelectionHandler = (direction: string) => {
+    if (direction === 'left') {
+      if (onWeekSelection) {
+        onWeekSelection(subDays(selectedWeekStartDay, 7));
+      }
+      setSelectedWeekStartDay(subDays(selectedWeekStartDay,7));
+    } else {
+      if (onWeekSelection) {
+        onWeekSelection(addDays(selectedWeekStartDay, 7));
+      }
+      setSelectedWeekStartDay(addDays(selectedWeekStartDay,7));
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.weekSelectorContainer}>
-        <Pressable onPress={() => setSelectedWeekStartDay(subDays(selectedWeekStartDay,7))}>
+        <Pressable onPress={() => weekSelectionHandler('left')}>
           <Image source={require('../assets/icons/arrowLeft.png')} />
         </Pressable>
         <Text style={styles.weekRangeText}>{weekRangeText}</Text>
-        <Pressable onPress={() => setSelectedWeekStartDay(addDays(selectedWeekStartDay,7))}>
+        <Pressable onPress={() => weekSelectionHandler('right')}>
           <Image source={require('../assets/icons/arrowRight.png')} />
         </Pressable>
       </View>
-      {isExpanded &&
+      {daysVisible &&
       <View style={styles.daySelectorContainer}>
-      {weekdays.map((weekDay) => {
+      {weekdays.map((weekDay, index) => {
         return (
           <LinearGradient
+            key={index}
             colors={colors.primary.gradientDark.colors}
             start={colors.primary.gradientDark.start}
             end={colors.primary.gradientDark.end}
@@ -104,7 +116,6 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     rowGap: 10,
   },
-
   weekSelectorContainer: {
     display: 'flex',
     flexDirection: 'row',
@@ -113,7 +124,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 10,
   },
-
   daySelectorContainer: {
     display: 'flex',
     flexDirection: 'row',
@@ -121,13 +131,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-
   weekRangeText: {
     fontSize: 16,
     fontFamily: fontFamily.body,
     color: colors.secondaryGreenDark,
   },
-
   weekDayItem: {
     flexDirection: 'column',
     paddingVertical: 10,
@@ -138,33 +146,28 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     backgroundColor: colors.neutral.backgroundBlack,
   },
-
   weekDayName: {
     fontSize: 14,
     fontFamily: fontFamily.body,
     color: colors.neutral.surfaceWhite,
     textAlign: 'center',
   },
-
   weekDayNumber: {
     fontSize: 14,
     fontFamily: fontFamily.body,
     color: 'white',
     textAlign: 'center',
   },
-
   linearGradient: {
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 8,
   },
-
   selectedDay: {
     color: colors.secondaryGreenDark,
     fontFamily: fontFamily.body,
     fontWeight: fontWeightSubtitle2,
   },
-
 });
 
 export default WeekCalendar;

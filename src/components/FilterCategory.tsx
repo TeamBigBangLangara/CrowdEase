@@ -1,4 +1,4 @@
-import { useState, useRef, forwardRef, useImperativeHandle } from 'react';
+import { useState, useRef, forwardRef, useImperativeHandle, useEffect } from 'react';
 import { Modal, Pressable, StyleSheet, Text, View, Image } from "react-native";
 
 import { fontFamily, fontSize, fontWeightSubtitle } from "../styles/fonts";
@@ -6,34 +6,76 @@ import { colors } from "../styles/colors";
 
 import PrimaryButton from "./PrimaryButton";
 import LinkButton from "./LinkButton";
+import { TypeCategoryFilter } from "../screens/EventScreen";
 
+//////////////////////// FILTER PRESSABLE COMPONENT ////////////////////////
+const EventCategoryPressable = (props: {name: string, icon?: any, categoryFilterArray: TypeCategoryFilter[], clearAllTrigger: number}) => {
+  //Get the corresponding object in the categoryFilterArray in order to check if the button is already check or not (boolean)
+  const categoryFilterObject = props.categoryFilterArray.find(item => item.category === props.name);
+  //Get if the corresponding object is active or not
+  const [isSelected, setIsSelected] = useState(categoryFilterObject?.isActive);
 
-//////////////////////// FILTER PRESSABLE ////////////////////////
-
-const EventCategoryPressable = forwardRef((props: {text: string, icon?: any}, ref) => {
-
-  const [isSelected, setIsSelected] = useState(false);
-
-  const selectionHandle = () => {
-    if(!isSelected){
-      setIsSelected(true);
-    } else {
+  useEffect(() => {
+    if (props.clearAllTrigger) {
+      categoryFilterObject.isActive = false;
       setIsSelected(false);
     }
+  }, [props.clearAllTrigger]);
+
+
+  const selectionHandle = () => {
+
+    //If is selected, deselect and viceversa
+    if(!isSelected){
+      //Update isActive status
+      categoryFilterObject.isActive = true;
+      setIsSelected(true);
+    } else {
+      //Update isActive status
+      categoryFilterObject.isActive = false;
+      setIsSelected(false);
+    }
+
   };
 
   return (
     <Pressable onPress={selectionHandle} style={[styles.eventsFilterPressable, isSelected && styles.eventsFilterPressableActive]}>
-      <Text style={[styles.eventsFilterPressableText, isSelected && styles.eventsFilterPressableActive]}>{props.text}</Text>
+      <Text style={[styles.eventsFilterPressableText, isSelected && styles.eventsFilterPressableActive]}>{props.name}</Text>
       {props.icon &&
       <Image source={props.icon}/>}
     </Pressable>
   );
-});
+};
 
 //////////////////////// MAIN COMPONENT ////////////////////////
 
-const FilterCategory = (props: {visible: boolean, onRequestClose?: () => void, onTouchStart?: () => void, onClosePress: () => void}) => {
+const FilterCategory = (props: {
+  visible: boolean, 
+  onRequestClose?: () => void, 
+  onTouchStart?: () => void, 
+  onClosePress: () => void,
+  onApplyFilterPress: (newCategoryFilterArray: TypeCategoryFilter[]) => void, 
+  categoryFilterArray: TypeCategoryFilter[], 
+  }
+  ) => {
+
+  const [clearAllTrigger, setClearAllTrigger] = useState(0);
+
+  //Category Filter Array
+  const updatedCategoryFilter = props.categoryFilterArray;
+
+  /////========= Handlers
+  //Handler when ApplyFilter Button is pressed
+  const applyFilterHandler = () => {
+    props.onApplyFilterPress(updatedCategoryFilter);
+    props.onClosePress();
+  };
+
+  //Handler to deactivate all category filters.
+  const clearAllHandler = () => {
+    setClearAllTrigger(clearAllTrigger => clearAllTrigger + 1);
+  };
+
 
   return (
       <Modal
@@ -52,21 +94,21 @@ const FilterCategory = (props: {visible: boolean, onRequestClose?: () => void, o
                 <Text style={styles.eventsFilterHeaderContainerTitle}>Filters</Text>
                 <Image source={require('../assets/icons/filter.png')}/>
               </View>
-              <LinkButton onPress={() => console.log("under development")} label={"Clear All"} style={styles.eventsFilterHeaderContainerButtons}/>
+              <LinkButton onPress={clearAllHandler} label={"Clear All"} style={styles.eventsFilterHeaderContainerButtons}/>
             </View>
 
             <View style={styles.eventsFilterContainer}>
               <Text style={styles.eventsFilterContainerTitle}>Event Category</Text>
               <View style={styles.eventsFilterPressableContainer}>
                 <View style={styles.eventsFilterPressableContainerRow}>
-                  <EventCategoryPressable text={"Sports"} icon={require('../assets/category/sport.png')} />
-                  <EventCategoryPressable text={"Shows"} icon={require('../assets/category/show.png')} />
-                  <EventCategoryPressable text={"Music"} icon={require('../assets/category/music.png')} />
+                  <EventCategoryPressable name={"Sports"} icon={require('../assets/category/sport.png')} categoryFilterArray={updatedCategoryFilter} clearAllTrigger={clearAllTrigger}/>
+                  <EventCategoryPressable name={"Shows"} icon={require('../assets/category/show.png')} categoryFilterArray={updatedCategoryFilter} clearAllTrigger={clearAllTrigger}/>
+                  <EventCategoryPressable name={"Music"} icon={require('../assets/category/music.png')} categoryFilterArray={updatedCategoryFilter} clearAllTrigger={clearAllTrigger}/>
                 </View>
                 <View style={styles.eventsFilterPressableContainerRow}>
-                  <EventCategoryPressable text={"Festivals"} icon={require('../assets/category/festival.png')}/>
-                  <EventCategoryPressable text={"Business"} icon={require('../assets/category/business.png')}/>
-                  <EventCategoryPressable text={"Other"} icon={require('../assets/category/other.png')}/>
+                  <EventCategoryPressable name={"Festivals"} icon={require('../assets/category/festival.png')} categoryFilterArray={updatedCategoryFilter} clearAllTrigger={clearAllTrigger}/>
+                  <EventCategoryPressable name={"Business"} icon={require('../assets/category/business.png')} categoryFilterArray={updatedCategoryFilter} clearAllTrigger={clearAllTrigger}/>
+                  <EventCategoryPressable name={"Other"} icon={require('../assets/category/other.png')} categoryFilterArray={updatedCategoryFilter} clearAllTrigger={clearAllTrigger}/>
                 </View>
               </View>
             </View>
@@ -75,14 +117,14 @@ const FilterCategory = (props: {visible: boolean, onRequestClose?: () => void, o
               <Text style={styles.eventsFilterContainerTitle}>Distance</Text>
               <View style={styles.eventsFilterPressableContainer}>
                 <View style={styles.eventsFilterPressableContainerRow}>
-                  <EventCategoryPressable text={'500m'}/>
-                  <EventCategoryPressable text={'1km'}/>
-                  <EventCategoryPressable text={'3km'}/>
+                  <EventCategoryPressable name={'500m'} categoryFilterArray={updatedCategoryFilter} clearAllTrigger={clearAllTrigger}/>
+                  <EventCategoryPressable name={'1km'} categoryFilterArray={updatedCategoryFilter} clearAllTrigger={clearAllTrigger}/>
+                  <EventCategoryPressable name={'3km'} categoryFilterArray={updatedCategoryFilter} clearAllTrigger={clearAllTrigger}/>
                 </View>
               </View>
             </View>
 
-            <PrimaryButton onPress={() => console.log('apply filter press')} label={"Apply Filter"}/>
+            <PrimaryButton onPress={applyFilterHandler} label={"Apply Filter"}/>
           </View>
         </View>
       </Modal>

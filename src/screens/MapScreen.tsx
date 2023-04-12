@@ -105,8 +105,8 @@ const MapScreen = ({navigation,} : MapStackNavigationProps<'MapScreen'>) => {
         customMapStyle={mapDarkStyle}
         style={styles.map}
         initialRegion={{
-          latitude: 49.2820,
-          longitude: -123.1171,
+          latitude:  selectedMarker != null ? Number(selectedMarker!.latitude) : 49.2820,
+          longitude: selectedMarker != null ? Number(selectedMarker!.latitude) : -123.1171,
           latitudeDelta: 0.0003,
           longitudeDelta: 0.04,
         }}

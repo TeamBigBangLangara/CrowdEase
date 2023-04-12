@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Alert, Image, Pressable, StyleSheet, Switch, Text, View } from "react-native";
+import { Alert, Image, Platform, Pressable, StyleSheet, Switch, Text, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 
 import { MainStackNavigationProps } from "../types/navigationTypes";
@@ -204,8 +204,8 @@ const styles = StyleSheet.create({
     width: 400,
   },
   picture: {
-    height: 100,
-    width: 100,
+    height: Platform.OS === 'ios' ? 75 : 100,
+    width: Platform.OS === 'ios' ? 75 : 100,
     marginLeft: 15,
   },
   editProfile: {

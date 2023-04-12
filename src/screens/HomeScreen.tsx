@@ -27,9 +27,6 @@ const { formattedFirstDay, formattedLastDay, today, todayFormatted, week, getWee
 const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => {
   const [isDark, setIsDark] = useState(storage.getBoolean("darkMode") || false);
 
-const HomeScreen = ({ navigation }: HomeScreenProps) => {
-  const isDark = storage.getBoolean("isDark");
-  
   useEffect(() => {
     storage.addOnValueChangedListener((key) => {
       if (key === 'darkMode') {

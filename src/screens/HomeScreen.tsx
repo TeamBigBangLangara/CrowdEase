@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Alert, Image, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 import { useQuery } from "react-query";
 
@@ -16,20 +15,28 @@ import { borderRadius } from "../styles/basic";
 import EventCarousel from "../components/EventCarousel";
 import { getEvents } from "../api/event";
 
-import OneSignal from 'react-native-onesignal';
+import OneSignal from "react-native-onesignal";
 import { storage } from "../store/mmkv";
+import { useEffect, useState } from "react";
 
 const ONESIGNAL_APP_ID = 'ee944c2a-c447-402c-9f22-48dbdddb9caa';
 
 // Get the dates
 const { formattedFirstDay, formattedLastDay, today, todayFormatted, week, getWeekday, } = getDate();
 
-type HomeScreenProps = MainStackNavigationProps<'HomeScreen'>;
+const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => {
+  const [isDark, setIsDark] = useState(storage.getBoolean("darkMode") || false);
 
 const HomeScreen = ({ navigation }: HomeScreenProps) => {
   const isDark = storage.getBoolean("isDark");
-  console.log("hme", isDark);
   
+  useEffect(() => {
+    storage.addOnValueChangedListener((key) => {
+      if (key === 'darkMode') {
+        setIsDark(storage.getBoolean("darkMode")!);
+      }
+    });
+  }, []);
 
   const requestEvents = useQuery("events", () => getEvents(),
     {
@@ -171,6 +178,12 @@ const HomeScreen = ({ navigation }: HomeScreenProps) => {
     const eventID = notification?.notification.additionalData.eventID;
     navigation.navigate("EventDetailsScreen", { eventId: eventID, });
   });
+
+//Method for handling notifications opened
+OneSignal.setNotificationOpenedHandler(notification => {
+  const eventID = notification?.notification.additionalData.eventID;
+  navigation.navigate("EventDetailsScreen", {eventId: eventID,});
+});
 
   return (
     <SafeAreaView style={{ flex: 1, }}>

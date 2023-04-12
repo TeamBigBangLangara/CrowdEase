@@ -36,10 +36,7 @@ export type MainStackParams = {
   SuggestionScreen: undefined
   EventDetailsScreen: {eventId: string;}
   PastEventScreen: undefined
-  ProfileScreen: {
-    isDarkMode: boolean;
-    toggleDarkMode: (value: boolean) => void;
-  }
+  ProfileScreen: undefined
 }
 
 export type EventsStackParams = {
@@ -72,16 +69,12 @@ const MapStack = createNativeStackNavigator<MapStackParams>();
 
 
 export const HomeStack = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const toggleDarkMode = (isDarkMode: boolean) => {
-    setIsDarkMode(!isDarkMode);
-  }
   return (
     <MainStack.Navigator screenOptions={{ headerShown: false,}}>
       <MainStack.Screen name={"HomeScreen"} component={HomeScreen}/>
       <MainStack.Screen name={"WeekManagerScreen"} component={WeekManagerScreen} />
       <MainStack.Screen name={"PastEventScreen"} component={PastEventScreen}/>
-      <MainStack.Screen name={"ProfileScreen"} component={ProfileScreen} initialParams={{isDarkMode, toggleDarkMode}}/>
+      <MainStack.Screen name={"ProfileScreen"} component={ProfileScreen} />
       <MainStack.Screen name={"EventDetailsScreen"} component={EventDetailsScreen} />
       <MainStack.Screen name={"SuggestionScreen"} component={SuggestionScreen} />
     </MainStack.Navigator>

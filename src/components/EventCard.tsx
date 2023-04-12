@@ -23,7 +23,7 @@ const EventCard = (props: {
   isDark?: boolean
 }) => {
 
-  const isDark = storage.getBoolean("isDark");
+  const isDark = storage.getBoolean("darkMode");
 
   const saveBookmark = useMutation(["bookmark"], () => addBookmark({
     "user_id": props.userId!,
@@ -49,8 +49,7 @@ const EventCard = (props: {
   const saveNotification = useMutation(["createNewNotification"], () => createNotification(props.event.dates.date,props.event.id, props.event.name, props.event.image),
    {
     onSuccess: (data) => {
-      console.log(data);
-      setNotificationId(data);
+      setNotificationID(data);
     },
     onError: () => {
         console.log("Something went wrong, please try again.");
@@ -91,7 +90,7 @@ const EventCard = (props: {
       }
     }
   };
-  console.log("EventCard", isDark);
+
   const renderDate = () => {
     if (props.eventType === "past") {
       return (
@@ -255,7 +254,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     alignItems: "flex-end",
-    color: colors.neutral.surfaceWhite
+    color: colors.neutral.surfaceWhite,
   },
 });
 
@@ -295,7 +294,7 @@ const lightModeStyles = StyleSheet.create({
   },
   icon: {
     alignItems: "flex-end",
-    color: colors.neutral.surfaceBlack
+    color: colors.neutral.surfaceBlack,
   },
 });
 

@@ -16,11 +16,14 @@ const NavigationBottomTab = () => {
   useEffect (()=>{
     getToken();
   }, []);
-  const [isDark, setIsDark] = useState(storage.getBoolean("isDark")); // use state to store isDark value
-
-  useFocusEffect(() => { // update isDark value when the screen is focused
-    setIsDark(storage.getBoolean("isDark"));
-  });
+  const [isDark, setIsDark] = useState(storage.getBoolean("darkMode") || false);
+  useEffect(() => {
+    storage.addOnValueChangedListener((key) => {
+      if (key === 'darkMode') {
+        setIsDark(storage.getBoolean("darkMode")!);
+      }
+    });
+  }, []);
 
   return (
     <Tab.Navigator initialRouteName="Home"
@@ -36,7 +39,7 @@ const NavigationBottomTab = () => {
         options={{
           tabBarIcon: ({ focused, }) => (
             <View style={styles.iconContainer}>
-              <Image source={focused ? require('../../assets/icons/navIcons/HomeActive.png') : 
+              <Image source={focused ? require('../../assets/icons/navIcons/HomeActive.png') :
               isDark ? require('../../assets/icons/navIcons/Home.png') : require('../../assets/icons/lightMode/home.png')} />
               {focused ?
                 <GradientText

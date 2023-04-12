@@ -29,10 +29,10 @@ const EventDetailsScreen = ({ route, navigation, }: MainStackNavigationProps<"Ev
   const [notificationId, setNotificationId] = useState("");
 
   useQuery("getUserData", getUser, {
-      onSuccess: (data: LoggedUser) => {
-        setUserInfo(data);
-      },
-    }
+    onSuccess: (data: LoggedUser) => {
+      setUserInfo(data);
+    },
+  }
   );
 
   const requestEventById = useQuery("eventDetail", () => getEventById(eventId),
@@ -43,17 +43,17 @@ const EventDetailsScreen = ({ route, navigation, }: MainStackNavigationProps<"Ev
     });
 
   useQuery("bookmarks", () => {
-      return fetchBookmarks(userInfo.uid);
-    }, {
-      onSuccess: (data) => {
-        const bookmark = data.find((bookmark: Bookmark) => bookmark.event_id === eventId);
-        if (bookmark) {
-          setBookmarkId(bookmark._id);
-          setIsBookmarkAdded(true);
-        }
-      },
-      enabled: !!userInfo.uid,
-    }
+    return fetchBookmarks(userInfo.uid);
+  }, {
+    onSuccess: (data) => {
+      const bookmark = data.find((bookmark: Bookmark) => bookmark.event_id === eventId);
+      if (bookmark) {
+        setBookmarkId(bookmark._id);
+        setIsBookmarkAdded(true);
+      }
+    },
+    enabled: !!userInfo.uid,
+  }
   );
 
   const saveBookmark = useMutation(["bookmarks"], () => addBookmark({
@@ -80,10 +80,10 @@ const EventDetailsScreen = ({ route, navigation, }: MainStackNavigationProps<"Ev
   });
 
   const saveNotification = useMutation(["notifications"], () => createNotification(
-      requestEventById.data!.dates.date,
-      eventId,
-      requestEventById.data!.name,
-      requestEventById.data!.image),
+    requestEventById.data!.dates.date,
+    eventId,
+    requestEventById.data!.name,
+    requestEventById.data!.image),
     {
       onSuccess: (data) => {
         setNotificationId(data);
@@ -173,9 +173,9 @@ const EventDetailsScreen = ({ route, navigation, }: MainStackNavigationProps<"Ev
   return (
     <SafeAreaView>
       <ScrollView style={styles.container}>
-        <Pressable onPress={() => navigation.goBack()} style={styles.backButton}>
-          <Image source={require("../assets/icons/leftIcon.png")} />
-        </Pressable>
+          <Pressable onPress={() => navigation.goBack()} style={styles.backButton}>
+            <Image source={require("../assets/icons/leftIcon.png")} style={styles.backImage}/>
+          </Pressable>
         <Image source={{ uri: requestEventById.data?.image, }} style={styles.image} />
         <View style={styles.nameContainer}>
           <View style={styles.participantsContainer}>
@@ -234,7 +234,10 @@ const styles = StyleSheet.create({
     top: 15,
     left: 5,
     zIndex: 10,
-
+  },
+  backImage: {
+width: 30,
+height: 30
   },
   nameContainer: {
     flexDirection: "row",
@@ -254,6 +257,7 @@ const styles = StyleSheet.create({
   image: {
     height: 200,
     marginHorizontal: -20,
+    marginTop: 50
   },
   number: {
     fontFamily: fontFamily.subtitle,

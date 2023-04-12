@@ -410,11 +410,7 @@ const lightModeStyles = StyleSheet.create({
     fontFamily: fontFamily.heading,
     fontSize: fontSize.heading2,
     fontWeight: fontWeightSubtitle2,
-    color: colors.neutral.surfaceBlack,
-  },
-  profileIcon: {
-    width: 28,
-    height: 28,
+    color: colors.neutral.backgroundBlack,
   },
   title: {
     color: colors.primary.primaryPurpleLight,
@@ -515,7 +511,7 @@ const lightModeStyles = StyleSheet.create({
   },
   linkButton: {
     color: colors.accent.accentBlueLight,
-    borderBottomColor: colors.accent.accentBlueDark,
+    borderBottomColor: colors.accent.accentBlueLight,
   },
 });
 

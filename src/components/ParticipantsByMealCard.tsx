@@ -14,21 +14,21 @@ const ParticipantsByMeal = (props: {
       case 'morning':
         return (
           <View>
-            <IconText icon={require('../assets/icons/morning.png')} text={'6am-12pm'} 
+            <IconText icon={props.isDark ? require('../assets/icons/morning.png') : require('../assets/icons/lightMode/morning.png')} text={'6am-12pm'} 
             style={styles.icon} isDark={props.isDark}/>
           </View>
         );
         case 'lunch':
         return (
           <View>
-            <IconText icon={require('../assets/icons/lunch.png')} text={'1pm-5pm'} 
+            <IconText icon={props.isDark ? require('../assets/icons/lunch.png') : require('../assets/icons/lightMode/evening.png')} text={'1pm-5pm'} 
             style={styles.icon} isDark={props.isDark}/>
           </View>
         );
         case 'dinner':
         return (
           <View>
-            <IconText icon={require('../assets/icons/dinner.png')} text={'6pm-10pm'} 
+            <IconText icon={props.isDark ? require('../assets/icons/dinner.png') : require('../assets/icons/lightMode/dinner.png')} text={'6pm-10pm'} 
             style={styles.icon} isDark={props.isDark}/>
           </View>
         );

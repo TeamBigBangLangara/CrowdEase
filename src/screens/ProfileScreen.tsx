@@ -279,7 +279,9 @@ const styles = StyleSheet.create({
   showSetting: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
+    marginLeft: 40,
+    marginRight: 33,
     alignItems: "center",
     backgroundColor: colors.neutral.surfaceBlack,
     borderRadius: 22,
@@ -403,7 +405,9 @@ const lightModeStyles = StyleSheet.create({
   showSetting: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
+    marginLeft: 40,
+    marginRight: 33,
     alignItems: "center",
     backgroundColor: colors.neutral.backgroundWhite,
     borderRadius: 22,

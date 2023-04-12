@@ -522,6 +522,9 @@ SPEC REPOS:
     - GTMAppAuth
     - GTMSessionFetcher
     - libevent
+    - libwebp
+    - MMKV
+    - MMKVCore
     - OneSignalXCFramework
     - PromisesObjC
     - SDWebImage

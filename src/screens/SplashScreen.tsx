@@ -7,12 +7,10 @@ import FastImage from "react-native-fast-image";
 const SplashScreen = ({ navigation, }: AuthStackNavigationProps<"SplashScreen">) => {
 
   useEffect(() => {
-
     if (navigation) {
       navigation.setOptions({
         headerShown: false,
       });
-
       setTimeout(() => {
         navigation.navigate("LaunchScreen");
       }, 6000);

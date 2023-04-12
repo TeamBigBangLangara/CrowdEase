@@ -25,7 +25,6 @@ const MapScreen = ({navigation,} : MapStackNavigationProps<'MapScreen'>) => {
   const requestEvents = useQuery('events', () => getEvents(), {
     select: events => {
       return events.filter((event) => {
-        console.log(new Date().toISOString().split('T')[0]);
         return event.dates.date === new Date().toISOString().split('T')[0];
       });
     },

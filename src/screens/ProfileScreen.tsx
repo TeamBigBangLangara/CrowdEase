@@ -153,7 +153,7 @@ const ProfileScreen = ({ navigation, }: ProfileScreenProps) => {
         <IconText
           icon={isDark ? require("../assets/icons/profileIcons/logout.png") : require("../assets/icons/lightMode/logout.png")}
           text={"Log Out"}
-          style={isDark ? styles.logout : lightModeStyles.logout}
+          style={styles.logout}
           isDark={isDark} />
       </Pressable>
     </View>
@@ -394,13 +394,6 @@ const lightModeStyles = StyleSheet.create({
     fontFamily: fontFamily.body,
     fontWeight: fontWeightBody,
     fontSize: fontSize.subtitle2,
-  },
-  logout: {
-    color: colors.neutral.surfaceBlack,
-    fontFamily: fontFamily.body,
-    fontWeight: fontWeightBody,
-    fontSize: fontSize.body,
-    marginTop: 70,
   },
   showSetting: {
     display: "flex",

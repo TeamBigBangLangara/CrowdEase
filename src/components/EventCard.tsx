@@ -19,13 +19,25 @@ const EventCard = (props: {
   eventType: string
   userId?: string,
   bookmarkId?: string
-  onDetail: () => void
-  isDark?: boolean
+  onEventCardPress?: () => void
 }) => {
-
   const isDark = storage.getBoolean("darkMode");
 
-  const saveBookmark = useMutation(["bookmark"], () => addBookmark({
+  const [showRating, setShowRating] = useState(false);
+  const [isBookmarkAdded, setIsBookmarkAdded] = useState(false);
+  const [bookmarkId, setBookmarkId] = useState("");
+  const [notificationId, setNotificationId] = useState("");
+
+  useEffect(() => {
+    if (props.bookmarkId !== undefined) {
+      setBookmarkId(props.bookmarkId);
+      setIsBookmarkAdded(true);
+    } else {
+      setIsBookmarkAdded(false);
+    }
+  }, [props.bookmarkId]);
+
+  const saveBookmark = useMutation(["bookmarks"], () => addBookmark({
     "user_id": props.userId!,
     "event_id": props.event.id,
   }), {
@@ -47,29 +59,30 @@ const EventCard = (props: {
   });
 
   const saveNotification = useMutation(["createNewNotification"], () => createNotification(props.event.dates.date,props.event.id, props.event.name, props.event.image),
-   {
-    onSuccess: (data) => {
-      setNotificationID(data);
-    },
-    onError: () => {
+    {
+      onSuccess: (data) => {
+        console.log(data);
+        setNotificationId(data);
+      },
+      onError: () => {
         console.log("Something went wrong, please try again.");
-    },
-  });
+      },
+    });
 
   const deleteNotification = useMutation(["deleteNotification"], () => cancelNotification(notificationId),
-   {
-    onError: () => {
-      console.log("Something went wrong, please try again.");
-    },
-  });
+    {
+      onError: () => {
+        console.log("Something went wrong, please try again.");
+      },
+    });
 
   const onBookmarkPress = () => {
     if(!isBookmarkAdded)
     {
       try{
-      saveBookmark.mutate();
-      saveNotification.mutate();
-      setIsBookmarkAdded(!isBookmarkAdded);
+        saveBookmark.mutate();
+        saveNotification.mutate();
+        setIsBookmarkAdded(!isBookmarkAdded);
       }
       catch(error){
         Alert.alert('Unable to save data' +error);
@@ -77,14 +90,14 @@ const EventCard = (props: {
     }
     else{
       try{
-         deleteBookmark.mutate();
-         if(notificationId !== undefined)
-          {
-            deleteNotification.mutate();
-          }
-          setNotificationId('');
-          setIsBookmarkAdded(!isBookmarkAdded);
+        deleteBookmark.mutate();
+        if(notificationId !== undefined)
+        {
+          deleteNotification.mutate();
         }
+        setNotificationId('');
+        setIsBookmarkAdded(!isBookmarkAdded);
+      }
       catch(error){
         Alert.alert('Unable to save data' +error);
       }
@@ -151,7 +164,7 @@ const EventCard = (props: {
   };
 
   return (
-    <Pressable onPress={props.onDetail}>
+    <Pressable onPress={props.onEventCardPress}>
       <View style={isDark ? styles.container : lightModeStyles.container}>
         {renderDragUpButton()}
         <View style={styles.eventContainer}>
@@ -190,19 +203,6 @@ const styles = StyleSheet.create({
     display: "flex",
     borderRadius: 22,
     marginVertical: 8,
-    elevation: 5,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1, },
-    shadowOpacity: 0.3,
-    shadowRadius: 2,
-    //add an inset shadow using negative elevation
-    insetShadow: {
-      elevation: -4,
-      shadowColor: '#000',
-      shadowOffset: { width: 0, height: 4, },
-      shadowOpacity: 0.1,
-      shadowRadius: 6,
-    },
   },
   eventContainer: {
     display: "flex",
@@ -254,7 +254,6 @@ const styles = StyleSheet.create({
   },
   icon: {
     alignItems: "flex-end",
-    color: colors.neutral.surfaceWhite,
   },
 });
 

@@ -215,9 +215,9 @@ OneSignal.setNotificationOpenedHandler(notification => {
             </View>
             <Text style={isDark ? styles.subtitleBreakdown : lightModeStyles.subtitleBreakdown}>Participants Breakdown</Text>
             <View style={styles.breakdownContainer}>
-              <ParticipantsByMealCard mealTime={'morning'} crowdNumber={2453} isDark={isDark} />
-              <ParticipantsByMealCard mealTime={'lunch'} crowdNumber={1320} isDark={isDark} />
-              <ParticipantsByMealCard mealTime={'dinner'} crowdNumber={2653} isDark={isDark} />
+              <ParticipantsByMealCard mealTime={'morning'} crowdNumber={renderMorningParticipants()} isDark={isDark}/>
+              <ParticipantsByMealCard mealTime={'lunch'} crowdNumber={renderLunchParticipants()} isDark={isDark}/>
+              <ParticipantsByMealCard mealTime={'dinner'} crowdNumber={renderDinnerParticipants()} isDark={isDark}/>
             </View>
           </View>
           <View style={styles.todayEventTitleContainer}>
@@ -225,7 +225,7 @@ OneSignal.setNotificationOpenedHandler(notification => {
             <LinkButton onPress={onSeeMorePress} label={'See All'} style={isDark ? styles.linkButton : lightModeStyles.linkButton} />
           </View>
           <View style={styles.carouselContainer}>
-            <EventCarousel isDark={isDark}/>
+            <EventCarousel/>
           </View>
         </View>
       </ScrollView>

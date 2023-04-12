@@ -6,26 +6,26 @@ import EventCard from "./EventCard";
 import { colors } from "../styles/colors";
 import { useNavigation } from "@react-navigation/native";
 
-const EventCarousel = (props:{isDark?: boolean}) => {
-const navigation = useNavigation();
+const EventCarousel = () => {
+  const navigation = useNavigation();
 
   const  {data: events = [],} = useQuery("events", () => getEvents(),
-  {
-    onError: (error: TypeError) => {
-      Alert.alert("Error", error.message);
-    },
-  }
-);
+    {
+      onError: (error: TypeError) => {
+        Alert.alert("Error", error.message);
+      },
+    }
+  );
 
-const onEventCardPress = (eventId: string) => {
-  navigation.navigate("EventDetailsScreen", {eventId: eventId,});
-};
+  const onEventCardPress = (eventId: string) => {
+    navigation.navigate("EventDetailsScreen", {eventId: eventId,});
+  };
 
-const today = new Date().toISOString().slice(0, 10);
+  const today = new Date().toISOString().slice(0, 10);
 
-const filteredEvents = () => {
-  return events.filter((event) => event.dates.date === today);
-};
+  const filteredEvents = () => {
+    return events.filter((event) => event.dates.date === today);
+  };
 
   if (filteredEvents().length === 0 ) {
     return (
@@ -37,23 +37,21 @@ const filteredEvents = () => {
   } else {
     return (
       <Carousel
-      data={filteredEvents()}
+        data={filteredEvents()}
         renderItem={({ item,}) => {
           return<EventCard
             key={item.id}
             event={item}
             eventType={"actual"}
-            onBookmarkPress={onBookMarkPress}
-            onDetail={() => onDetailScreen(item.id)}
-            isDark={props.isDark}
+            onEventCardPress={() => onEventCardPress(item.id)}
           />;
 
         }
         }
-          sliderWidth={390}
-          itemWidth={318}
+        sliderWidth={390}
+        itemWidth={318}
       />
-  );
+    );
   }
 };
 

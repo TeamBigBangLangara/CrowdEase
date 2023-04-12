@@ -6705,6 +6705,11 @@ react-native-maps@^1.4.0:
   dependencies:
     "@types/geojson" "^7946.0.8"
 
+react-native-mmkv@^2.8.0:
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/react-native-mmkv/-/react-native-mmkv-2.8.0.tgz#328318256eb50f0b87826edceaff4b1cd70ba957"
+  integrity sha512-sfI2uzr5UCz7jS6QxIWnC7AbIuoIw9T7hDtsw0ohSlIdCABPoORPu8xpOSZN2bMkK7Z7sMQwLeP73uBXu0A3jw==
+
 react-native-onesignal@^4.5.1:
   version "4.5.1"
   resolved "https://registry.yarnpkg.com/react-native-onesignal/-/react-native-onesignal-4.5.1.tgz#f46007d0a30a7c4e42a531b7c4940f0bfdfbc326"

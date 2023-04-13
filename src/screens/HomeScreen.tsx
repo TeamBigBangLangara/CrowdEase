@@ -14,10 +14,11 @@ import { getDate } from "../utils/getDate";
 import { borderRadius } from "../styles/basic";
 import EventCarousel from "../components/EventCarousel";
 import { getEvents } from "../api/event";
+import { REACT_ONESIGNAL_APP_ID } from "@env";
 
 import OneSignal from "react-native-onesignal";
 
-const ONESIGNAL_APP_ID = 'ee944c2a-c447-402c-9f22-48dbdddb9caa';
+const ONESIGNAL_APP_ID = REACT_ONESIGNAL_APP_ID;
 
 // Get the dates
 const { formattedFirstDay, formattedLastDay, today, todayFormatted, week, getWeekday, } = getDate();
@@ -143,7 +144,7 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
   };
 
   // OneSignal Initialization
-  OneSignal.setAppId(ONESIGNAL_APP_ID);
+  OneSignal.setAppId(REACT_ONESIGNAL_APP_ID);
 
   // promptForPushNotificationsWithUserResponse will show the native iOS or Android notification permission prompt.
   // We recommend removing the following code and instead using an In-App Message to prompt for notification permission (See step 8)

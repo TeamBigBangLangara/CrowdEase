@@ -1,11 +1,10 @@
 import { Event} from "../types/types";
-
-const apiKey = 'rvESUQSbTV3omXuXVz0HR6XsQNvsPRES';
+import { REACT_EVENTS_APIKEY } from "@env";
 
 const baseURL = 'https://app.ticketmaster.com/discovery/v2/';
 
 export const getEvents = () => {
-  return fetch(`${baseURL}/events.json?dmaId=528&apikey=${apiKey}`)
+  return fetch(`${baseURL}/events.json?dmaId=528&apikey=${REACT_EVENTS_APIKEY}`)
     .then((res) => res.json())
     .then((data) => {
         const res2 = JSON.parse(JSON.stringify(data._embedded.events));
@@ -41,7 +40,7 @@ export const getEvents = () => {
 };
 
 export const getEventById = (id: string) => {
-  return fetch(`${baseURL}events/${id}?apikey=${apiKey}`)
+  return fetch(`${baseURL}events/${id}?apikey=${REACT_EVENTS_APIKEY}`)
     .then((res) => {return res.json();})
     .then((data) => {
         const response = JSON.parse(JSON.stringify(data));

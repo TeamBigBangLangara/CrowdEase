@@ -20,6 +20,7 @@ import PastEventScreen from "./screens/PastEventScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import EventDetailsScreen from "./screens/EventDetailsScreen";
 import MapScreen from "./screens/MapScreen";
+import { REACT_GOOGLE_WEB_CLIENT_ID } from "@env";
 
 export type AuthStackParams = {
   SplashScreen: undefined
@@ -123,7 +124,7 @@ const App = () => {
     });
 
     GoogleSignin.configure({
-      webClientId: '259021060250-a486v22la0hut46k5f0r3rntoevh9unt.apps.googleusercontent.com',
+      webClientId: `${REACT_GOOGLE_WEB_CLIENT_ID}`,
     });
   }, []);
 

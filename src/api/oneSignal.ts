@@ -1,9 +1,8 @@
 import OneSignal from 'react-native-onesignal';
 import axios from 'axios';
+import { REACT_ONESIGNAL_APP_ID, REACT_ONESIGNAL_REST_API_KEY } from "@env";
 
-const ONESIGNAL_APP_ID = 'ee944c2a-c447-402c-9f22-48dbdddb9caa';
-const REST_API_KEY = 'MWRhOWE2N2EtNjljYS00NDM2LTg3M2MtMzYzYmEzOWM5NGMz';
-OneSignal.setAppId(ONESIGNAL_APP_ID);
+OneSignal.setAppId(REACT_ONESIGNAL_APP_ID);
 
 export const createNotification = async(date: string, eventID:string, notificationData: string, eventImage: string) : Promise<any> => {
 
@@ -22,16 +21,16 @@ export const createNotification = async(date: string, eventID:string, notificati
       url: 'https://onesignal.com/api/v1/notifications',
       headers: {
         accept: 'application/json',
-        Authorization: `Basic ${REST_API_KEY}`,
+        Authorization: `Basic ${REACT_ONESIGNAL_REST_API_KEY}`,
         'content-type': 'application/json',
       },
       data: {
-        app_id: ONESIGNAL_APP_ID,
+        app_id: REACT_ONESIGNAL_APP_ID,
         include_player_ids: [playerId],
         contents: { en: `${eventNotificationMessage}`, },
         headings: { en: `${eventTitle}`, },
         big_picture: eventImage,
-        data: {"eventID":eventID},
+        data: {"eventID":eventID,},
         send_after: eventDate.toISOString(),
       },
     };
@@ -48,8 +47,8 @@ export const cancelNotification = (notificationId:string): Promise<any>  => {
     const options = {
         method: 'DELETE',
         url: `https://onesignal.com/api/v1/notifications/${notificationId}`,
-        params: {app_id: `${ONESIGNAL_APP_ID}`,},
-        headers: {accept: 'application/json', Authorization:  `Basic ${REST_API_KEY}` ,},
+        params: {app_id: `${REACT_ONESIGNAL_APP_ID}`,},
+        headers: {accept: 'application/json', Authorization:  `Basic ${REACT_ONESIGNAL_REST_API_KEY}` ,},
       };
     const response = axios.request(options);
     return response;

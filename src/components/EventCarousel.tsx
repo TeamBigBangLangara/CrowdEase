@@ -7,25 +7,25 @@ import { colors } from "../styles/colors";
 import { useNavigation } from "@react-navigation/native";
 
 const EventCarousel = () => {
-const navigation: any = useNavigation();
+  const navigation = useNavigation();
 
   const  {data: events = [],} = useQuery("events", () => getEvents(),
-  {
-    onError: (error: TypeError) => {
-      Alert.alert("Error", error.message);
-    },
-  }
-);
+    {
+      onError: (error: TypeError) => {
+        Alert.alert("Error", error.message);
+      },
+    }
+  );
 
-const onEventCardPress = (eventId: string) => {
-  navigation.navigate("EventDetailsScreen", {eventId: eventId,});
-};
+  const onEventCardPress = (eventId: string) => {
+    navigation.navigate("EventDetailsScreen", {eventId: eventId,});
+  };
 
-const today = new Date().toISOString().slice(0, 10);
+  const today = new Date().toISOString().slice(0, 10);
 
-const filteredEvents = () => {
-  return events.filter((event) => event.dates.date === today);
-};
+  const filteredEvents = () => {
+    return events.filter((event) => event.dates.date === today);
+  };
 
   if (filteredEvents().length === 0 ) {
     return (
@@ -37,7 +37,7 @@ const filteredEvents = () => {
   } else {
     return (
       <Carousel
-      data={filteredEvents()}
+        data={filteredEvents()}
         renderItem={({ item,}) => {
           return<EventCard
             key={item.id}
@@ -48,10 +48,10 @@ const filteredEvents = () => {
 
         }
         }
-          sliderWidth={390}
-          itemWidth={353}
+        sliderWidth={390}
+        itemWidth={318}
       />
-  );
+    );
   }
 };
 

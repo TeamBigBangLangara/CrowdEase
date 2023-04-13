@@ -16,6 +16,8 @@ import EventCarousel from "../components/EventCarousel";
 import { getEvents } from "../api/event";
 
 import OneSignal from "react-native-onesignal";
+import { storage } from "../store/mmkv";
+import { useEffect, useState } from "react";
 
 const ONESIGNAL_APP_ID = 'ee944c2a-c447-402c-9f22-48dbdddb9caa';
 
@@ -23,6 +25,15 @@ const ONESIGNAL_APP_ID = 'ee944c2a-c447-402c-9f22-48dbdddb9caa';
 const { formattedFirstDay, formattedLastDay, today, todayFormatted, week, getWeekday, } = getDate();
 
 const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => {
+  const [isDark, setIsDark] = useState(storage.getBoolean("darkMode") || false);
+
+  useEffect(() => {
+    storage.addOnValueChangedListener((key) => {
+      if (key === 'darkMode') {
+        setIsDark(storage.getBoolean("darkMode")!);
+      }
+    });
+  }, []);
 
   const requestEvents = useQuery("events", () => getEvents(),
     {
@@ -55,7 +66,7 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
       }
     });
     return (
-      <Text style={styles.todayParticipantsNumber}>{participants}</Text>
+      <Text style={isDark ? styles.todayParticipantsNumber : lightModeStyles.todayParticipantsNumber}>{participants}</Text>
     );
   };
 
@@ -165,50 +176,56 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
     navigation.navigate("EventDetailsScreen", { eventId: eventID, });
   });
 
+//Method for handling notifications opened
+OneSignal.setNotificationOpenedHandler(notification => {
+  const eventID = notification?.notification.additionalData.eventID;
+  navigation.navigate("EventDetailsScreen", {eventId: eventID,});
+});
+
   return (
     <SafeAreaView style={{ flex: 1, }}>
       <ScrollView>
-        <View style={styles.container}>
-          <View style={styles.header}>
-            <Text style={styles.headerTitle}>Crowd Ease</Text>
+        <View style={isDark ? styles.container : lightModeStyles.container}>
+          <View style={isDark ? styles.header : lightModeStyles.header}>
+            <Text style={isDark ? styles.headerTitle : lightModeStyles.headerTitle}>Crowd Ease</Text>
             <Pressable onPress={onProfileScreen}>
-              <Image style={styles.profileIcon} source={require('../assets/icons/profile.png')} />
+            <Image style={styles.profileIcon} source={isDark ? require('../assets/icons/profile.png') : require('../assets/icons/lightMode/profile.png')} />
             </Pressable>
           </View>
-          <Text style={styles.title}>Preview of this week's events</Text>
+          <Text style={isDark ? styles.title : lightModeStyles.title}>Preview of this week's events</Text>
           <View style={styles.dataVisualizationContainer}>
-            <DataVisualization />
+            <DataVisualization isDark={isDark} />
           </View>
-          <View style={styles.dataBox}>
-            <Text style={styles.date}>{`${formattedFirstDay} - ${formattedLastDay}`}</Text>
-            <PrimaryButton onPress={onFullReportPress} label={'View Full Report'} />
+          <View style={isDark ? styles.dataBox : lightModeStyles.dataBox}>
+            <Text style={isDark ? styles.date : lightModeStyles.date}>{`${formattedFirstDay} - ${formattedLastDay}`}</Text>
+            <PrimaryButton onPress={onFullReportPress} label={'View Full Report'} isDark={isDark} />
           </View>
-          <View style={styles.suggestionContainer}>
-            <Text style={styles.subtitle}>It seems that {renderBusyDay()} is the busiest day of this week, would you like to see some promotional opportunities?</Text>
-            <SecondaryButton onPress={onSeeSuggestionPress} label={'See Suggestions'} />
+          <View style={isDark ? styles.suggestionContainer : lightModeStyles.suggestionContainer}>
+            <Text style={isDark ? styles.subtitle : lightModeStyles.subtitle}>It seems that {renderBusyDay()} is the busiest day of this week, would you like to see some promotional opportunities?</Text>
+            <SecondaryButton onPress={onSeeSuggestionPress} label={'See Suggestions'} isDark={isDark} />
           </View>
           <View style={styles.todayParticipantsContainer}>
             <View style={styles.todayParticipantTitle}>
-              <Text style={styles.title}>Event Participants for today</Text>
-              <Text style={styles.todayDate}>{today}</Text>
+              <Text style={isDark ? styles.title : lightModeStyles.title}>Event Participants for today</Text>
+              <Text style={isDark ? styles.todayDate : lightModeStyles.todayDate}>{today}</Text>
             </View>
-            <View style={styles.numberContainer}>
-              <IconText icon={require('../assets/icons/participants.png')} text={'Total Participants'} style={styles.participantIcon} />
+            <View style={isDark ? styles.numberContainer : lightModeStyles.numberContainer}>
+              <IconText icon={isDark ? require('../assets/icons/participants.png') : require('../assets/icons/lightMode/Participants.png')} text={'Total Participants'} style={isDark ? styles.participantIcon : lightModeStyles.participantIcon} isDark={isDark}/>
               <View>{renderTodayParticipants()}</View>
             </View>
-            <Text style={styles.subtitleBreakdown}>Participants Breakdown</Text>
+            <Text style={isDark ? styles.subtitleBreakdown : lightModeStyles.subtitleBreakdown}>Participants Breakdown</Text>
             <View style={styles.breakdownContainer}>
-              <ParticipantsByMealCard mealTime={'morning'} crowdNumber={renderMorningParticipants()} />
-              <ParticipantsByMealCard mealTime={'lunch'} crowdNumber={renderLunchParticipants()} />
-              <ParticipantsByMealCard mealTime={'dinner'} crowdNumber={renderDinnerParticipants()} />
+              <ParticipantsByMealCard mealTime={'morning'} crowdNumber={renderMorningParticipants()} isDark={isDark}/>
+              <ParticipantsByMealCard mealTime={'lunch'} crowdNumber={renderLunchParticipants()} isDark={isDark}/>
+              <ParticipantsByMealCard mealTime={'dinner'} crowdNumber={renderDinnerParticipants()} isDark={isDark}/>
             </View>
           </View>
           <View style={styles.todayEventTitleContainer}>
-            <Text style={styles.title}>Today's Events</Text>
-            <LinkButton onPress={onSeeMorePress} label={'See All'} style={styles.linkButton} />
+            <Text style={isDark ? styles.title : lightModeStyles.title}>Today's Events</Text>
+            <LinkButton onPress={onSeeMorePress} label={'See All'} style={isDark ? styles.linkButton : lightModeStyles.linkButton} />
           </View>
           <View style={styles.carouselContainer}>
-            <EventCarousel />
+            <EventCarousel/>
           </View>
         </View>
       </ScrollView>
@@ -371,6 +388,130 @@ const styles = StyleSheet.create({
   carouselContainer: {
     justifyContent: 'center',
     alignItems: 'center',
+  },
+});
+
+const lightModeStyles = StyleSheet.create({
+  container: {
+    backgroundColor: colors.neutral.backgroundWhite,
+    paddingHorizontal: 20,
+    paddingVertical: 24,
+  },
+  header: {
+    height: 40,
+    backgroundColor: colors.neutral.backgroundWhite,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 24,
+  },
+  headerTitle:{
+    fontFamily: fontFamily.heading,
+    fontSize: fontSize.heading2,
+    fontWeight: fontWeightSubtitle2,
+    color: colors.neutral.backgroundBlack,
+  },
+  title: {
+    color: colors.primary.primaryPurpleLight,
+    fontFamily: fontFamily.subtitle,
+    fontSize: fontSize.subtitle1,
+    fontWeight: fontWeightBody,
+  },
+  participantIcon: {
+    alignItems: "center",
+  },
+  dataBox: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  date: {
+    color: colors.neutral.surfaceBlack,
+    fontFamily: fontFamily.body,
+    fontSize: fontSize.subtitle2,
+    fontWeight: fontWeightBody,
+    marginBottom: 15,
+    marginTop: 30,
+  },
+  suggestionContainer: {
+    alignSelf: 'center',
+    backgroundColor: colors.neutral.backgroundWhite,
+    borderRadius: borderRadius.primary,
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1, },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+    //add an inset shadow using negative elevation
+    insetShadow: {
+      elevation: -4,
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 4, },
+      shadowOpacity: 0.1,
+      shadowRadius: 6,
+    },
+    marginTop: 40,
+    paddingHorizontal: 13,
+    paddingVertical: 16,
+  },
+  subtitle: {
+    color: colors.neutral.surfaceBlack,
+    fontFamily: fontFamily.subtitle,
+    fontSize: fontSize.subtitle2,
+    fontWeight: fontWeightSubtitle,
+    marginBottom: 20,
+    marginTop: 10,
+  },
+  busyDay: {
+    fontFamily: fontFamily.heading,
+    fontWeight: '900',
+    fontSize: fontSize.subtitle2,
+  },
+  todayDate: {
+    color: colors.secondaryGreenLight,
+    fontFamily: fontFamily.subtitle,
+    fontSize: fontSize.subtitle2,
+    fontWeight: fontWeightSubtitle,
+  },
+  numberContainer: {
+    backgroundColor: colors.neutral.backgroundWhite,
+    borderRadius: borderRadius.primary,
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1, },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+    //add an inset shadow using negative elevation
+    insetShadow: {
+      elevation: -4,
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 4, },
+      shadowOpacity: 0.1,
+      shadowRadius: 6,
+    },
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 10,
+    paddingVertical: 15,
+  },
+  todayParticipantsNumber: {
+    color: colors.neutral.surfaceBlack,
+    marginTop: 10,
+    fontFamily: fontFamily.heading,
+    fontSize: fontSize.heading2,
+    fontWeight: fontWeightSubtitle2,
+  },
+  subtitleBreakdown: {
+    color: colors.neutral.surfaceBlack,
+    fontFamily: fontFamily.subtitle,
+    fontSize: fontSize.subtitle2,
+    fontWeight: fontWeightSubtitle,
+    marginTop: 16,
+  },
+  linkButton: {
+    color: colors.accent.accentBlueLight,
+    borderBottomColor: colors.accent.accentBlueLight,
   },
 });
 

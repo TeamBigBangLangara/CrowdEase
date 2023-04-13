@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { firebase } from "@react-native-firebase/auth";
@@ -34,7 +34,7 @@ export type MainStackParams = {
   HomeScreen: undefined
   WeekManagerScreen: undefined
   SuggestionScreen: undefined
-  EventDetailsScreen: {eventId: string};
+  EventDetailsScreen: {eventId: string;}
   PastEventScreen: undefined
   ProfileScreen: undefined
 }
@@ -67,13 +67,14 @@ const EventsStack = createNativeStackNavigator<EventsStackParams>();
 const ReportStack = createNativeStackNavigator<ReportStackParams>();
 const MapStack = createNativeStackNavigator<MapStackParams>();
 
+
 export const HomeStack = () => {
   return (
     <MainStack.Navigator screenOptions={{ headerShown: false,}}>
       <MainStack.Screen name={"HomeScreen"} component={HomeScreen}/>
-      <MainStack.Screen name={"WeekManagerScreen"} component={WeekManagerScreen}/>
+      <MainStack.Screen name={"WeekManagerScreen"} component={WeekManagerScreen} />
       <MainStack.Screen name={"PastEventScreen"} component={PastEventScreen}/>
-      <MainStack.Screen name={"ProfileScreen"} component={ProfileScreen}/>
+      <MainStack.Screen name={"ProfileScreen"} component={ProfileScreen} />
       <MainStack.Screen name={"EventDetailsScreen"} component={EventDetailsScreen} />
       <MainStack.Screen name={"SuggestionScreen"} component={SuggestionScreen} />
     </MainStack.Navigator>

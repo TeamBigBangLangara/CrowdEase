@@ -1,15 +1,26 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Pressable, Alert, ImageBackground, Image, TouchableHighlight } from 'react-native';
+import React, { useState } from "react";
+import {
+  Alert,
+  Image,
+  ImageBackground,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableHighlight,
+  View
+} from "react-native";
 
-import { isEmailValid } from '../utils/email';
-import { onGoogleButtonPress } from '../auth/googleSignIn';
-import { signIn } from '../auth/user';
-import { AuthStackNavigationProps } from '../types/navigationTypes';
-import PrimaryButton from '../components/PrimaryButton';
+import { isEmailValid } from "../utils/email";
+import { isPasswordValid } from "../utils/password";
+import { onGoogleButtonPress } from "../auth/googleSignIn";
+import { signIn } from "../auth/user";
+import { AuthStackNavigationProps } from "../types/navigationTypes";
+import PrimaryButton from "../components/PrimaryButton";
 
 const LoginScreen = ({ navigation, }: AuthStackNavigationProps<'LoginScreen'>) => {
-  const [email, setEmail] = useState('business@gmail.com');
-  const [password, setPassword] = useState('test123');
+  const [email, setEmail] = useState('business2@gmail.com');
+  const [password, setPassword] = useState('4awrHl37^ZoR');
 
   const onLoginPress = () => {
     if (loginValidation()) {
@@ -27,7 +38,7 @@ const LoginScreen = ({ navigation, }: AuthStackNavigationProps<'LoginScreen'>) =
   };
 
   const loginValidation = (): boolean => {
-    if (isEmailValid(email)) {
+    if (isEmailValid(email) && isPasswordValid(password)) {
       return true;
     } else {
       Alert.alert('Error', 'Invalid Email');

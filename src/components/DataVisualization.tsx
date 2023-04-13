@@ -9,7 +9,7 @@ import { getDate } from "../utils/getDate";
 import { fontWeightTitle } from '../styles/fonts';
 import IconText from "./IconText";
 
-const DataVisualization = () => {
+const DataVisualization = (props: {isDark: boolean}) => {
   const { week, } = getDate();
   
   const requestEvents = useQuery("events", () => getEvents(),
@@ -43,30 +43,30 @@ const DataVisualization = () => {
   const [selectedBar, setSelectedBar] = useState(weekParticipants);
 
   const barChartSvg = {
-    fill: colors.neutral.surfaceWhite,
+    fill: props.isDark ? colors.neutral.surfaceWhite : colors.neutral.grey,
   };
 
   const axisStyles = {
     axis: {
-      stroke: colors.neutral.surfaceWhite,
+      stroke: props.isDark ? colors.neutral.surfaceWhite : colors.neutral.grey,
     },
     tickLabels: {
       fontSize: fontSize.caption,
       fontFamily: fontFamily.body,
-      fill: colors.neutral.surfaceWhite,
+      fill: props.isDark ? colors.neutral.surfaceWhite : colors.neutral.grey,
     },
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.participantsNumberContainer}>
-        <IconText icon={require('../assets/icons/participants.png')} text={'Total participants:'} style={styles.participantIcon} />
-        <Text style={styles.participantsNumber}>{selectedBar}</Text>
+        <IconText icon={props.isDark ? require('../assets/icons/participants.png') : require('../assets/icons/lightMode/Participants.png')} text={'Total participants:'} style={styles.participantIcon} isDark={props.isDark} />
+        <Text style={props.isDark ? styles.participantsNumber : lightModeStyles.participantsNumber}>{selectedBar}</Text>
       </View>
       <VictoryChart height={200}>
         <VictoryAxis
           style={axisStyles}
-          tickLabelComponent={<VictoryLabel style={styles.xAxisSvg} />}
+          tickLabelComponent={<VictoryLabel style={props.isDark ? styles.xAxisSvg : lightModeStyles.xAxisSvg} />}
         />
         <VictoryBar
           data={data}
@@ -85,9 +85,14 @@ const DataVisualization = () => {
                       eventKey: 'all',
                       mutation: (props: any, clickedData: { datum: { day: string, value: number } }) => {
                         const fill = props.style?.fill;
-                        return fill === colors.neutral.surfaceWhite
+                        return props.isDark ?
+                         fill === colors.neutral.surfaceWhite
                           ? colors.neutral.surfaceWhite
-                          : { fill: colors.secondaryGreenDark, };
+                          : { fill: colors.secondaryGreenDark, } : 
+                          fill === colors.neutral.grey
+                          ? colors.neutral.grey
+                          : { fill: colors.secondaryGreenLight, }
+                        
                       },
                     },
                     {
@@ -95,7 +100,7 @@ const DataVisualization = () => {
                       mutation: (clickedData: { datum: { day: string, value: number } }) => {
                         setSelectedBar(data?.datum.value);
                         return {
-                          style: { fill: colors.secondaryGreenDark, },
+                          style: { fill: props.isDark ? colors.secondaryGreenDark : colors.secondaryGreenLight },
                         };
                       },
                     }
@@ -134,6 +139,20 @@ const styles = StyleSheet.create({
   },
   participantIcon: {
     alignItems: "center",
+  },
+});
+
+const lightModeStyles = StyleSheet.create({
+  xAxisSvg: {
+    fontSize: fontSize.caption,
+    fontFamily: fontFamily.body,
+    fill: colors.neutral.grey,
+  },
+  participantsNumber: {
+    color: colors.secondaryGreenLight,
+    fontFamily: fontFamily.heading,
+    fontSize: fontSize.heading2,
+    fontWeight: fontWeightTitle,
   },
 });
 

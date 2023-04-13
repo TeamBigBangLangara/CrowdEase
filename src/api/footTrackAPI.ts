@@ -1,5 +1,7 @@
+import { env } from "../../env";
+
 const params = new URLSearchParams({
-  'api_key_private': 'pri_d22d46ca1806456b8bc804dc54147603',
+  'api_key_private': env.REACT_BESTTIME_APIKEY,
 });
 
 export const getCrowd = () => {

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { Image, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 
 import IconButton from "./IconButton";
@@ -9,21 +9,17 @@ import { fontFamily, fontSize } from "../styles/fonts";
 const SearchForm = (props: {
   onChangeText: (searchKeyword: string) => void
   onFilterPress: () => void
+  onCancelPress: () => void
+  textInputRef: any
 }) => {
-  const textInputRef = useRef(null);
   const [searchOnFocus, setSearchOnFocus] = useState(false);
-
-  const cancelButtonHandling = () => {
-    textInputRef.current.clear();
-    textInputRef.current.blur();
-  };
 
   return (
     <View style={styles.container}>
       <View style={[styles.searchContainer, searchOnFocus?styles.searchContainerFocus: styles.searchContainerNoFocus]}>
         <Image source={require('../assets/icons/search.png')} />
         <TextInput
-          ref={textInputRef}
+          ref={props.textInputRef}
           onChangeText={props.onChangeText}
           onFocus={() => setSearchOnFocus(true)}
           onBlur={() => setSearchOnFocus(false)}
@@ -35,7 +31,7 @@ const SearchForm = (props: {
       </View>
       {searchOnFocus ?
       <Pressable
-        onPress={cancelButtonHandling}
+        onPress={props.onCancelPress}
         style={styles.cancelButton}
         >
           <Text style={styles.cancelText}>Cancel</Text>

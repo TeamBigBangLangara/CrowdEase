@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useQuery } from "react-query";
 import { Alert, FlatList, Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { getEvents } from "../api/bigBangAPI/JsonEvents";
@@ -16,6 +16,7 @@ import { getUser } from "../auth/user";
 import { Bookmark, LoggedUser } from "types/types";
 import { fetchBookmarks } from "../api/bigBangAPI/bookmark";
 import { EventsStackNavigationProps } from "../types/navigationTypes";
+import FastImage from "react-native-fast-image";
 // import { getEvents } from "../api/event";
 
 export type TypeCategoryFilter = {
@@ -24,6 +25,9 @@ export type TypeCategoryFilter = {
 };
 
 const EventScreen = ({ navigation,}: EventsStackNavigationProps<"EventScreen">) => {
+
+  const textInputRef = useRef(null);
+
 
   const [searchFilter, setSearchFilter] = useState("");
   const [dateFilter, setDateFilter] = useState(format(new Date, "yyyy-MM-dd"));
@@ -91,7 +95,23 @@ const EventScreen = ({ navigation,}: EventsStackNavigationProps<"EventScreen">) 
     }
   );
 
-  const mergeBookmarkAndEvents = () => {
+  if (requestEvents.isLoading || requestUserBookmarks.isLoading) {
+    // return <FastImage source={require('../assets/animations/loading.gif')}/>;
+
+    return (
+      <View style={styles.gifContainer}>
+      <FastImage
+        source={require("../assets/animations/loading.gif")}
+        style={styles.gif}
+        resizeMode={FastImage.resizeMode.contain}
+      />
+      </View>
+    );
+
+  }
+
+
+    const mergeBookmarkAndEvents = () => {
     if (requestEvents.data && requestUserBookmarks.data) {
        return requestEvents.data.map((event) => {
         const bookmark = requestUserBookmarks.data.find((bookmark: Bookmark) => bookmark.event_id === event.id);
@@ -165,6 +185,12 @@ const EventScreen = ({ navigation,}: EventsStackNavigationProps<"EventScreen">) 
           onFilterPress={() => {
             setModalVisible(true);
           }}
+          textInputRef={textInputRef}
+          onCancelPress={() => {
+            textInputRef.current.clear();
+            textInputRef.current.blur();
+            setSearchFilter("");
+          }}
         />
         <WeekCalendar
           onDaySelection={daySelectionHandler}
@@ -219,6 +245,16 @@ const styles = StyleSheet.create({
     borderRightWidth: 2,
     borderColor: colors.neutral.backgroundWhite,
     marginHorizontal: 8,
+  },
+  gif: {
+    width: "100%",
+    height: "100%",
+  },
+  gifContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#000000",
   },
 });
 

@@ -8,6 +8,7 @@ import { useState } from "react";
 import { useMutation } from "react-query";
 import { addRating } from "../api/bigBangAPI/rating";
 import { Event } from "../types/types";
+import CustomAlert from "./CustomAlert";
 
 const RateCard = (props: {
   onSkipPress: () => void;
@@ -15,6 +16,7 @@ const RateCard = (props: {
   userId: string,
 }) => {
   const [rate, setRate] = useState(props.event.rate);
+  const [modalShow, setModalShow] = useState(false);
 
   const saveRating = useMutation('rating',  () => addRating({
     user_id: props.userId,
@@ -32,6 +34,7 @@ const RateCard = (props: {
 
   const onSubmitPress = () => {
     saveRating.mutate();
+    setModalShow(true)
   };
 
   const renderStars = () => {
@@ -53,6 +56,7 @@ const RateCard = (props: {
     );
   };
 
+
   return (
     <View style={styles.container}>
       <Text style={styles.header}>
@@ -63,6 +67,7 @@ const RateCard = (props: {
       <View style={styles.skipLabel}>
         <LinkButton onPress={props.onSkipPress} label={'Skip'} style={styles.linkButton} />
       </View>
+      {modalShow ? <CustomAlert onOkPress={() =>setModalShow(false)}/> : ''}
     </View>
   );
 };

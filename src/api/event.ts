@@ -1,4 +1,4 @@
-import { Event} from "../types/types";
+import { Event } from "../types/types";
 
 const apiKey = 'rvESUQSbTV3omXuXVz0HR6XsQNvsPRES';
 

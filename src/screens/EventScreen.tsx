@@ -16,6 +16,7 @@ import { getUser } from "../auth/user";
 import { Bookmark, LoggedUser } from "types/types";
 import { fetchBookmarks } from "../api/bigBangAPI/bookmark";
 import { EventsStackNavigationProps } from "../types/navigationTypes";
+// import { getEvents } from "../api/event";
 
 export type TypeCategoryFilter = {
   category: string,

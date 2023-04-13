@@ -6,10 +6,10 @@ import { fontFamily } from '../styles/fonts';
 import { fontSize } from '../styles/fonts';
 import { fontWeightSubtitle2 } from '../styles/fonts';
 
-const PrimaryButton = (props: { onPress: ((event: GestureResponderEvent) => void); label: string; }) => {
+const PrimaryButton = (props: { onPress: ((event: GestureResponderEvent) => void); label: string; isDark?: boolean }) => {
 
   return (
-    <View style={[styles.button, styles.elevation]}>
+    <View style={[props.isDark ? styles.button : styles.buttonLight, styles.elevation]}>
       <InsetShadow containerStyle={styles.shadow}
         shadowRadius={5}
         shadowOffset={10}
@@ -18,10 +18,10 @@ const PrimaryButton = (props: { onPress: ((event: GestureResponderEvent) => void
           onPress={props.onPress}
           style={({ pressed, }) => [
             pressed ? styles.pressedShadow : styles.shadowProp,
-            styles.button
+            props.isDark ? styles.button : styles.buttonLight
           ]}
         >
-          <Text style={styles.text}>{props.label}</Text>
+          <Text style={props.isDark ? styles.text : styles.textLight}>{props.label}</Text>
         </Pressable>
       </InsetShadow>
     </View>
@@ -34,6 +34,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: colors.primary.primaryPurpleDark,
+    borderRadius: 22,
+    width: 330,
+    height: 42,
+  },
+  buttonLight: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.primary.primaryPurpleLight,
     borderRadius: 22,
     width: 330,
     height: 42,
@@ -59,6 +68,12 @@ const styles = StyleSheet.create({
   },
   text: {
     color: colors.neutral.surfaceBlack,
+    fontSize: fontSize.body,
+    fontFamily: fontFamily.body,
+    fontWeight: fontWeightSubtitle2,
+  },
+  textLight: {
+    color: colors.neutral.backgroundWhite,
     fontSize: fontSize.body,
     fontFamily: fontFamily.body,
     fontWeight: fontWeightSubtitle2,

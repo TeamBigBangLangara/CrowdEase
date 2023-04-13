@@ -15,8 +15,11 @@ import PrimaryButton from "../components/PrimaryButton";
 import { getUser } from "../auth/user";
 import { Bookmark, LoggedUser } from "types/types";
 import SecondaryButton from "../components/SecondaryButton";
+import { storage } from "../store/mmkv";
 
 const EventDetailsScreen = ({ route, navigation, }: MainStackNavigationProps<"EventDetailsScreen"> | EventsStackNavigationProps<"EventDetailsScreen">) => {
+  const isDark = storage.getBoolean("darkMode");
+
   const mapRef = React.useRef<any>(null);
   const queryClient = useQueryClient();
   const { eventId, } = route.params;
@@ -26,10 +29,10 @@ const EventDetailsScreen = ({ route, navigation, }: MainStackNavigationProps<"Ev
   const [notificationId, setNotificationId] = useState("");
 
   useQuery("getUserData", getUser, {
-      onSuccess: (data: LoggedUser) => {
-        setUserInfo(data);
-      },
-    }
+    onSuccess: (data: LoggedUser) => {
+      setUserInfo(data);
+    },
+  }
   );
 
   const requestEventById = useQuery("eventDetail", () => getEventById(eventId),
@@ -40,17 +43,17 @@ const EventDetailsScreen = ({ route, navigation, }: MainStackNavigationProps<"Ev
     });
 
   useQuery("bookmarks", () => {
-      return fetchBookmarks(userInfo.uid);
-    }, {
-      onSuccess: (data) => {
-        const bookmark = data.find((bookmark: Bookmark) => bookmark.event_id === eventId);
-        if (bookmark) {
-          setBookmarkId(bookmark._id);
-          setIsBookmarkAdded(true);
-        }
-      },
-      enabled: !!userInfo.uid,
-    }
+    return fetchBookmarks(userInfo.uid);
+  }, {
+    onSuccess: (data) => {
+      const bookmark = data.find((bookmark: Bookmark) => bookmark.event_id === eventId);
+      if (bookmark) {
+        setBookmarkId(bookmark._id);
+        setIsBookmarkAdded(true);
+      }
+    },
+    enabled: !!userInfo.uid,
+  }
   );
 
   const saveBookmark = useMutation(["bookmarks"], () => addBookmark({
@@ -77,10 +80,10 @@ const EventDetailsScreen = ({ route, navigation, }: MainStackNavigationProps<"Ev
   });
 
   const saveNotification = useMutation(["notifications"], () => createNotification(
-      requestEventById.data!.dates.date,
-      eventId,
-      requestEventById.data!.name,
-      requestEventById.data!.image),
+    requestEventById.data!.dates.date,
+    eventId,
+    requestEventById.data!.name,
+    requestEventById.data!.image),
     {
       onSuccess: (data) => {
         setNotificationId(data);
@@ -129,11 +132,13 @@ const EventDetailsScreen = ({ route, navigation, }: MainStackNavigationProps<"Ev
     if (isBookmarkAdded) {
       return <SecondaryButton
         onPress={onBookMarkButtonPress}
-        label={"Remove Bookmark"} />;
+        label={"Remove Bookmark"} 
+        isDark={isDark}/>;
     } else {
       return <PrimaryButton
         onPress={onBookMarkButtonPress}
-        label={"Add to Bookmark"} />;
+        label={"Add to Bookmark"}
+        isDark={isDark} />;
     }
   };
 
@@ -170,9 +175,9 @@ const EventDetailsScreen = ({ route, navigation, }: MainStackNavigationProps<"Ev
   return (
     <SafeAreaView>
       <ScrollView style={styles.container}>
-        <Pressable onPress={() => navigation.goBack()} style={styles.backButton}>
-          <Image source={require("../assets/icons/leftIcon.png")} />
-        </Pressable>
+          <Pressable onPress={() => navigation.goBack()} style={styles.backButton}>
+            <Image source={require("../assets/icons/leftIcon.png")} style={styles.backImage}/>
+          </Pressable>
         <Image source={{ uri: requestEventById.data?.image, }} style={styles.image} />
         <View style={styles.nameContainer}>
           <View style={styles.participantsContainer}>
@@ -186,15 +191,21 @@ const EventDetailsScreen = ({ route, navigation, }: MainStackNavigationProps<"Ev
           <IconText
             icon={require("../assets/icons/calendar.png")}
             text={formattedDate}
-            style={styles.iconText} />
+            style={styles.iconText}
+            isDark={isDark}
+          />
           <IconText
             icon={require("../assets/icons/pin.png")}
             text={requestEventById.data?.address}
-            style={styles.iconText} />
+            style={styles.iconText}
+            isDark={isDark}
+          />
           <IconText
             icon={require("../assets/icons/category.png")}
             text={requestEventById.data?.category.name}
-            style={styles.iconText} />
+            style={styles.iconText}
+            isDark={isDark}
+          />
         </View>
         <View>
           <Text style={styles.title}>About</Text>
@@ -225,7 +236,10 @@ const styles = StyleSheet.create({
     top: 15,
     left: 5,
     zIndex: 10,
-
+  },
+  backImage: {
+width: 30,
+height: 30
   },
   nameContainer: {
     flexDirection: "row",
@@ -245,6 +259,7 @@ const styles = StyleSheet.create({
   image: {
     height: 200,
     marginHorizontal: -20,
+    marginTop: 50
   },
   number: {
     fontFamily: fontFamily.subtitle,

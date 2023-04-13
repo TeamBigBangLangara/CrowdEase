@@ -4,7 +4,8 @@ import { Image, Pressable } from "react-native";
 const BookmarkButton = (props: {
   eventId?: string, userID?: string,
   isBookmarkAdded: boolean,
-  onBookmarkPress?: () => void
+  onBookmarkPress?: () => void,
+  isDark?: boolean
 }) => {
 
   return (
@@ -12,7 +13,7 @@ const BookmarkButton = (props: {
       {
         props.isBookmarkAdded ? (
             <Image source={require("../assets/icons/bookmarkSaved.png")} />)
-          : (<Image source={require("../assets/icons/bookmark.png")} />)
+          : (<Image source={props.isDark ? require("../assets/icons/bookmark.png") : require("../assets/icons/lightMode/bookmark.png")} />)
       }
     </Pressable>
   );

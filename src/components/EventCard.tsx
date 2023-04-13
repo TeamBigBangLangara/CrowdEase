@@ -12,6 +12,7 @@ import { fontFamily, fontSize } from "../styles/fonts";
 import { timeFormat } from "../utils/timeFormat";
 import { addBookmark, removeBookmark } from "../api/bigBangAPI/bookmark";
 import { cancelNotification, createNotification } from "../api/oneSignal";
+import { storage } from "../store/mmkv";
 
 const EventCard = (props: {
   event: Event
@@ -20,6 +21,7 @@ const EventCard = (props: {
   bookmarkId?: string
   onEventCardPress?: () => void
 }) => {
+  const isDark = storage.getBoolean("darkMode");
 
   const [showRating, setShowRating] = useState(false);
   const [isBookmarkAdded, setIsBookmarkAdded] = useState(false);
@@ -57,30 +59,30 @@ const EventCard = (props: {
   });
 
   const saveNotification = useMutation(["createNewNotification"], () => createNotification(props.event.dates.date,props.event.id, props.event.name, props.event.image),
-   {
-    onSuccess: (data) => {
-      console.log(data);
-      setNotificationId(data);
-    },
-    onError: () => {
+    {
+      onSuccess: (data) => {
+        console.log(data);
+        setNotificationId(data);
+      },
+      onError: () => {
         console.log("Something went wrong, please try again.");
-    },
-  });
+      },
+    });
 
   const deleteNotification = useMutation(["deleteNotification"], () => cancelNotification(notificationId),
-   {
-    onError: () => {
-      console.log("Something went wrong, please try again.");
-    },
-  });
+    {
+      onError: () => {
+        console.log("Something went wrong, please try again.");
+      },
+    });
 
   const onBookmarkPress = () => {
     if(!isBookmarkAdded)
     {
       try{
-      saveBookmark.mutate();
-      saveNotification.mutate();
-      setIsBookmarkAdded(!isBookmarkAdded);
+        saveBookmark.mutate();
+        saveNotification.mutate();
+        setIsBookmarkAdded(!isBookmarkAdded);
       }
       catch(error){
         Alert.alert('Unable to save data' +error);
@@ -88,14 +90,14 @@ const EventCard = (props: {
     }
     else{
       try{
-         deleteBookmark.mutate();
-         if(notificationId !== undefined)
-          {
-            deleteNotification.mutate();
-          }
-          setNotificationId('');
-          setIsBookmarkAdded(!isBookmarkAdded);
+        deleteBookmark.mutate();
+        if(notificationId !== undefined)
+        {
+          deleteNotification.mutate();
         }
+        setNotificationId('');
+        setIsBookmarkAdded(!isBookmarkAdded);
+      }
       catch(error){
         Alert.alert('Unable to save data' +error);
       }
@@ -113,7 +115,7 @@ const EventCard = (props: {
     } else {
       return (
         <View>
-          <Text style={styles.label}>{timeFormat(props.event.dates.time)}</Text>
+          <Text style={isDark ? styles.label : lightModeStyles.label}>{timeFormat(props.event.dates.time)}</Text>
         </View>
       );
     }
@@ -126,6 +128,7 @@ const EventCard = (props: {
         userID={props.userId}
         isBookmarkAdded={isBookmarkAdded}
         onBookmarkPress={onBookmarkPress}
+        isDark={isDark}
       />;
     }
   };
@@ -162,22 +165,23 @@ const EventCard = (props: {
 
   return (
     <Pressable onPress={props.onEventCardPress}>
-      <View style={styles.container}>
+      <View style={isDark ? styles.container : lightModeStyles.container}>
         {renderDragUpButton()}
         <View style={styles.eventContainer}>
           <Image source={{ uri: props.event.image, }} style={styles.eventImage} />
           <View style={styles.leftContainer}>
             <View style={styles.upContainer}>
               {renderDate()}
-              <Text style={styles.eventTitle} numberOfLines={1}>{props.event.name}</Text>
-              <IconText icon={require("../assets/icons/pin.png")} numberOfLines={1} text={props.event.address}
-                        style={styles.icon} />
+              <Text style={isDark ? styles.eventTitle : lightModeStyles.eventTitle} numberOfLines={1}>{props.event.name}</Text>
+              <IconText icon={isDark ? require("../assets/icons/pin.png") : require("../assets/icons/lightMode/location.png")} numberOfLines={1} text={props.event.address}
+                        style={isDark ? styles.icon : lightModeStyles.icon} isDark={isDark} />
             </View>
             <View style={styles.participantsContainer}>
               <IconText
-                icon={require("../assets/icons/participants.png")}
+                icon={isDark ? require("../assets/icons/participants.png") : require("../assets/icons/lightMode/Participants.png")}
                 text={`${props.event.participants} participants`}
-                style={styles.icon}
+                style={isDark ? styles.icon : lightModeStyles.icon}
+                isDark={isDark}
               />
               {renderBookmarkButton()}
             </View>
@@ -250,6 +254,46 @@ const styles = StyleSheet.create({
   },
   icon: {
     alignItems: "flex-end",
+  },
+});
+
+const lightModeStyles = StyleSheet.create({
+  container: {
+    backgroundColor: colors.neutral.backgroundWhite,
+    paddingHorizontal: 24,
+    paddingVertical: 16,
+    flexDirection: "column",
+    display: "flex",
+    borderRadius: 22,
+    marginVertical: 8,
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1, },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+    //add an inset shadow using negative elevation
+    insetShadow: {
+      elevation: -4,
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 4, },
+      shadowOpacity: 0.1,
+      shadowRadius: 6,
+    },
+  },
+  label: {
+    color: colors.neutral.surfaceBlack,
+    fontSize: fontSize.body,
+    lineHeight: 18,
+    fontFamily: fontFamily.body,
+  },
+  eventTitle: {
+    fontSize: fontSize.subtitle2,
+    color: colors.neutral.surfaceBlack,
+    fontFamily: fontFamily.body,
+  },
+  icon: {
+    alignItems: "flex-end",
+    color: colors.neutral.surfaceBlack,
   },
 });
 

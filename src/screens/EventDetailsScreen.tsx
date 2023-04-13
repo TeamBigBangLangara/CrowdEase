@@ -132,11 +132,13 @@ const EventDetailsScreen = ({ route, navigation, }: MainStackNavigationProps<"Ev
     if (isBookmarkAdded) {
       return <SecondaryButton
         onPress={onBookMarkButtonPress}
-        label={"Remove Bookmark"} />;
+        label={"Remove Bookmark"} 
+        isDark={isDark}/>;
     } else {
       return <PrimaryButton
         onPress={onBookMarkButtonPress}
-        label={"Add to Bookmark"} />;
+        label={"Add to Bookmark"}
+        isDark={isDark} />;
     }
   };
 

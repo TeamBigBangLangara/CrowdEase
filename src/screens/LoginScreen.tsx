@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Pressable, Alert, ImageBackground, Image, TouchableHighlight } from 'react-native';
 
 import { isEmailValid } from '../utils/email';
+import { isPasswordValid } from '../utils/password';
 import { onGoogleButtonPress } from '../auth/googleSignIn';
 import { signIn } from '../auth/user';
 import { AuthStackNavigationProps } from '../types/navigationTypes';
@@ -27,7 +28,7 @@ const LoginScreen = ({ navigation, }: AuthStackNavigationProps<'LoginScreen'>) =
   };
 
   const loginValidation = (): boolean => {
-    if (isEmailValid(email)) {
+    if (isEmailValid(email) && isPasswordValid(password)) {
       return true;
     } else {
       Alert.alert('Error', 'Invalid Email');

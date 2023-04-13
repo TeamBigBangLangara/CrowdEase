@@ -5,6 +5,7 @@ import { isEmailValid } from '../utils/email';
 import { isPasswordValid } from '../utils/password';
 import { AuthStackNavigationProps } from '../types/navigationTypes';
 import PrimaryButton from '../components/PrimaryButton';
+import { isBusinessNameValid } from '../utils/businessNameValidor';
 
 const SignUpScreen = ({ navigation, }: AuthStackNavigationProps<'SignUpScreen'>) => {
   const [email, setEmail] = useState('');
@@ -38,9 +39,7 @@ const SignUpScreen = ({ navigation, }: AuthStackNavigationProps<'SignUpScreen'>)
   };
 
   const signUpValidation = (): boolean => {
-    if (isEmailValid(email)) {
-    }
-    if (isPasswordValid(password)) {
+    if (isEmailValid(email) && isPasswordValid(password) && isBusinessNameValid(businessName)) {
       return true;
     } else {
       Alert.alert('Error', 'Invalid Email or Password');

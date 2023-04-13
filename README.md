@@ -5,8 +5,7 @@ To setup your API keys, create a config file called env.js and place it in your 
 
 The following keys are needed to run this application: 
 
-OneSignal App ID
-OneSignal Rest API Key
+OneSignal App ID & OneSignal Rest API Key
 (Refer: https://documentation.onesignal.com/docs/keys-and-ids)
 
 Ticketmaster API 

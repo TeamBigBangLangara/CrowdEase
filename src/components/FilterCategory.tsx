@@ -7,6 +7,7 @@ import { colors } from "../styles/colors";
 import PrimaryButton from "./PrimaryButton";
 import LinkButton from "./LinkButton";
 import { TypeCategoryFilter } from "../screens/EventScreen";
+import { storage } from '../store/mmkv';
 
 //////////////////////// FILTER PRESSABLE COMPONENT ////////////////////////
 const EventCategoryPressable = (props: {name: string, icon?: any, categoryFilterArray: TypeCategoryFilter[], clearAllTrigger: number}) => {
@@ -14,6 +15,7 @@ const EventCategoryPressable = (props: {name: string, icon?: any, categoryFilter
   const categoryFilterObject = props.categoryFilterArray.find(item => item.category === props.name);
   //Get if the corresponding object is active or not
   const [isSelected, setIsSelected] = useState(categoryFilterObject?.isActive);
+  // const [isDark, setIsDark] = useState(storage.getBoolean("darkMode") || false);
 
   useEffect(() => {
     if (props.clearAllTrigger) {
@@ -60,6 +62,7 @@ const FilterCategory = (props: {
   ) => {
 
   const [clearAllTrigger, setClearAllTrigger] = useState(0);
+  const [isDark, setIsDark] = useState(storage.getBoolean("darkMode") || true);
 
   //Category Filter Array
   const updatedCategoryFilter = props.categoryFilterArray;
@@ -124,7 +127,7 @@ const FilterCategory = (props: {
               </View>
             </View>
 
-            <PrimaryButton onPress={applyFilterHandler} label={"Apply Filter"}/>
+            <PrimaryButton onPress={applyFilterHandler} label={"Apply Filter"} isDark={isDark}/>
           </View>
         </View>
       </Modal>

@@ -1,5 +1,4 @@
-
-import { getEvents } from "../api/event";
+import { getEvents } from "../api/bigBangAPI/JsonEvents";
 import { useState } from "react";
 import { Alert, StyleSheet, View, Text } from "react-native";
 import { useQuery } from "react-query";
@@ -31,7 +30,7 @@ const DataVisualization = () => {
     { day: "SUN", value: 0, }
   ];
   
-  requestEvents.data?.forEach((event) => {
+  requestEvents.data?.forEach((event: { dates: { date: string; }; participants: number; }) => {
     for (let i = 0; i < 7; i++) {
       if (event.dates.date === week[i]) {
         data[i].value += event.participants;

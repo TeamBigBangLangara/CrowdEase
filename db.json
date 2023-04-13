@@ -1,0 +1,257 @@
+{
+  "events": [
+    {
+      "address": "800 Griffiths Way",
+      "category": { "id": "KZFzniwnSyZfZ7v7nE", "name": "Sports" },
+      "dates": { "date": "2023-04-03", "time": "19:00:00" },
+      "id": "G5v7Z989IRPGm",
+      "image": "https://s1.ticketm.net/dam/a/33e/6d629753-e609-4bc2-b8f2-5ed321ccb33e_1277151_RECOMENDATION_16_9.jpg",
+      "location": { "latitude": "49.2776612", "longitude": "-123.1081074" },
+      "name": "Vancouver Canucks vs. Chicago Blackhawks",
+      "participants": 10569,
+      "venue": { "id": "KovZpZAFFInA", "name": "Rogers Arena", "type": "venue" }
+    },
+    {
+      "address": "800 Griffiths Way",
+      "category": { "id": "KZFzniwnSyZfZ7v7nJ", "name": "Music" },
+      "dates": { "date": "2023-05-02", "time": "19:30:00" },
+      "id": "G5v7Z94lcIfq4",
+      "image": "https://s1.ticketm.net/dam/a/1d1/47cc9b10-4904-4dec-b1d6-539e44a521d1_1825531_RETINA_PORTRAIT_3_2.jpg",
+      "location": { "latitude": "49.2776612", "longitude": "-123.1081074" },
+      "name": "Shania Twain: Queen Of Me Tour",
+      "participants": 11229,
+      "venue": { "id": "KovZpZAFFInA", "name": "Rogers Arena", "type": "venue" }
+    },
+    {
+      "address": "800 Griffiths Way",
+      "category": { "id": "KZFzniwnSyZfZ7v7nJ", "name": "Music" },
+      "dates": { "date": "2023-05-03", "time": "19:30:00" },
+      "id": "G5v7Z94lctfq9",
+      "image": "https://s1.ticketm.net/dam/a/1d1/47cc9b10-4904-4dec-b1d6-539e44a521d1_1825531_RETINA_PORTRAIT_3_2.jpg",
+      "location": { "latitude": "49.2776612", "longitude": "-123.1081074" },
+      "name": "Shania Twain: Queen Of Me Tour",
+      "participants": 3519,
+      "venue": { "id": "KovZpZAFFInA", "name": "Rogers Arena", "type": "venue" }
+    },
+    {
+      "address": "777 Pacific Blvd.",
+      "category": { "id": "KZFzniwnSyZfZ7v7nJ", "name": "Music" },
+      "dates": { "date": "2023-09-11", "time": "19:00:00" },
+      "id": "G5v7Z9NDH875m",
+      "image": "https://s1.ticketm.net/dam/a/9ff/750d0e9b-b2c2-4b82-8898-edb3d8dca9ff_SOURCE",
+      "location": { "latitude": "49.2760688", "longitude": "-123.1127117" },
+      "name": "BEYONCÉ - RENAISSANCE WORLD TOUR",
+      "participants": 11666,
+      "venue": { "id": "KovZpZAJdn6A", "name": "BC Place", "type": "venue" }
+    },
+    {
+      "address": "777 Pacific Blvd.",
+      "category": { "id": "KZFzniwnSyZfZ7v7nJ", "name": "Music" },
+      "dates": { "date": "2023-04-08", "time": "19:00:00" },
+      "id": "G5v7Z9NDH875im",
+      "image": "https://s1.ticketm.net/dam/a/9ff/750d0e9b-b2c2-4b82-8898-edb3d8dca9ff_SOURCE",
+      "location": { "latitude": "49.2760688", "longitude": "-123.1127117" },
+      "name": "BEYONCÉ - RENAISSANCE WORLD TOUR",
+      "participants": 11666,
+      "venue": { "id": "KovZpZAJdn6A", "name": "BC Place", "type": "venue" }
+    },
+    {
+      "address": "800 Griffiths Way",
+      "category": { "id": "KZFzniwnSyZfZ7v7nJ", "name": "Music" },
+      "dates": { "date": "2023-10-20", "time": "19:30:00" },
+      "id": "G5v7Z90w6cvZ4",
+      "image": "https://s1.ticketm.net/dam/a/4c8/cee4224d-ed9f-4267-81a4-61be2a1f44c8_ARTIST_PAGE_3_2.jpg",
+      "location": { "latitude": "49.2776612", "longitude": "-123.1081074" },
+      "name": "P!NK: TRUSTFALL TOUR",
+      "participants": 8435,
+      "venue": { "id": "KovZpZAFFInA", "name": "Rogers Arena", "type": "venue" }
+    },
+    {
+      "address": "800 Griffiths Way",
+      "category": { "id": "KZFzniwnSyZfZ7v7nJ", "name": "Music" },
+      "dates": { "date": "2023-04-09", "time": "19:30:00" },
+      "id": "G5v7Z90w6cvZ34",
+      "image": "https://s1.ticketm.net/dam/a/4c8/cee4224d-ed9f-4267-81a4-61be2a1f44c8_ARTIST_PAGE_3_2.jpg",
+      "location": { "latitude": "49.2776612", "longitude": "-123.1081074" },
+      "name": "P!NK: TRUSTFALL TOUR",
+      "participants": 8435,
+      "venue": { "id": "KovZpZAFFInA", "name": "Rogers Arena", "type": "venue" }
+    },
+    {
+      "address": "800 Griffiths Way",
+      "category": { "id": "KZFzniwnSyZfZ7v7nJ", "name": "Music" },
+      "dates": { "date": "2023-10-21", "time": "19:30:00" },
+      "id": "G5v7Z90w1u-vB",
+      "image": "https://s1.ticketm.net/dam/a/4c8/cee4224d-ed9f-4267-81a4-61be2a1f44c8_ARTIST_PAGE_3_2.jpg",
+      "location": { "latitude": "49.2776612", "longitude": "-123.1081074" },
+      "name": "P!NK: TRUSTFALL TOUR",
+      "participants": 11158,
+      "venue": { "id": "KovZpZAFFInA", "name": "Rogers Arena", "type": "venue" }
+    },
+    {
+      "address": "800 Griffiths Way",
+      "category": { "id": "KZFzniwnSyZfZ7v7nJ", "name": "Music" },
+      "dates": { "date": "2023-11-14", "time": "19:30:00" },
+      "id": "G5v7Z9bCdWsf1",
+      "image": "https://s1.ticketm.net/dam/a/1d1/47cc9b10-4904-4dec-b1d6-539e44a521d1_1825531_RETINA_PORTRAIT_3_2.jpg",
+      "location": { "latitude": "49.2776612", "longitude": "-123.1081074" },
+      "name": "Shania Twain: Queen Of Me Tour",
+      "participants": 4015,
+      "venue": { "id": "KovZpZAFFInA", "name": "Rogers Arena", "type": "venue" }
+    },
+    {
+      "address": "800 Griffiths Way",
+      "category": { "id": "KZFzniwnSyZfZ7v7nJ", "name": "Music" },
+      "dates": { "date": "2023-04-03", "time": "19:30:00" },
+      "id": "G5v7Z9bCdWsf12",
+      "image": "https://s1.ticketm.net/dam/a/1d1/47cc9b10-4904-4dec-b1d6-539e44a521d1_1825531_RETINA_PORTRAIT_3_2.jpg",
+      "location": { "latitude": "49.2776612", "longitude": "-123.1081074" },
+      "name": "Shania Twain: Queen Of Me Tour",
+      "participants": 4015,
+      "venue": { "id": "KovZpZAFFInA", "name": "Rogers Arena", "type": "venue" }
+    },
+    {
+      "address": "100 N. Renfrew St.",
+      "category": { "id": "KZFzniwnSyZfZ7v7nJ", "name": "Music" },
+      "dates": { "date": "2023-04-06", "time": "17:00:00" },
+      "id": "G5v7Z90xnt3xj",
+      "image": "https://s1.ticketm.net/dam/c/df8/81eadad8-4449-412e-a2b1-3d8bbb78edf8_106181_EVENT_DETAIL_PAGE_16_9.jpg",
+      "location": { "latitude": "49.288227", "longitude": "-123.0440748" },
+      "name": "Foundation presents John Summit, Green Velvet, Eli & Fur, Maine & more",
+      "participants": 3857,
+      "venue": { "id": "KovZpZAavE7A", "name": "PNE Forum", "type": "venue" }
+    },
+    {
+      "address": "800 Griffiths Way",
+      "category": { "id": "KZFzniwnSyZfZ7v7nE", "name": "Sports" },
+      "dates": { "date": "2023-04-04", "time": "19:00:00" },
+      "id": "G5v7Z989ImgGt",
+      "image": "https://s1.ticketm.net/dam/a/33e/6d629753-e609-4bc2-b8f2-5ed321ccb33e_1277151_RECOMENDATION_16_9.jpg",
+      "location": { "latitude": "49.2776612", "longitude": "-123.1081074" },
+      "name": "Vancouver Canucks vs. Seattle Kraken",
+      "participants": 7618,
+      "venue": { "id": "KovZpZAFFInA", "name": "Rogers Arena", "type": "venue" }
+    },
+    {
+      "address": "#3 Centennial Square Pandora at Government",
+      "category": { "id": "KZFzniwnSyZfZ7v7nJ", "name": "Music" },
+      "dates": { "date": "2023-04-04", "time": "20:00:00" },
+      "id": "G5v7Z991dw-ED",
+      "image": "https://s1.ticketm.net/dam/a/15f/ee5fc143-3abb-419d-8f93-c1cd0c01715f_1845591_ARTIST_PAGE_3_2.jpg",
+      "location": { "latitude": "48.4230937", "longitude": "-123.3611373" },
+      "name": "Matt Andersen & the Big Bottle of Joy",
+      "participants": 5953,
+      "venue": { "id": "KovZpaCJje", "name": "MCPHERSON PLAYHOUSE", "type": "venue" }
+    },
+    {
+      "address": "125 Front Street",
+      "category": { "id": "KZFzniwnSyZfZ7v7nJ", "name": "Music" },
+      "dates": { "date": "2023-04-04", "time": "20:00:00" },
+      "id": "G5v7Z9EcDNvrR",
+      "image": "https://s1.ticketm.net/dam/a/dca/9cefb4b7-2206-43f8-a6ec-27b8305b9dca_1109701_TABLET_LANDSCAPE_3_2.jpg",
+      "location": { "latitude": "49.16592", "longitude": "-123.9352986" },
+      "name": "Herb Alpert & Lani Hall",
+      "participants": 9000,
+      "venue": { "id": "KovZpZAkJv7A", "name": "Port Theatre", "type": "venue" }
+    },
+    {
+      "address": "777 Pacific Blvd.",
+      "category": { "id": "KZFzniwnSyZfZ7v7nE", "name": "Sports" },
+      "dates": { "date": "2023-04-05", "time": "19:00:00" },
+      "id": "G5v7Z9JlwI4Nv",
+      "image": "https://s1.ticketm.net/dam/a/5be/eb5e9aed-48f8-45f1-bcab-5e4e971415be_1334151_EVENT_DETAIL_PAGE_16_9.jpg",
+      "location": { "latitude": "49.2760688", "longitude": "-123.1127117" },
+      "name": "CONCACAF Champions League: Vancouver Whitecaps FC vs LAFC",
+      "participants": 5712,
+      "venue": { "id": "KovZpZAJdn6A", "name": "BC Place", "type": "venue" }
+    },
+    {
+      "address": "868 Granville St.",
+      "category": { "id": "KZFzniwnSyZfZ7v7nJ", "name": "Music" },
+      "dates": { "date": "2023-04-04", "time": "19:30:00" },
+      "id": "G5v7Z9b5uB0aY",
+      "image": "https://s1.ticketm.net/dam/a/08c/397a6be9-7a58-4671-b57f-f4b05ce9308c_RETINA_PORTRAIT_3_2.jpg",
+      "location": { "latitude": "49.2806462", "longitude": "-123.1208652" },
+      "name": "Theo Katzman",
+      "participants": 4297,
+      "venue": { "id": "KovZpZAEkklA", "name": "Commodore Ballroom", "type": "venue" }
+    },
+    {
+      "address": "395 Kingsway",
+      "category": { "id": "KZFzniwnSyZfZ7v7nJ", "name": "Music" },
+      "dates": { "date": "2023-04-06", "time": "20:00:00" },
+      "id": "G5v7Z9xQ_aoHl",
+      "image": "https://s1.ticketm.net/dam/a/889/301d0538-df36-4c4a-89f8-866d66949889_1774511_EVENT_DETAIL_PAGE_16_9.jpg",
+      "location": { "latitude": "49.2599155", "longitude": "-123.0964901" },
+      "name": "BoomBox",
+      "participants": 9393,
+      "venue": { "id": "KovZpZAae7JA", "name": "BILTMORE CABARET", "type": "venue" }
+    },
+    {
+      "address": "868 Granville St.",
+      "category": { "id": "KZFzniwnSyZfZ7v7nJ", "name": "Music" },
+      "dates": { "date": "2023-04-06", "time": "20:00:00" },
+      "id": "G5v7Z9xlvRepW",
+      "image": "https://s1.ticketm.net/dam/a/967/b8e34613-1ea2-4b3e-aa3a-06e1d5d87967_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+      "location": { "latitude": "49.2806462", "longitude": "-123.1208652" },
+      "name": "Yaeji",
+      "participants": 7527,
+      "venue": { "id": "KovZpZAEkklA", "name": "Commodore Ballroom", "type": "venue" }
+    },
+    {
+      "address": "1022 Davie Street, Vancouver, BC V6E 1M3",
+      "category": { "id": "KZFzniwnSyZfZ7v7nJ", "name": "Music" },
+      "dates": { "date": "2023-04-07", "time": "22:00:00" },
+      "id": "G5e0Z9EoeYeWf",
+      "image": "https://s1.ticketm.net/dam/c/48b/2352e3b5-8496-496b-97a3-e605177e848b_105851_RETINA_LANDSCAPE_16_9.jpg",
+      "location": { "latitude": "49.279672", "longitude": "-123.130293" },
+      "name": "Sold Out - Real Love",
+      "participants": 2872,
+      "venue": { "id": "KovZpZAkal7A", "name": "Celebrities", "type": "venue" }
+    },
+    {
+      "address": "33800 King Rd",
+      "category": { "id": "KZFzniwnSyZfZ7v7nE", "name": "Sports" },
+      "dates": { "date": "2023-04-07", "time": "19:00:00" },
+      "id": "G5v7Z98HuDgKK",
+      "image": "https://s1.ticketm.net/dam/a/bbc/bd5ffb53-6faf-46da-8fc2-9eb42c622bbc_1520031_EVENT_DETAIL_PAGE_16_9.jpg",
+      "location": { "latitude": "49.030235", "longitude": "-122.287062" },
+      "name": "Abbotsford Canucks vs. Ontario Reign",
+      "participants": 6182,
+      "venue": { "id": "KovZpZA7A7EA", "name": "Abbotsford Centre", "type": "venue" }
+    },
+    {
+      "address": "#3 Centennial Square Pandora at Government",
+      "category": { "id": "KZFzniwnSyZfZ7v7nJ", "name": "Music" },
+      "dates": { "date": "2023-04-07", "time": "20:00:00" },
+      "id": "G5v7Z9EcDVvrW",
+      "image": "https://s1.ticketm.net/dam/a/dca/9cefb4b7-2206-43f8-a6ec-27b8305b9dca_1109701_TABLET_LANDSCAPE_3_2.jpg",
+      "location": { "latitude": "48.4230937", "longitude": "-123.3611373" },
+      "name": "Herb Alpert & Lani Hall",
+      "participants": 6854,
+      "venue": { "id": "KovZpaCJje", "name": "MCPHERSON PLAYHOUSE", "type": "venue" }
+    },
+    {
+      "address": "100 N. Renfrew St.",
+      "category": { "id": "KZFzniwnSyZfZ7v7nJ", "name": "Music" },
+      "dates": { "date": "2023-04-07", "time": "19:30:00" },
+      "id": "G5v7Z9NJkpopt",
+      "image": "https://s1.ticketm.net/dam/a/68f/81fe48f6-6743-4a54-aaa3-727a08eb868f_ARTIST_PAGE_3_2.jpg",
+      "location": { "latitude": "49.288227", "longitude": "-123.0440748" },
+      "name": "100 gecs present: 10,000 gecs tour 2 with Machine Girl",
+      "participants": 7069,
+      "venue": { "id": "KovZpZAavE7A", "name": "PNE Forum", "type": "venue" }
+    },
+    {
+      "address": "868 Granville St.",
+      "category": { "id": "KZFzniwnSyZfZ7v7nJ", "name": "Music" },
+      "dates": { "date": "2023-04-07", "time": "22:30:00" },
+      "id": "G5v7Z9xnhhvc9",
+      "image": "https://s1.ticketm.net/dam/a/2aa/d4d04317-ecd5-41e3-8bf7-bde899e442aa_1685171_RETINA_PORTRAIT_3_2.jpg",
+      "location": { "latitude": "49.2806462", "longitude": "-123.1208652" },
+      "name": "Dr. Fresch",
+      "participants": 2808,
+      "venue": { "id": "KovZpZAEkklA", "name": "Commodore Ballroom", "type": "venue" }
+    }
+  ]
+}

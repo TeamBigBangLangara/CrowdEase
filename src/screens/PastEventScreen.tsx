@@ -1,6 +1,6 @@
 import { Alert, FlatList, SafeAreaView, StyleSheet } from "react-native";
 import { useQuery } from "react-query";
-import { getEvents } from "../api/event";
+import { getEvents } from "../api/bigBangAPI/JsonEvents";
 
 import EventCard from "../components/EventCard";
 import { getUser } from "../auth/user";
@@ -45,10 +45,13 @@ const PastEventScreen = () => {
     }
   };
 
+  const currentDate = new Date().toISOString().slice(0, 10);
+  const pastEvents = mergeRatingAndEvents()?.filter((event) => event.dates.date < currentDate);
+
   return (
     <SafeAreaView style={{ flex: 1, }}>
       <FlatList
-        data={mergeRatingAndEvents()}
+        data={pastEvents}
         renderItem={({ item, }) =>
           <EventCard
             key={item.id}

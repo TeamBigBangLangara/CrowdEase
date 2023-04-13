@@ -24,7 +24,7 @@ const CustomAlert = (props: { onOkPress: () => void }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'rgba(1,1,1,.9)',
+    backgroundColor: 'rgba(33,33,33,0.95)',
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -39,7 +39,8 @@ const styles = StyleSheet.create({
     fontFamily: fontFamily.subtitle,
     fontSize: fontSize.subtitle2,
     fontWeight: fontWeightSubtitle2,
-    textAlign: 'center'
+    textAlign: 'center',
+    color: colors.neutral.surfaceWhite
   },
   gif: {
     height: '80%',
@@ -50,7 +51,8 @@ const styles = StyleSheet.create({
     // fontFamily: fontFamily.subtitle,
     fontSize: fontSize.subtitle2,
     fontWeight: fontWeightSubtitle2,
-    textAlign: 'right'
+    textAlign: 'right',
+    color: colors.neutral.surfaceWhite
   },
 })
 export default CustomAlert;

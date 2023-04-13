@@ -41,7 +41,7 @@ export const getEvents = () => {
 };
 
 export const getEventById = (id: string) => {
-  return fetch(`${baseURL}events/${id}?apikey=${REACT_EVENTS_APIKEY}`)
+  return fetch(`${baseURL}events/${id}?apikey=${env.REACT_EVENTS_APIKEY}`)
     .then((res) => {return res.json();})
     .then((data) => {
         const response = JSON.parse(JSON.stringify(data));

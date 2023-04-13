@@ -14,11 +14,11 @@ import { getDate } from "../utils/getDate";
 import { borderRadius } from "../styles/basic";
 import EventCarousel from "../components/EventCarousel";
 import { getEvents } from "../api/event";
-import { REACT_ONESIGNAL_APP_ID } from "@env";
+import { env } from "../../env";
 
 import OneSignal from "react-native-onesignal";
 
-const ONESIGNAL_APP_ID = REACT_ONESIGNAL_APP_ID;
+const ONESIGNAL_APP_ID = env.REACT_ONESIGNAL_APP_ID;
 
 // Get the dates
 const { formattedFirstDay, formattedLastDay, today, todayFormatted, week, getWeekday, } = getDate();

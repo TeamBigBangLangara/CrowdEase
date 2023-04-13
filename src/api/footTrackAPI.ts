@@ -1,7 +1,7 @@
-import { REACT_BESTTIME_APIKEY } from "@env";
+import { env } from "../../env";
 
 const params = new URLSearchParams({
-  'api_key_private': REACT_BESTTIME_APIKEY,
+  'api_key_private': env.REACT_BESTTIME_APIKEY,
 });
 
 export const getCrowd = () => {

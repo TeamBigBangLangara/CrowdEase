@@ -144,7 +144,7 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
   };
 
   // OneSignal Initialization
-  OneSignal.setAppId(REACT_ONESIGNAL_APP_ID);
+  OneSignal.setAppId(env.REACT_ONESIGNAL_APP_ID);
 
   // promptForPushNotificationsWithUserResponse will show the native iOS or Android notification permission prompt.
   // We recommend removing the following code and instead using an In-App Message to prompt for notification permission (See step 8)

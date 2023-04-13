@@ -1,10 +1,11 @@
 import { Event} from "../types/types";
-import { REACT_EVENTS_APIKEY } from "@env";
+import { env } from "../../env";
+
 
 const baseURL = 'https://app.ticketmaster.com/discovery/v2/';
 
 export const getEvents = () => {
-  return fetch(`${baseURL}/events.json?dmaId=528&apikey=${REACT_EVENTS_APIKEY}`)
+  return fetch(`${baseURL}/events.json?dmaId=528&apikey=${env.REACT_EVENTS_APIKEY}`)
     .then((res) => res.json())
     .then((data) => {
         const res2 = JSON.parse(JSON.stringify(data._embedded.events));

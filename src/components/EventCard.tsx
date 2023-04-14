@@ -197,7 +197,8 @@ const EventCard = (props: {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.neutral.surfaceBlack,
-    paddingHorizontal: 24,
+    paddingLeft: 24,
+    paddingRight: 32,
     paddingVertical: 16,
     flexDirection: "column",
     display: "flex",
@@ -260,7 +261,8 @@ const styles = StyleSheet.create({
 const lightModeStyles = StyleSheet.create({
   container: {
     backgroundColor: colors.neutral.backgroundWhite,
-    paddingHorizontal: 24,
+    paddingLeft: 24,
+    paddingRight: 32,
     paddingVertical: 16,
     flexDirection: "column",
     display: "flex",

@@ -96,7 +96,7 @@ const SuggestionScreen = ({ navigation, }: ReportStackNavigationProps<'Suggestio
           <DayEventCard event={eventsOfCurrentDay[0]} percentage={moreParticipantsEventOverCategoryTotal}/>
         </View>
         <View style={{alignItems: 'center',}}>
-          <PrimaryButton onPress={onReturnButtonPress} label={"Go to the week preview"}/>
+          <PrimaryButton onPress={onReturnButtonPress} label={"Go to the week preview"} isDark={true}/>
         </View>
 
       </View>

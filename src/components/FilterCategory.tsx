@@ -215,14 +215,14 @@ const styles = StyleSheet.create({
     columnGap: 5,
     alignItems: 'center',
     justifyContent: 'center',
-    borderColor: colors.secondaryGreenLight,
+    borderColor: colors.secondaryGreenDark,
     borderRadius: 22,
     borderWidth: 2,
     height: 42,
   },
 
   eventsFilterPressableText: {
-    color: colors.secondaryGreenLight,
+    color: colors.secondaryGreenDark,
     fontFamily: fontFamily.subtitle,
     fontSize: fontSize.subtitle2,
     fontWeight: fontWeightSubtitle,
@@ -230,8 +230,8 @@ const styles = StyleSheet.create({
   },
 
   eventsFilterPressableActive: {
-    borderColor: colors.secondaryGreenDark,
-    color: colors.secondaryGreenDark,
+    borderColor: colors.secondaryGreenLight,
+    color: colors.secondaryGreenLight,
   },
 });
 

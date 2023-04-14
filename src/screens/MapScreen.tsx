@@ -5,7 +5,8 @@ import React, { useEffect, useRef, useState } from "react";
 import Carousel from "react-native-snap-carousel";
 
 import EventCard from "../components/EventCard";
-import { getEvents } from "../api/event";
+// import { getEvents } from "../api/event";
+import { getEvents } from "../api/bigBangAPI/JsonEvents";
 import { mapDarkStyle } from "../styles/maps";
 import { Event, Location } from "../types/types";
 import { getCrowd } from "../api/footTrackAPI";
@@ -25,7 +26,7 @@ const MapScreen = ({navigation,} : MapStackNavigationProps<'MapScreen'>) => {
   const requestEvents = useQuery('events', () => getEvents(), {
     select: events => {
       return events.filter((event) => {
-        return event.dates.date === new Date().toISOString().split('T')[0];
+        return event.dates.date === "2023-04-14";
       });
     },
   });

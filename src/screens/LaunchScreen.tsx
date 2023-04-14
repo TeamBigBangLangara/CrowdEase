@@ -37,6 +37,7 @@ const LaunchScreen = ({ navigation, }: AuthStackNavigationProps<'LaunchScreen'>)
             <PrimaryButton
               onPress={() => navigation.navigate('SignUpScreen')}
               label = {"Sign Up"}
+              isDark = {true}
             />
             <Pressable onPress={() => navigation.navigate('LoginScreen')}>
               <Text  style={styles.text}>I already have an account</Text>

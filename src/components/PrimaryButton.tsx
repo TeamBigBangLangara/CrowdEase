@@ -10,10 +10,6 @@ const PrimaryButton = (props: { onPress: ((event: GestureResponderEvent) => void
 
   return (
     <View style={[props.isDark ? styles.button : styles.buttonLight, styles.elevation]}>
-      <InsetShadow containerStyle={styles.shadow}
-        shadowRadius={5}
-        shadowOffset={10}
-        shadowOpacity={0.8}>
       <Pressable
           onPress={props.onPress}
           style={({ pressed, }) => [
@@ -23,7 +19,6 @@ const PrimaryButton = (props: { onPress: ((event: GestureResponderEvent) => void
         >
           <Text style={props.isDark ? styles.text : styles.textLight}>{props.label}</Text>
         </Pressable>
-      </InsetShadow>
     </View>
   );
 };
@@ -46,6 +41,19 @@ const styles = StyleSheet.create({
     borderRadius: 22,
     width: 330,
     height: 42,
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1, },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+    //add an inset shadow using negative elevation
+    insetShadow: {
+      elevation: -4,
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 4, },
+      shadowOpacity: 0.1,
+      shadowRadius: 6,
+    },
   },
   pressedShadow: {
     shadowColor: 'rgba(131, 53, 253, 0.9)',

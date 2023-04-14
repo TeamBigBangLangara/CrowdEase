@@ -107,7 +107,7 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
     requestEvents.data?.forEach(event => {
       if (event.dates.date === todayFormatted) {
         const eventHour = parseInt(event.dates.time.split(':')[0]);
-        if (eventHour >= 18 && eventHour < 22) {
+        if (eventHour >= 18 && eventHour <= 22) {
           participants += event.participants;
         }
       }

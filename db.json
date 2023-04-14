@@ -3,7 +3,7 @@
     {
       "address": "800 Griffiths Way",
       "category": { "id": "KZFzniwnSyZfZ7v7nE", "name": "Sports" },
-      "dates": { "date": "2023-04-03", "time": "19:00:00" },
+      "dates": { "date": "2023-04-10", "time": "13:00:00" },
       "id": "G5v7Z989IRPGm",
       "image": "https://s1.ticketm.net/dam/a/33e/6d629753-e609-4bc2-b8f2-5ed321ccb33e_1277151_RECOMENDATION_16_9.jpg",
       "location": { "latitude": "49.2776612", "longitude": "-123.1081074" },
@@ -12,20 +12,9 @@
       "venue": { "id": "KovZpZAFFInA", "name": "Rogers Arena", "type": "venue" }
     },
     {
-      "address": "800 Griffiths Way",
-      "category": { "id": "KZFzniwnSyZfZ7v7nJ", "name": "Music" },
-      "dates": { "date": "2023-05-02", "time": "19:30:00" },
-      "id": "G5v7Z94lcIfq4",
-      "image": "https://s1.ticketm.net/dam/a/1d1/47cc9b10-4904-4dec-b1d6-539e44a521d1_1825531_RETINA_PORTRAIT_3_2.jpg",
-      "location": { "latitude": "49.2776612", "longitude": "-123.1081074" },
-      "name": "Shania Twain: Queen Of Me Tour",
-      "participants": 11229,
-      "venue": { "id": "KovZpZAFFInA", "name": "Rogers Arena", "type": "venue" }
-    },
-    {
       "address": "777 Pacific Blvd.",
       "category": { "id": "KZFzniwnSyZfZ7v7nJ", "name": "Music" },
-      "dates": { "date": "2023-04-08", "time": "19:00:00" },
+      "dates": { "date": "2023-04-10", "time": "19:00:00" },
       "id": "G5v7Z9NDH875im",
       "image": "https://s1.ticketm.net/dam/a/9ff/750d0e9b-b2c2-4b82-8898-edb3d8dca9ff_SOURCE",
       "location": { "latitude": "49.2760688", "longitude": "-123.1127117" },
@@ -34,20 +23,9 @@
       "venue": { "id": "KovZpZAJdn6A", "name": "BC Place", "type": "venue" }
     },
     {
-      "address": "800 Griffiths Way",
-      "category": { "id": "KZFzniwnSyZfZ7v7nJ", "name": "Music" },
-      "dates": { "date": "2023-10-20", "time": "19:30:00" },
-      "id": "G5v7Z90w6cvZ4",
-      "image": "https://s1.ticketm.net/dam/a/4c8/cee4224d-ed9f-4267-81a4-61be2a1f44c8_ARTIST_PAGE_3_2.jpg",
-      "location": { "latitude": "49.2776612", "longitude": "-123.1081074" },
-      "name": "P!NK: TRUSTFALL TOUR",
-      "participants": 8435,
-      "venue": { "id": "KovZpZAFFInA", "name": "Rogers Arena", "type": "venue" }
-    },
-    {
       "address": "100 N. Renfrew St.",
       "category": { "id": "KZFzniwnSyZfZ7v7nJ", "name": "Music" },
-      "dates": { "date": "2023-04-06", "time": "17:00:00" },
+      "dates": { "date": "2023-04-10", "time": "17:00:00" },
       "id": "G5v7Z90xnt3xj",
       "image": "https://s1.ticketm.net/dam/c/df8/81eadad8-4449-412e-a2b1-3d8bbb78edf8_106181_EVENT_DETAIL_PAGE_16_9.jpg",
       "location": { "latitude": "49.288227", "longitude": "-123.0440748" },
@@ -56,20 +34,9 @@
       "venue": { "id": "KovZpZAavE7A", "name": "PNE Forum", "type": "venue" }
     },
     {
-      "address": "800 Griffiths Way",
-      "category": { "id": "KZFzniwnSyZfZ7v7nE", "name": "Sports" },
-      "dates": { "date": "2023-04-04", "time": "19:00:00" },
-      "id": "G5v7Z989ImgGt",
-      "image": "https://s1.ticketm.net/dam/a/33e/6d629753-e609-4bc2-b8f2-5ed321ccb33e_1277151_RECOMENDATION_16_9.jpg",
-      "location": { "latitude": "49.2776612", "longitude": "-123.1081074" },
-      "name": "Vancouver Canucks vs. Seattle Kraken",
-      "participants": 7618,
-      "venue": { "id": "KovZpZAFFInA", "name": "Rogers Arena", "type": "venue" }
-    },
-    {
       "address": "#3 Centennial Square Pandora at Government",
       "category": { "id": "KZFzniwnSyZfZ7v7nJ", "name": "Music" },
-      "dates": { "date": "2023-04-04", "time": "20:00:00" },
+      "dates": { "date": "2023-04-10", "time": "20:00:00" },
       "id": "G5v7Z991dw-ED",
       "image": "https://s1.ticketm.net/dam/a/15f/ee5fc143-3abb-419d-8f93-c1cd0c01715f_1845591_ARTIST_PAGE_3_2.jpg",
       "location": { "latitude": "48.4230937", "longitude": "-123.3611373" },
@@ -77,21 +44,24 @@
       "participants": 5953,
       "venue": { "id": "KovZpaCJje", "name": "MCPHERSON PLAYHOUSE", "type": "venue" }
     },
+
+
+
     {
-      "address": "125 Front Street",
+      "address": "800 Griffiths Way",
       "category": { "id": "KZFzniwnSyZfZ7v7nJ", "name": "Music" },
-      "dates": { "date": "2023-04-04", "time": "20:00:00" },
-      "id": "G5v7Z9EcDNvrR",
-      "image": "https://s1.ticketm.net/dam/a/dca/9cefb4b7-2206-43f8-a6ec-27b8305b9dca_1109701_TABLET_LANDSCAPE_3_2.jpg",
-      "location": { "latitude": "49.16592", "longitude": "-123.9352986" },
-      "name": "Herb Alpert & Lani Hall",
-      "participants": 9000,
-      "venue": { "id": "KovZpZAkJv7A", "name": "Port Theatre", "type": "venue" }
+      "dates": { "date": "2023-04-11", "time": "19:30:00" },
+      "id": "G5v7Z90w6cvZ4",
+      "image": "https://s1.ticketm.net/dam/a/4c8/cee4224d-ed9f-4267-81a4-61be2a1f44c8_ARTIST_PAGE_3_2.jpg",
+      "location": { "latitude": "49.2776612", "longitude": "-123.1081074" },
+      "name": "P!NK: TRUSTFALL TOUR",
+      "participants": 8435,
+      "venue": { "id": "KovZpZAFFInA", "name": "Rogers Arena", "type": "venue" }
     },
     {
       "address": "777 Pacific Blvd.",
       "category": { "id": "KZFzniwnSyZfZ7v7nE", "name": "Sports" },
-      "dates": { "date": "2023-04-05", "time": "19:00:00" },
+      "dates": { "date": "2023-04-11", "time": "09:00:00" },
       "id": "G5v7Z9JlwI4Nv",
       "image": "https://s1.ticketm.net/dam/a/5be/eb5e9aed-48f8-45f1-bcab-5e4e971415be_1334151_EVENT_DETAIL_PAGE_16_9.jpg",
       "location": { "latitude": "49.2760688", "longitude": "-123.1127117" },
@@ -102,7 +72,7 @@
     {
       "address": "868 Granville St.",
       "category": { "id": "KZFzniwnSyZfZ7v7nJ", "name": "Music" },
-      "dates": { "date": "2023-04-04", "time": "19:30:00" },
+      "dates": { "date": "2023-04-11", "time": "20:00:00" },
       "id": "G5v7Z9b5uB0aY",
       "image": "https://s1.ticketm.net/dam/a/08c/397a6be9-7a58-4671-b57f-f4b05ce9308c_RETINA_PORTRAIT_3_2.jpg",
       "location": { "latitude": "49.2806462", "longitude": "-123.1208652" },
@@ -110,21 +80,14 @@
       "participants": 4297,
       "venue": { "id": "KovZpZAEkklA", "name": "Commodore Ballroom", "type": "venue" }
     },
-    {
-      "address": "395 Kingsway",
-      "category": { "id": "KZFzniwnSyZfZ7v7nJ", "name": "Music" },
-      "dates": { "date": "2023-04-06", "time": "20:00:00" },
-      "id": "G5v7Z9xQ_aoHl",
-      "image": "https://s1.ticketm.net/dam/a/889/301d0538-df36-4c4a-89f8-866d66949889_1774511_EVENT_DETAIL_PAGE_16_9.jpg",
-      "location": { "latitude": "49.2599155", "longitude": "-123.0964901" },
-      "name": "BoomBox",
-      "participants": 9393,
-      "venue": { "id": "KovZpZAae7JA", "name": "BILTMORE CABARET", "type": "venue" }
-    },
+
+
+
+
     {
       "address": "868 Granville St.",
       "category": { "id": "KZFzniwnSyZfZ7v7nJ", "name": "Music" },
-      "dates": { "date": "2023-04-06", "time": "20:00:00" },
+      "dates": { "date": "2023-04-12", "time": "13:00:00" },
       "id": "G5v7Z9xlvRepW",
       "image": "https://s1.ticketm.net/dam/a/967/b8e34613-1ea2-4b3e-aa3a-06e1d5d87967_TABLET_LANDSCAPE_LARGE_16_9.jpg",
       "location": { "latitude": "49.2806462", "longitude": "-123.1208652" },
@@ -134,30 +97,43 @@
     },
     {
       "address": "1022 Davie Street, Vancouver, BC V6E 1M3",
-      "category": { "id": "KZFzniwnSyZfZ7v7nJ", "name": "Music" },
-      "dates": { "date": "2023-04-07", "time": "22:00:00" },
-      "id": "G5e0Z9EoeYeWf",
-      "image": "https://s1.ticketm.net/dam/c/48b/2352e3b5-8496-496b-97a3-e605177e848b_105851_RETINA_LANDSCAPE_16_9.jpg",
-      "location": { "latitude": "49.279672", "longitude": "-123.130293" },
-      "name": "Sold Out - Real Love",
-      "participants": 2872,
-      "venue": { "id": "KovZpZAkal7A", "name": "Celebrities", "type": "venue" }
+      "category": {
+        "id": "KZFzniwnSyZfZ7v7nJ",
+        "name": "Music"
+      },
+      "dates": {
+        "date": "2023-04-12",
+        "time": "22:00:00"
+      },
+      "id": "G5e0Z9EVfVvtO",
+      "image": "https://s1.ticketm.net/dam/c/df8/81eadad8-4449-412e-a2b1-3d8bbb78edf8_106181_EVENT_DETAIL_PAGE_16_9.jpg",
+      "location": {
+        "latitude": "49.279672",
+        "longitude": "-123.130293"
+      },
+      "name": "Playhouse Saturdays - Local",
+      "participants": 10587,
+      "venue": {
+        "id": "KovZpZAkal7A",
+        "name": "Celebrities",
+        "type": "venue"
+      }
     },
     {
-      "address": "33800 King Rd",
+      "address": "800 Griffiths Way",
       "category": { "id": "KZFzniwnSyZfZ7v7nE", "name": "Sports" },
-      "dates": { "date": "2023-04-07", "time": "19:00:00" },
-      "id": "G5v7Z98HuDgKK",
-      "image": "https://s1.ticketm.net/dam/a/bbc/bd5ffb53-6faf-46da-8fc2-9eb42c622bbc_1520031_EVENT_DETAIL_PAGE_16_9.jpg",
-      "location": { "latitude": "49.030235", "longitude": "-122.287062" },
-      "name": "Abbotsford Canucks vs. Ontario Reign",
-      "participants": 6182,
-      "venue": { "id": "KovZpZA7A7EA", "name": "Abbotsford Centre", "type": "venue" }
+      "dates": { "date": "2023-04-12", "time": "10:00:00" },
+      "id": "G5v7Z989ImgGt",
+      "image": "https://s1.ticketm.net/dam/a/33e/6d629753-e609-4bc2-b8f2-5ed321ccb33e_1277151_RECOMENDATION_16_9.jpg",
+      "location": { "latitude": "49.2776612", "longitude": "-123.1081074" },
+      "name": "Vancouver Canucks vs. Seattle Kraken",
+      "participants": 7618,
+      "venue": { "id": "KovZpZAFFInA", "name": "Rogers Arena", "type": "venue" }
     },
     {
       "address": "#3 Centennial Square Pandora at Government",
       "category": { "id": "KZFzniwnSyZfZ7v7nJ", "name": "Music" },
-      "dates": { "date": "2023-04-07", "time": "20:00:00" },
+      "dates": { "date": "2023-04-12", "time": "20:00:00" },
       "id": "G5v7Z9EcDVvrW",
       "image": "https://s1.ticketm.net/dam/a/dca/9cefb4b7-2206-43f8-a6ec-27b8305b9dca_1109701_TABLET_LANDSCAPE_3_2.jpg",
       "location": { "latitude": "48.4230937", "longitude": "-123.3611373" },
@@ -168,7 +144,7 @@
     {
       "address": "100 N. Renfrew St.",
       "category": { "id": "KZFzniwnSyZfZ7v7nJ", "name": "Music" },
-      "dates": { "date": "2023-04-07", "time": "19:30:00" },
+      "dates": { "date": "2023-04-12", "time": "19:30:00" },
       "id": "G5v7Z9NJkpopt",
       "image": "https://s1.ticketm.net/dam/a/68f/81fe48f6-6743-4a54-aaa3-727a08eb868f_ARTIST_PAGE_3_2.jpg",
       "location": { "latitude": "49.288227", "longitude": "-123.0440748" },
@@ -176,10 +152,13 @@
       "participants": 7069,
       "venue": { "id": "KovZpZAavE7A", "name": "PNE Forum", "type": "venue" }
     },
+
+    
+
     {
       "address": "868 Granville St.",
       "category": { "id": "KZFzniwnSyZfZ7v7nJ", "name": "Music" },
-      "dates": { "date": "2023-04-07", "time": "22:30:00" },
+      "dates": { "date": "2023-04-13", "time": "16:30:00" },
       "id": "G5v7Z9xnhhvc9",
       "image": "https://s1.ticketm.net/dam/a/2aa/d4d04317-ecd5-41e3-8bf7-bde899e442aa_1685171_RETINA_PORTRAIT_3_2.jpg",
       "location": { "latitude": "49.2806462", "longitude": "-123.1208652" },
@@ -187,102 +166,9 @@
       "participants": 2808,
       "venue": { "id": "KovZpZAEkklA", "name": "Commodore Ballroom", "type": "venue" }
     },
-    {
-      "address": "800 Griffiths Way",
-      "category": {
-        "id": "KZFzniwnSyZfZ7v7nJ",
-        "name": "Music"
-      },
-      "dates": {
-        "date": "2023-10-20",
-        "time": "19:30:00"
-      },
-      "id": "G5v7Z90w6cvZ4",
-      "image": "https://s1.ticketm.net/dam/a/4c8/cee4224d-ed9f-4267-81a4-61be2a1f44c8_ARTIST_PAGE_3_2.jpg",
-      "location": {
-        "latitude": "49.2776612",
-        "longitude": "-123.1081074"
-      },
-      "name": "P!NK: TRUSTFALL TOUR",
-      "participants": 8525,
-      "venue": {
-        "id": "KovZpZAFFInA",
-        "name": "Rogers Arena",
-        "type": "venue"
-      }
-    },
-    {
-      "address": "800 Griffiths Way",
-      "category": {
-        "id": "KZFzniwnSyZfZ7v7nJ",
-        "name": "Music"
-      },
-      "dates": {
-        "date": "2023-11-14",
-        "time": "19:30:00"
-      },
-      "id": "G5v7Z9bCdWsf1",
-      "image": "https://s1.ticketm.net/dam/a/1d1/47cc9b10-4904-4dec-b1d6-539e44a521d1_1825531_RETINA_PORTRAIT_3_2.jpg",
-      "location": {
-        "latitude": "49.2776612",
-        "longitude": "-123.1081074"
-      },
-      "name": "Shania Twain: Queen Of Me Tour",
-      "participants": 3461,
-      "venue": {
-        "id": "KovZpZAFFInA",
-        "name": "Rogers Arena",
-        "type": "venue"
-      }
-    },
-    {
-      "address": "147 East Pender Street",
-      "category": {
-        "id": "KZFzniwnSyZfZ7v7nJ",
-        "name": "Music"
-      },
-      "dates": {
-        "date": "2023-04-14",
-        "time": "18:00:00"
-      },
-      "id": "G5e0Z9N50YYse",
-      "image": "https://s1.ticketm.net/dam/a/291/be865949-050a-4ef8-914f-f90ad0400291_ARTIST_PAGE_3_2.jpg",
-      "location": {
-        "latitude": "49.2805197",
-        "longitude": "-123.1007382"
-      },
-      "name": "Alexander Stewart",
-      "participants": 9064,
-      "venue": {
-        "id": "KovZpZAavneA",
-        "name": "Fortune Sound Club",
-        "type": "venue"
-      }
-    },
-    {
-      "address": "1024 Davie Street",
-      "category": {
-        "id": "KZFzniwnSyZfZ7v7nJ",
-        "name": "Music"
-      },
-      "dates": {
-        "date": "2023-04-14",
-        "time": "22:00:00"
-      },
-      "id": "G5e0Z9NOnvZmn",
-      "image": "https://s1.ticketm.net/dam/c/df8/81eadad8-4449-412e-a2b1-3d8bbb78edf8_106181_EVENT_DETAIL_PAGE_16_9.jpg",
-      "location": {
-        "latitude": "49.27950169",
-        "longitude": "-123.1299918"
-      },
-      "name": "CRi",
-      "participants": 11533,
-      "venue": {
-        "id": "KovZ917At5O",
-        "name": "Village Studios",
-        "type": "venue"
-      }
-    },
+
+
+
     {
       "address": "1022 Davie Street, Vancouver, BC V6E 1M3",
       "category": {
@@ -291,7 +177,7 @@
       },
       "dates": {
         "date": "2023-04-14",
-        "time": "22:00:00"
+        "time": "21:00:00"
       },
       "id": "G5e0Z9x8SRwkC",
       "image": "https://s1.ticketm.net/dam/a/1b2/22da63ba-e11d-488d-b407-07d9b55831b2_TABLET_LANDSCAPE_LARGE_16_9.jpg",
@@ -314,8 +200,8 @@
         "name": "Sports"
       },
       "dates": {
-        "date": "2023-04-12",
-        "time": "19:00:00"
+        "date": "2023-04-14",
+        "time": "09:30:00"
       },
       "id": "G5v7Z98HuHgKl",
       "image": "https://s1.ticketm.net/dam/a/bbc/bd5ffb53-6faf-46da-8fc2-9eb42c622bbc_1520031_EVENT_DETAIL_PAGE_16_9.jpg",
@@ -332,26 +218,26 @@
       }
     },
     {
-      "address": "33800 King Rd",
+      "address": "800 Griffiths Way",
       "category": {
-        "id": "KZFzniwnSyZfZ7v7nE",
-        "name": "Sports"
+        "id": "KZFzniwnSyZfZ7v7nJ",
+        "name": "Music"
       },
       "dates": {
         "date": "2023-04-14",
-        "time": "19:00:00"
+        "time": "19:30:00"
       },
-      "id": "G5v7Z98HuWPKs",
-      "image": "https://s1.ticketm.net/dam/a/bbc/bd5ffb53-6faf-46da-8fc2-9eb42c622bbc_1520031_EVENT_DETAIL_PAGE_16_9.jpg",
+      "id": "G5v7Z9bCdWsf1",
+      "image": "https://s1.ticketm.net/dam/a/1d1/47cc9b10-4904-4dec-b1d6-539e44a521d1_1825531_RETINA_PORTRAIT_3_2.jpg",
       "location": {
-        "latitude": "49.030235",
-        "longitude": "-122.287062"
+        "latitude": "49.2776612",
+        "longitude": "-123.1081074"
       },
-      "name": "Abbotsford Canucks vs. Calgary Wranglers",
-      "participants": 7299,
+      "name": "Shania Twain: Queen Of Me Tour",
+      "participants": 3461,
       "venue": {
-        "id": "KovZpZA7A7EA",
-        "name": "Abbotsford Centre",
+        "id": "KovZpZAFFInA",
+        "name": "Rogers Arena",
         "type": "venue"
       }
     },
@@ -362,8 +248,8 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-04-13",
-        "time": "21:00:00"
+        "date": "2023-04-14",
+        "time": "15:00:00"
       },
       "id": "G5v7Z9pkXnPaP",
       "image": "https://s1.ticketm.net/dam/a/a52/a258c643-c0bb-48e4-9c76-581a9e736a52_1706861_RECOMENDATION_16_9.jpg",
@@ -380,29 +266,19 @@
       }
     },
     {
-      "address": "1022 Davie Street, Vancouver, BC V6E 1M3",
-      "category": {
-        "id": "KZFzniwnSyZfZ7v7nJ",
-        "name": "Music"
-      },
-      "dates": {
-        "date": "2023-04-15",
-        "time": "22:00:00"
-      },
-      "id": "G5e0Z9EVfVvtO",
-      "image": "https://s1.ticketm.net/dam/c/df8/81eadad8-4449-412e-a2b1-3d8bbb78edf8_106181_EVENT_DETAIL_PAGE_16_9.jpg",
-      "location": {
-        "latitude": "49.279672",
-        "longitude": "-123.130293"
-      },
-      "name": "Playhouse Saturdays - Local",
-      "participants": 10587,
-      "venue": {
-        "id": "KovZpZAkal7A",
-        "name": "Celebrities",
-        "type": "venue"
-      }
+      "address": "800 Griffiths Way",
+      "category": { "id": "KZFzniwnSyZfZ7v7nJ", "name": "Music" },
+      "dates": { "date": "2023-04-14", "time": "19:30:00" },
+      "id": "G5v7Z94lcIfq4",
+      "image": "https://s1.ticketm.net/dam/a/1d1/47cc9b10-4904-4dec-b1d6-539e44a521d1_1825531_RETINA_PORTRAIT_3_2.jpg",
+      "location": { "latitude": "49.2776612", "longitude": "-123.1081074" },
+      "name": "Shania Twain: Queen Of Me Tour",
+      "participants": 11229,
+      "venue": { "id": "KovZpZAFFInA", "name": "Rogers Arena", "type": "venue" }
     },
+
+
+
     {
       "address": "33800 King Rd",
       "category": {
@@ -500,13 +376,40 @@
       }
     },
     {
+      "address": "33800 King Rd",
+      "category": {
+        "id": "KZFzniwnSyZfZ7v7nE",
+        "name": "Sports"
+      },
+      "dates": {
+        "date": "2023-04-15",
+        "time": "19:00:00"
+      },
+      "id": "G5v7Z9EQqVx8F",
+      "image": "https://s1.ticketm.net/dam/a/bbc/bd5ffb53-6faf-46da-8fc2-9eb42c622bbc_1520031_EVENT_DETAIL_PAGE_16_9.jpg",
+      "location": {
+        "latitude": "49.030235",
+        "longitude": "-122.287062"
+      },
+      "name": "Abbotsford Canucks",
+      "participants": 6957,
+      "venue": {
+        "id": "KovZpZA7A7EA",
+        "name": "Abbotsford Centre",
+        "type": "venue"
+      }
+    },
+
+
+
+    {
       "address": "884 Granville St.",
       "category": {
         "id": "KZFzniwnSyZfZ7v7nJ",
         "name": "Music"
       },
       "dates": {
-        "date": "2023-04-18",
+        "date": "2023-04-16",
         "time": "20:00:00"
       },
       "id": "G5v7Z9pnBMwVo",
@@ -523,54 +426,7 @@
         "type": "venue"
       }
     },
-    {
-      "address": "33800 King Rd",
-      "category": {
-        "id": "KZFzniwnSyZfZ7v7nE",
-        "name": "Sports"
-      },
-      "dates": {
-        "date": "2023-04-19",
-        "time": "19:00:00"
-      },
-      "id": "G5v7Z9EQqVx8F",
-      "image": "https://s1.ticketm.net/dam/a/bbc/bd5ffb53-6faf-46da-8fc2-9eb42c622bbc_1520031_EVENT_DETAIL_PAGE_16_9.jpg",
-      "location": {
-        "latitude": "49.030235",
-        "longitude": "-122.287062"
-      },
-      "name": "Abbotsford Canucks - Opponent TBD",
-      "participants": 6957,
-      "venue": {
-        "id": "KovZpZA7A7EA",
-        "name": "Abbotsford Centre",
-        "type": "venue"
-      }
-    },
-    {
-      "address": "147 East Pender Street",
-      "category": {
-        "id": "KZFzniwnSyZfZ7v7nJ",
-        "name": "Music"
-      },
-      "dates": {
-        "date": "2023-04-20",
-        "time": "22:00:00"
-      },
-      "id": "G5e0Z9E4od8SQ",
-      "image": "https://s1.ticketm.net/dam/c/80b/f3cd8d24-c3ae-4fa0-b4bc-1ba99f9b380b_106091_RETINA_PORTRAIT_3_2.jpg",
-      "location": {
-        "latitude": "49.2805197",
-        "longitude": "-123.1007382"
-      },
-      "name": "4/20 with DJ Paul of Three 6 Mafia & Killy",
-      "participants": 11111,
-      "venue": {
-        "id": "KovZpZAavneA",
-        "name": "Fortune Sound Club",
-        "type": "venue"
-      }
-    },
+
     {
       "address": "868 Granville St.",
       "category": {
@@ -578,79 +434,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-04-26",
-        "time": "18:00:00"
-      },
-      "id": "G5v7Z99DL300L",
-      "image": "https://s1.ticketm.net/dam/a/be9/e378826d-f05d-4c33-b21d-3605c1685be9_1343041_RETINA_PORTRAIT_3_2.jpg",
-      "location": {
-        "latitude": "49.2806462",
-        "longitude": "-123.1208652"
-      },
-      "name": "Silverstein: Misery Made Me 2023",
-      "participants": 4994,
-      "venue": {
-        "id": "KovZpZAEkklA",
-        "name": "Commodore Ballroom",
-        "type": "venue"
-      }
-    },
-    {
-      "address": "806 Broughton Street",
-      "category": {
-        "id": "KZFzniwnSyZfZ7v7na",
-        "name": "Arts & Theatre"
-      },
-      "dates": {
-        "date": "2023-04-26",
-        "time": "20:00:00"
-      },
-      "id": "G5v7Z9ploTd-3",
-      "image": "https://s1.ticketm.net/dam/a/d7c/dd5fad2a-4e78-4a5c-bcc5-fa5540652d7c_1265711_CUSTOM.jpg",
-      "location": {
-        "latitude": "48.4234907",
-        "longitude": "-123.3624328"
-      },
-      "name": "Gerry Dee - Best Medicine Tour",
-      "participants": 11642,
-      "venue": {
-        "id": "KovZpZAk1tlA",
-        "name": "Royal Theatre",
-        "type": "venue"
-      }
-    },
-    {
-      "address": "6250 144 St.",
-      "category": {
-        "id": "KZFzniwnSyZfZ7v7na",
-        "name": "Arts & Theatre"
-      },
-      "dates": {
-        "date": "2023-04-27",
-        "time": "20:00:00"
-      },
-      "id": "G5v7Z9p3_47CM",
-      "image": "https://s1.ticketm.net/dam/a/d7c/dd5fad2a-4e78-4a5c-bcc5-fa5540652d7c_1265711_CUSTOM.jpg",
-      "location": {
-        "latitude": "49.1157686",
-        "longitude": "-122.8232961"
-      },
-      "name": "Gerry Dee - Best Medicine Tour",
-      "participants": 2654,
-      "venue": {
-        "id": "KovZpZAavElA",
-        "name": "Bell Performing Arts Centre",
-        "type": "venue"
-      }
-    },
-    {
-      "address": "868 Granville St.",
-      "category": {
-        "id": "KZFzniwnSyZfZ7v7nJ",
-        "name": "Music"
-      },
-      "dates": {
-        "date": "2023-04-27",
+        "date": "2023-04-17",
         "time": "19:00:00"
       },
       "id": "G5v7ZpiHtYorZ",
@@ -674,7 +458,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-04-28",
+        "date": "2023-04-17",
         "time": "22:00:00"
       },
       "id": "G5e0Z90VCW3mR",
@@ -698,7 +482,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-04-28",
+        "date": "2023-04-17",
         "time": "22:00:00"
       },
       "id": "G5e0Z9IihWovD",
@@ -722,7 +506,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-04-28",
+        "date": "2023-04-17",
         "time": "19:30:00"
       },
       "id": "G5v7Z90J-awwv",
@@ -746,7 +530,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-04-28",
+        "date": "2023-04-17",
         "time": "19:00:00"
       },
       "id": "G5v7Z9J1wuNqN",
@@ -770,7 +554,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-04-28",
+        "date": "2023-04-18",
         "time": "19:00:00"
       },
       "id": "G5v7ZpiHiesrq",
@@ -794,7 +578,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-04-29",
+        "date": "2023-04-18",
         "time": "18:30:00"
       },
       "id": "G5e0Z99quRwTf",
@@ -818,7 +602,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-04-29",
+        "date": "2023-04-18",
         "time": "22:00:00"
       },
       "id": "G5e0Z9JjxtOs5",
@@ -842,7 +626,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-04-29",
+        "date": "2023-04-18",
         "time": "22:00:00"
       },
       "id": "G5e0Z9Jy1r-GB",
@@ -866,8 +650,8 @@
         "name": "Sports"
       },
       "dates": {
-        "date": "2023-04-29",
-        "time": "19:30:00"
+        "date": "2023-04-18",
+        "time": "15:30:00"
       },
       "id": "G5v7Z9_b0iOYx",
       "image": "https://s1.ticketm.net/dam/a/5be/eb5e9aed-48f8-45f1-bcab-5e4e971415be_1334151_EVENT_DETAIL_PAGE_16_9.jpg",
@@ -884,13 +668,38 @@
       }
     },
     {
+      "address": "600 Block Hamilton St.",
+      "category": {
+        "id": "KZFzniwnSyZfZ7v7na",
+        "name": "Arts & Theatre"
+      },
+      "dates": {
+        "date": "2023-04-18",
+        "time": "11:00:00"
+      },
+      "id": "G5v7Z9Nk9eopB",
+      "image": "https://s1.ticketm.net/dam/a/d89/6fc71111-2dfd-45ba-8e2b-b5314a825d89_1552841_EVENT_DETAIL_PAGE_16_9.jpg",
+      "location": {
+        "latitude": "49.2777469",
+        "longitude": "-123.1174817"
+      },
+      "name": "Cats (Touring)",
+      "participants": 10669,
+      "venue": {
+        "id": "KovZpZAavEvA",
+        "name": "Queen Elizabeth Theatre",
+        "type": "venue"
+      }
+    },
+
+    {
       "address": "800 Griffiths Way",
       "category": {
         "id": "KZFzniwnSyZfZ7v7nE",
         "name": "Sports"
       },
       "dates": {
-        "date": "2023-04-29",
+        "date": "2023-04-19",
         "time": "19:00:00"
       },
       "id": "G5v7Z9fB7Js_q",
@@ -914,7 +723,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-04-29",
+        "date": "2023-04-19",
         "time": "19:00:00"
       },
       "id": "G5v7Z9xpPyw59",
@@ -938,7 +747,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-04-30",
+        "date": "2023-04-19",
         "time": "18:30:00"
       },
       "id": "G5e0Z9NP2Os91",
@@ -962,7 +771,7 @@
         "name": "Sports"
       },
       "dates": {
-        "date": "2023-04-30",
+        "date": "2023-04-19",
         "time": "17:00:00"
       },
       "id": "G5v7Z9JJV2NuQ",
@@ -986,7 +795,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-04-30",
+        "date": "2023-04-19",
         "time": "19:30:00"
       },
       "id": "G5v7Z9xJCK-_N",
@@ -1003,6 +812,11 @@
         "type": "venue"
       }
     },
+
+
+
+
+
     {
       "address": "6066 Thunderbird Boulevard",
       "category": {
@@ -1010,7 +824,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-04-30",
+        "date": "2023-04-20",
         "time": "20:00:00"
       },
       "id": "G5v7Z9xKdCeUd",
@@ -1034,7 +848,7 @@
         "name": "Film"
       },
       "dates": {
-        "date": "2023-05-01",
+        "date": "2023-04-20",
         "time": "19:30:00"
       },
       "id": "G5v7Z9JxL1eSN",
@@ -1058,7 +872,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-05-03",
+        "date": "2023-04-20",
         "time": "18:00:00"
       },
       "id": "G5v7Z9br4cSZS",
@@ -1082,7 +896,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-05-03",
+        "date": "2023-04-20",
         "time": "20:00:00"
       },
       "id": "G5v7ZpMVkXV33",
@@ -1106,7 +920,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-05-04",
+        "date": "2023-04-20",
         "time": "19:00:00"
       },
       "id": "G5v7Z90COB3b9",
@@ -1123,6 +937,10 @@
         "type": "venue"
       }
     },
+
+
+
+
     {
       "address": "147 East Pender Street",
       "category": {
@@ -1130,7 +948,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-05-05",
+        "date": "2023-04-21",
         "time": "22:00:00"
       },
       "id": "G5e0Z90bFkKCH",
@@ -1154,7 +972,7 @@
         "name": "Sports"
       },
       "dates": {
-        "date": "2023-05-05",
+        "date": "2023-04-21",
         "time": "19:00:00"
       },
       "id": "G5v7Z9Epmq3lf",
@@ -1178,7 +996,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-05-06",
+        "date": "2023-04-21",
         "time": "22:00:00"
       },
       "id": "G5e0Z9EfLgZJx",
@@ -1202,7 +1020,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-05-06",
+        "date": "2023-04-21",
         "time": "19:00:00"
       },
       "id": "G5v7Z9Pb0rJCV",
@@ -1220,13 +1038,37 @@
       }
     },
     {
+      "address": "8811 River Rd.",
+      "category": {
+        "id": "KZFzniwnSyZfZ7v7nJ",
+        "name": "Music"
+      },
+      "dates": {
+        "date": "2023-04-21",
+        "time": "20:00:00"
+      },
+      "id": "G5v7Z90lltVzN",
+      "image": "https://s1.ticketm.net/dam/c/548/5fefbd1c-973b-4b0e-9b2e-d78e4ce37548_106111_RETINA_PORTRAIT_3_2.jpg",
+      "location": {
+        "latitude": "49.1962813",
+        "longitude": "-123.1267642"
+      },
+      "name": "LEPA BRENA @ The River Rock Show Theatre",
+      "participants": 8634,
+      "venue": {
+        "id": "KovZpaK5ze",
+        "name": "River Rock Casino Resort",
+        "type": "venue"
+      }
+    },
+    {
       "address": "777 Pacific Blvd.",
       "category": {
         "id": "KZFzniwnSyZfZ7v7nE",
         "name": "Sports"
       },
       "dates": {
-        "date": "2023-05-06",
+        "date": "2023-04-21",
         "time": "19:30:00"
       },
       "id": "G5v7Z9_b0cOYJ",
@@ -1243,6 +1085,12 @@
         "type": "venue"
       }
     },
+
+
+
+
+
+
     {
       "address": "800 Griffiths Way",
       "category": {
@@ -1250,7 +1098,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-05-06",
+        "date": "2023-04-22",
         "time": "19:30:00"
       },
       "id": "G5v7Z9fSCdPQ4",
@@ -1274,7 +1122,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-05-07",
+        "date": "2023-04-22",
         "time": "20:00:00"
       },
       "id": "G5e0Z9G7osvsO",
@@ -1298,7 +1146,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-05-08",
+        "date": "2023-04-22",
         "time": "20:00:00"
       },
       "id": "G5v7Z9bNuQNm4",
@@ -1322,7 +1170,7 @@
         "name": "Miscellaneous"
       },
       "dates": {
-        "date": "2023-05-09",
+        "date": "2023-04-22",
         "time": "19:30:00"
       },
       "id": "G5v7Z9JBl83j0",
@@ -1346,7 +1194,7 @@
         "name": "Miscellaneous"
       },
       "dates": {
-        "date": "2023-05-09",
+        "date": "2023-04-22",
         "time": "19:30:00"
       },
       "id": "G5v7Z9JURWe8D",
@@ -1370,7 +1218,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-05-09",
+        "date": "2023-04-23",
         "time": "20:00:00"
       },
       "id": "G5v7Z9xK_NNRW",
@@ -1394,7 +1242,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-05-10",
+        "date": "2023-04-23",
         "time": "21:00:00"
       },
       "id": "G5e0Z9E8QBeHG",
@@ -1418,7 +1266,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-05-11",
+        "date": "2023-04-23",
         "time": "21:00:00"
       },
       "id": "G5e0Z9E8oxxyV",
@@ -1442,7 +1290,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-05-12",
+        "date": "2023-04-23",
         "time": "22:00:00"
       },
       "id": "G5e0Z9J0lsNiz",
@@ -1466,7 +1314,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-05-12",
+        "date": "2023-04-23",
         "time": "19:00:00"
       },
       "id": "G5e0Z9JHp6-jO",
@@ -1483,6 +1331,11 @@
         "type": "venue"
       }
     },
+
+
+
+
+
     {
       "address": "33800 King Rd",
       "category": {
@@ -1490,7 +1343,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-05-12",
+        "date": "2023-04-24",
         "time": "20:00:00"
       },
       "id": "G5v7Z9NXXA3NK",
@@ -1514,7 +1367,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-05-12",
+        "date": "2023-04-24",
         "time": "20:00:00"
       },
       "id": "G5v7Z9NnccwC2",
@@ -1538,7 +1391,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-05-12",
+        "date": "2023-04-24",
         "time": "17:30:00"
       },
       "id": "G5v7Z9fDMfAEj",
@@ -1562,7 +1415,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-05-13",
+        "date": "2023-04-24",
         "time": "19:00:00"
       },
       "id": "G5e0Z9JG0dKYz",
@@ -1586,7 +1439,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-05-13",
+        "date": "2023-04-24",
         "time": "20:00:00"
       },
       "id": "G5v7Z90CxIxhr",
@@ -1603,6 +1456,11 @@
         "type": "venue"
       }
     },
+
+
+
+
+
     {
       "address": "868 Granville St.",
       "category": {
@@ -1610,7 +1468,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-05-13",
+        "date": "2023-04-25",
         "time": "18:00:00"
       },
       "id": "G5v7Z9NmzFSnn",
@@ -1634,7 +1492,7 @@
         "name": "Sports"
       },
       "dates": {
-        "date": "2023-05-14",
+        "date": "2023-04-25",
         "time": "15:00:00"
       },
       "id": "G5v7Z9JJgPS2v",
@@ -1658,7 +1516,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-05-14",
+        "date": "2023-04-25",
         "time": "19:00:00"
       },
       "id": "G5v7Z9NBQkvRW",
@@ -1682,7 +1540,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-05-16",
+        "date": "2023-04-25",
         "time": "19:30:00"
       },
       "id": "1AoZAOIGkdzrf4a",
@@ -1706,7 +1564,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-05-16",
+        "date": "2023-04-25",
         "time": "19:00:00"
       },
       "id": "G5e0Z9Pjkw-jd",
@@ -1723,6 +1581,12 @@
         "type": "venue"
       }
     },
+
+
+
+
+
+
     {
       "address": "868 Granville St.",
       "category": {
@@ -1730,7 +1594,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-05-16",
+        "date": "2023-04-26",
         "time": "19:00:00"
       },
       "id": "G5v7Z99MEkSAy",
@@ -1754,7 +1618,7 @@
         "name": "Miscellaneous"
       },
       "dates": {
-        "date": "2023-05-18",
+        "date": "2023-04-26",
         "time": "19:00:00"
       },
       "id": "G5v7Z991NQesE",
@@ -1778,7 +1642,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-05-18",
+        "date": "2023-04-26",
         "time": "20:00:00"
       },
       "id": "G5v7Z9EU4ewjV",
@@ -1802,7 +1666,7 @@
         "name": "Miscellaneous"
       },
       "dates": {
-        "date": "2023-05-18",
+        "date": "2023-04-26",
         "time": "19:30:00"
       },
       "id": "G5v7Z9xpQQxZ7",
@@ -1826,7 +1690,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-05-19",
+        "date": "2023-04-26",
         "time": "22:00:00"
       },
       "id": "G5e0Z9E8mVwWF",
@@ -1843,6 +1707,11 @@
         "type": "venue"
       }
     },
+
+
+
+
+
     {
       "address": "147 East Pender Street",
       "category": {
@@ -1850,7 +1719,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-05-19",
+        "date": "2023-04-27",
         "time": "22:00:00"
       },
       "id": "G5e0Z9Ifcx-Fy",
@@ -1871,10 +1740,10 @@
       "address": "1925 Blanshard Street",
       "category": {
         "id": "KZFzniwnSyZfZ7v7n1",
-        "name": "Miscellaneous"
+        "name": "Other"
       },
       "dates": {
-        "date": "2023-05-19",
+        "date": "2023-04-27",
         "time": "19:30:00"
       },
       "id": "G5v7Z90JP2wUo",
@@ -1898,7 +1767,7 @@
         "name": "Miscellaneous"
       },
       "dates": {
-        "date": "2023-05-19",
+        "date": "2023-04-27",
         "time": "19:30:00"
       },
       "id": "G5v7Z90xtTe-0",
@@ -1922,7 +1791,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-05-19",
+        "date": "2023-04-27",
         "time": "20:00:00"
       },
       "id": "G5v7Z9NChf3ee",
@@ -1946,7 +1815,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-05-20",
+        "date": "2023-04-27",
         "time": "22:00:00"
       },
       "id": "G5e0Z9E6sneaK",
@@ -1963,30 +1832,7 @@
         "type": "venue"
       }
     },
-    {
-      "address": "8811 River Rd.",
-      "category": {
-        "id": "KZFzniwnSyZfZ7v7nJ",
-        "name": "Music"
-      },
-      "dates": {
-        "date": "2023-05-20",
-        "time": "20:00:00"
-      },
-      "id": "G5v7Z90lltVzN",
-      "image": "https://s1.ticketm.net/dam/c/548/5fefbd1c-973b-4b0e-9b2e-d78e4ce37548_106111_RETINA_PORTRAIT_3_2.jpg",
-      "location": {
-        "latitude": "49.1962813",
-        "longitude": "-123.1267642"
-      },
-      "name": "LEPA BRENA @ The River Rock Show Theatre",
-      "participants": 8634,
-      "venue": {
-        "id": "KovZpaK5ze",
-        "name": "River Rock Casino Resort",
-        "type": "venue"
-      }
-    },
+
     {
       "address": "868 Granville St.",
       "category": {
@@ -1994,7 +1840,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-05-20",
+        "date": "2023-04-28",
         "time": "19:00:00"
       },
       "id": "G5v7Z9JrhevT5",
@@ -2018,7 +1864,7 @@
         "name": "Sports"
       },
       "dates": {
-        "date": "2023-05-20",
+        "date": "2023-04-28",
         "time": "19:30:00"
       },
       "id": "G5v7Z9_b0QZxD",
@@ -2042,7 +1888,7 @@
         "name": "Arts & Theatre"
       },
       "dates": {
-        "date": "2023-05-20",
+        "date": "2023-04-28",
         "time": "17:00:00"
       },
       "id": "G5v7Z9bLG4fjb",
@@ -2066,7 +1912,7 @@
         "name": "Arts & Theatre"
       },
       "dates": {
-        "date": "2023-05-20",
+        "date": "2023-04-28",
         "time": "13:00:00"
       },
       "id": "G5v7Z9bLGffjK",
@@ -2083,6 +1929,11 @@
         "type": "venue"
       }
     },
+
+
+
+
+
     {
       "address": "868 Granville St.",
       "category": {
@@ -2090,7 +1941,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-05-21",
+        "date": "2023-04-29",
         "time": "19:30:00"
       },
       "id": "G5v7Z9EDuTSi7",
@@ -2114,7 +1965,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-05-21",
+        "date": "2023-04-29",
         "time": "17:00:00"
       },
       "id": "G5v7Z9I8hgfo6",
@@ -2138,7 +1989,7 @@
         "name": "Arts & Theatre"
       },
       "dates": {
-        "date": "2023-05-21",
+        "date": "2023-04-29",
         "time": "13:00:00"
       },
       "id": "G5v7Z9bJjMwp0",
@@ -2162,7 +2013,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-05-23",
+        "date": "2023-04-29",
         "time": "20:00:00"
       },
       "id": "G5v7Z9N3PqwqW",
@@ -2186,7 +2037,7 @@
         "name": "Arts & Theatre"
       },
       "dates": {
-        "date": "2023-05-23",
+        "date": "2023-04-29",
         "time": "20:00:00"
       },
       "id": "G5v7Z9Nk9vvpg",
@@ -2203,6 +2054,12 @@
         "type": "venue"
       }
     },
+
+
+
+
+
+
     {
       "address": "3123 W Broadway",
       "category": {
@@ -2210,7 +2067,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-05-23",
+        "date": "2023-04-30",
         "time": "19:00:00"
       },
       "id": "G5v7Z9NrKK-QJ",
@@ -2228,61 +2085,13 @@
       }
     },
     {
-      "address": "868 Granville St.",
-      "category": {
-        "id": "KZFzniwnSyZfZ7v7nJ",
-        "name": "Music"
-      },
-      "dates": {
-        "date": "2023-05-23",
-        "time": "19:00:00"
-      },
-      "id": "G5v7Z9PpG7vR1",
-      "image": "https://s1.ticketm.net/dam/a/15d/a43c48e2-9c51-47dd-a5b7-d506964a815d_SOURCE",
-      "location": {
-        "latitude": "49.2806462",
-        "longitude": "-123.1208652"
-      },
-      "name": "$NOT presents Get Busy Or Die North American Tour 2023",
-      "participants": 2370,
-      "venue": {
-        "id": "KovZpZAEkklA",
-        "name": "Commodore Ballroom",
-        "type": "venue"
-      }
-    },
-    {
-      "address": "Ferguson Point",
-      "category": {
-        "id": "KZFzniwnSyZfZ7v7nJ",
-        "name": "Music"
-      },
-      "dates": {
-        "date": "2023-05-23",
-        "time": "18:00:00"
-      },
-      "id": "G5v7Z9pkoTwDe",
-      "image": "https://s1.ticketm.net/dam/a/ce8/6c35c2e4-a71c-43af-91d7-f5fe641aece8_SOURCE",
-      "location": {
-        "latitude": "49.2908103",
-        "longitude": "-123.1462095"
-      },
-      "name": "First Aid Kit - Palomino Tour with guest Hurray for the Riff Raff",
-      "participants": 3417,
-      "venue": {
-        "id": "KovZpaKgFe",
-        "name": "Malkin Bowl",
-        "type": "venue"
-      }
-    },
-    {
       "address": "600 Block Hamilton St.",
       "category": {
         "id": "KZFzniwnSyZfZ7v7na",
         "name": "Arts & Theatre"
       },
       "dates": {
-        "date": "2023-05-24",
+        "date": "2023-04-30",
         "time": "20:00:00"
       },
       "id": "G5v7Z9Nk9v-pM",
@@ -2300,37 +2109,13 @@
       }
     },
     {
-      "address": "600 Block Hamilton St.",
-      "category": {
-        "id": "KZFzniwnSyZfZ7v7na",
-        "name": "Arts & Theatre"
-      },
-      "dates": {
-        "date": "2023-05-25",
-        "time": "20:00:00"
-      },
-      "id": "G5v7Z9Nk9eopB",
-      "image": "https://s1.ticketm.net/dam/a/d89/6fc71111-2dfd-45ba-8e2b-b5314a825d89_1552841_EVENT_DETAIL_PAGE_16_9.jpg",
-      "location": {
-        "latitude": "49.2777469",
-        "longitude": "-123.1174817"
-      },
-      "name": "Cats (Touring)",
-      "participants": 10669,
-      "venue": {
-        "id": "KovZpZAavEvA",
-        "name": "Queen Elizabeth Theatre",
-        "type": "venue"
-      }
-    },
-    {
       "address": "147 East Pender Street",
       "category": {
         "id": "KZFzniwnSyZfZ7v7nJ",
         "name": "Music"
       },
       "dates": {
-        "date": "2023-05-26",
+        "date": "2023-04-30",
         "time": "22:00:00"
       },
       "id": "G5e0Z900wgsJj",
@@ -2347,6 +2132,11 @@
         "type": "venue"
       }
     },
+
+
+
+
+
     {
       "address": "1024 Davie Street",
       "category": {
@@ -2354,7 +2144,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-05-26",
+        "date": "2023-05-01",
         "time": "22:00:00"
       },
       "id": "G5e0Z9J-kUxsm",
@@ -2378,7 +2168,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-05-26",
+        "date": "2023-05-01",
         "time": "19:00:00"
       },
       "id": "G5e0Z9J0X-NRC",
@@ -2402,7 +2192,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-05-26",
+        "date": "2023-05-01",
         "time": "19:15:00"
       },
       "id": "G5e0Z9P-8Re2W",
@@ -2426,7 +2216,7 @@
         "name": "Arts & Theatre"
       },
       "dates": {
-        "date": "2023-05-26",
+        "date": "2023-05-02",
         "time": "20:00:00"
       },
       "id": "G5v7Z9Nk9dv9F",
@@ -2450,7 +2240,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-05-26",
+        "date": "2023-05-02",
         "time": "18:00:00"
       },
       "id": "G5v7Z9NlyxNBL",
@@ -2474,7 +2264,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-05-27",
+        "date": "2023-05-02",
         "time": "22:00:00"
       },
       "id": "G5e0Z900j0sNF",

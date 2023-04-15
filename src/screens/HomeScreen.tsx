@@ -68,7 +68,7 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
       }
     });
     return (
-      <Text style={isDark ? styles.todayParticipantsNumber : lightModeStyles.todayParticipantsNumber}>{participants}</Text>
+      <Text style={isDark ? styles.todayParticipantsNumber : lightModeStyles.todayParticipantsNumber}>{participants.toLocaleString("en-US")}</Text>
     );
   };
 
@@ -83,7 +83,7 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
       }
     });
     return (
-      participants
+      participants.toLocaleString('en-US')
     );
   };
 
@@ -98,7 +98,7 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
       }
     });
     return (
-      participants
+      participants.toLocaleString('en-US')
     );
   };
 
@@ -113,7 +113,7 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
       }
     });
     return (
-      participants
+      participants.toLocaleString('en-US')
     );
   };
 

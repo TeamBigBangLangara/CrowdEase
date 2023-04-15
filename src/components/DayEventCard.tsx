@@ -23,19 +23,19 @@ const DayEventCard = (props: {
       <View style={styles.suggestionContainer}>
         <View style={styles.suggestionTextContainer}>
           <Text style={styles.suggestionHeader}>We got your back! Let’s try use this chance to:</Text>
-          <View style={{flexDirection: 'row'}}>
+          <View style={{flexDirection: 'row',}}>
             <Text style={styles.suggestionText}> • </Text>
             <Text style={styles.suggestionText}>Customise your restaurant theme, music, and vibe according to this
               event.</Text>
           </View>
-          <View style={{flexDirection: 'row'}}>
+          <View style={{flexDirection: 'row',}}>
             <Text style={styles.suggestionText}> • </Text>
             <Text style={styles.suggestionText}>Hand out leaflets or coupons regarding your promotions.</Text>
           </View>
-          <View style={{flexDirection: 'row'}}>
+          <View style={{flexDirection: 'row',}}>
             <Text style={styles.suggestionText}> • </Text>
             <Text style={styles.suggestionText}>Prepare your inventory, staff, and manage your online orders.</Text>
-          </View>          
+          </View>
         </View>
         <Pressable style={styles.upIcon} onPress={() => setShowSuggestion(false)}>
           <Image source={require("../assets/icons/upIcon.png")} />
@@ -68,9 +68,9 @@ const DayEventCard = (props: {
       <View style={styles.headerContainer}>
         <View style={styles.eventNameContainer}>
           {renderIcon()}
-          <Text style={styles.eventName}>{props.event.name}</Text>          
+          <Text style={styles.eventName}>{props.event.name}</Text>
         </View>
-        <Text style={styles.participants}>{props.event.participants} participants</Text>
+        <Text style={styles.participants}>{props.event.participants.toLocaleString("en-US")} participants</Text>
       </View>
       <Text style={styles.categoryLabel}>
         {props.percentage}% over {props.event.category.name} category
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
   },
   upIcon: {
     marginTop: margin.secondary,
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
 });
 

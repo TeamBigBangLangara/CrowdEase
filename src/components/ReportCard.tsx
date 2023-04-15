@@ -17,7 +17,7 @@ const ReportCard = (props: { date: string; eventNumber: number; participantsQty:
       </View>
       <View style={styles.infoContainer}>
         <Text style={styles.header}>Event Participants</Text>
-        <Text style={styles.info}>{props.participantsQty}</Text>
+        <Text style={styles.info}>{props.participantsQty.toLocaleString("en-US")}</Text>
       </View>
     </View>
   );

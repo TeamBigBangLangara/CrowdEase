@@ -13,8 +13,9 @@ import DataVisualization from "../components/DataVisualization";
 import { getDate } from "../utils/getDate";
 import { borderRadius } from "../styles/basic";
 import EventCarousel from "../components/EventCarousel";
-import { getEvents } from "../api/event";
+//import { getEvents } from "../api/event";
 import { env } from "../../env";
+import { getEvents } from "../api/bigBangAPI/JsonEvents";
 
 import OneSignal from "react-native-onesignal";
 import { storage } from "../store/mmkv";
@@ -67,7 +68,7 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
       }
     });
     return (
-      <Text style={isDark ? styles.todayParticipantsNumber : lightModeStyles.todayParticipantsNumber}>{participants}</Text>
+      <Text style={isDark ? styles.todayParticipantsNumber : lightModeStyles.todayParticipantsNumber}>{participants.toLocaleString("en-US")}</Text>
     );
   };
 
@@ -82,7 +83,7 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
       }
     });
     return (
-      participants
+      participants.toLocaleString('en-US')
     );
   };
 
@@ -97,7 +98,7 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
       }
     });
     return (
-      participants
+      participants.toLocaleString('en-US')
     );
   };
 
@@ -106,13 +107,13 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
     requestEvents.data?.forEach(event => {
       if (event.dates.date === todayFormatted) {
         const eventHour = parseInt(event.dates.time.split(':')[0]);
-        if (eventHour >= 18 && eventHour < 22) {
+        if (eventHour >= 18 && eventHour <= 22) {
           participants += event.participants;
         }
       }
     });
     return (
-      participants
+      participants.toLocaleString('en-US')
     );
   };
 
@@ -437,7 +438,7 @@ const lightModeStyles = StyleSheet.create({
   },
   suggestionContainer: {
     alignSelf: 'center',
-    backgroundColor: colors.neutral.backgroundWhite,
+    backgroundColor: "#F4F4F4",
     borderRadius: borderRadius.primary,
     elevation: 5,
     shadowColor: '#000',
@@ -476,7 +477,7 @@ const lightModeStyles = StyleSheet.create({
     fontWeight: fontWeightSubtitle,
   },
   numberContainer: {
-    backgroundColor: colors.neutral.backgroundWhite,
+    backgroundColor: "#F4F4F4",
     borderRadius: borderRadius.primary,
     elevation: 5,
     shadowColor: '#000',

@@ -179,7 +179,7 @@ const EventCard = (props: {
             <View style={styles.participantsContainer}>
               <IconText
                 icon={isDark ? require("../assets/icons/participants.png") : require("../assets/icons/lightMode/Participants.png")}
-                text={`${props.event.participants} participants`}
+                text={`${props.event.participants.toLocaleString("en-US")} participants`}
                 style={isDark ? styles.icon : lightModeStyles.icon}
                 isDark={isDark}
               />
@@ -260,7 +260,7 @@ const styles = StyleSheet.create({
 
 const lightModeStyles = StyleSheet.create({
   container: {
-    backgroundColor: colors.neutral.backgroundWhite,
+    backgroundColor: "#F4F4F4",
     paddingLeft: 24,
     paddingRight: 32,
     paddingVertical: 16,

@@ -1,18 +1,16 @@
-
-import { getEvents } from "../api/event";
+import { getEvents } from "../api/bigBangAPI/JsonEvents";
 import { useState } from "react";
-import { Alert, StyleSheet, View, Text } from "react-native";
+import { Alert, StyleSheet, Text, View } from "react-native";
 import { useQuery } from "react-query";
-import { VictoryBar, VictoryChart, VictoryAxis, VictoryLabel } from "victory-native";
+import { VictoryAxis, VictoryBar, VictoryChart, VictoryLabel } from "victory-native";
 import { colors } from "../styles/colors";
-import { fontFamily, fontSize } from "../styles/fonts";
+import { fontFamily, fontSize, fontWeightTitle } from "../styles/fonts";
 import { getDate } from "../utils/getDate";
-import { fontWeightTitle } from '../styles/fonts';
 import IconText from "./IconText";
 
 const DataVisualization = (props: {isDark: boolean}) => {
   const { week, } = getDate();
-  
+
   const requestEvents = useQuery("events", () => getEvents(),
   {
     onError: (error: TypeError) => {
@@ -20,7 +18,7 @@ const DataVisualization = (props: {isDark: boolean}) => {
     },
   }
   );
-  
+
   const data = [
     { day: "MON", value: 0, },
     { day: "TUE", value: 0, },
@@ -30,17 +28,17 @@ const DataVisualization = (props: {isDark: boolean}) => {
     { day: "SAT", value: 0, },
     { day: "SUN", value: 0, }
   ];
-  
-  requestEvents.data?.forEach((event) => {
+
+  requestEvents.data?.forEach((event: { dates: { date: string; }; participants: number; }) => {
     for (let i = 0; i < 7; i++) {
       if (event.dates.date === week[i]) {
         data[i].value += event.participants;
       }
     }
   });
-  
+
   const weekParticipants = data.reduce((total, day) => total + day.value, 0);
- 
+
   const [selectedBar, setSelectedBar] = useState(weekParticipants);
 
   const barChartSvg = {
@@ -61,8 +59,15 @@ const DataVisualization = (props: {isDark: boolean}) => {
   return (
     <View style={styles.container}>
       <View style={styles.participantsNumberContainer}>
-        <IconText icon={props.isDark ? require('../assets/icons/participants.png') : require('../assets/icons/lightMode/Participants.png')} text={'Total participants:'} style={styles.participantIcon} isDark={props.isDark} />
-        <Text style={props.isDark ? styles.participantsNumber : lightModeStyles.participantsNumber}>{selectedBar}</Text>
+        <IconText
+          icon={props.isDark ? require('../assets/icons/participants.png')
+            : require('../assets/icons/lightMode/Participants.png')} text={'Total participants:'}
+          style={styles.participantIcon}
+          isDark={props.isDark}
+        />
+        <Text style={props.isDark ? styles.participantsNumber : lightModeStyles.participantsNumber}>
+          {selectedBar.toLocaleString("en-US")}
+        </Text>
       </View>
       <VictoryChart height={200}>
         <VictoryAxis
@@ -89,11 +94,11 @@ const DataVisualization = (props: {isDark: boolean}) => {
                         return props.isDark ?
                          fill === colors.neutral.surfaceWhite
                           ? colors.neutral.surfaceWhite
-                          : { fill: colors.secondaryGreenDark, } : 
+                          : { fill: colors.secondaryGreenDark, } :
                           fill === colors.neutral.grey
                           ? colors.neutral.grey
-                          : { fill: colors.secondaryGreenLight, }
-                        
+                          : { fill: colors.secondaryGreenLight, };
+
                       },
                     },
                     {
@@ -101,7 +106,7 @@ const DataVisualization = (props: {isDark: boolean}) => {
                       mutation: (clickedData: { datum: { day: string, value: number } }) => {
                         setSelectedBar(data?.datum.value);
                         return {
-                          style: { fill: props.isDark ? colors.secondaryGreenDark : colors.secondaryGreenLight },
+                          style: { fill: props.isDark ? colors.secondaryGreenDark : colors.secondaryGreenLight, },
                         };
                       },
                     }

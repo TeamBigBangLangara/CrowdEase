@@ -11,7 +11,7 @@ import SplashScreen from "./screens/SplashScreen";
 import Login from "./screens/LoginScreen";
 import NavigationBottomTab from "./components/navigation/NavigationBottomTab";
 import LocationScreen from "./screens/LocationScreen";
-import { SafeAreaView, StatusBar } from "react-native";
+import { LogBox, SafeAreaView, StatusBar } from "react-native";
 import WeekManagerScreen from "./screens/WeekManagerScreen";
 import SuggestionScreen from "./screens/SuggestionScreen";
 import EventScreen from "./screens/EventScreen";
@@ -114,6 +114,9 @@ const queryClient = new QueryClient();
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+  LogBox.ignoreAllLogs();//Ignore all log notifications
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(user => {

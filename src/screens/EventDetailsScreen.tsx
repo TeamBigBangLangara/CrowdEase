@@ -132,7 +132,7 @@ const EventDetailsScreen = ({ route, navigation, }: MainStackNavigationProps<"Ev
     if (isBookmarkAdded) {
       return <SecondaryButton
         onPress={onBookMarkButtonPress}
-        label={"Remove Bookmark"} 
+        label={"Remove Bookmark"}
         isDark={isDark}/>;
     } else {
       return <PrimaryButton
@@ -182,7 +182,7 @@ const EventDetailsScreen = ({ route, navigation, }: MainStackNavigationProps<"Ev
         <View style={styles.nameContainer}>
           <View style={styles.participantsContainer}>
             <Image source={require("../assets/icons/participants.png")} />
-            <Text style={styles.number}>{requestEventById.data?.participants}
+            <Text style={styles.number}>{requestEventById.data?.participants.toLocaleString("en-US")}
             </Text>
           </View>
           <Text adjustsFontSizeToFit={true} style={styles.name}>{requestEventById.data?.name}</Text>
@@ -239,7 +239,7 @@ const styles = StyleSheet.create({
   },
   backImage: {
 width: 30,
-height: 30
+height: 30,
   },
   nameContainer: {
     flexDirection: "row",
@@ -259,7 +259,7 @@ height: 30
   image: {
     height: 200,
     marginHorizontal: -20,
-    marginTop: 50
+    marginTop: 50,
   },
   number: {
     fontFamily: fontFamily.subtitle,
@@ -313,13 +313,11 @@ height: 30
   },
   buttonContainer: {
     backgroundColor: colors.neutral.surfaceBlack,
-    borderTopLeftRadius: 22,
-    borderTopRightRadius: 22,
-    marginHorizontal: -18,
-    display: "flex",
     justifyContent: "center",
     alignItems: "center",
     height: 97,
+    borderTopLeftRadius: 22,
+    borderTopRightRadius: 22,
   },
 });
 export default EventDetailsScreen;

@@ -2,7 +2,9 @@ import { useState } from "react";
 import { useQuery } from "react-query";
 import { Alert, FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
 
-import { getEvents } from "../api/event";
+// import { getEvents } from "../api/event";
+import { getEvents } from "../api/bigBangAPI/JsonEvents";
+
 
 import ReportCard from "../components/ReportCard";
 import WeekCalendar from "../components/WeekCalendar";
@@ -63,15 +65,13 @@ const WeekManagerScreen = () => {
   });
 
   return (
-    <View style={styles.container}>
-    <ScrollView >
+    <ScrollView style={styles.container}>
       <Text style={styles.screenTitle}>Weekly Event Preview</Text>
       <WeekCalendar
       onDaySelection={() => console.log("under development")}
       onWeekSelection={weekCalendarArrowHandler}
       daysVisible={false}
       />
-    </ScrollView>
       <FlatList
         data={weekDayList}
         renderItem={({ item, }) =>
@@ -83,7 +83,7 @@ const WeekManagerScreen = () => {
         }
         ItemSeparatorComponent={() => <View style={{height: 18,}} />}
       />
-    </View>
+    </ScrollView>
   );
 };
 

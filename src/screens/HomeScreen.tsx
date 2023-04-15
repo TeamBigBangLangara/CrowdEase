@@ -438,7 +438,7 @@ const lightModeStyles = StyleSheet.create({
   },
   suggestionContainer: {
     alignSelf: 'center',
-    backgroundColor: colors.neutral.backgroundWhite,
+    backgroundColor: "#F4F4F4",
     borderRadius: borderRadius.primary,
     elevation: 5,
     shadowColor: '#000',
@@ -477,7 +477,7 @@ const lightModeStyles = StyleSheet.create({
     fontWeight: fontWeightSubtitle,
   },
   numberContainer: {
-    backgroundColor: colors.neutral.backgroundWhite,
+    backgroundColor: "#F4F4F4",
     borderRadius: borderRadius.primary,
     elevation: 5,
     shadowColor: '#000',

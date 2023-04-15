@@ -259,7 +259,7 @@ const styles = StyleSheet.create({
 
 const lightModeStyles = StyleSheet.create({
   container: {
-    backgroundColor: colors.neutral.backgroundWhite,
+    backgroundColor: "#F4F4F4",
     paddingHorizontal: 24,
     paddingVertical: 16,
     flexDirection: "column",

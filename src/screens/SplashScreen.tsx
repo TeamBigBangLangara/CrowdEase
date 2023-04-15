@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { AuthStackNavigationProps } from "../types/navigationTypes";
 
 import FastImage from "react-native-fast-image";
@@ -20,7 +20,6 @@ const SplashScreen = ({ navigation, }: AuthStackNavigationProps<"SplashScreen">)
 
   return (
     <View style={styles.container}>
-      <Text>SplashScreen</Text>
       <FastImage
         source={require("../assets/animations/splashScreen.gif")}
         style={styles.gif}

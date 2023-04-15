@@ -82,7 +82,7 @@ const ProfileScreen = ({ navigation, }: ProfileScreenProps) => {
               <Image
                 source={isDark ? require("../assets/icons/profileIcons/edit.png") : require("../assets/icons/lightMode/edit.png")} />
               <LinkButton label={"Edit Profile"} style={isDark ? styles.editProfile : lightModeStyles.editProfile}
-                          onPress={onEditPress} />
+                onPress={onEditPress} />
             </View>
           </View>
         </View>
@@ -110,22 +110,24 @@ const ProfileScreen = ({ navigation, }: ProfileScreenProps) => {
               source={isDark ? require("../assets/icons/downIcon.png") : require("../assets/icons/lightMode/downArrow.png")} />
           </Pressable>
         </View>
-        <View style={isDark ? styles.settingContainer : lightModeStyles.settingContainer}>
-          <View style={isDark ? styles.itemSetting : lightModeStyles.itemSetting}>
-            <IconText
-              icon={showSetting ? require("../assets/icons/activeSetting.png") :
-                isDark ? require("../assets/icons/profileIcons/setting.png") : require("../assets/icons/lightMode/setting.png")}
-              text={"Application Settings"}
-              style={isDark ? styles.iconText : lightModeStyles.iconText}
-              isDark={isDark} />
-            <Pressable onPress={onShowSetting}>
-              <Image source={!showSetting ?
-                isDark ? require("../assets/icons/downIcon.png") : require("../assets/icons/lightMode/downArrow.png") :
-                isDark ? require("../assets/icons/upIcon.png") : require("../assets/icons/lightMode/upArrow.png")} />
-            </Pressable>
+        <Pressable onPress={onShowSetting}>
+          <View style={isDark ? styles.settingContainer : lightModeStyles.settingContainer}>
+            <View style={isDark ? styles.itemSetting : lightModeStyles.itemSetting}>
+              <IconText
+                icon={showSetting ? require("../assets/icons/activeSetting.png") :
+                  isDark ? require("../assets/icons/profileIcons/setting.png") : require("../assets/icons/lightMode/setting.png")}
+                text={"Application Settings"}
+                style={isDark ? styles.iconText : lightModeStyles.iconText}
+                isDark={isDark} />
+              <Pressable onPress={onShowSetting}>
+                <Image source={!showSetting ?
+                  isDark ? require("../assets/icons/downIcon.png") : require("../assets/icons/lightMode/downArrow.png") :
+                  isDark ? require("../assets/icons/upIcon.png") : require("../assets/icons/lightMode/upArrow.png")} />
+              </Pressable>
+            </View>
+            {showSetting ? renderSetting() : ""}
           </View>
-          {showSetting ? renderSetting() : ""}
-        </View>
+        </Pressable>
         <View style={isDark ? styles.item : lightModeStyles.item}>
           <IconText
             icon={isDark ? require("../assets/icons/bookmark.png") : require("../assets/icons/lightMode/bookmark.png")}

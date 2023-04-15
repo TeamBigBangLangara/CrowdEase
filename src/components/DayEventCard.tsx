@@ -138,6 +138,7 @@ const styles = StyleSheet.create({
   },
   suggestionTextContainer: {
     gap: 10,
+    padding: 5
   },
   suggestionText: {
     color: colors.neutral.surfaceWhite,

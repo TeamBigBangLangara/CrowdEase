@@ -63,7 +63,7 @@ const RateCard = (props: {
         Please tell how much this event affected your business?
       </Text>
       {renderStars()}
-      <SecondaryButton onPress={onSubmitPress} label={'Submit'} />
+      <SecondaryButton onPress={onSubmitPress} label={'Submit'} isDark={true}/>
       <View style={styles.skipLabel}>
         <LinkButton onPress={props.onSkipPress} label={'Skip'} style={styles.linkButton} />
       </View>

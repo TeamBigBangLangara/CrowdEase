@@ -16,6 +16,7 @@ import { getUser } from "../auth/user";
 import { Bookmark, LoggedUser } from "types/types";
 import SecondaryButton from "../components/SecondaryButton";
 import { storage } from "../store/mmkv";
+import FastImage from "react-native-fast-image";
 
 const EventDetailsScreen = ({ route, navigation, }: MainStackNavigationProps<"EventDetailsScreen"> | EventsStackNavigationProps<"EventDetailsScreen">) => {
   const isDark = storage.getBoolean("darkMode");
@@ -42,7 +43,7 @@ const EventDetailsScreen = ({ route, navigation, }: MainStackNavigationProps<"Ev
       },
     });
 
-  useQuery("bookmarks", () => {
+  const requestUserBookmarks = useQuery("bookmarks", () => {
     return fetchBookmarks(userInfo.uid);
   }, {
     onSuccess: (data) => {
@@ -55,6 +56,19 @@ const EventDetailsScreen = ({ route, navigation, }: MainStackNavigationProps<"Ev
     enabled: !!userInfo.uid,
   }
   );
+
+  if (requestEventById.isLoading || requestUserBookmarks.isLoading) {
+    return (
+      <View style={styles.gifContainer}>
+        <FastImage
+          source={require("../assets/animations/loading.gif")}
+          style={styles.gif}
+          resizeMode={FastImage.resizeMode.contain}
+        />
+      </View>
+    );
+  }
+
 
   const saveBookmark = useMutation(["bookmarks"], () => addBookmark({
     "user_id": userInfo?.uid,
@@ -318,6 +332,16 @@ height: 30,
     height: 97,
     borderTopLeftRadius: 22,
     borderTopRightRadius: 22,
+  },
+  gif: {
+    width: "100%",
+    height: "100%",
+  },
+  gifContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#000000",
   },
 });
 export default EventDetailsScreen;

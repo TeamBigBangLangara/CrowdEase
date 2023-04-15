@@ -65,15 +65,13 @@ const WeekManagerScreen = () => {
   });
 
   return (
-    <View style={styles.container}>
-    <ScrollView >
+    <ScrollView style={styles.container}>
       <Text style={styles.screenTitle}>Weekly Event Preview</Text>
       <WeekCalendar
       onDaySelection={() => console.log("under development")}
       onWeekSelection={weekCalendarArrowHandler}
       daysVisible={false}
       />
-    </ScrollView>
       <FlatList
         data={weekDayList}
         renderItem={({ item, }) =>
@@ -85,7 +83,7 @@ const WeekManagerScreen = () => {
         }
         ItemSeparatorComponent={() => <View style={{height: 18,}} />}
       />
-    </View>
+    </ScrollView>
   );
 };
 

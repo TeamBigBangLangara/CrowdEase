@@ -182,7 +182,7 @@ const EventDetailsScreen = ({ route, navigation, }: MainStackNavigationProps<"Ev
         <View style={styles.nameContainer}>
           <View style={styles.participantsContainer}>
             <Image source={require("../assets/icons/participants.png")} />
-            <Text style={styles.number}>{requestEventById.data?.participants}
+            <Text style={styles.number}>{requestEventById.data?.participants.toLocaleString("en-US")}
             </Text>
           </View>
           <Text adjustsFontSizeToFit={true} style={styles.name}>{requestEventById.data?.name}</Text>

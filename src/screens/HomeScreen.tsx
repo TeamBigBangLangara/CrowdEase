@@ -68,7 +68,7 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
       }
     });
     return (
-      <Text style={isDark ? styles.todayParticipantsNumber : lightModeStyles.todayParticipantsNumber}>{participants}</Text>
+      <Text style={isDark ? styles.todayParticipantsNumber : lightModeStyles.todayParticipantsNumber}>{participants.toLocaleString("en-US")}</Text>
     );
   };
 
@@ -83,7 +83,7 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
       }
     });
     return (
-      participants
+      participants.toLocaleString('en-US')
     );
   };
 
@@ -98,7 +98,7 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
       }
     });
     return (
-      participants
+      participants.toLocaleString('en-US')
     );
   };
 
@@ -113,7 +113,7 @@ const HomeScreen = ({ navigation, }: MainStackNavigationProps<'HomeScreen'>) => 
       }
     });
     return (
-      participants
+      participants.toLocaleString('en-US')
     );
   };
 
@@ -438,7 +438,7 @@ const lightModeStyles = StyleSheet.create({
   },
   suggestionContainer: {
     alignSelf: 'center',
-    backgroundColor: colors.neutral.backgroundWhite,
+    backgroundColor: "#F4F4F4",
     borderRadius: borderRadius.primary,
     elevation: 5,
     shadowColor: '#000',
@@ -477,7 +477,7 @@ const lightModeStyles = StyleSheet.create({
     fontWeight: fontWeightSubtitle,
   },
   numberContainer: {
-    backgroundColor: colors.neutral.backgroundWhite,
+    backgroundColor: "#F4F4F4",
     borderRadius: borderRadius.primary,
     elevation: 5,
     shadowColor: '#000',

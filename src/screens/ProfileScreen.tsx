@@ -45,7 +45,7 @@ const ProfileScreen = ({ navigation, }: ProfileScreenProps) => {
         <Switch
           value={isDark}
           onValueChange={changeDarkMode}
-          thumbTintColor={isDark ? colors.primary.primaryPurpleDark : colors.neutral.grey}
+          thumbColor={isDark ? colors.primary.primaryPurpleDark : colors.neutral.grey}
           trackColor={{
             false: colors.neutral.surfaceWhite,
             true: colors.primary.primaryPurpleDark,

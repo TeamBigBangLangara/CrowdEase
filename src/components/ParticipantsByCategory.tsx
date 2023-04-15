@@ -1,7 +1,7 @@
-import { View, StyleSheet, Text, Image } from 'react-native';
+import { Image, StyleSheet, Text, View } from "react-native";
 
 import { colors } from "../styles/colors";
-import { fontSize, fontFamily, fontWeightSubtitle } from "../styles/fonts";
+import { fontFamily, fontSize, fontWeightSubtitle } from "../styles/fonts";
 import { borderRadius } from "../styles/basic";
 
 const ParticipantsByCategory = (props: {
@@ -59,7 +59,7 @@ const ParticipantsByCategory = (props: {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.participants}>{props.participants} participants</Text>
+      <Text style={styles.participants}>{props.participants.toLocaleString("en-US")} participants</Text>
       <Text style={styles.infoPercentage}>{props.percentage}% less than last week</Text>
       <View style={styles.progressbar}>
         <View>{values}</View>

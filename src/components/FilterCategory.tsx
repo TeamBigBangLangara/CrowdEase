@@ -1,5 +1,5 @@
-import { useState, useRef, forwardRef, useImperativeHandle, useEffect } from 'react';
-import { Modal, Pressable, StyleSheet, Text, View, Image } from "react-native";
+import { useEffect, useState } from "react";
+import { Image, Modal, Pressable, StyleSheet, Text, View } from "react-native";
 
 import { fontFamily, fontSize, fontWeightSubtitle } from "../styles/fonts";
 import { colors } from "../styles/colors";
@@ -7,7 +7,7 @@ import { colors } from "../styles/colors";
 import PrimaryButton from "./PrimaryButton";
 import LinkButton from "./LinkButton";
 import { TypeCategoryFilter } from "../screens/EventScreen";
-import { storage } from '../store/mmkv';
+import { storage } from "../store/mmkv";
 
 //////////////////////// FILTER PRESSABLE COMPONENT ////////////////////////
 const EventCategoryPressable = (props: {name: string, icon?: any, categoryFilterArray: TypeCategoryFilter[], clearAllTrigger: number}) => {
@@ -52,12 +52,12 @@ const EventCategoryPressable = (props: {name: string, icon?: any, categoryFilter
 //////////////////////// MAIN COMPONENT ////////////////////////
 
 const FilterCategory = (props: {
-  visible: boolean, 
-  onRequestClose?: () => void, 
-  onTouchStart?: () => void, 
+  visible: boolean,
+  onRequestClose?: () => void,
+  onTouchStart?: () => void,
   onClosePress: () => void,
-  onApplyFilterPress: (newCategoryFilterArray: TypeCategoryFilter[]) => void, 
-  categoryFilterArray: TypeCategoryFilter[], 
+  onApplyFilterPress: (newCategoryFilterArray: TypeCategoryFilter[]) => void,
+  categoryFilterArray: TypeCategoryFilter[],
   }
   ) => {
 
@@ -92,7 +92,7 @@ const FilterCategory = (props: {
           <View style={styles.modalView}>
             <View style={styles.eventsFilterHeaderContainer}>
               <LinkButton onPress={props.onClosePress} label={"Close"} style={styles.eventsFilterHeaderContainerButtons}/>
-              
+
               <View style={{flexDirection: 'row', columnGap: 5,}}>
                 <Text style={styles.eventsFilterHeaderContainerTitle}>Filters</Text>
                 <Image source={require('../assets/icons/filter.png')}/>
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
   eventsFilterPressableContainer: {
     flexDirection: "column",
     rowGap: 20,
-  },  
+  },
 
   eventsFilterPressableContainerRow: {
     flexDirection: 'row',
@@ -215,14 +215,14 @@ const styles = StyleSheet.create({
     columnGap: 5,
     alignItems: 'center',
     justifyContent: 'center',
-    borderColor: colors.secondaryGreenDark,
+    borderColor: colors.secondaryGreenLight,
     borderRadius: 22,
     borderWidth: 2,
     height: 42,
   },
 
   eventsFilterPressableText: {
-    color: colors.secondaryGreenDark,
+    color: colors.secondaryGreenLight,
     fontFamily: fontFamily.subtitle,
     fontSize: fontSize.subtitle2,
     fontWeight: fontWeightSubtitle,
@@ -230,8 +230,8 @@ const styles = StyleSheet.create({
   },
 
   eventsFilterPressableActive: {
-    borderColor: colors.secondaryGreenLight,
-    color: colors.secondaryGreenLight,
+    borderColor: colors.secondaryGreenDark,
+    color: colors.secondaryGreenDark,
   },
 });
 

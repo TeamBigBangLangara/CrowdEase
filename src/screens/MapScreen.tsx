@@ -21,7 +21,7 @@ const MapScreen = ({navigation,} : MapStackNavigationProps<'MapScreen'>) => {
 
   const [isCarouselVisible, setIsCarouselVisible] = useState(false);
   const ITEM_WIDTH = Dimensions.get('screen').width * 0.8;
-  const radius = Platform.OS === 'ios' ? 150 : 40;
+  const radius = Platform.OS === 'ios' ? 150 : 50;
 
   const requestEvents = useQuery('events', () => getEvents(), {
     select: events => {
@@ -75,12 +75,12 @@ const MapScreen = ({navigation,} : MapStackNavigationProps<'MapScreen'>) => {
       return (
         <Marker
           zIndex={selectedMarker ? 1000 : 0}
-          key={event.id}
+          key={`${event.id}-${isSelected ? 'active' : 'inactive'}`}
           coordinate={{
             latitude: Number(event.location.latitude),
             longitude: Number(event.location.longitude),
           }}
-          pinColor={isSelected ? "green" : "#B687FF"}
+          pinColor={!isSelected ? "#1035b4" : "#B687FF"}
           onPress={() => {
             onMarkerPress(index, event.location);
           }}

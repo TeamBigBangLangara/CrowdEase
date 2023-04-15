@@ -74,7 +74,7 @@ const LoginScreen = ({ navigation, }: AuthStackNavigationProps<'LoginScreen'>) =
           <Text style={styles.link}>Forgot Password</Text>
         </Pressable>
         <View style={styles.buttonContainer}>
-          <PrimaryButton label="Login" onPress={onLoginPress} />
+          <PrimaryButton label="Login" onPress={onLoginPress} isDark={true}/>
         </View>
         <View style={styles.textContainer}>
           <View style={styles.line}></View>

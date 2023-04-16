@@ -18,7 +18,7 @@ const PastEventScreen = () => {
       },
     });
 
-  const requestEventRatedByUser = useQuery("userRating", () => {
+  const requestEventRatedByUser = useQuery("rating", () => {
     return getEventRatedByUser(requestUser.data!.uid);
     },
     {

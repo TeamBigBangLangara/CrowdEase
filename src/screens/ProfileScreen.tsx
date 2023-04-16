@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Alert, Image, Platform, Pressable, StyleSheet, Switch, Text, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 
@@ -29,14 +29,16 @@ const ProfileScreen = ({ navigation, }: ProfileScreenProps) => {
     navigation.navigate("PastEventScreen");
   };
   const animation = useRef(new Animated.Value(0)).current;
+  useEffect(() => {
+    Animated.timing(animation, {
+      toValue: showSetting ? 1 : 0,
+      duration: 300,
+      useNativeDriver: false,
+    }).start();
+  }, [showSetting]);
 
   const onShowSetting = () => {
     setShowSetting(!showSetting);
-      Animated.timing(animation, {
-        toValue: showSetting ? 0 : 1,
-        duration: 300,
-        useNativeDriver: false,
-      }).start();
   };
 
   const animatedHeight = animation.interpolate({

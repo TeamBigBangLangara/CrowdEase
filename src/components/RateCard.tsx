@@ -5,7 +5,7 @@ import { colors } from "../styles/colors";
 import { fontFamily, fontSize } from "../styles/fonts";
 import { margin } from "../styles/basic";
 import { useState } from "react";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { addRating } from "../api/bigBangAPI/rating";
 import { Event } from "../types/types";
 import CustomAlert from "./CustomAlert";
@@ -18,6 +18,8 @@ const RateCard = (props: {
 }) => {
   const [rate, setRate] = useState(props.event.rate);
   const [modalShow, setModalShow] = useState(false);
+
+  const queryClient = useQueryClient();
 
   const saveRating = useMutation('rating', () => addRating({
     user_id: props.userId,
@@ -35,20 +37,21 @@ const RateCard = (props: {
 
   const onSubmitPress = () => {
     saveRating.mutate();
-    setModalShow(true)
+    setModalShow(true);
   };
 
   const onOKPress = () => {
     props.setModalShow(false);
     props.onSkipPress();
-  }
+    queryClient.invalidateQueries('rating');
+  };
 
   const renderStars = () => {
     const starIds = [1, 2, 3, 4, 5];
     return (
       <View style={styles.starContainer}>
         {starIds.map(id => (
-          <Pressable key={id} onPress={() => { setRate(id) }}>
+          <Pressable key={id} onPress={() => { setRate(id); }}>
             {
               id <= rate ?
                 <Image source={require("../assets/icons/StarActive.png")} />

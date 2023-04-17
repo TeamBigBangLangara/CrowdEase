@@ -82,12 +82,18 @@ const SuggestionScreen = ({ navigation, }: ReportStackNavigationProps<'Suggestio
           <ParticipantsByCategory
             participants={totalParticipants}
             percentage={50}
-            musicQty={eventsCategories.find(categoryObject => categoryObject.name === 'Music').participants.toLocaleString("en-US")}
-            sportQty={eventsCategories.find(categoryObject => categoryObject.name === 'Sports').participants.toLocaleString("en-US")}
-            showsQty={eventsCategories.find(categoryObject => categoryObject.name === 'Shows').participants.toLocaleString("en-US")}
-            festivalsQty={eventsCategories.find(categoryObject => categoryObject.name === 'Festivals').participants.toLocaleString("en-US")}
-            businessQty={eventsCategories.find(categoryObject => categoryObject.name === 'Business').participants.toLocaleString("en-US")}
-            otherQty={eventsCategories.find(categoryObject => categoryObject.name === 'Other').participants.toLocaleString("en-US")}
+            musicQty={eventsCategories.find(categoryObject => categoryObject.name === 'Music')
+              .participants}
+            sportQty={eventsCategories.find(categoryObject => categoryObject.name === 'Sports')
+              .participants}
+            showsQty={eventsCategories.find(categoryObject => categoryObject.name === 'Shows')
+              .participants}
+            festivalsQty={eventsCategories.find(categoryObject => categoryObject.name === 'Festivals')
+              .participants}
+            businessQty={eventsCategories.find(categoryObject => categoryObject.name === 'Business')
+              .participants}
+            otherQty={eventsCategories.find(categoryObject => categoryObject.name === 'Other')
+              .participants}
           />
         </View>
         <View style={{flex: 1,}}>

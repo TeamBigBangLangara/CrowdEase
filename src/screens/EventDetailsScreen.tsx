@@ -57,7 +57,7 @@ const EventDetailsScreen = ({ route, navigation, }: MainStackNavigationProps<"Ev
   }
   );
 
-  if (requestEventById.isLoading || requestUserBookmarks.isLoading) {
+  if (requestEventById.isLoading && requestUserBookmarks.isLoading) {
     return (
       <View style={styles.gifContainer}>
         <FastImage

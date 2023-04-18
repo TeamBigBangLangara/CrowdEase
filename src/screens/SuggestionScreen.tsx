@@ -8,10 +8,10 @@ import DayEventCard from "../components/DayEventCard";
 import ParticipantsByCategory from "../components/ParticipantsByCategory";
 import PrimaryButton from "../components/PrimaryButton";
 
-// import { getEvents } from "../api/event";
+import { getEvents } from "../api/event";
 import { colors } from "../styles/colors";
 import { fontFamily, fontSize } from "../styles/fonts";
-import { getEvents } from "../api/bigBangAPI/JsonEvents";
+// import { getEvents } from "../api/bigBangAPI/JsonEvents";
 
 const SuggestionScreen = ({ navigation, }: ReportStackNavigationProps<'SuggestionScreen'>) => {
   /////========= States

@@ -96,8 +96,6 @@ const EventScreen = ({ navigation,}: EventsStackNavigationProps<"EventScreen">) 
   );
 
   if (requestEvents.isLoading || requestUserBookmarks.isLoading) {
-    // return <FastImage source={require('../assets/animations/loading.gif')}/>;
-
     return (
       <View style={styles.gifContainer}>
       <FastImage
@@ -107,7 +105,6 @@ const EventScreen = ({ navigation,}: EventsStackNavigationProps<"EventScreen">) 
       />
       </View>
     );
-
   }
 
 

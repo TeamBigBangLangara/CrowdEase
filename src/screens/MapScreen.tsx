@@ -26,7 +26,7 @@ const MapScreen = ({navigation,} : MapStackNavigationProps<'MapScreen'>) => {
   const requestEvents = useQuery('events', () => getEvents(), {
     select: events => {
       return events.filter((event) => {
-        return event.dates.date === "2023-04-14";
+        return event.dates.date === "2023-04-18";
       });
     },
   });

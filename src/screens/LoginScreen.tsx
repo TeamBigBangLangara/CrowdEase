@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  Touchable,
   TouchableHighlight,
   View
 } from "react-native";
@@ -87,9 +88,9 @@ const LoginScreen = ({ navigation, }: AuthStackNavigationProps<'LoginScreen'>) =
           <TouchableHighlight onPress={onAppleLoginPress}>
             <Image source={require('../assets/icons/loginIcons/apple.png')} />
           </TouchableHighlight>
-          <TouchableHighlight onPress={onGoogleLoginPress}>
+          <Pressable onPress={onGoogleLoginPress}>
             <Image source={require('../assets/icons/loginIcons/google.png')} />
-          </TouchableHighlight>
+          </Pressable>
         </View>
       </View>
     </ImageBackground>

@@ -188,7 +188,7 @@ const EventCard = (props: {
             <View style={styles.participantsContainer}>
               <IconText
                 icon={isDark ? require("../assets/icons/participants.png") : require("../assets/icons/lightMode/Participants.png")}
-                text={`${props.event.participants.toLocaleString("en-US")} participants`}
+                text={`${props.event.participants.toLocaleString("en-US")}`}
                 style={isDark ? styles.icon : lightModeStyles.icon}
                 isDark={isDark}
               />

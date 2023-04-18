@@ -40,7 +40,7 @@ const DayEventCard = (props: {
           <Text style={styles.suggestionHeader}>We got your back! Let’s try use this chance to:</Text>
           <View style={{flexDirection: 'row',}}>
             <Text style={styles.suggestionText}> • </Text>
-            <Text style={styles.suggestionText}>Customise your restaurant theme, music, and vibe according to this
+            <Text style={styles.suggestionText}>Customize your restaurant theme, music, and vibe according to this
               event.</Text>
           </View>
           <View style={{flexDirection: 'row',}}>

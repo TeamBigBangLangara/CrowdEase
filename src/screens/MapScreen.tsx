@@ -12,6 +12,7 @@ import { Event, Location } from "../types/types";
 import { getCrowd } from "../api/footTrackAPI";
 import { heatMap } from "../model/mapData";
 import { MapStackNavigationProps } from "../types/navigationTypes";
+import FastImage from "react-native-fast-image";
 
 const MapScreen = ({navigation,} : MapStackNavigationProps<'MapScreen'>) => {
 
@@ -121,7 +122,12 @@ const MapScreen = ({navigation,} : MapStackNavigationProps<'MapScreen'>) => {
           onPress={() => Alert.alert("Home", "My location")}
           pinColor={"#90EE90"}
         >
-          <Image style={styles.myLocationIcon} source={require('../assets/icons/mylocation.png')} />
+          <FastImage
+        source={require("../assets/animations/baseLocation.gif")}
+        style={styles.myLocationIcon}
+        resizeMode={FastImage.resizeMode.contain}
+        />
+          {/* <Image style={styles.myLocationIcon} source={require('../assets/animations/baseLocation.gif')} /> */}
         </Marker>
         {renderEventMarkers()}
         <Heatmap
@@ -155,8 +161,8 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   myLocationIcon: {
-    width: 30,
-    height: 30,
+    width: 70,
+    height: 70,
   },
 });
 

@@ -5,7 +5,7 @@ import { colors } from "../styles/colors";
 import { fontFamily, fontSize } from "../styles/fonts";
 import { margin } from "../styles/basic";
 import { useState } from "react";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { addRating } from "../api/bigBangAPI/rating";
 import { Event } from "../types/types";
 import CustomAlert from "./CustomAlert";
@@ -13,12 +13,15 @@ import CustomAlert from "./CustomAlert";
 const RateCard = (props: {
   onSkipPress: () => void;
   event: Event
-  userId: string,
+  userId: string
+  setModalShow: (show: boolean) => void
 }) => {
   const [rate, setRate] = useState(props.event.rate);
   const [modalShow, setModalShow] = useState(false);
 
-  const saveRating = useMutation('rating',  () => addRating({
+  const queryClient = useQueryClient();
+
+  const saveRating = useMutation('rating', () => addRating({
     user_id: props.userId,
     category: props.event.category.name,
     rate: rate,
@@ -28,13 +31,19 @@ const RateCard = (props: {
     },
     onError: (error) => {
       console.log(error);
-  },
+    },
 
   });
 
   const onSubmitPress = () => {
     saveRating.mutate();
-    setModalShow(true)
+    setModalShow(true);
+  };
+
+  const onOKPress = () => {
+    props.setModalShow(false);
+    props.onSkipPress();
+    queryClient.invalidateQueries('rating');
   };
 
   const renderStars = () => {
@@ -42,13 +51,12 @@ const RateCard = (props: {
     return (
       <View style={styles.starContainer}>
         {starIds.map(id => (
-          <Pressable key={id} onPress={() => {setRate(id);
-          }}>
+          <Pressable key={id} onPress={() => { setRate(id); }}>
             {
               id <= rate ?
-                <Image source={require("../assets/icons/StarActive.png")}/>
+                <Image source={require("../assets/icons/StarActive.png")} />
                 :
-                <Image source={require("../assets/icons/star.png")}/>
+                <Image source={require("../assets/icons/star.png")} />
             }
           </Pressable>
         ))}
@@ -63,11 +71,11 @@ const RateCard = (props: {
         Please tell how much this event affected your business?
       </Text>
       {renderStars()}
-      <SecondaryButton onPress={onSubmitPress} label={'Submit'} isDark={true}/>
+      <SecondaryButton onPress={onSubmitPress} label={'Submit'} isDark={true} />
       <View style={styles.skipLabel}>
         <LinkButton onPress={props.onSkipPress} label={'Skip'} style={styles.linkButton} />
       </View>
-      {modalShow ? <CustomAlert onOkPress={() =>setModalShow(false)}/> : ''}
+      {modalShow ? <CustomAlert onOkPress={onOKPress} /> : ''}
     </View>
   );
 };

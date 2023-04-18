@@ -27,6 +27,8 @@ const EventCard = (props: {
   const [isBookmarkAdded, setIsBookmarkAdded] = useState(false);
   const [bookmarkId, setBookmarkId] = useState("");
   const [notificationId, setNotificationId] = useState("");
+  const [modalShow, setModalShow] = useState(false);
+
 
   useEffect(() => {
     if (props.bookmarkId !== undefined) {
@@ -58,7 +60,7 @@ const EventCard = (props: {
     },
   });
 
-  const saveNotification = useMutation(["createNewNotification"], () => createNotification(props.event.dates.date,props.event.id, props.event.name, props.event.image),
+  const saveNotification = useMutation(["createNewNotification"], () => createNotification(props.event.dates.date, props.event.id, props.event.name, props.event.image),
     {
       onSuccess: (data) => {
         console.log(data);
@@ -77,29 +79,27 @@ const EventCard = (props: {
     });
 
   const onBookmarkPress = () => {
-    if(!isBookmarkAdded)
-    {
-      try{
+    if (!isBookmarkAdded) {
+      try {
         saveBookmark.mutate();
         saveNotification.mutate();
         setIsBookmarkAdded(!isBookmarkAdded);
       }
-      catch(error){
-        Alert.alert('Unable to save data' +error);
+      catch (error) {
+        Alert.alert('Unable to save data' + error);
       }
     }
-    else{
-      try{
+    else {
+      try {
         deleteBookmark.mutate();
-        if(notificationId !== undefined)
-        {
+        if (notificationId !== undefined) {
           deleteNotification.mutate();
         }
         setNotificationId('');
         setIsBookmarkAdded(!isBookmarkAdded);
       }
-      catch(error){
-        Alert.alert('Unable to save data' +error);
+      catch (error) {
+        Alert.alert('Unable to save data' + error);
       }
     }
   };
@@ -135,11 +135,19 @@ const EventCard = (props: {
 
   const renderRatingButton = () => {
     if (props.eventType === "past") {
-      return (
-        <View style={styles.ratingButton}>
-          <DropdownButton onDropdownPress={() => setShowRating(true)} label={"Give a Rating"} />
-        </View>
-      );
+      if (props.event.rate) {
+        return (
+          <View style={styles.ratingButton}>
+            <DropdownButton onDropdownPress={() => setShowRating(true)} label={"Rated"} />
+          </View>
+        );
+      } else {
+        return (
+          <View style={styles.ratingButton}>
+            <DropdownButton onDropdownPress={() => setShowRating(true)} label={"Give a Rating"} />
+          </View>
+        );
+      }
     }
   };
 
@@ -149,6 +157,7 @@ const EventCard = (props: {
         event={props.event}
         onSkipPress={() => { setShowRating(false); }}
         userId={props.userId!}
+        setModalShow={setModalShow}
       />
     );
   };
@@ -174,7 +183,7 @@ const EventCard = (props: {
               {renderDate()}
               <Text style={isDark ? styles.eventTitle : lightModeStyles.eventTitle} numberOfLines={1}>{props.event.name}</Text>
               <IconText icon={isDark ? require("../assets/icons/pin.png") : require("../assets/icons/lightMode/location.png")} numberOfLines={1} text={props.event.address}
-                        style={isDark ? styles.icon : lightModeStyles.icon} isDark={isDark} />
+                style={isDark ? styles.icon : lightModeStyles.icon} isDark={isDark} />
             </View>
             <View style={styles.participantsContainer}>
               <IconText

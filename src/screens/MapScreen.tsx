@@ -1,4 +1,4 @@
-import { Alert, Dimensions, Image, Platform, StyleSheet, View } from "react-native";
+import { Dimensions, Platform, StyleSheet, View } from "react-native";
 import MapView, { Heatmap, Marker } from "react-native-maps";
 import { useQuery } from "react-query";
 import React, { useEffect, useRef, useState } from "react";
@@ -12,6 +12,7 @@ import { Event, Location } from "../types/types";
 import { getCrowd } from "../api/footTrackAPI";
 import { heatMap } from "../model/mapData";
 import { MapStackNavigationProps } from "../types/navigationTypes";
+import FastImage from "react-native-fast-image";
 
 const MapScreen = ({navigation,} : MapStackNavigationProps<'MapScreen'>) => {
 
@@ -80,7 +81,7 @@ const MapScreen = ({navigation,} : MapStackNavigationProps<'MapScreen'>) => {
             latitude: Number(event.location.latitude),
             longitude: Number(event.location.longitude),
           }}
-          pinColor={!isSelected ? "#1035b4" : "#B687FF"}
+          pinColor={!isSelected ? "#B687FF" : "#ad0a22"}
           onPress={() => {
             onMarkerPress(index, event.location);
           }}
@@ -115,14 +116,19 @@ const MapScreen = ({navigation,} : MapStackNavigationProps<'MapScreen'>) => {
         <Marker
           key={1}
           coordinate={{
-            latitude: 49.27699862052147,
-            longitude: -123.11528432004984,
+            latitude: 49.27843982529755,
+            longitude: -123.113535648926,
           }}
-          onPress={() => Alert.alert("Home", "My location")}
           pinColor={"#90EE90"}
         >
-          <Image style={styles.myLocationIcon} source={require('../assets/icons/mylocation.png')} />
-        </Marker>
+          <View style={styles.gifContainer}>
+            <FastImage
+              source={require("../assets/animations/userLocation.gif")}
+              style={styles.myLocationIcon}
+              resizeMode={FastImage.resizeMode.contain}
+            />
+          </View>
+          </Marker>
         {renderEventMarkers()}
         <Heatmap
           points={heatMap}
@@ -155,8 +161,13 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   myLocationIcon: {
-    width: 30,
-    height: 30,
+    width: 45,
+    height: 45,
+  },
+  gifContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

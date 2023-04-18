@@ -12,17 +12,6 @@
       "venue": { "id": "KovZpZAFFInA", "name": "Rogers Arena", "type": "venue" }
     },
     {
-      "address": "777 Pacific Blvd.",
-      "category": { "id": "KZFzniwnSyZfZ7v7nJ", "name": "Music" },
-      "dates": { "date": "2023-04-10", "time": "19:00:00" },
-      "id": "G5v7Z9NDH875im",
-      "image": "https://s1.ticketm.net/dam/a/9ff/750d0e9b-b2c2-4b82-8898-edb3d8dca9ff_SOURCE",
-      "location": { "latitude": "49.2760688", "longitude": "-123.1127117" },
-      "name": "BEYONCÉ - RENAISSANCE WORLD TOUR",
-      "participants": 11666,
-      "venue": { "id": "KovZpZAJdn6A", "name": "BC Place", "type": "venue" }
-    },
-    {
       "address": "100 N. Renfrew St.",
       "category": { "id": "KZFzniwnSyZfZ7v7nJ", "name": "Music" },
       "dates": { "date": "2023-04-10", "time": "17:00:00" },
@@ -153,7 +142,7 @@
       "venue": { "id": "KovZpZAavE7A", "name": "PNE Forum", "type": "venue" }
     },
 
-    
+
 
     {
       "address": "868 Granville St.",
@@ -564,7 +553,7 @@
         "longitude": "-123.1208652"
       },
       "name": "GEORGE THOROGOOD and THE DESTROYERS: Good To Be Bad Tour",
-      "participants": 12181,
+      "participants": 10181,
       "venue": {
         "id": "KovZpZAEkklA",
         "name": "Commodore Ballroom",
@@ -612,7 +601,7 @@
         "longitude": "-123.130293"
       },
       "name": "Nostalgix",
-      "participants": 7552,
+      "participants": 17552,
       "venue": {
         "id": "KovZpZAkal7A",
         "name": "Celebrities",

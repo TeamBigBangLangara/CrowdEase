@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
     borderRadius: borderRadius.primary,
     paddingVertical: 16,
     paddingHorizontal: 18,
+    marginBottom: 18,
   },
   infoContainer: {
     alignItems: 'center',

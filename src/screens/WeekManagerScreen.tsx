@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
-import { Alert, FlatList, ScrollView, StyleSheet, Text } from "react-native";
+import { Alert, FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
 
 // import { getEvents } from "../api/event";
 import { getEvents } from "../api/bigBangAPI/JsonEvents";
@@ -72,6 +72,7 @@ const WeekManagerScreen = () => {
       onWeekSelection={weekCalendarArrowHandler}
       daysVisible={false}
       />
+      <View style={styles.reportCardContainer}>
       <FlatList
         data={weekDayList}
         renderItem={({ item, }) =>
@@ -82,6 +83,7 @@ const WeekManagerScreen = () => {
           />
         }
       />
+      </View>
     </ScrollView>
   );
 };
@@ -101,6 +103,9 @@ const styles = StyleSheet.create({
     lineHeight: 36,
     textAlign: 'center',
     color: colors.neutral.surfaceWhite,
+  },
+  reportCardContainer: {
+    marginBottom: 30,
   },
 });
 

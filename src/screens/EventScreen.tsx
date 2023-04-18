@@ -200,7 +200,9 @@ const EventScreen = ({ navigation,}: EventsStackNavigationProps<"EventScreen">) 
             <Image source={require("../assets/icons/layout2.png")} />
           </View>
         </View>
+      <View style={styles.eventList}>
       {renderEvents()}
+      </View>
       <FilterCategory
         visible={modalVisible}
         onClosePress={() => setModalVisible(false)}

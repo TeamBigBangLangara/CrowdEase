@@ -72,6 +72,7 @@ const WeekManagerScreen = () => {
       onWeekSelection={weekCalendarArrowHandler}
       daysVisible={false}
       />
+      <View style={styles.reportCardContainer}>
       <FlatList
         data={weekDayList}
         renderItem={({ item, }) =>
@@ -81,8 +82,8 @@ const WeekManagerScreen = () => {
             participantsQty={item.eventsParticipants}
           />
         }
-        ItemSeparatorComponent={() => <View style={{height: 18,}} />}
       />
+      </View>
     </ScrollView>
   );
 };
@@ -96,13 +97,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 24,
   },
-
   screenTitle: {
     fontFamily: fontFamily.heading,
     fontSize: fontSize.heading1,
     lineHeight: 36,
     textAlign: 'center',
     color: colors.neutral.surfaceWhite,
+  },
+  reportCardContainer: {
+    marginBottom: 30,
   },
 });
 

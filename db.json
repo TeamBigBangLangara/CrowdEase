@@ -564,7 +564,7 @@
         "longitude": "-123.1208652"
       },
       "name": "GEORGE THOROGOOD and THE DESTROYERS: Good To Be Bad Tour",
-      "participants": 4446,
+      "participants": 12181,
       "venue": {
         "id": "KovZpZAEkklA",
         "name": "Commodore Ballroom",
@@ -671,7 +671,7 @@
       "address": "600 Block Hamilton St.",
       "category": {
         "id": "KZFzniwnSyZfZ7v7na",
-        "name": "Arts & Theatre"
+        "name": "Shows"
       },
       "dates": {
         "date": "2023-04-18",
@@ -699,7 +699,7 @@
         "name": "Sports"
       },
       "dates": {
-        "date": "2023-04-19",
+        "date": "2023-04-18",
         "time": "19:00:00"
       },
       "id": "G5v7Z9fB7Js_q",
@@ -824,7 +824,7 @@
         "name": "Music"
       },
       "dates": {
-        "date": "2023-04-20",
+        "date": "2023-04-21",
         "time": "20:00:00"
       },
       "id": "G5v7Z9xKdCeUd",
@@ -845,10 +845,10 @@
       "address": "884 Granville St.",
       "category": {
         "id": "KZFzniwnSyZfZ7v7nn",
-        "name": "Film"
+        "name": "Festivals"
       },
       "dates": {
-        "date": "2023-04-20",
+        "date": "2023-04-18",
         "time": "19:30:00"
       },
       "id": "G5v7Z9JxL1eSN",
@@ -858,7 +858,7 @@
         "longitude": "-123.1211044"
       },
       "name": "Silent Movie Mondays - Safety Last",
-      "participants": 12181,
+      "participants": 4446,
       "venue": {
         "id": "KovZpZAaevlA",
         "name": "Orpheum Theatre",

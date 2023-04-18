@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Alert, Image, Platform, Pressable, StyleSheet, Switch, Text, View } from "react-native";
+import { Alert, Animated, Image, Platform, Pressable, StyleSheet, Switch, Text, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 
 import { MainStackNavigationProps } from "../types/navigationTypes";
@@ -9,7 +9,6 @@ import LinkButton from "../components/LinkButton";
 import { colors } from "../styles/colors";
 import { fontFamily, fontSize, fontWeightBody, fontWeightSubtitle, fontWeightSubtitle2 } from "../styles/fonts";
 import { storage } from "../store/mmkv";
-import { Animated } from "react-native";
 
 type ProfileScreenProps = MainStackNavigationProps<"ProfileScreen">
 
@@ -53,10 +52,10 @@ const ProfileScreen = ({ navigation, }: ProfileScreenProps) => {
 
   const renderSetting = () => {
     return (
-      <Animated.View style={{ height: animatedHeight, overflow: 'hidden' }}>
+      <Animated.View style={{ height: animatedHeight, overflow: 'hidden', }}>
         <View style={isDark ? styles.showSetting : lightModeStyles.showSetting}>
           <Text
-            style={isDark ? styles.textSetting : lightModeStyles.textSetting}>{isDark ? "Light Mode" : "Dark Mode"}</Text>
+            style={isDark ? styles.textSetting : lightModeStyles.textSetting}>{"Dark Mode"}</Text>
           <Switch
             value={isDark}
             onValueChange={changeDarkMode}

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
-import { Alert, FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Alert, FlatList, ScrollView, StyleSheet, Text } from "react-native";
 
 // import { getEvents } from "../api/event";
 import { getEvents } from "../api/bigBangAPI/JsonEvents";
@@ -81,7 +81,6 @@ const WeekManagerScreen = () => {
             participantsQty={item.eventsParticipants}
           />
         }
-        ItemSeparatorComponent={() => <View style={{height: 18,}} />}
       />
     </ScrollView>
   );
@@ -96,7 +95,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 24,
   },
-
   screenTitle: {
     fontFamily: fontFamily.heading,
     fontSize: fontSize.heading1,

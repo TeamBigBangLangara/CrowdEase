@@ -13,9 +13,8 @@ import DataVisualization from "../components/DataVisualization";
 import { getDate } from "../utils/getDate";
 import { borderRadius } from "../styles/basic";
 import EventCarousel from "../components/EventCarousel";
-//import { getEvents } from "../api/event";
 import { env } from "../../env";
-import { getEvents } from "../api/bigBangAPI/JsonEvents";
+import { getEvents } from "../api/event";
 
 import OneSignal from "react-native-onesignal";
 import { storage } from "../store/mmkv";

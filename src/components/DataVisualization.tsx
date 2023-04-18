@@ -1,4 +1,4 @@
-import { getEvents } from "../api/bigBangAPI/JsonEvents";
+import { getEvents } from "../api/event";
 import { useState } from "react";
 import { Alert, StyleSheet, Text, View } from "react-native";
 import { useQuery } from "react-query";

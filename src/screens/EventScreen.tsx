@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useQuery } from "react-query";
 import { Alert, FlatList, Image, ScrollView, StyleSheet, Text, View } from "react-native";
-import { getEvents } from "../api/bigBangAPI/JsonEvents";
 import { format } from "date-fns";
 
 import SearchForm from "../components/SearchForm";
@@ -17,7 +16,7 @@ import { Bookmark, LoggedUser } from "types/types";
 import { fetchBookmarks } from "../api/bigBangAPI/bookmark";
 import { EventsStackNavigationProps } from "../types/navigationTypes";
 import FastImage from "react-native-fast-image";
-// import { getEvents } from "../api/event";
+import { getEvents } from "../api/event";
 
 export type TypeCategoryFilter = {
   category: string,

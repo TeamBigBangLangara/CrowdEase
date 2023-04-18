@@ -1,10 +1,10 @@
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { Animated, Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { Event } from "../types/types";
 import { borderRadius, margin } from "../styles/basic";
 import { colors } from "../styles/colors";
 import { fontFamily, fontSize, fontWeightBody, fontWeightSubtitle } from "../styles/fonts";
 import DropdownButton from "./DropdownButton";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const DayEventCard = (props: {
   event: Event
@@ -18,14 +18,29 @@ const DayEventCard = (props: {
     return <DropdownButton label={"What we can do?"} onDropdownPress={() => setShowSuggestion(true)} />;
   };
 
+  const animation = useRef(new Animated.Value(0)).current;
+  useEffect(() => {
+    Animated.timing(animation, {
+      toValue: showSuggestion ? 1 : 0,
+      duration: 300,
+      useNativeDriver: false,
+    }).start();
+  }, [showSuggestion]);
+
+  const animatedHeight = animation.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 250],
+  });
+
   const renderSuggestions = () => {
     return (
+      <Animated.View style={{ height: animatedHeight, overflow: 'hidden' }}>
       <View style={styles.suggestionContainer}>
         <View style={styles.suggestionTextContainer}>
           <Text style={styles.suggestionHeader}>We got your back! Let’s try use this chance to:</Text>
           <View style={{flexDirection: 'row',}}>
             <Text style={styles.suggestionText}> • </Text>
-            <Text style={styles.suggestionText}>Customise your restaurant theme, music, and vibe according to this
+            <Text style={styles.suggestionText}>Customize your restaurant theme, music, and vibe according to this
               event.</Text>
           </View>
           <View style={{flexDirection: 'row',}}>
@@ -41,6 +56,7 @@ const DayEventCard = (props: {
           <Image source={require("../assets/icons/upIcon.png")} />
         </Pressable>
       </View>
+      </Animated.View>
     );
   };
 

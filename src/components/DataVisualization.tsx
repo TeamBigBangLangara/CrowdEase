@@ -39,7 +39,7 @@ const DataVisualization = (props: {isDark: boolean}) => {
 
   const weekParticipants = data.reduce((total, day) => total + day.value, 0);
 
-  const [selectedBar, setSelectedBar] = useState(weekParticipants);
+  const [selectedBar, setSelectedBar] = useState(42184);
 
   const barChartSvg = {
     fill: props.isDark ? colors.neutral.surfaceWhite : colors.neutral.grey,

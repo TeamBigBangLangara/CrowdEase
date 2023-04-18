@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Alert, Image, Platform, Pressable, StyleSheet, Switch, Text, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 
@@ -9,6 +9,7 @@ import LinkButton from "../components/LinkButton";
 import { colors } from "../styles/colors";
 import { fontFamily, fontSize, fontWeightBody, fontWeightSubtitle, fontWeightSubtitle2 } from "../styles/fonts";
 import { storage } from "../store/mmkv";
+import { Animated } from "react-native";
 
 type ProfileScreenProps = MainStackNavigationProps<"ProfileScreen">
 
@@ -27,10 +28,23 @@ const ProfileScreen = ({ navigation, }: ProfileScreenProps) => {
   const onPastEvent = () => {
     navigation.navigate("PastEventScreen");
   };
+  const animation = useRef(new Animated.Value(0)).current;
+  useEffect(() => {
+    Animated.timing(animation, {
+      toValue: showSetting ? 1 : 0,
+      duration: 300,
+      useNativeDriver: false,
+    }).start();
+  }, [showSetting]);
 
   const onShowSetting = () => {
     setShowSetting(!showSetting);
   };
+
+  const animatedHeight = animation.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 70],
+  });
 
   const changeDarkMode = () => {
     setIsDark(!isDark);
@@ -39,19 +53,21 @@ const ProfileScreen = ({ navigation, }: ProfileScreenProps) => {
 
   const renderSetting = () => {
     return (
-      <View style={isDark ? styles.showSetting : lightModeStyles.showSetting}>
-        <Text
-          style={isDark ? styles.textSetting : lightModeStyles.textSetting}>{isDark ? "Light Mode" : "Dark Mode"}</Text>
-        <Switch
-          value={isDark}
-          onValueChange={changeDarkMode}
-          thumbColor={isDark ? colors.primary.primaryPurpleDark : colors.neutral.grey}
-          trackColor={{
-            false: colors.neutral.surfaceWhite,
-            true: colors.primary.primaryPurpleDark,
-          }}
-        />
-      </View>
+      <Animated.View style={{ height: animatedHeight, overflow: 'hidden' }}>
+        <View style={isDark ? styles.showSetting : lightModeStyles.showSetting}>
+          <Text
+            style={isDark ? styles.textSetting : lightModeStyles.textSetting}>{isDark ? "Light Mode" : "Dark Mode"}</Text>
+          <Switch
+            value={isDark}
+            onValueChange={changeDarkMode}
+            thumbColor={isDark ? colors.primary.primaryPurpleDark : colors.neutral.grey}
+            trackColor={{
+              false: colors.neutral.surfaceWhite,
+              true: colors.primary.primaryPurpleDark,
+            }}
+          />
+        </View>
+      </Animated.View>
     );
   };
 

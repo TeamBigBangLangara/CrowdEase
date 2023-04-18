@@ -11,7 +11,6 @@ import PrimaryButton from "../components/PrimaryButton";
 import { getEvents } from "../api/event";
 import { colors } from "../styles/colors";
 import { fontFamily, fontSize } from "../styles/fonts";
-// import { getEvents } from "../api/bigBangAPI/JsonEvents";
 
 const SuggestionScreen = ({ navigation, }: ReportStackNavigationProps<'SuggestionScreen'>) => {
   /////========= States
@@ -58,6 +57,7 @@ const SuggestionScreen = ({ navigation, }: ReportStackNavigationProps<'Suggestio
 
   //Sorting Events from most participants to lower. This sort logic returns a sorted array using participants property.
   eventsOfCurrentDay.sort((a,b) => b.participants - a.participants);
+  console.log(eventsOfCurrentDay);
 
   //Calculating percentage of most-participants-event over its category total.
   const moreParticipantsEventCategoryTotal = eventsCategories.find(categoryObject => categoryObject.name === eventsOfCurrentDay[0].category.name)?.participants;
@@ -82,12 +82,12 @@ const SuggestionScreen = ({ navigation, }: ReportStackNavigationProps<'Suggestio
           <ParticipantsByCategory
             participants={totalParticipants}
             percentage={50}
-            musicQty={eventsCategories.find(categoryObject => categoryObject.name === 'Music').participants}
-            sportQty={eventsCategories.find(categoryObject => categoryObject.name === 'Sports').participants}
-            showsQty={eventsCategories.find(categoryObject => categoryObject.name === 'Shows').participants}
-            festivalsQty={eventsCategories.find(categoryObject => categoryObject.name === 'Festivals').participants}
-            businessQty={eventsCategories.find(categoryObject => categoryObject.name === 'Business').participants}
-            otherQty={eventsCategories.find(categoryObject => categoryObject.name === 'Other').participants}
+            musicQty={eventsCategories.find(categoryObject => categoryObject.name === 'Music').participants.toLocaleString("en-US")}
+            sportQty={eventsCategories.find(categoryObject => categoryObject.name === 'Sports').participants.toLocaleString("en-US")}
+            showsQty={eventsCategories.find(categoryObject => categoryObject.name === 'Shows').participants.toLocaleString("en-US")}
+            festivalsQty={eventsCategories.find(categoryObject => categoryObject.name === 'Festivals').participants.toLocaleString("en-US")}
+            businessQty={eventsCategories.find(categoryObject => categoryObject.name === 'Business').participants.toLocaleString("en-US")}
+            otherQty={eventsCategories.find(categoryObject => categoryObject.name === 'Other').participants.toLocaleString("en-US")}
           />
         </View>
         <View style={{flex: 1,}}>

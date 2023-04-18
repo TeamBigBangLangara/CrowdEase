@@ -2,8 +2,7 @@ import { useState } from "react";
 import { useQuery } from "react-query";
 import { Alert, FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
 
-// import { getEvents } from "../api/event";
-import { getEvents } from "../api/bigBangAPI/JsonEvents";
+import { getEvents } from "../api/event";
 
 
 import ReportCard from "../components/ReportCard";

@@ -1,0 +1,53 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/CircularStd-Black.otf",
+      "sha1": "c3151c999f79358f3a091222ebefcd4d436cbe8e"
+    },
+    {
+      "path": "assets/fonts/CircularStd-BlackItalic.otf",
+      "sha1": "2e263d71f8fcbd12f3a02e7c01df6a865f68acce"
+    },
+    {
+      "path": "assets/fonts/CircularStd-Bold.otf",
+      "sha1": "2a36de6df85e4da5c22d26a427fd7390ad32840f"
+    },
+    {
+      "path": "assets/fonts/CircularStd-BoldItalic.otf",
+      "sha1": "1496c0d9ea9622abc43231fbc83bf08099053926"
+    },
+    {
+      "path": "assets/fonts/CircularStd-Book.otf",
+      "sha1": "a67856765459bf64a0a1259b6621613edd717ff9"
+    },
+    {
+      "path": "assets/fonts/CircularStd-BookItalic.otf",
+      "sha1": "6ba07b4856b40f621a080196730051ee4d921ae8"
+    },
+    {
+      "path": "assets/fonts/CircularStd-Light Italic.otf",
+      "sha1": "54dfa5f8744b0e5ab860e10a6d2f221b341694d1"
+    },
+    {
+      "path": "assets/fonts/CircularStd-Light.otf",
+      "sha1": "4131b07a036089f0542a451f0e4193338dc4d4b5"
+    },
+    {
+      "path": "assets/fonts/CircularStd-Medium.otf",
+      "sha1": "29b0a9af2e480ffb9d45de38a44f1c21a002adc9"
+    },
+    {
+      "path": "assets/fonts/CircularStd-MediumItalic.otf",
+      "sha1": "fdce946f1649c046388806513c4eed1c45852da2"
+    },
+    {
+      "path": "assets/fonts/Read Me.txt",
+      "sha1": "e55f19c6ebfcfecff4d7393fea6c1f245802f4f6"
+    },
+    {
+      "path": "assets/fonts/www.dfonts.org.url",
+      "sha1": "95cc7fa2d6c65461c8c03788488db94690e6dc83"
+    }
+  ]
+}
